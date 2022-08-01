@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import '../colors';
 // 공통 레이아웃
 .layout {
@@ -5,6 +6,15 @@
   position: relative;
   display: flex;
   flex-direction: column;
+=======
+@import "../colors";
+// 공통 레이아웃
+.layout {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+>>>>>>> 123b882 (project init)
   align-items: center;
   margin: 0 auto;
   max-width: 480px;
