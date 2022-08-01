@@ -20,7 +20,7 @@ export const Routes = () => {
         <Route path="/sendSuccess" element={<SendSuccess />} />
         <Route path="/sendError" element={<SendError />} />
         <Route path="/modalTest" element={<ModalTest />} />
-        <Route path="/modalCallTest" element={<ModalCallTest/>} />
+        <Route path="/modalCallTest" element={<ModalCallTest />} />
       </ReactRouterRoutes>
     </BrowserRouter>
   )
