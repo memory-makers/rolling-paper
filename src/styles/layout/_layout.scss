@@ -1,0 +1,21 @@
+@import "../colors";
+// 공통 레이아웃
+.layout {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 auto;
+  max-width: 480px;
+  min-width: 380px;
+  width: 100%;
+  height: 100vh;
+  padding: 32px;
+  &.light {
+    background-color: $mainBg;
+  }
+  &.dark {
+    background-color: $darkBg;
+  }
+}
