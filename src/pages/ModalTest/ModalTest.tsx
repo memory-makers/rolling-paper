@@ -25,10 +25,10 @@ const ModalTest = () => {
       <ModalText type='title'>롤링 페이퍼를 만들어볼까요?</ModalText>
 
       <ModalText type='label'>롤링페이퍼 이름을 적어주세요</ModalText>
-      <ModalInput type='text' name='title' onChange={handleTitleChange} />
+      <ModalInput type='text' name='title' value='' onChange={handleTitleChange} />
 
       <ModalText type='label'>언제 열어보시겠어요?</ModalText>
-      <ModalInput type='date' name='dueDate' onChange={handleDueDateChange} />
+      <ModalInput type='date' name='dueDate' value='' onChange={handleDueDateChange} />
 
       <ModalButton type='button' onClick={handleButtonClick} color='secondary'>취소</ModalButton>
       <ModalButton type='button' onClick={handleButtonClick}>완료</ModalButton>
