@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "baseUrl": "src",
     "target": "ESNext",
     "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
@@ -15,18 +14,12 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "types": ["node"],
+    "paths": {
+      "@/*": ["./src/*"],
+    },
   },
   "include": ["src"],
-  "paths": {
-    "pages/*": ["pages/*"],
-
-    "components/*": ["components/*"],
-    "constants/*": ["constants/*"],
-    "styles/*": ["styles/*"],
-    "utils/*": ["utils/*"],
-    "hooks/*": ["hooks/*"],
-    "stores/*": ["stores/*"]
-  },
   "references": [{ "path": "./tsconfig.node.json" }]
 }
