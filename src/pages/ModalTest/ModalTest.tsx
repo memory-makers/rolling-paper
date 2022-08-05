@@ -1,7 +1,7 @@
-import { ChangeEventHandler, useState } from 'react';
+import { ChangeEventHandler, MouseEventHandler, useState } from 'react';
 
 import Modal from '@/components/Modal';
-import { ModalInput, ModalText } from '@/components/Modal/ModalItem';
+import { ModalButton, ModalInput, ModalText } from '@/components/Modal/ModalItem';
 
 const ModalTest = () => {
   const [, setIsModalOpen] = useState(false);
@@ -16,6 +16,10 @@ const ModalTest = () => {
     setDueDate(e.currentTarget.value);
   };
 
+  const handleButtonClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+    console.log('ModalTest Button clicked');
+  }
+
   return (
     <Modal setIsModalOpen={setIsModalOpen}>
       <ModalText type='title'>롤링 페이퍼를 만들어볼까요?</ModalText>
@@ -25,6 +29,11 @@ const ModalTest = () => {
 
       <ModalText type='label'>언제 열어보시겠어요?</ModalText>
       <ModalInput type='date' name='dueDate' onChange={handleDueDateChange} />
+
+      <ModalButton type='button' onClick={handleButtonClick} color='secondary'>취소</ModalButton>
+      <ModalButton type='button' onClick={handleButtonClick}>완료</ModalButton>
+      <ModalButton type='button' onClick={handleButtonClick} size='small' color='secondary'>취소</ModalButton>
+      <ModalButton type='button' onClick={handleButtonClick} size='small'>삭제</ModalButton>
     </Modal>
   )
 }
