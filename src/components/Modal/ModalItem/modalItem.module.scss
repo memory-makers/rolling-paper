@@ -17,3 +17,25 @@
   line-height: 20px;
   color: colors.$modalLabel;
 }
+
+// ModalInput.tsx
+.modalInput {
+  width: 263px;
+  height: 44px;
+  padding: 12px 48px 12px 14px;
+  margin-top: 16px;
+  background-color: colors.$modalWhite;
+  color: colors.$modalBlack;
+  border-radius: 20px;
+  border: 1px solid colors.$modalPoint;
+  font-size: 20px;
+  font-weight: 400;
+
+  &:focus {
+    outline: 1px solid colors.$modalPoint;
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    filter: invert(52%) sepia(36%) saturate(7081%) hue-rotate(341deg) brightness(100%) contrast(89%);
+  }
+}
