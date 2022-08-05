@@ -1,0 +1,19 @@
+@use '/src/styles/colors.scss';
+
+// ModalText.tsx
+.modalTitle {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 24px;
+  text-align: center;
+  color: colors.$modalBlack;
+}
+
+.modalLabel {
+  display: inline-block;
+  margin: 20px auto auto 7px;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 20px;
+  color: colors.$modalLabel;
+}
