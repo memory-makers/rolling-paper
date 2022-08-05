@@ -1,11 +1,12 @@
-import React from 'react'
-import { Route, Routes as ReactRouterRoutes, Navigate, BrowserRouter } from 'react-router-dom'
+import { Route, Routes as ReactRouterRoutes, BrowserRouter } from 'react-router-dom'
+
 import Editor from './Editor'
 import Home from './Home'
 import MyPage from './MyPage'
 import RollingPaper from './RollingPaper'
 import SendError from './SendError'
 import SendSuccess from './SendSuccess'
+
 export const Routes = () => {
   return (
     <BrowserRouter>
