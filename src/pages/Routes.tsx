@@ -12,11 +12,11 @@ export const Routes = () => {
     <BrowserRouter>
       <ReactRouterRoutes>
         <Route path="/" element={<Home />} />
-        <Route path="editor" element={<Editor />} />
-        <Route path="mypage" element={<MyPage />} />
-        <Route path="rollingpaper/*" element={<RollingPaper />} />
-        <Route path="sendSuccess" element={<SendSuccess />} />
-        <Route path="sendError" element={<SendError />} />
+        <Route path="/editor" element={<Editor />} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/rollingpaper/*" element={<RollingPaper />} />
+        <Route path="/sendSuccess" element={<SendSuccess />} />
+        <Route path="/sendError" element={<SendError />} />
       </ReactRouterRoutes>
     </BrowserRouter>
   )
