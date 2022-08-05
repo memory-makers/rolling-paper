@@ -1,4 +1,5 @@
 import ModalText from './ModalText';
 import ModalInput from './ModalInput';
+import ModalButton from './ModalButton';
 
-export { ModalText, ModalInput };
+export { ModalText, ModalInput, ModalButton };
