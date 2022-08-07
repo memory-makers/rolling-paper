@@ -1,20 +1,20 @@
-import React, { ReactNode } from "react";
-import { useTheme } from "../../store/theme";
+import React, { ReactNode } from 'react'
+import { useTheme } from '../../store/theme'
 
 interface LayoutProps {
-  children: ReactNode;
+  children: ReactNode
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const { state, dispatch } = useTheme();
+  const { state, dispatch } = useTheme()
   return (
     <div
-      onClick={() => dispatch({ type: "toggle" })}
+      // onClick={() => dispatch({ type: "toggle" })}
       className={`layout ${state.theme}`}
     >
       {children}
     </div>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout
