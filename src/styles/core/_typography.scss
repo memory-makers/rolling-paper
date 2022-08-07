@@ -1,41 +1,42 @@
 @font-face {
-  font-family: "LeeSeoyun";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff")
-    format("woff");
+  font-family: 'LeeSeoyun';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202-2@1.0/LeeSeoyun.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "EarlyFontDiary";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EarlyFontDiary.woff2")
-    format("woff2");
+  font-family: 'EarlyFontDiary';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EarlyFontDiary.woff2')
+    format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "PyeongChangPeace-Light";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Light.woff2")
-    format("woff2");
+  font-family: 'PyeongChangPeace-Light';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-02@1.0/PyeongChangPeace-Light.woff2')
+    format('woff2');
   font-weight: 300;
   font-style: normal;
 }
 @font-face {
-  font-family: "ParkYongJun";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/ParkYongJun.woff2")
-    format("woff2");
+  font-family: 'ParkYongJun';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/ParkYongJun.woff2')
+    format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 
 $fontFamilyMap: (
-  "basic": "LeeSeoyun",
-  "type1": "EarlyFontDiary",
-  "type2": "PyeongChangPeace-Light",
-  "type3": "ParkYongJun",
-  "type4": "Jeju Myeongjo",
-  "type5": "Nanum Gothic",
+  'basic': 'LeeSeoyun',
+  'type1': 'EarlyFontDiary',
+  'type2': 'PyeongChangPeace-Light',
+  'type3': 'ParkYongJun',
+  'type4': 'Jeju Myeongjo',
+  'type5': 'Nanum Gothic'
 );
-@mixin typograpy($font, $fontSize, $fontWeight) {
+
+@mixin typograpy($font, $fontSize, $fontWeight: 400) {
   font-family: map-get($fontFamilyMap, $font);
   font-size: $fontSize;
   font-weight: $fontWeight;

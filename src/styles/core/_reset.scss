@@ -4,11 +4,11 @@
   box-sizing: border-box;
   border-width: 0;
   border-style: solid;
-  border-color: theme("borderColor.DEFAULT", "currentColor");
+  border-color: theme('borderColor.DEFAULT', 'currentColor');
 }
 ::before,
 ::after {
-  --tw-content: "";
+  --tw-content: '';
 }
 html {
   line-height: 1.5;
@@ -16,21 +16,21 @@ html {
   -moz-tab-size: 4;
   tab-size: 4;
   font-family: theme(
-    "fontFamily.sans",
+    'fontFamily.sans',
     ui-sans-serif,
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
-    "Segoe UI",
+    'Segoe UI',
     Roboto,
-    "Helvetica Neue",
+    'Helvetica Neue',
     Arial,
-    "Noto Sans",
+    'Noto Sans',
     sans-serif,
-    "Apple Color Emoji",
-    "Segoe UI Emoji",
-    "Segoe UI Symbol",
-    "Noto Color Emoji"
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol',
+    'Noto Color Emoji'
   );
 }
 body {
@@ -67,14 +67,14 @@ kbd,
 samp,
 pre {
   font-family: theme(
-    "fontFamily.mono",
+    'fontFamily.mono',
     ui-monospace,
     SFMono-Regular,
     Menlo,
     Monaco,
     Consolas,
-    "Liberation Mono",
-    "Courier New",
+    'Liberation Mono',
+    'Courier New',
     monospace
   );
   font-size: 1em;
@@ -117,9 +117,9 @@ select {
   text-transform: none;
 }
 button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
+[type='button'],
+[type='reset'],
+[type='submit'] {
   -webkit-appearance: button;
   background-color: transparent;
   background-image: none;
@@ -137,7 +137,7 @@ progress {
 ::-webkit-outer-spin-button {
   height: auto;
 }
-[type="search"] {
+[type='search'] {
   -webkit-appearance: textfield;
   outline-offset: -2px;
 }
@@ -186,10 +186,10 @@ textarea {
 input::placeholder,
 textarea::placeholder {
   opacity: 1;
-  color: theme("colors.gray.400", #9ca3af);
+  color: theme('colors.gray.400', #9ca3af);
 }
 button,
-[role="button"] {
+[role='button'] {
   cursor: pointer;
 }
 :disabled {
