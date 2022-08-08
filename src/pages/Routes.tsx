@@ -6,6 +6,7 @@ import MyPage from './MyPage'
 import RollingPaper from './RollingPaper'
 import SendError from './SendError'
 import SendSuccess from './SendSuccess'
+import ModalTest from './ModalTest/ModalTest'
 
 export const Routes = () => {
   return (
@@ -17,6 +18,7 @@ export const Routes = () => {
         <Route path="/rollingpaper/*" element={<RollingPaper />} />
         <Route path="/sendSuccess" element={<SendSuccess />} />
         <Route path="/sendError" element={<SendError />} />
+        <Route path="/modalTest" element={<ModalTest />} />
       </ReactRouterRoutes>
     </BrowserRouter>
   )

@@ -1,0 +1,26 @@
+@use '/src/styles/colors.scss';
+
+.modalContainer{
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2px);
+
+  .modalBody{
+    position: absolute;
+    width: 303px;
+    z-index: 9999;
+    padding: 32px 24px;
+    background-color: colors.$modalWhite;
+    border-radius: 20px;
+    border: 1px solid colors.$modalPoint;
+
+  }
+}
