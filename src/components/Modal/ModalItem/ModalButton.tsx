@@ -1,6 +1,6 @@
 import { MouseEventHandler, ReactNode } from 'react'
-import styles from './modalItem.module.scss'
 import cx from 'classnames'
+import styles from './modalItem.module.scss'
 
 interface Props {
   type: 'button' | 'submit';
