@@ -1,0 +1,41 @@
+@use '@/styles/colors.scss' as colors;
+@use '@/styles/core/_typography.scss' as txt;
+.content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.card {
+  font-size: 16px;
+  box-sizing: border-box;
+  padding: 20px;
+  width: 100%;
+  min-width: 160px;
+  min-height: 160px;
+  aspect-ratio: 1 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  div {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+  }
+  border-radius: 20px;
+  @each $colorKey, $colorValue in colors.$colorMap {
+    &.#{$colorKey} {
+      background-color: $colorValue;
+    }
+  }
+  @each $fontKey, $fontValue in txt.$fontFamilyMap {
+    &.#{$fontKey} {
+      font-family: $fontValue;
+    }
+  }
+}
