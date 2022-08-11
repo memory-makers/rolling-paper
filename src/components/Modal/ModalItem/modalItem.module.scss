@@ -11,7 +11,7 @@
 
 .modalLabel {
   display: inline-block;
-  margin: 20px auto auto 7px;
+  margin: 20px auto auto;
   font-weight: 400;
   font-size: 20px;
   line-height: 20px;
@@ -22,7 +22,7 @@
 .modalInput {
   width: 263px;
   height: 44px;
-  padding: 12px 48px 12px 14px;
+  padding: 12px 14px 12px 14px;
   margin-top: 16px;
   background-color: colors.$modalWhite;
   color: colors.$modalBlack;
@@ -38,6 +38,10 @@
   &::-webkit-calendar-picker-indicator {
     filter: invert(52%) sepia(36%) saturate(7081%) hue-rotate(341deg) brightness(100%) contrast(89%);
   }
+}
+
+.isAddIcon {
+  padding: 12px 48px 12px 14px;
 }
 
 // ModalButton.tsx
