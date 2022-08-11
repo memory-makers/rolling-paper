@@ -15,7 +15,8 @@ html {
   -webkit-text-size-adjust: 100%;
   -moz-tab-size: 4;
   tab-size: 4;
-  font-family: theme(
+  font-family: 
+    "LeeSeoyun",
     "fontFamily.sans",
     ui-sans-serif,
     system-ui,
@@ -31,7 +32,7 @@ html {
     "Segoe UI Emoji",
     "Segoe UI Symbol",
     "Noto Color Emoji"
-  );
+  ;
 }
 body {
   margin: 0;
@@ -66,7 +67,8 @@ code,
 kbd,
 samp,
 pre {
-  font-family: theme(
+  font-family: 
+    "LeeSeoyun",
     "fontFamily.mono",
     ui-monospace,
     SFMono-Regular,
@@ -76,7 +78,7 @@ pre {
     "Liberation Mono",
     "Courier New",
     monospace
-  );
+  ;
   font-size: 1em;
 }
 small {
