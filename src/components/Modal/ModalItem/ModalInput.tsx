@@ -1,5 +1,5 @@
 import { ChangeEventHandler } from 'react'
-import cx from 'classNames'
+import cx from 'classnames'
 import styles from './modalItem.module.scss'
 
 interface Props {
