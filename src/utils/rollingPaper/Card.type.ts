@@ -1,6 +1,6 @@
-interface Card {
+interface CardType {
   content: string
   background: string
   font: string
 }
-export default Card
+export default CardType

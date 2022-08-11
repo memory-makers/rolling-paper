@@ -1,5 +1,6 @@
 import Header from '@/components/layout/Header'
 import Buttons from '@/components/rollingpaper/Buttons'
+import Content from '@/components/rollingpaper/Content'
 import cardDummy from '@/utils/rollingPaper/dummy'
 import React, { useCallback, useState } from 'react'
 import { useParams } from 'react-router-dom'
@@ -40,8 +41,7 @@ const RollingPaper = () => {
       <Header text={rollingpaperName} type="title-button">
         <Buttons isModifyMode={isModifyMode} isCardDetailVisible={isCardDetailVisible} />
       </Header>
-      <div className="content"></div>
-      <div></div>
+      <Content handleClick={handleClick} />
     </>
   )
 }

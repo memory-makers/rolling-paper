@@ -41,3 +41,11 @@ $fontFamilyMap: (
   font-size: $fontSize;
   font-weight: $fontWeight;
 }
+
+// :export {
+//   basic: map-get($fontFamilyMap, 'basic');
+//   type1: map-get($fontFamilyMap, 'type1');
+//   type2: map-get($fontFamilyMap, 'type2');
+//   type3: map-get($fontFamilyMap, 'type3');
+//   type4: map-get($fontFamilyMap, 'type4');
+// }
