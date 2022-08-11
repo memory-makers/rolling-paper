@@ -1,17 +1,19 @@
 import { ChangeEventHandler } from 'react'
+import cx from 'classNames'
 import styles from './modalItem.module.scss'
 
 interface Props {
-  type: 'text' | 'date'
+  type: 'text' | 'date';
   name: string;
   onChange: ChangeEventHandler<HTMLInputElement>;
   value?: string;
   readOnly?: boolean;
+  isAddIcon?: boolean;
 }
 
-const ModalInput = ({type, name, onChange, value, readOnly}: Props) => {
+const ModalInput = ({type, name, onChange, value, readOnly, isAddIcon}: Props) => {
   return (
-    <input type={type} className={styles.modalInput} name={name} 
+    <input type={type} className={cx(styles.modalInput, {[styles.isAddIcon]: isAddIcon})} name={name} 
       onChange={onChange} value={value} readOnly={readOnly}/>
   )
 }
