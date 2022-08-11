@@ -7,7 +7,7 @@ import RollingPaper from './RollingPaper'
 import SendError from './SendError'
 import SendSuccess from './SendSuccess'
 import ModalTest from './ModalTest/ModalTest'
-import MakeRoll from './CreateRoll/MakeRoll'
+import ModalCallTest from './ModalTest/ModalCallTest'
 
 export const Routes = () => {
   return (
@@ -20,7 +20,7 @@ export const Routes = () => {
         <Route path="/sendSuccess" element={<SendSuccess />} />
         <Route path="/sendError" element={<SendError />} />
         <Route path="/modalTest" element={<ModalTest />} />
-        <Route path="/modalTest-makeroll" element={<MakeRoll />} />
+        <Route path="/modalCallTest" element={<ModalCallTest/>} />
       </ReactRouterRoutes>
     </BrowserRouter>
   )
