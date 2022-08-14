@@ -1,16 +1,17 @@
 // Abstract files
-@import "abstracts/_mixins.scss";
-@import "abstracts/_variables.scss";
+@import 'abstracts/_mixins.scss';
+@import 'abstracts/_variables.scss';
 
 // Core files
-@import "core/_reset.scss";
-@import "core/_typography.scss";
+@import 'core/_reset.scss';
+@import 'core/_typography.scss';
 
 // Components
-// @import "./components/";
+@import './components/_buttons.scss';
+@import './components/_header.scss';
 
 // Layout
-@import "layout/_layout.scss";
+@import 'layout/_layout.scss';
 
 // Pages
-// @import "./pages/all";
+@import './pages/rollingpaper.scss';
