@@ -9,7 +9,8 @@ const cardDummy = {
 앞으로 잘부탁하구
 우리 화이팅하자~!`,
     background: 'cardBlue',
-    font: 'basic'
+    font: 'basic',
+    author: '얌얌'
   },
   ['1']: {
     content: `안녕 레몬아너는 참 귀여워
@@ -19,7 +20,8 @@ const cardDummy = {
 앞으로 잘부탁하구
 우리 화이팅하자~!`,
     background: 'cardRed',
-    font: 'type1'
+    font: 'type1',
+    author: '토미'
   },
   ['2']: {
     content: `안녕 레몬아너는 참 귀여워
@@ -29,7 +31,8 @@ const cardDummy = {
 앞으로 잘부탁하구
 우리 화이팅하자~!`,
     background: 'cardPurple',
-    font: 'type2'
+    font: 'type2',
+    author: '토마토'
   }
 } as { [id: string]: Card }
 
