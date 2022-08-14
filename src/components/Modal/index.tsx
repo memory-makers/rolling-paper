@@ -1,4 +1,4 @@
-import { ReactNode, useRef } from 'react';
+import { MouseEventHandler, ReactNode, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import styles from './modal.module.scss';
 
@@ -15,9 +15,13 @@ const Modal = ({ setIsModalOpen, children }: Props) => {
     setIsModalOpen(false);
   };
 
+  const handlePreventCloseClick: MouseEventHandler<HTMLDivElement> = (e) => {
+    e.stopPropagation();
+  }
+
   return createPortal(
     <div className={styles.modalContainer} ref={modalRef} onClick={handleModalOutSideClick}>
-      <div className={styles.modalBody}>{children}</div>
+      <div className={styles.modalBody} onClick={handlePreventCloseClick}>{children}</div>
     </div>,
     modalRoot,
   )
