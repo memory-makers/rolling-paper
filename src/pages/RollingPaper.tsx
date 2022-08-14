@@ -13,7 +13,7 @@ const RollingPaper = () => {
   const [cards, setCards] = useState(cardDummy)
   const rollingpaperName = '3학년 2반 친구들'
 
-  const handleClick = useCallback(
+  const handleClickCard = useCallback(
     (id: number) => {
       setIsCardDetailVisible(true)
       setCardIndex(id)
@@ -41,7 +41,7 @@ const RollingPaper = () => {
       <Header text={rollingpaperName} type="title-button">
         <Buttons isModifyMode={isModifyMode} isCardDetailVisible={isCardDetailVisible} />
       </Header>
-      <Content handleClick={handleClick} />
+      <Content handleClickCard={handleClickCard} />
     </>
   )
 }

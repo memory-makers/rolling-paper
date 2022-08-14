@@ -1,4 +1,5 @@
 import { useTheme } from '@/store/theme'
+import classNames from 'classnames'
 import React from 'react'
 
 type HeaderType = 'only-button' | 'title-button' | 'only-title'
@@ -15,7 +16,7 @@ const Header = ({ children, text, type }: HeaderProps) => {
   const titleVisible = type === 'only-title' || type === 'title-button'
   const buttonVisible = type === 'only-button' || type === 'title-button'
   return (
-    <header className={`header ${state.theme} ${type}`}>
+    <header className={classNames('header', state.theme, type)}>
       {titleVisible && (
         <div>
           <span className="header_name">{name}</span>

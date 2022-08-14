@@ -6,17 +6,16 @@ import fonts from '@/styles/core/_typography.scss'
 import classNames from 'classnames'
 interface CardProps {
   card: CardType
-  index: number
+  rotateDeg: string
   handleClick: () => void
 }
 
-const Card = ({ index, card, handleClick }: CardProps) => {
-  const rotate = index % 3 && index % 4 ? 'rotate(-10deg)' : 'rotate(10deg)'
+const Card = ({ rotateDeg, card, handleClick }: CardProps) => {
   console.log(styles)
   return (
     <div
       className={classNames(styles.card, styles[card.background], styles[card.font])}
-      style={{ transform: rotate }}
+      style={{ transform: rotateDeg }}
       onClick={handleClick}
     >
       <div>{card.content}</div>
