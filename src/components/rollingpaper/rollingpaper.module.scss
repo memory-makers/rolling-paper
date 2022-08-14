@@ -8,6 +8,7 @@
 }
 
 .card {
+  cursor: pointer;
   font-size: 16px;
   box-sizing: border-box;
   padding: 20px;
@@ -38,4 +39,55 @@
       font-family: $fontValue;
     }
   }
+}
+
+.card-modal{
+  z-index: 20;
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  padding: 66px 16px 16px;
+  margin-bottom: 66px;
+  svg{
+    cursor: pointer;
+  }
+}
+.card-content{
+  width: 100%;
+  font-size: 32px;
+  padding: 66px 40px;
+  box-sizing: border-box;
+  border-radius: 20px;
+  @each $colorKey, $colorValue in colors.$colorMap {
+    &.#{$colorKey} {
+      background-color: $colorValue;
+    }
+  }
+  @each $fontKey, $fontValue in txt.$fontFamilyMap {
+    &.#{$fontKey} {
+      font-family: $fontValue;
+    }
+  }
+}
+.card-btns{
+  display: flex;
+  align-items: center;
+  margin-top: 66px;
+  font-size: 32px;
+  width: 100%;
+  justify-content: space-between;
+}
+.close-btn{
+  position: absolute;
+  top: 100px;
+  right: 20px;
 }
