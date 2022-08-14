@@ -11,7 +11,6 @@ interface CardProps {
 }
 
 const Card = ({ rotateDeg, card, handleClick }: CardProps) => {
-  console.log(styles)
   return (
     <div
       className={classNames(styles.card, styles[card.background], styles[card.font])}
