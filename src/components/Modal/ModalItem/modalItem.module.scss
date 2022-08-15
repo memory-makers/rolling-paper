@@ -51,6 +51,12 @@
   border: 1px solid colors.$modalPoint;
   border-radius: 20px;
   cursor: pointer;
+
+  svg {
+    display: inherit;
+    margin-left: 15px;
+    margin: 0 0 4px 15px;
+  }
 }
 
 .normal {
