@@ -5,7 +5,7 @@ import styles from './modalItem.module.scss'
 interface Props {
   type: 'text' | 'date'
   name: string
-  onChange: ChangeEventHandler<HTMLInputElement>
+  onChange?: ChangeEventHandler<HTMLInputElement>
   value?: string
   readOnly?: boolean
   isAddIcon?: boolean
