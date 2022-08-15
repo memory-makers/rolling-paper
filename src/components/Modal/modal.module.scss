@@ -1,6 +1,6 @@
 @use '/src/styles/colors.scss';
 
-.modalContainer{
+.modalContainer {
   display: flex;
   position: absolute;
   justify-content: center;
@@ -13,7 +13,7 @@
   background-color: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(2px);
 
-  .modalBody{
+  .modalBody {
     position: absolute;
     width: 303px;
     z-index: 9999;
@@ -21,6 +21,5 @@
     background-color: colors.$modalWhite;
     border-radius: 20px;
     border: 1px solid colors.$modalPoint;
-
   }
 }

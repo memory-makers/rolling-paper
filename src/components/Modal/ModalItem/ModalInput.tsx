@@ -3,18 +3,24 @@ import cx from 'classnames'
 import styles from './modalItem.module.scss'
 
 interface Props {
-  type: 'text' | 'date';
-  name: string;
-  onChange: ChangeEventHandler<HTMLInputElement>;
-  value?: string;
-  readOnly?: boolean;
-  isAddIcon?: boolean;
+  type: 'text' | 'date'
+  name: string
+  onChange: ChangeEventHandler<HTMLInputElement>
+  value?: string
+  readOnly?: boolean
+  isAddIcon?: boolean
 }
 
-const ModalInput = ({type, name, onChange, value, readOnly, isAddIcon}: Props) => {
+const ModalInput = ({ type, name, onChange, value, readOnly, isAddIcon }: Props) => {
   return (
-    <input type={type} className={cx(styles.modalInput, {[styles.isAddIcon]: isAddIcon})} name={name} 
-      onChange={onChange} value={value} readOnly={readOnly}/>
+    <input
+      type={type}
+      className={cx(styles.modalInput, { [styles.isAddIcon]: isAddIcon })}
+      name={name}
+      onChange={onChange}
+      value={value}
+      readOnly={readOnly}
+    />
   )
 }
 
