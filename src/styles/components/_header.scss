@@ -1,0 +1,23 @@
+@import '../core/typography';
+@import '../colors';
+
+.header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  @include typograpy('basic', 32px);
+}
+.header_name {
+  color: $subPoint;
+}
+.only-button .header_buttons {
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+}
+.title-button .header_buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 12px;
+}
