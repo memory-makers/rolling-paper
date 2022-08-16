@@ -1,0 +1,24 @@
+@use '@/styles/core/typography.scss' as txt;
+
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 70%;
+    aspect-ratio: 1 / 1;
+    @include txt.typograpy('basic', 14px, 400);
+  }
+
+  .home-description {
+    text-align: center;
+    line-height: 32px;
+    @include txt.typograpy('basic', 32px, 400);
+  }
+}
