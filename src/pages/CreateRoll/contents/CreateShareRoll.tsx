@@ -1,4 +1,4 @@
-import styles from './createShareRoll.module.scss'
+import styles from '@/styles/pages/_shareRoll.module.scss'
 
 import { ModalButton, ModalInput, ModalText } from '@/components/Modal/ModalItem'
 
@@ -32,9 +32,9 @@ const CreateShareRoll = ({ paperUrl }: Props) => {
       </ModalText>
 
       <ModalText type="label">롤링페이퍼 링크</ModalText>
-      <div className={styles.inputWrapper}>
+      <div className={styles.shareInputWrapper}>
         <ModalInput type="text" name="title" value={paperUrl} readOnly isAddIcon />
-        <button type="button" className={styles.iconButton} onClick={handleClipboardCopyClick}>
+        <button type="button" className={styles.shareIconButton} onClick={handleClipboardCopyClick}>
           <ClipboardIcon />
         </button>
       </div>
