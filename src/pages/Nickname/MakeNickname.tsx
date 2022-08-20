@@ -14,7 +14,7 @@ const MakeNickname = ({ setIsModalOpen }: Props) => {
     setNickname(e.currentTarget.value)
   }
   const handleButtonClick = () => {
-    console.log('nickname 저장', nickname)
+    // console.log('nickname 생성 DB저장', nickname)
     setIsModalOpen(false)
   }
 

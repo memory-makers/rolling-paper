@@ -1,6 +1,7 @@
+import { ChangeEventHandler, useEffect, useState } from 'react'
+
 import Modal from '@/components/Modal'
 import { ModalButton, ModalInput, ModalText } from '@/components/Modal/ModalItem'
-import { ChangeEventHandler, useEffect, useState } from 'react'
 
 interface Props {
   setIsModalOpen: (state: boolean) => void
@@ -13,7 +14,7 @@ const EditNickname = ({ setIsModalOpen }: Props) => {
     setNickname(e.currentTarget.value)
   }
   const handleButtonClick = () => {
-    console.log('nickname 저장', nickname)
+    // console.log('nickname 수정 DB저장', nickname)
     setIsModalOpen(false)
   }
 
