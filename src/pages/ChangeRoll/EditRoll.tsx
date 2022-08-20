@@ -27,7 +27,7 @@ const EditRoll = ({ setIsModalOpen }: Props) => {
   }
 
   const handleButtonClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    console.log(title, dueDate, paperTheme)
+    // console.log('버튼 클릭시 롤링페이퍼 수정', title, dueDate, paperTheme)
     setIsModalOpen(false)
   }
 
