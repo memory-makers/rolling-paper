@@ -10,7 +10,7 @@ const CheckSendingCard = ({ setIsModalOpen }: Props) => {
     setIsModalOpen(false)
   }
   const handleDeleteClick = () => {
-    console.log('카드 전송하기 클릭')
+    // console.log('카드 전송하기 클릭')
     setIsModalOpen(false)
   }
 
