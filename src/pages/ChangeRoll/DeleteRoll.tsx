@@ -10,7 +10,7 @@ const DeleteRoll = ({ setIsModalOpen }: Props) => {
     setIsModalOpen(false)
   }
   const handleDeleteClick = () => {
-    console.log('삭제클릭')
+    // console.log('삭제클릭시 롤링페이퍼 삭제')
     setIsModalOpen(false)
   }
 
