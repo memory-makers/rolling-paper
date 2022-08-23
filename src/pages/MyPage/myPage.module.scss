@@ -1,4 +1,4 @@
-@use '/src/styles/colors.scss';
+@use '@/styles/colors.scss';
 
 .myPageContainer {
   width: 100%;
@@ -6,6 +6,7 @@
   user-select: none;
   font-family: 'LeeSeoyun';
 
+  // Header Area
   .myPageHeader {
     height: 120px;
     line-height: 120px;
@@ -21,8 +22,23 @@
     font-size: 20px;
   }
 
-  .myPageContentMain {
+  // Paper Add Button
+  .paperAddButton {
+    position: absolute;
+    bottom: 24px;
+    right: 24px;
+    width: 60px;
+    height: 60px;
     display: flex;
-    justify-content: space-around;
+    align-items: center;
+    justify-content: center;
+    background: colors.$point;
+    border-radius: 50%;
+
+    img {
+      width: 48px;
+      height: 48px;
+      padding: 4px;
+    }
   }
 }
