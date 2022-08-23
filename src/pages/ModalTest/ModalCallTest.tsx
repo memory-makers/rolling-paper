@@ -5,6 +5,8 @@ import CreateRoll from '../CreateRoll'
 import EditRoll from '../ChangeRoll/EditRoll'
 import ChangeShareRoll from '../ChangeRoll/ChangeShareRoll'
 import DeleteRoll from '../ChangeRoll/DeleteRoll'
+import CheckSendingCard from '../WriterRoll/CheckSendingCard'
+import WriterShareRoll from '../WriterRoll/WriterShareRoll'
 
 const ModalCallTest = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -23,7 +25,9 @@ const ModalCallTest = () => {
       {/* {isModalOpen && (
         <ChangeShareRoll setIsModalOpen={setIsModalOpen} paperUrl={'user.paperUrl'} />
       )} */}
-      {isModalOpen && <DeleteRoll setIsModalOpen={setIsModalOpen} />}
+      {/* {isModalOpen && <DeleteRoll setIsModalOpen={setIsModalOpen} />} */}
+      {/* {isModalOpen && <CheckSendingCard setIsModalOpen={setIsModalOpen} />} */}
+      {isModalOpen && <WriterShareRoll setIsModalOpen={setIsModalOpen} paperUrl="user.paperUrl" />}
     </>
   )
 }
