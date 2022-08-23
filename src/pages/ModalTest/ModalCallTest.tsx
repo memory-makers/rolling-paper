@@ -2,6 +2,8 @@ import { useCallback, useState } from 'react'
 
 import { ModalButton } from '@/components/Modal/ModalItem'
 import CreateRoll from '../CreateRoll'
+import MakeNickname from '../Nickname/MakeNickname'
+import EditNickname from '../Nickname/EditNickname'
 import EditRoll from '../ChangeRoll/EditRoll'
 import ChangeShareRoll from '../ChangeRoll/ChangeShareRoll'
 import DeleteRoll from '../ChangeRoll/DeleteRoll'
@@ -21,6 +23,8 @@ const ModalCallTest = () => {
         ModalCallTest
       </ModalButton>
       {/* {isModalOpen && <CreateRoll setIsModalOpen={setIsModalOpen} />} */}
+      {/* {isModalOpen && <MakeNickname setIsModalOpen={setIsModalOpen} />} */}
+      {/* {isModalOpen && <EditNickname setIsModalOpen={setIsModalOpen} />} */}
       {/* {isModalOpen && <EditRoll setIsModalOpen={setIsModalOpen} />} */}
       {/* {isModalOpen && (
         <ChangeShareRoll setIsModalOpen={setIsModalOpen} paperUrl={'user.paperUrl'} />
