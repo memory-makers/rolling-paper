@@ -1,4 +1,4 @@
-@use '@/styles/colors.scss';
+@use '/src/styles/colors.scss';
 
 // Main Area
 .myPageMainContent {
@@ -36,7 +36,7 @@
     border-bottom-right-radius: 24px;
 
     p {
-      color: colors.$myPageMainBlack;
+      color: colors.$myPageBlack;
       padding-right: 12px;
     }
   }
