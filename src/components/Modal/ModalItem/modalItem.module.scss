@@ -11,7 +11,11 @@
 
 .modalLabel {
   display: inline-block;
+<<<<<<< HEAD
   margin: 20px auto auto;
+=======
+  margin: 20px auto auto 7px;
+>>>>>>> 789963b83a17581192beb67967c0da3025bf962d
   font-weight: 400;
   font-size: 20px;
   line-height: 20px;
@@ -22,7 +26,11 @@
 .modalInput {
   width: 263px;
   height: 44px;
+<<<<<<< HEAD
   padding: 12px 14px 12px 14px;
+=======
+  padding: 12px 48px 12px 14px;
+>>>>>>> 789963b83a17581192beb67967c0da3025bf962d
   margin-top: 16px;
   background-color: colors.$modalWhite;
   color: colors.$modalBlack;
@@ -40,23 +48,31 @@
   }
 }
 
+<<<<<<< HEAD
 .isAddIcon {
   padding: 12px 48px 12px 14px;
 }
 
 // ModalButton.tsx
 .modalButton {
+=======
+// ModalButton.tsx
+.modalButton { 
+>>>>>>> 789963b83a17581192beb67967c0da3025bf962d
   height: 44px;
   margin-top: 28px;
   border: 1px solid colors.$modalPoint;
   border-radius: 20px;
   cursor: pointer;
+<<<<<<< HEAD
 
   svg {
     display: inherit;
     margin-left: 15px;
     margin: 0 0 4px 15px;
   }
+=======
+>>>>>>> 789963b83a17581192beb67967c0da3025bf962d
 }
 
 .normal {
@@ -80,4 +96,8 @@
 .secondary {
   background: colors.$modalWhite;
   color: colors.$modalPoint;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 789963b83a17581192beb67967c0da3025bf962d

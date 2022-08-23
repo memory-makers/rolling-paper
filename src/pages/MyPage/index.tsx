@@ -18,6 +18,7 @@ const MyPage = () => {
   return (
     <div className={styles.myPageContainer}>
       {/* Header Area */}
+
       <header className={styles.myPageHeader}>Header Area</header>
       <section>
         <div className={styles.myPageContentTitle}>
@@ -32,6 +33,11 @@ const MyPage = () => {
       <button className={styles.paperAddButton}>
         <img src="/src/assets/paper-airplane.svg" alt="롤링 페이퍼 생성 버튼 이미지" />
       </button>
+
+      <div className={styles.myPageContentMain}>
+        <div>{USER_DATA[0].title}</div>
+        <div>{USER_DATA[0].dueDate}</div>
+      </div>
     </div>
   )
 }
