@@ -37,14 +37,6 @@ const Sending = ({ nickname }: Props) => {
     navigate('/')
   }
 
-  const handleReWriteClick = () => {
-    navigate('/editor')
-  }
-
-  const handleCancelClick = () => {
-    navigate('/editor')
-  }
-
   return (
     <div className={styles.container}>
       <header>
