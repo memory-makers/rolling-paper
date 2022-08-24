@@ -21,5 +21,4 @@ const ModalButton = ({ type, onClick, children, size = 'normal', color = 'primar
     </button>
   )
 }
-
 export default ModalButton
