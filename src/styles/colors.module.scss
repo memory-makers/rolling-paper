@@ -14,7 +14,7 @@ $card-color-map: (
   'cardPurple': $cardPurple,
   'cardYellow': $cardYellow,
   'cardBeige': $cardBeige,
-  'cardWhite': $cardWhite
+  'cardWhite': $cardWhite,
 );
 
 // text color
@@ -29,7 +29,7 @@ $text-color-map: (
   'textBlue': $textBlue,
   'textGreen': $textGreen,
   'textPurple': $textPurple,
-  'textYellow': $textYellow
+  'textYellow': $textYellow,
 );
 
 // main color
@@ -48,7 +48,7 @@ $main-color-map: (
   'pointLow': $pointLow,
   'grayMid': $grayMid,
   'grayLow': $grayLow,
-  'darkBg': $darkBg
+  'darkBg': $darkBg,
 );
 
 // modal color
@@ -61,14 +61,7 @@ $modal-color-map: (
   'modalBlack': $modalBlack,
   'modalWhite': $modalWhite,
   'modalPoint': $modalPoint,
-  'modalLabel': $modalLabel
-);
-
-// mypage color
-$myPageBlack: #222222;
-
-$myPage-color-map: (
-  'myPageBlack': $myPageBlack
+  'modalLabel': $modalLabel,
 );
 
 // etc
@@ -77,7 +70,7 @@ $white: #ffff;
 
 $etc-color-map: (
   'kakao': $kakao,
-  'white': $white
+  'white': $white,
 );
 
 :export {
@@ -91,9 +84,6 @@ $etc-color-map: (
     #{unquote($key)}: $value;
   }
   @each $key, $value in $modal-color-map {
-    #{unquote($key)}: $value;
-  }
-  @each $key, $value in $myPage-color-map {
     #{unquote($key)}: $value;
   }
   @each $key, $value in $etc-color-map {
