@@ -20,7 +20,7 @@ export const Routes = () => {
         <Route path="/rollingpaper/*" element={<RollingPaper />} />
         <Route path="/sendSuccess" element={<SendSuccess />} />
         <Route path="/sendError" element={<SendError />} />
-        <Route path="/sending" element={<Sending isSuccess={false} nickname="레몬은 귀여워" />} />
+        <Route path="/sending" element={<Sending nickname="레몬은 귀여워" />} />
         <Route path="/modalTest" element={<ModalTest />} />
         <Route path="/modalCallTest" element={<ModalCallTest />} />
       </ReactRouterRoutes>
