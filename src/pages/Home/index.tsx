@@ -72,7 +72,6 @@ const cardOption = [
 ]
 
 const Home = () => {
-  console.log(colors);
   return (
     <div className={styles.home}>
       <div>
