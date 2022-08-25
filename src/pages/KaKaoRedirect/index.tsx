@@ -38,6 +38,32 @@ const KakaoRedirect = () => {
       {`토큰: `}
       <button
         onClick={async () => {
+          const response = await axios.post(
+            'http://14.39.205.218:8080/card',
+            {
+              cardText: 'text',
+              cardColor: 'color',
+              paperId: '1'
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            }
+          )
+
+          console.log(response)
+
+          if (response) {
+            setSuccess(true)
+          }
+        }}
+      >
+        헤더에 토큰보내보기
+      </button>
+
+      <button
+        onClick={async () => {
           const response = await axios.post('http://14.39.205.218:8080/card', {
             cardText: 'text',
             cardColor: 'color',
@@ -52,7 +78,25 @@ const KakaoRedirect = () => {
           }
         }}
       >
-        토큰보내보기
+        Body에 토큰보내보기
+      </button>
+
+      <button
+        onClick={async () => {
+          const response = await axios.post('http://14.39.205.218:8080/card', {
+            cardText: 'text',
+            cardColor: 'color',
+            paperId: '1'
+          })
+
+          console.log(response)
+
+          if (response) {
+            setSuccess(true)
+          }
+        }}
+      >
+        토큰없이
       </button>
 
       <div>{success && '성공'}</div>
