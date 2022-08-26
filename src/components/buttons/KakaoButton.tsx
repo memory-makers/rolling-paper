@@ -14,6 +14,7 @@ const KakaoButton = () => {
   // }
 
   return (
+    // <a href={KAKAO_LOGIN_URL}>
     <a href={url}>
       {/* <img className="kakao" src={`./imgs/kakao-login.png`} onClick={() => test()} /> */}
       <img className="kakao" src={`./imgs/kakao-login.png`} />
