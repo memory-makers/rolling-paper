@@ -2,7 +2,13 @@ import Header from '@/components/layout/Header'
 import Buttons from '@/components/rollingpaper/Buttons'
 import CardModal from '@/components/rollingpaper/CardModal'
 import Content from '@/components/rollingpaper/Content'
+import ModifyModeButtons from '@/components/rollingpaper/ModifyModeButtons'
+import StickerContent from '@/components/rollingpaper/StickerContent'
+import StickerModifyContent from '@/components/rollingpaper/StickerModifyContent'
+import CardType from '@/utils/rollingPaper/Card.type'
 import cardDummy from '@/utils/rollingPaper/cardDummy'
+import StickerType from '@/utils/rollingPaper/Sticker.type'
+import stickerDummy from '@/utils/rollingPaper/stickerDummy'
 import React, { useCallback, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
@@ -11,15 +17,19 @@ const RollingPaper = () => {
   const [isCardDetailVisible, setIsCardDetailVisible] = useState(false)
   const [isModifyMode, setIsModifyMode] = useState(false)
   const [cardIndex, setCardIndex] = useState<number>(0)
-  const [cards, setCards] = useState(Object.values(cardDummy))
+  const [cards, setCards] = useState<CardType[]>(Object.values(cardDummy))
+  const [stickers, setStickers] = useState<StickerType[]>(stickerDummy)
+  const [newStickers, setNewStickers] = useState<StickerType[]>([...stickers])
   const rollingpaperName = '3학년 2반 친구들'
 
   const handleClickCard = useCallback(
     (id: number) => {
-      setIsCardDetailVisible(true)
-      setCardIndex(id)
+      if (!isModifyMode) {
+        setIsCardDetailVisible(true)
+        setCardIndex(id)
+      }
     },
-    [cards]
+    [cards, isModifyMode]
   )
   const handlePrev = useCallback(() => {
     if (0 === cardIndex) {
@@ -37,12 +47,35 @@ const RollingPaper = () => {
     }
   }, [cardIndex, cards])
 
+  const handleModifyDone = useCallback(() => {
+    setStickers([...newStickers])
+    setIsModifyMode(false)
+  }, [])
+
+  const handleModifyMode = useCallback(() => {
+    setIsModifyMode(!isModifyMode)
+  }, [isModifyMode])
+
   return (
     <>
       <Header text={rollingpaperName} type="title-button">
-        <Buttons isModifyMode={isModifyMode} isCardDetailVisible={isCardDetailVisible} />
+        {isModifyMode ? (
+          <ModifyModeButtons
+            handleModifyMode={handleModifyMode}
+            handleModifyDone={handleModifyDone}
+          />
+        ) : (
+          <Buttons handleModifyMode={handleModifyMode} />
+        )}
       </Header>
-      <Content cards={cards} handleClickCard={handleClickCard} />
+      <Content cards={cards} handleClickCard={handleClickCard}>
+        {isModifyMode ? (
+          <StickerModifyContent newStickers={newStickers} setNewStickers={setNewStickers} />
+        ) : (
+          <StickerContent stickers={stickers} />
+        )}
+      </Content>
+
       <CardModal
         card={cards[cardIndex]}
         setIsCardDetailVisible={setIsCardDetailVisible}

@@ -6,9 +6,10 @@ import styles from './rollingpaper.module.scss'
 interface ContentProps {
   handleClickCard: (index: number) => void
   cards: CardType[]
+  children: React.ReactNode
 }
 
-const Content = ({ cards, handleClickCard }: ContentProps) => {
+const Content = ({ cards, handleClickCard, children }: ContentProps) => {
   return (
     <div className={styles.content}>
       {cards.map((card, index) => {
@@ -22,6 +23,7 @@ const Content = ({ cards, handleClickCard }: ContentProps) => {
           />
         )
       })}
+      {children}
     </div>
   )
 }

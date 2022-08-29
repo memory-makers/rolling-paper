@@ -1,11 +1,7 @@
-import CardType from '@/utils/rollingPaper/Card.type'
-import cardDummy from '@/utils/rollingPaper/cardDummy'
-import StickerType, { StickerShape } from '@/utils/rollingPaper/Sticker.type'
 import React from 'react'
-import Card from './Card'
+import StickerType, { StickerShape } from '@/utils/rollingPaper/Sticker.type'
 import RndSticker from './RndSticker'
 import styles from './rollingpaper.module.scss'
-import Sticker from './Sticker'
 import StickerModal from './StickerModal'
 interface ContentProps {
   newStickers: StickerType[]

@@ -1,10 +1,14 @@
 @use '@/styles/colors.scss' as colors;
 @use '@/styles/core/_typography.scss' as txt;
 .content {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: row dense;
+  align-content: start;
   margin: 0 auto;
   padding: 16px;
+  height: 100%;
 }
 
 .card {
@@ -90,4 +94,81 @@
   position: absolute;
   top: 100px;
   right: 20px;
+}
+
+
+.sticker{
+  cursor: pointer;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  &.isFloating{
+    position: absolute;
+  }
+  &.rnd{
+    position: absolute;
+  }
+ 
+}
+.border{
+  position: absolute;
+  top:-10px;
+  left: -10px;
+}
+.delete-icn{
+  width: 20px;
+  height: 20px;
+  z-index: 10;
+  position: absolute;
+  top: -30px;
+  right: -30px;
+}
+.rotate-icn{
+  width: 20px;
+  height: 20px;
+  z-index: 10;
+  position: absolute;
+  bottom: -30px;
+  right: -30px;
+}
+
+.sticker-modal{
+  position: absolute;
+  z-index: 999;
+  bottom: 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease-out;
+  &.isClosed{
+    bottom: -400px;
+    & div{
+      opacity: 0;
+      padding: 0;
+    }
+  }
+}
+.sticker-modal-content{
+  transition: all 0.3s ease-out;
+  opacity: 1;
+  display: grid;
+  width: 100%;
+  height: 400px;
+  background: rgba(0, 0, 0, 0.8);
+  grid-template-columns: repeat(3, 1fr);
+  padding: 30px;
+  align-items: center;
+  justify-items: center;
+}
+
+.sticker-content{
+  width: 100%;
+  height: 100%; 
+  z-index: 100;
+  position: absolute;
+}
+.sticker-container{
+  width: 100%;
+  
 }
