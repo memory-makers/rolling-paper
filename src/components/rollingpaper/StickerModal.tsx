@@ -5,7 +5,9 @@ import { ReactComponent as OpenedModal } from '@/assets/opened-modal.svg'
 import { ReactComponent as ClosedModal } from '@/assets/closed-modal.svg'
 import classNames from 'classnames'
 import Sticker from './Sticker'
+import Layout from '../layout/Layout'
 
+import { createPortal } from 'react-dom'
 interface StickerModalProps {
   handleCreateNewSticker: (type: StickerShape) => void
 }
@@ -13,7 +15,8 @@ interface StickerModalProps {
 const StickerModal = ({ handleCreateNewSticker }: StickerModalProps) => {
   const [isClosed, setIsClosed] = useState(false)
   const handleClose = useCallback(() => setIsClosed(!isClosed), [isClosed])
-  return (
+  const modalRoot = document.querySelector('.layout') as HTMLDivElement
+  return createPortal(
     <div className={classNames(styles['sticker-modal'], isClosed && styles['isClosed'])}>
       {isClosed ? <ClosedModal onClick={handleClose} /> : <OpenedModal onClick={handleClose} />}
       <div className={styles['sticker-modal-content']}>
@@ -28,7 +31,8 @@ const StickerModal = ({ handleCreateNewSticker }: StickerModalProps) => {
           )
         })}
       </div>
-    </div>
+    </div>,
+    modalRoot
   )
 }
 
