@@ -3,6 +3,7 @@ import StickerType, { StickerShape } from '@/utils/rollingPaper/Sticker.type'
 import RndSticker from './RndSticker'
 import styles from './rollingpaper.module.scss'
 import StickerModal from './StickerModal'
+import MoveableSticker from './MoveableSticker'
 interface ContentProps {
   newStickers: StickerType[]
   setNewStickers: (newStickers: StickerType[]) => void
@@ -28,6 +29,11 @@ const StickerModifyContent = ({ newStickers, setNewStickers }: ContentProps) => 
   return (
     <div className={styles['sticker-content']}>
       <div className={styles['sticker-content']}>
+        <MoveableSticker
+          sticker={newStickers[0]}
+          handleUpdateStickers={handleUpdateStickers}
+          handleDeleteSticker={handleDeleteSticker}
+        />
         {newStickers.map((sticker) => (
           <RndSticker
             key={sticker.id}
