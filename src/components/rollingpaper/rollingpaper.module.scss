@@ -45,11 +45,11 @@
   }
 }
 
-.card-modal{
+.card-modal {
   z-index: 20;
   position: absolute;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   width: 100%;
   background: rgba(255, 255, 255, 0.8);
   height: 100%;
@@ -61,11 +61,11 @@
   box-sizing: border-box;
   padding: 66px 16px 16px;
   margin-bottom: 66px;
-  svg{
+  svg {
     cursor: pointer;
   }
 }
-.card-content{
+.card-content {
   width: 100%;
   font-size: 32px;
   padding: 66px 40px;
@@ -82,7 +82,7 @@
     }
   }
 }
-.card-btns{
+.card-btns {
   display: flex;
   align-items: center;
   margin-top: 66px;
@@ -90,40 +90,38 @@
   width: 100%;
   justify-content: space-between;
 }
-.close-btn{
+.close-btn {
   position: absolute;
   top: 100px;
   right: 20px;
 }
 
-
-.sticker{
+.sticker {
   cursor: pointer;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: contain;
-  &.isFloating{
+  &.isFloating {
     position: absolute;
   }
-  &.rnd{
+  &.rnd {
     position: absolute;
   }
- 
 }
-.border{
+.border {
   position: absolute;
-  top:-10px;
+  top: -10px;
   left: -10px;
 }
-.delete-icn{
+.delete-icn {
   width: 20px;
   height: 20px;
   z-index: 10;
   position: absolute;
-  top: -30px;
-  right: -30px;
+  top: -38px;
+  right: -35px;
 }
-.rotate-icn{
+.rotate-icn {
   width: 20px;
   height: 20px;
   z-index: 10;
@@ -132,7 +130,7 @@
   right: -30px;
 }
 
-.sticker-modal{
+.sticker-modal {
   position: absolute;
   z-index: 999;
   bottom: 0px;
@@ -141,15 +139,15 @@
   flex-direction: column;
   align-items: center;
   transition: all 0.3s ease-out;
-  &.isClosed{
+  &.isClosed {
     bottom: -400px;
-    & div{
+    & div {
       opacity: 0;
       padding: 0;
     }
   }
 }
-.sticker-modal-content{
+.sticker-modal-content {
   transition: all 0.3s ease-out;
   opacity: 1;
   display: grid;
@@ -162,13 +160,12 @@
   justify-items: center;
 }
 
-.sticker-content{
+.sticker-content {
   width: 100%;
-  height: 100%; 
+  height: 100%;
   z-index: 100;
   position: absolute;
 }
-.sticker-container{
+.sticker-container {
   width: 100%;
-  
 }
