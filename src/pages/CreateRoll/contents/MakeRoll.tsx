@@ -1,5 +1,5 @@
 import { ChangeEventHandler, MouseEventHandler } from 'react'
-import styles from './makeroll.module.scss'
+import styles from './makeRoll.module.scss'
 import cx from 'classnames'
 
 import { ModalButton, ModalInput, ModalText } from '@/components/Modal/ModalItem'
