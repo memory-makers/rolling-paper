@@ -23,19 +23,16 @@ const ModalCallTest = () => {
         ModalCallTest
       </ModalButton>
       {/* {isModalOpen && <CreateRoll setIsModalOpen={setIsModalOpen} />} */}
-
+      {/* {isModalOpen && <MakeNickname setIsModalOpen={setIsModalOpen} />} */}
+      {/* {isModalOpen && <EditNickname setIsModalOpen={setIsModalOpen} />} */}
       {/* {isModalOpen && <CheckSendingCard setIsModalOpen={setIsModalOpen} />} */}
       {/* {isModalOpen && <WriterShareRoll setIsModalOpen={setIsModalOpen} paperUrl="user.paperUrl" />} */}
-
       {/* {isModalOpen && <EditRoll setIsModalOpen={setIsModalOpen} />} */}
       {/* {isModalOpen && (
         <ChangeShareRoll setIsModalOpen={setIsModalOpen} paperUrl={'user.paperUrl'} />
       )} */}
       {/* {isModalOpen && <DeleteRoll setIsModalOpen={setIsModalOpen} />} */}
-
-      {/* {isModalOpen && <MakeNickname setIsModalOpen={setIsModalOpen} />} */}
-      {/* {isModalOpen && <EditNickname setIsModalOpen={setIsModalOpen} />} */}
-
+      {isModalOpen && <CheckSendingCard setIsModalOpen={setIsModalOpen} />}
     </>
   )
 }

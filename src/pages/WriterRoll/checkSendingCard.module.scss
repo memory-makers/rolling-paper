@@ -1,0 +1,8 @@
+@use '/src/styles/colors.scss';
+
+.errorText {
+  text-align: center;
+  margin-top: 22px;
+  color: colors.$point;
+  font-weight: 600;
+}
