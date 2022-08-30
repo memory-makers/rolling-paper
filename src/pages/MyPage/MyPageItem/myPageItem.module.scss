@@ -22,6 +22,11 @@
     p {
       color: colors.$white;
     }
+
+    button > img {
+      width: 16px;
+      height: 13px;
+    }
   }
 
   .openDateWrap {

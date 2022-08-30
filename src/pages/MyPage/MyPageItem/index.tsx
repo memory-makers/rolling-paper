@@ -1,5 +1,6 @@
 import styles from './myPageItem.module.scss'
-
+import { useState } from 'react'
+import cx from 'classnames'
 interface Props {
   id: number
   title: string
@@ -7,6 +8,11 @@ interface Props {
 }
 
 const MyPageItem = ({ user }: { user: Props }) => {
+  const [onDropdown, setOnDropdown] = useState(false)
+
+  const onClickDropdownList = () => {
+    setOnDropdown((prev) => !prev)
+  }
   return (
     <div className={styles.myPageMainContent}>
       <div className={styles.paperNameWrap}>
@@ -19,7 +25,7 @@ const MyPageItem = ({ user }: { user: Props }) => {
       </div>
       <div className={styles.openDateWrap}>
         <p>{user.dueDate}</p>
-        <button>
+        <button type="button" onClick={onClickDropdownList}>
           {/* <img src="/src/assets/arrow-down.svg" alt="가리는 토글 버튼" /> */}
           <img src="/src/assets/arrow-up.svg" alt="보여주는 토글 버튼" />
         </button>
