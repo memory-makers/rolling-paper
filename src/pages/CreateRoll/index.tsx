@@ -17,7 +17,7 @@ const CreateRoll = ({ setIsModalOpen }: Props) => {
   const [isNextStep, setIsNextStep] = useState(false)
 
   const handleButtonClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    console.log(title, dueDate, paperTheme)
+    // console.log('버튼 클릭시, 롤링페이퍼 생성 및 URL 받기', title, dueDate, paperTheme)
     setPaperUrl(`https://rolling-paper.vercel.app/rollingpaper/${paperUrl}`)
     setIsNextStep(true)
   }

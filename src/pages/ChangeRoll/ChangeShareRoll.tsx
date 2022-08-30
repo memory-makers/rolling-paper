@@ -1,15 +1,17 @@
 import styles from '@/styles/pages/_shareRoll.module.scss'
 
+import Modal from '@/components/Modal'
 import { ModalButton, ModalInput, ModalText } from '@/components/Modal/ModalItem'
 
 import { ReactComponent as ClipboardIcon } from '@/assets/Text-files.svg'
 import { ReactComponent as ShareIcon } from '@/assets/share.svg'
 
 interface Props {
+  setIsModalOpen: (state: boolean) => void
   paperUrl: string
 }
 
-const CreateShareRoll = ({ paperUrl }: Props) => {
+const ChangeShareRoll = ({ setIsModalOpen, paperUrl }: Props) => {
   const shareData = {
     title: `홍길동님의 롤링페이퍼`,
     text: `홍길동님에게 롤링페이퍼를 써보아요!`,
@@ -26,9 +28,9 @@ const CreateShareRoll = ({ paperUrl }: Props) => {
   }
 
   return (
-    <>
+    <Modal setIsModalOpen={setIsModalOpen}>
       <ModalText type="title">
-        롤링 페이퍼를 만들었어요! <br /> 이제 친구들에게 써달라고 <br /> 말해볼까요?
+        롤링페이퍼를 친구들에게 <br /> 작성해달라고 공유해볼까요?
       </ModalText>
 
       <ModalText type="label">롤링페이퍼 링크</ModalText>
@@ -43,8 +45,8 @@ const CreateShareRoll = ({ paperUrl }: Props) => {
         <span>공유하기</span>
         <ShareIcon />
       </ModalButton>
-    </>
+    </Modal>
   )
 }
 
-export default CreateShareRoll
+export default ChangeShareRoll
