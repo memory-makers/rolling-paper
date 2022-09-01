@@ -101,6 +101,8 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: contain;
+  width: 60px;
+  height: 60px;
   &.isFloating {
     position: absolute;
   }
