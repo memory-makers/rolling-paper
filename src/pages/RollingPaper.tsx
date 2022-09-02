@@ -20,6 +20,7 @@ const RollingPaper = () => {
   const [cards, setCards] = useState<CardType[]>(Object.values(cardDummy))
   const [stickers, setStickers] = useState<StickerType[]>(stickerDummy)
   const [newStickers, setNewStickers] = useState<StickerType[]>([...stickers])
+
   const rollingpaperName = '3학년 2반 친구들'
 
   const handleClickCard = useCallback(
@@ -57,6 +58,7 @@ const RollingPaper = () => {
     if (!isModifyMode) setNewStickers([...stickers])
     setIsModifyMode(!isModifyMode)
   }, [isModifyMode])
+
 
   return (
     <>

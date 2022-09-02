@@ -1,0 +1,10 @@
+@use '@/styles/core/_typography.scss';
+
+.card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+}
