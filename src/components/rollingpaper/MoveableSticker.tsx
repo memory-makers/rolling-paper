@@ -9,6 +9,9 @@ import Moveable, {
   OnDrag,
   OnDragEnd,
   OnDragStart,
+  OnResize,
+  OnResizeEnd,
+  OnResizeStart,
   OnRotate,
   OnRotateEnd,
   OnRotateStart,
@@ -23,17 +26,28 @@ interface StickerProps {
   handleDeleteSticker: (id: string) => void
 }
 
-const getStyle = (rotate: number | undefined, type: string) => {
+const getStickerStyle = (type: string, id: string) => {
   return {
-    backgroundImage: `url(/imgs/${type}.png)`
+    backgroundImage: `url(/imgs/${type}.png)`,
+    zIndex: `${id}`
   }
 }
 
 const MoveableSticker = ({ sticker, handleUpdateStickers, handleDeleteSticker }: StickerProps) => {
   const [target, setTarget] = useState<HTMLElement | null>(null)
   const [bounds, setBounds] = useState({ x: 380, y: 50 })
+  const [style, setStyle] = useState({
+    rotate: sticker.rotate || 1,
+    translate: [sticker.x || 0, sticker.y || 0],
+    size: sticker.size || 60
+  })
   useEffect(() => {
-    setTarget(document.querySelector('.target')! as HTMLElement)
+    const target = document.querySelector(`.sticker-${sticker.id}`)! as HTMLElement
+    target.style.width = `${style.size}px`
+    target.style.height = `${style.size}px`
+    target.style.transform =
+      `translate(${style.translate[0]}px, ${style.translate[1]}px)` + `rotate(${style.rotate}deg)`
+    setTarget(target)
     const layout = document.querySelector('.layout') as HTMLElement
     layout &&
       setBounds({
@@ -42,31 +56,24 @@ const MoveableSticker = ({ sticker, handleUpdateStickers, handleDeleteSticker }:
       })
   }, [])
 
-  const [style, setStyle] = useState({
-    scale: [sticker.scale || 1, sticker.scale || 1],
-    rotate: sticker.rotate || 1,
-    translate: [sticker.x || 0, sticker.y || 0]
-  })
   //scale event
-  const handleScaleStart = (e: OnScaleStart) => {
-    e.set(style.scale)
+  const handleResizeStart = (e: OnResizeStart) => {
+    e.setOrigin(['%', '%'])
     e.dragStart && e.dragStart.set(style.translate)
   }
-  const handleScale = (e: OnScale) => {
+  const handleResize = (e: OnResize) => {
     const beforeTranslate = e.drag.beforeTranslate
-    style.translate = beforeTranslate
-    style.scale = e.scale
+    if (e.width < 20 || e.width > 150) return
+    e.target.style.width = `${e.width}px`
+    e.target.style.height = `${e.height}px`
     e.target.style.transform =
-      `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)` +
-      `scale(${e.scale[0]}, ${e.scale[1]})` +
-      `rotate(${style.rotate}deg)`
+      `translate(${beforeTranslate[0]}px, ${beforeTranslate[1]}px)` + `rotate(${style.rotate}deg)`
   }
-  const handleScaleEnd = (e: OnScaleEnd) => {
+  const handleResizeEnd = (e: OnResizeEnd) => {
     if (e.lastEvent) {
       style.translate = e.lastEvent.drag.beforeTranslate
-      style.scale = e.lastEvent.scale
-      console.log(e.target)
-      // handleUpdateStickers({ ...sticker, scale: e.lastEvent.scale[0] })
+      style.size = e.lastEvent.width
+      handleUpdateStickers({ ...sticker, size: style.size })
     }
   }
 
@@ -78,14 +85,13 @@ const MoveableSticker = ({ sticker, handleUpdateStickers, handleDeleteSticker }:
     style.rotate = e.beforeRotation
     e.target.style.transform =
       `translate(${style.translate[0]}px, ${style.translate[1]}px)` +
-      `scale(${style.scale[0]}, ${style.scale[1]})` +
       `rotate(${e.beforeRotation}deg)`
   }
   const handleRotateEnd = (e: OnRotateEnd) => {
     if (e.lastEvent) {
       console.log(e.target)
       style.rotate = e.lastEvent.beforeRotate
-      // handleUpdateStickers({ ...sticker, rotate: e.lastEvent.rotate })
+      handleUpdateStickers({ ...sticker, rotate: style.rotate })
     }
   }
 
@@ -94,56 +100,55 @@ const MoveableSticker = ({ sticker, handleUpdateStickers, handleDeleteSticker }:
     e.set(style.translate)
   }
   const handleDrag = (e: OnDrag) => {
+    style.translate = e.beforeTranslate
     e.target.style.transform =
       `translate(${e.beforeTranslate[0]}px, ${e.beforeTranslate[1]}px)` +
-      `scale(${style.scale[0]}, ${style.scale[1]})` +
       `rotate(${style.rotate}deg)`
   }
   const handleDragEnd = (e: OnDragEnd) => {
     if (e.lastEvent) {
-      console.log(e.target)
       style.translate = e.lastEvent.beforeTranslate
-      // handleUpdateStickers({ ...sticker, x: e.lastEvent.translate[0], y: e.lastEvent.translate[1] })
+      handleUpdateStickers({ ...sticker, x: style.translate[0], y: style.translate[1] })
     }
   }
 
   return (
-    <div className="container">
-      <DeleteIcon
-        className={styles['delete-icn']}
-        onClick={() => handleDeleteSticker(sticker.id)}
-      />
+    <div className={styles['container']}>
       <div
-        className={classNames(styles.sticker, 'target')}
-        style={getStyle(sticker.rotate, sticker.type)}
-      ></div>
+        className={classNames(styles.sticker, `sticker-${sticker.id}`)}
+        style={getStickerStyle(sticker.type, sticker.id)}
+      >
+        <DeleteIcon
+          className={styles['delete-icn']}
+          onClick={() => handleDeleteSticker(sticker.id)}
+        />
+      </div>
+
       <Moveable
         target={target}
         rotatable={true}
         draggable={true}
         keepRatio={true}
         snappable={true}
+        resizable={true}
+        throttleResize={1}
         origin={true}
-        pinchable={true}
         edge={true}
         renderDirections={['nw', 'n', 'ne', 'w', 'e', 'sw', 's', 'se']}
         bounds={{ left: 0, top: 0, right: bounds.x, bottom: bounds.y }}
         throttleRotate={0}
         throttleDrag={0}
-        scalable={true}
-        throttleScale={0}
-        onScaleStart={handleScaleStart}
+        onResizeStart={handleResizeStart}
         onRotateStart={handleRotateStart}
         onDragtart={handleDragStart}
-        onScale={handleScale}
+        onResize={handleResize}
         onRotate={handleRotate}
         onDrag={handleDrag}
-        onScaleEnd={handleScaleEnd}
+        onResizeEnd={handleResizeEnd}
         onRotateEnd={handleRotateEnd}
-        OnDragEnd={handleDragEnd}
+        onDragEnd={handleDragEnd}
         rotationPosition={'bottom-right'}
         dragArea={true}
-        padding={{ left: 10, top: 10, right: 10, bottom: 10 }}
       ></Moveable>
     </div>
   )

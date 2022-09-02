@@ -13,10 +13,10 @@ const Sticker = ({ isFloating, sticker, handleStickerClick }: StickerProps) => {
   const style = {
     left: sticker.x,
     top: sticker.y,
-    width: sticker.size ? sticker.size : 60,
-    height: sticker.size ? sticker.size : 60,
+    width: sticker.size || 60,
+    height: sticker.size || 60,
     backgroundImage: `url(/imgs/${sticker.type}.png)`,
-    transform: `rotate(${sticker.rotate ? sticker.rotate : 0}deg)`
+    transform: `rotate(${sticker.rotate || 0}deg)`
   }
   return (
     <div
