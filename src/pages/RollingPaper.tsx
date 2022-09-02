@@ -48,11 +48,13 @@ const RollingPaper = () => {
   }, [cardIndex, cards])
 
   const handleModifyDone = useCallback(() => {
+    console.log(newStickers)
     setStickers([...newStickers])
     setIsModifyMode(false)
-  }, [])
+  }, [newStickers])
 
   const handleModifyMode = useCallback(() => {
+    if (!isModifyMode) setNewStickers([...stickers])
     setIsModifyMode(!isModifyMode)
   }, [isModifyMode])
 
