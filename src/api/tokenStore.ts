@@ -1,24 +1,28 @@
-export interface Token {
-  access_token: string;
-  refresh_token: string;
-}
+export type Token = string | undefined
 
 const tokenStore = {
-  setToken(tokenObj: Token) {
-    localStorage.setItem("access_token", tokenObj.access_token);
-    localStorage.setItem("refresh_token", tokenObj.refresh_token);
+  setAccessToken(access_token: Token) {
+    if (!access_token) {
+      return
+    }
+    localStorage.setItem('access_token', access_token)
   },
-
+  setRefreshToken(refresh_token: Token) {
+    if (!refresh_token) {
+      return
+    }
+    localStorage.setItem('refresh_token', refresh_token)
+  },
   getAccessToken() {
-    return localStorage.getItem("access_token");
+    return localStorage.getItem('access_token')
   },
   getRefreshToken() {
-    return localStorage.getItem("refresh_token");
+    return localStorage.getItem('refresh_token')
   },
   clearToken() {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
-  },
-};
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('refresh_token')
+  }
+}
 
-export default tokenStore;
+export default tokenStore
