@@ -1,0 +1,42 @@
+@use '/src/styles/colors.scss';
+
+.container {
+  width: 100%;
+  header {
+    .backArrowButton {
+      width: 45px;
+      margin: 0;
+    }
+  }
+
+  .contents {
+    margin-top: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .logoTextSvg {
+      margin-top: 24px;
+    }
+
+    .sendingText {
+      margin-top: 35px;
+      font-size: 32px;
+      line-height: 32px;
+      text-align: center;
+
+      .nameColor {
+        color: colors.$subPoint;
+      }
+    }
+
+    .buttonContainer {
+      margin-top: 76px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

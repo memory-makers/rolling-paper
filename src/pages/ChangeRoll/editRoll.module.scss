@@ -1,0 +1,39 @@
+@use '/src/styles/colors.scss';
+
+.radioWrapper {
+  text-align: center;
+  margin-top: 16px;
+
+  .radioLabel {
+    font-size: 14px;
+    display: inline-block;
+    color: colors.$modalBlack;
+    margin: 0 15px;
+
+    .radioInputField {
+      accent-color: colors.$modalPoint;
+      margin: 1px 7px 0 0;
+
+      & + label span {
+        width: 10px;
+        height: 10px;
+      }
+
+      &:checked {
+        background-color: colors.$modalPoint;
+      }
+    }
+
+    .radioColor {
+      width: 100px;
+      height: 140px;
+      border-radius: 20px;
+      margin-top: 10px;
+      background-color: colors.$mainBg;
+    }
+
+    .darkColor {
+      background-color: colors.$darkBg;
+    }
+  }
+}
