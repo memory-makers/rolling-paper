@@ -1,20 +1,10 @@
-import React from "react";
-import { test_API } from "../../api";
-import { login_API } from "../../api/user";
+import React from 'react'
+import { KAKAO_LOGIN_URL } from '@/api/user'
 
-const KakaoButton = () => {
-  const test = async () => {
-    const response = await test_API();
-    console.log(response);
-  };
+const KakaoButton = () => (
+  <a href={KAKAO_LOGIN_URL}>
+    <img className="kakao" src={`./imgs/kakao-login.png`} />
+  </a>
+)
 
-  return (
-    <img
-      className="kakao"
-      src={`./imgs/kakao-login.png`}
-      onClick={() => test()}
-    />
-  );
-};
-
-export default KakaoButton;
+export default KakaoButton
