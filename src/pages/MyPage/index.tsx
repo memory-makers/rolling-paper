@@ -1,6 +1,6 @@
+import Header from '@/components/layout/Header'
 import styles from './myPage.module.scss'
 import MyPageItem from './MyPageItem'
-
 const USER_DATA = [
   {
     id: 1,
@@ -18,8 +18,9 @@ const MyPage = () => {
   return (
     <div className={styles.myPageContainer}>
       {/* Header Area */}
-
-      <header className={styles.myPageHeader}>Header Area</header>
+      <div className={styles.myPageHeader}>
+        <Header text="롤링페이퍼 저장소" type="only-title" />
+      </div>
       <section>
         <div className={styles.myPageContentTitle}>
           <span>롤링 페이퍼 이름</span>
