@@ -4,12 +4,10 @@ import { ReactComponent as StickerIcon } from '@/assets/sticker-icn.svg'
 import { ReactComponent as ShareIcon } from '@/assets/share-icn.svg'
 
 interface ButtonsProps {
-  isCardDetailVisible: boolean
-  isModifyMode: boolean
+  handleModifyMode: () => void
 }
 
-const Buttons = ({}: ButtonsProps) => {
-  const handleModifyMode = () => {}
+const Buttons = ({ handleModifyMode }: ButtonsProps) => {
   const handleShare = () => {}
   return (
     <div className="header_buttons">
