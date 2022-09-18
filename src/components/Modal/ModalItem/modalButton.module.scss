@@ -1,0 +1,38 @@
+@use '/src/styles/colors.scss';
+
+.modalButton {
+  height: 44px;
+  margin-top: 28px;
+  border: 1px solid colors.$modalPoint;
+  border-radius: 20px;
+  cursor: pointer;
+
+  svg {
+    display: inherit;
+    margin-left: 15px;
+    margin: 0 0 4px 15px;
+  }
+}
+
+.normal {
+  width: 263px;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.small {
+  margin: 28px 3px 0;
+  width: 124px;
+  font-size: 20px;
+  line-height: 20px;
+}
+
+.primary {
+  background: colors.$modalPoint;
+  color: colors.$modalWhite;
+}
+
+.secondary {
+  background: colors.$modalWhite;
+  color: colors.$modalPoint;
+}

@@ -1,5 +1,5 @@
 import { memo, ReactNode } from 'react'
-import styles from './modalItem.module.scss'
+import styles from './modalText.module.scss'
 
 interface Props {
   type: 'title' | 'label'
