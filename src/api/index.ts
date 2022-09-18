@@ -16,7 +16,7 @@ axiosClient.interceptors.request.use(
     config.headers['Accept'] = 'application/json'
     config.headers['Access-Control-Allow-Origin'] = '*'
     config.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-    config.headers['Authorization'] = token
+    config.headers['Authorization'] = `Bearer ${token}`
     // config.withCredentials = true
     return config
   },

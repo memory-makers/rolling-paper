@@ -1,6 +1,6 @@
 import { axiosClient } from '.'
 
-const NICKNAME = 'member'
+const NICKNAME = 'members'
 
 export const KAKAO_LOGIN_URL = `${import.meta.env.VITE_BASE_URL}/oauth2/authorization/kakao`
 
