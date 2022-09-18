@@ -1,6 +1,6 @@
 import { ChangeEventHandler } from 'react'
 import cx from 'classnames'
-import styles from './modalItem.module.scss'
+import styles from './modalInput.module.scss'
 
 interface Props {
   type: 'text' | 'date'

@@ -1,3 +1,9 @@
+import { ReactComponent as EyeOffIcon } from '@/assets/eye-off.svg'
+import { ReactComponent as EyeIcon } from '@/assets/eye.svg'
+import { ReactComponent as ArrowDownIcon } from '@/assets/arrow-down.svg'
+import { ReactComponent as ArrowUpIcon } from '@/assets/arrow-up.svg'
+// import { ReactComponent as LockIcon } from '@/assets/lock.svg'
+
 import styles from './myPageItem.module.scss'
 import { useState } from 'react'
 import MyPageDropDown from './MyPageDropdown'
@@ -25,23 +31,21 @@ const MyPageItem = ({ user }: { user: Props }) => {
         <div className={styles.paperInfoWrap}>
           <p>{user.title}</p>
           <button type="button" onClick={handleClickVisible}>
-            {isVisible ? (
-              <img src="/src/assets/eye.svg" alt="눈 보임 버튼" />
+            { isVisible ? (
+              <EyeIcon  />
             ) : (
-              <img src="/src/assets/eye-off.svg" alt="눈 가림 버튼" />
+              <EyeOffIcon  />
             )}
-            {/* <img src="/src/assets/lock.svg" alt="자물쇠 잠금 버튼" /> */}
+            {/* <LockIcon  /> */}
           </button>
         </div>
         <div className={styles.openDateWrap}>
           <p>{user.dueDate}</p>
           <button type="button" onClick={handleClickDropdownList}>
             {isDropdown ? (
-              <>
-                <img src="/src/assets/arrow-down.svg" alt="가리는 토글 버튼" />
-              </>
+                <ArrowDownIcon />
             ) : (
-              <img src="/src/assets/arrow-up.svg" alt="보여주는 토글 버튼" />
+              <ArrowUpIcon />
             )}
           </button>
         </div>
