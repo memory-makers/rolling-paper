@@ -43,8 +43,8 @@ const Header = ({ children, text, type }: HeaderProps) => {
         <div>
           <button type="button" onClick={handleClickEditModal}>
             <span className="header_name">{name}</span>
+            <span>님의</span>
           </button>
-          <span>님의</span>
           <br />
           <span>{text}</span>
         </div>

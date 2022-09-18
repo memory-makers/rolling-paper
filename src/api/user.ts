@@ -16,8 +16,8 @@ export const setNicknameAPI = async (nickname: string | null) => {
 
 export const getNicknameAPI = async () => {
   try {
-    const res = await axiosClient.get(NICKNAME)
-    return res?.data?.nickname
+    const res = await axiosClient.get(`${NICKNAME}/nickname`)
+    return res.data
   } catch (error) {
     console.log(error, 'get nickname error')
   }
