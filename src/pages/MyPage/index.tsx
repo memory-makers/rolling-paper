@@ -1,6 +1,9 @@
+import { ReactComponent as PaperAirplaneIcon } from '@/assets/paper-airplane.svg'
+
 import Header from '@/components/layout/Header'
 import styles from './myPage.module.scss'
 import MyPageItem from './MyPageItem'
+
 const USER_DATA = [
   {
     id: 1,
@@ -32,7 +35,7 @@ const MyPage = () => {
         ))}
       </section>
       <button className={styles.paperAddButton}>
-        <img src="/src/assets/paper-airplane.svg" alt="롤링 페이퍼 생성 버튼 이미지" />
+        <PaperAirplaneIcon />
       </button>
     </div>
   )
