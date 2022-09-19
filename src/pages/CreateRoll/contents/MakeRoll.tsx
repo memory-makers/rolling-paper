@@ -6,14 +6,14 @@ import { ModalButton, ModalInput, ModalText } from '@/components/Modal/ModalItem
 
 interface Props {
   handleButtonClick: MouseEventHandler<HTMLButtonElement>
-  setTitle: (state: string) => void
+  setPaperTitle: (state: string) => void
   setDueDate: (state: string) => void
-  setPaperTheme: (state: string) => void
+  setTheme: (state: string) => void
 }
 
-const MakeRoll = ({ handleButtonClick, setTitle, setDueDate, setPaperTheme }: Props) => {
+const MakeRoll = ({ handleButtonClick, setPaperTitle, setDueDate, setTheme }: Props) => {
   const handleTitleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setTitle(e.currentTarget.value)
+    setPaperTitle(e.currentTarget.value)
   }
 
   const handleDueDateChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -21,7 +21,7 @@ const MakeRoll = ({ handleButtonClick, setTitle, setDueDate, setPaperTheme }: Pr
   }
 
   const handleThemeChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setPaperTheme(e.currentTarget.value)
+    setTheme(e.currentTarget.value)
   }
 
   return (
