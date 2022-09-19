@@ -10,7 +10,9 @@ const cardDummy = {
 우리 화이팅하자~!`,
     background: 'cardBlue',
     font: 'basic',
-    author: '얌얌'
+    fontColor: 'textRed',
+    author: '얌얌',
+    id: 100
   },
   ['1']: {
     content: `안녕 레몬아너는 참 귀여워
@@ -21,7 +23,9 @@ const cardDummy = {
 우리 화이팅하자~!`,
     background: 'cardRed',
     font: 'type1',
-    author: '토미'
+    author: '토미',
+    fontColor: 'textBlue',
+    id: 101
   },
   ['2']: {
     content: `안녕 레몬아너는 참 귀여워
@@ -32,7 +36,9 @@ const cardDummy = {
 우리 화이팅하자~!`,
     background: 'cardPurple',
     font: 'type2',
-    author: '토마토'
+    fontColor: 'textBlack',
+    author: '토마토',
+    id: 102
   }
 } as { [id: string]: Card }
 

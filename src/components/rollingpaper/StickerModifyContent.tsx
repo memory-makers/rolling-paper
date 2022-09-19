@@ -12,10 +12,10 @@ interface ContentProps {
 const StickerModifyContent = ({ newStickers, setNewStickers }: ContentProps) => {
   const handleCreateNewSticker = (type: StickerShape) => {
     const newSticker = {
-      id: Math.floor(Math.random() * 1000).toString(),
+      id: Math.floor(Math.random() * 1000),
       size: 60,
       type: type,
-      paperId: '1',
+      paperId: 1,
       x: 0,
       y: 0
     } as StickerType
@@ -25,11 +25,11 @@ const StickerModifyContent = ({ newStickers, setNewStickers }: ContentProps) => 
     console.log(newSticker)
     setNewStickers([...newStickers.filter((sticker) => sticker.id !== newSticker.id), newSticker])
   }
-  const handleDeleteSticker = (id: string) => {
+  const handleDeleteSticker = (id: number) => {
     setNewStickers([...newStickers.filter((sticker) => sticker.id !== id)])
   }
   return (
-    <div className={styles['sticker-content']}>
+    <div className={styles['sticker-modify-content']}>
       <div className={styles['sticker-container']}>
         {newStickers.map((sticker) => (
           <MoveableSticker
@@ -38,12 +38,6 @@ const StickerModifyContent = ({ newStickers, setNewStickers }: ContentProps) => 
             handleUpdateStickers={handleUpdateStickers}
             handleDeleteSticker={handleDeleteSticker}
           />
-          // <RndSticker
-          //   key={sticker.id}
-          //   sticker={sticker}
-          //   handleUpdateStickers={handleUpdateStickers}
-          //   handleDeleteSticker={handleDeleteSticker}
-          // />
         ))}
       </div>
       <StickerModal handleCreateNewSticker={handleCreateNewSticker} />

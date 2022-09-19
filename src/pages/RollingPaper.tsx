@@ -1,3 +1,5 @@
+import { test_API } from '@/api'
+import { fetchCards_API } from '@/api/rollingpaper'
 import Header from '@/components/layout/Header'
 import Buttons from '@/components/rollingpaper/Buttons'
 import CardModal from '@/components/rollingpaper/CardModal'
@@ -9,7 +11,7 @@ import CardType from '@/utils/rollingPaper/Card.type'
 import cardDummy from '@/utils/rollingPaper/cardDummy'
 import StickerType from '@/utils/rollingPaper/Sticker.type'
 import stickerDummy from '@/utils/rollingPaper/stickerDummy'
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 const RollingPaper = () => {
@@ -21,6 +23,13 @@ const RollingPaper = () => {
   const [stickers, setStickers] = useState<StickerType[]>(stickerDummy)
   const [newStickers, setNewStickers] = useState<StickerType[]>([...stickers])
   const rollingpaperName = '3학년 2반 친구들'
+
+  useEffect(() => {
+    console.log(rollingPaperId)
+    if (rollingPaperId) {
+      fetchCards_API(rollingPaperId, setCards)
+    }
+  }, [])
 
   const handleClickCard = useCallback(
     (id: number) => {

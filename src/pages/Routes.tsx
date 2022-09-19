@@ -16,7 +16,7 @@ export const Routes = () => {
         <Route path="/" element={<Home />} />
         <Route path="/editor" element={<Editor />} />
         <Route path="/mypage" element={<MyPage />} />
-        <Route path="/rollingpaper/*" element={<RollingPaper />} />
+        <Route path="/rollingpaper/:rollingPaperId" element={<RollingPaper />}></Route>
         <Route path="/sending" element={<Sending nickname="레몬은 귀여워" />} />
         <Route path="/modalTest" element={<ModalTest />} />
         <Route path="/modalCallTest" element={<ModalCallTest />} />

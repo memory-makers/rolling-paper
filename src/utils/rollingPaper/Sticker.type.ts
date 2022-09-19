@@ -1,12 +1,12 @@
 interface StickerType {
-  id: string
+  id: number
   size?: number
   type: string
   rotate?: number
   x?: number
   y?: number
   scale?: number
-  paperId: string
+  paperId: number
 }
 export default StickerType
 

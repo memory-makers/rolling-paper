@@ -82,6 +82,13 @@
     }
   }
 }
+.text {
+  @each $colorKey, $colorValue in colors.$colorMap {
+    &.#{$colorKey} {
+      color: $colorValue;
+    }
+  }
+}
 .card-btns {
   display: flex;
   align-items: center;
@@ -166,12 +173,19 @@
   justify-items: center;
 }
 
-.sticker-content {
+.sticker-modify-content {
   z-index: 100;
   width: 100%;
   position: absolute;
   height: 100%;
 }
+.sticker-content {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  pointer-events: none;
+}
+
 .sticker-container {
   position: relative;
   width: 100%;
