@@ -1,8 +1,10 @@
+import { useState } from 'react'
 import { ReactComponent as PaperAirplaneIcon } from '@/assets/paper-airplane.svg'
 
 import Header from '@/components/layout/Header'
 import styles from './myPage.module.scss'
 import MyPageItem from './MyPageItem'
+import CreateRoll from '../CreateRoll'
 
 const USER_DATA = [
   {
@@ -18,6 +20,11 @@ const USER_DATA = [
 ]
 
 const MyPage = () => {
+  const [isAddRollModalOpen, setIsAddRollModalOpen] = useState(false)
+  const handleClickAddRoll = () => {
+    setIsAddRollModalOpen((prev) => !prev)
+  }
+
   return (
     <div className={styles.myPageContainer}>
       {/* Header Area */}
@@ -34,9 +41,10 @@ const MyPage = () => {
           <MyPageItem key={user.id} user={user} />
         ))}
       </section>
-      <button className={styles.paperAddButton}>
+      <button className={styles.paperAddButton} onClick={handleClickAddRoll}>
         <PaperAirplaneIcon />
       </button>
+      {isAddRollModalOpen && <CreateRoll setIsModalOpen={setIsAddRollModalOpen} />}
     </div>
   )
 }
