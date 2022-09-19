@@ -3,23 +3,33 @@ import { MouseEventHandler, useState } from 'react'
 import Modal from '@/components/Modal'
 import MakeRoll from './contents/MakeRoll'
 import CreateShareRoll from './contents/CreateShareRoll'
+import { setPaperAPI } from '@/api/user'
 
 interface Props {
   setIsModalOpen: (state: boolean) => void
 }
 
 const CreateRoll = ({ setIsModalOpen }: Props) => {
-  const [title, setTitle] = useState('')
+  const [paperTitle, setPaperTitle] = useState('')
   const [dueDate, setDueDate] = useState('')
-  const [paperTheme, setPaperTheme] = useState('light')
+  const [theme, setTheme] = useState('light')
 
   const [paperUrl, setPaperUrl] = useState('test')
   const [isNextStep, setIsNextStep] = useState(false)
 
-  const handleButtonClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    // console.log('버튼 클릭시, 롤링페이퍼 생성 및 URL 받기', title, dueDate, paperTheme)
-    setPaperUrl(`https://rolling-paper.vercel.app/rollingpaper/${paperUrl}`)
+  const handleButtonClick: MouseEventHandler<HTMLButtonElement> = async (e) => {
+    const paperId = await getPaperId()
+    setPaperUrl(`https://rolling-paper.vercel.app/rollingpaper/${paperId}`)
     setIsNextStep(true)
+  }
+
+  const getPaperId = async () => {
+    const {
+      result: {
+        paper: { paperId }
+      }
+    } = await setPaperAPI(paperTitle, dueDate, theme)
+    return paperId
   }
 
   return (
@@ -27,9 +37,9 @@ const CreateRoll = ({ setIsModalOpen }: Props) => {
       {!isNextStep && (
         <MakeRoll
           handleButtonClick={handleButtonClick}
-          setTitle={setTitle}
+          setPaperTitle={setPaperTitle}
           setDueDate={setDueDate}
-          setPaperTheme={setPaperTheme}
+          setTheme={setTheme}
         />
       )}
 
