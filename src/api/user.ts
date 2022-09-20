@@ -10,7 +10,8 @@ export const setNicknameAPI = async (nickname: string | null) => {
   try {
     if (!nickname) return
     const data = { nickname }
-    return await axiosClient.put(NICKNAME, data)
+    const res = await axiosClient.put(NICKNAME, data)
+    return res
   } catch (error) {
     console.log(error, 'set nickname error')
   }
@@ -51,7 +52,8 @@ export const editPaperAPI = async (
 ) => {
   try {
     const data = { paper: { paperId, paperTitle, dueDate, theme } }
-    return await axiosClient.put(PAPER, data)
+    const res = await axiosClient.put(PAPER, data)
+    return res
   } catch (error) {
     console.log(error, 'edit rolling paper error')
   }
@@ -61,7 +63,8 @@ export const editPaperAPI = async (
 export const deletePaperAPI = async (paperId: number, deleteYd: string = 'y') => {
   try {
     const data = { paper: { paperId, deleteYd } }
-    return await axiosClient.put(PAPER, data)
+    const res = await axiosClient.put(PAPER, data)
+    return res
   } catch (error) {
     console.log(error, 'delete rolling paper error')
   }
