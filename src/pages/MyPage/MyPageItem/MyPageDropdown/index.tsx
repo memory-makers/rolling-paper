@@ -38,7 +38,13 @@ const MyPageDropDown = ({ isVisible }: { isVisible: boolean }) => {
       </button>
       <button type="button">{isVisible ? '모두 보기' : '나만 보기'}</button>
       {isEditRollModalOpen && (
-        <EditRoll paperId={paperId} setIsModalOpen={setIsEditRollModalOpen} />
+        <EditRoll
+          paperId={paperId}
+          ePaperTitle="3학년 2반 친구들"
+          eDueDate="2022-12-16"
+          eTheme="dark"
+          setIsModalOpen={setIsEditRollModalOpen}
+        />
       )}
       {isDeleteRollModalOpen && (
         <DeleteRoll paperId={paperId} setIsModalOpen={setIsDeleteRollModalOpen} />

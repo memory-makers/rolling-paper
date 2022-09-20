@@ -8,13 +8,16 @@ import { editPaperAPI } from '@/api/user'
 
 interface Props {
   paperId: number
+  ePaperTitle: string
+  eDueDate: string
+  eTheme: string
   setIsModalOpen: (state: boolean) => void
 }
 
-const EditRoll = ({ paperId, setIsModalOpen }: Props) => {
-  const [paperTitle, setPaperTitle] = useState('3학년 2반 친구들')
-  const [dueDate, setDueDate] = useState('2022-12-16')
-  const [theme, setTheme] = useState('dark')
+const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, setIsModalOpen }: Props) => {
+  const [paperTitle, setPaperTitle] = useState(ePaperTitle)
+  const [dueDate, setDueDate] = useState(eDueDate)
+  const [theme, setTheme] = useState(eTheme)
 
   const handlePaperTitleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setPaperTitle(e.currentTarget.value)
