@@ -41,3 +41,28 @@ export const setPaperAPI = async (
     console.log(error, 'set rolling paper error')
   }
 }
+
+// 롤링페이퍼 수정
+export const editPaperAPI = async (
+  paperId: number,
+  paperTitle: string | null,
+  dueDate: string | null,
+  theme: string | null
+) => {
+  try {
+    const data = { paper: { paperId, paperTitle, dueDate, theme } }
+    return await axiosClient.put(PAPER, data)
+  } catch (error) {
+    console.log(error, 'edit rolling paper error')
+  }
+}
+
+// 롤링페이퍼 삭제
+export const deletePaperAPI = async (paperId: number, deleteYd: string = 'y') => {
+  try {
+    const data = { paper: { paperId, deleteYd } }
+    return await axiosClient.put(PAPER, data)
+  } catch (error) {
+    console.log(error, 'delete rolling paper error')
+  }
+}
