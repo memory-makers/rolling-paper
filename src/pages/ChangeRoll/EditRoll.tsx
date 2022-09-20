@@ -4,15 +4,18 @@ import styles from './editRoll.module.scss'
 
 import Modal from '@/components/Modal'
 import { ModalButton, ModalInput, ModalText } from '@/components/Modal/ModalItem'
+import { editPaperAPI } from '@/api/user'
 
 interface Props {
   setIsModalOpen: (state: boolean) => void
 }
 
 const EditRoll = ({ setIsModalOpen }: Props) => {
-  const [paperTitle, setPaperTitle] = useState('')
-  const [dueDate, setDueDate] = useState('')
-  const [theme, setTheme] = useState('light')
+  // NOTE: 추후 변경필요. 상위 setFunction 내려받기. mypage -> dropdown -> editroll
+  const paperId = 1
+  const [paperTitle, setPaperTitle] = useState('3학년 2반 친구들')
+  const [dueDate, setDueDate] = useState('2022-12-16')
+  const [theme, setTheme] = useState('dark')
 
   const handlePaperTitleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setPaperTitle(e.currentTarget.value)
@@ -27,15 +30,9 @@ const EditRoll = ({ setIsModalOpen }: Props) => {
   }
 
   const handleButtonClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    // console.log('버튼 클릭시 롤링페이퍼 수정', paperTitle, dueDate, theme)
+    editPaperAPI(paperId, paperTitle, dueDate, theme)
     setIsModalOpen(false)
   }
-
-  useEffect(() => {
-    setPaperTitle('3학년 2반 친구들')
-    setDueDate('2022-12-16')
-    setTheme('dark')
-  }, [])
 
   return (
     <Modal setIsModalOpen={setIsModalOpen}>
