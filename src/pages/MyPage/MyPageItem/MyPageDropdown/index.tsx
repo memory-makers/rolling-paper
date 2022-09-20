@@ -3,14 +3,21 @@ import styles from './myPageDropdown.module.scss'
 
 import EditRoll from '@/pages/ChangeRoll/EditRoll'
 import DeleteRoll from '@/pages/ChangeRoll/DeleteRoll'
+import ChangeShareRoll from '@/pages/ChangeRoll/ChangeShareRoll'
+
+const CLIENT_URL = 'https://rolling-pager-client.vercel.app/rollingpaper/'
 
 const MyPageDropDown = ({ isVisible }: { isVisible: boolean }) => {
-  const paperId = 1 // NOTE: 추후 변경 필요. 상위 setFunction 내려받기. myPage -> dropdown
+  // NOTE: 추후 변경 필요. 상위 setFunction 내려받기. myPage -> dropdown
+  const paperId = 1
+  const paperUrl = 'asdf-asdf-asdf-asdf'
+
+  const [isShareRollModalOpen, setIsShareRollModalOpen] = useState(false)
   const [isEditRollModalOpen, setIsEditRollModalOpen] = useState(false)
   const [isDeleteRollModalOpen, setIsDeleteRollModalOpen] = useState(false)
 
   const handleClickShare = () => {
-    confirm('공유하기를 진행하시겠습니까?')
+    setIsShareRollModalOpen((prev) => !prev)
   }
   const handleClickEdit = () => {
     setIsEditRollModalOpen((prev) => !prev)
@@ -35,6 +42,13 @@ const MyPageDropDown = ({ isVisible }: { isVisible: boolean }) => {
       )}
       {isDeleteRollModalOpen && (
         <DeleteRoll paperId={paperId} setIsModalOpen={setIsDeleteRollModalOpen} />
+      )}
+
+      {isShareRollModalOpen && (
+        <ChangeShareRoll
+          paperUrl={`${CLIENT_URL}${paperUrl}`}
+          setIsModalOpen={setIsShareRollModalOpen}
+        />
       )}
     </section>
   )
