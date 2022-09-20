@@ -1,16 +1,18 @@
+import { deletePaperAPI } from '@/api/user'
 import Modal from '@/components/Modal'
 import { ModalButton, ModalText } from '@/components/Modal/ModalItem'
 
 interface Props {
+  paperId: number
   setIsModalOpen: (state: boolean) => void
 }
 
-const DeleteRoll = ({ setIsModalOpen }: Props) => {
+const DeleteRoll = ({ paperId, setIsModalOpen }: Props) => {
   const handleCancelClick = () => {
     setIsModalOpen(false)
   }
   const handleDeleteClick = () => {
-    // console.log('삭제클릭시 롤링페이퍼 삭제')
+    deletePaperAPI(paperId)
     setIsModalOpen(false)
   }
 
