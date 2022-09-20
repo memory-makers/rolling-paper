@@ -18,18 +18,18 @@ const CreateRoll = ({ setIsModalOpen }: Props) => {
   const [isNextStep, setIsNextStep] = useState(false)
 
   const handleButtonClick: MouseEventHandler<HTMLButtonElement> = async (e) => {
-    const paperId = await getPaperId()
-    setPaperUrl(`https://rolling-paper.vercel.app/rollingpaper/${paperId}`)
+    const paperUrl = await getPaperUrl()
+    setPaperUrl(`https://rolling-paper.vercel.app/rollingpaper/${paperUrl}`)
     setIsNextStep(true)
   }
 
-  const getPaperId = async () => {
+  const getPaperUrl = async () => {
     const {
       result: {
-        paper: { paperId }
+        paper: { paperUrl }
       }
     } = await setPaperAPI(paperTitle, dueDate, theme)
-    return paperId
+    return paperUrl
   }
 
   return (

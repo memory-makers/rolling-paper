@@ -5,6 +5,7 @@ const PAPER = 'papers'
 
 export const KAKAO_LOGIN_URL = `${import.meta.env.VITE_BASE_URL}/oauth2/authorization/kakao`
 
+// 닉네임 설정
 export const setNicknameAPI = async (nickname: string | null) => {
   try {
     if (!nickname) return
@@ -15,6 +16,7 @@ export const setNicknameAPI = async (nickname: string | null) => {
   }
 }
 
+// 닉네임 조회
 export const getNicknameAPI = async () => {
   try {
     const res = await axiosClient.get(`${NICKNAME}/nickname`)
@@ -24,6 +26,7 @@ export const getNicknameAPI = async () => {
   }
 }
 
+// 롤링페이퍼 생성
 export const setPaperAPI = async (
   paperTitle: string | null,
   dueDate: string | null,
