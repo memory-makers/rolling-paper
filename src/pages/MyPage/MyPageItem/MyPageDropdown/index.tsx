@@ -5,12 +5,14 @@ import EditRoll from '@/pages/ChangeRoll/EditRoll'
 import DeleteRoll from '@/pages/ChangeRoll/DeleteRoll'
 import ChangeShareRoll from '@/pages/ChangeRoll/ChangeShareRoll'
 import { CLIENT_PAPER_URL } from '@/config/commonLink'
+import PaperType from '@/utils/rollingPaper/Paper.type'
 
-const MyPageDropDown = ({ isVisible }: { isVisible: boolean }) => {
-  // NOTE: 추후 변경 필요. 상위 setFunction 내려받기. myPage -> dropdown
-  const paperId = 1
-  const paperUrl = 'asdf-asdf-asdf-asdf'
+interface Props {
+  paper: PaperType
+  isVisible: boolean
+}
 
+const MyPageDropDown = ({ paper, isVisible }: Props) => {
   const [isShareRollModalOpen, setIsShareRollModalOpen] = useState(false)
   const [isEditRollModalOpen, setIsEditRollModalOpen] = useState(false)
   const [isDeleteRollModalOpen, setIsDeleteRollModalOpen] = useState(false)
@@ -24,6 +26,7 @@ const MyPageDropDown = ({ isVisible }: { isVisible: boolean }) => {
   const handleClickDelete = () => {
     setIsDeleteRollModalOpen((prev) => !prev)
   }
+
   return (
     <section className={styles.dropdown}>
       <button type="button" onClick={handleClickShare}>
@@ -38,20 +41,20 @@ const MyPageDropDown = ({ isVisible }: { isVisible: boolean }) => {
       <button type="button">{isVisible ? '모두 보기' : '나만 보기'}</button>
       {isEditRollModalOpen && (
         <EditRoll
-          paperId={paperId}
-          ePaperTitle="3학년 2반 친구들"
-          eDueDate="2022-12-16"
-          eTheme="dark"
+          paperId={paper.paperId}
+          ePaperTitle={paper.paperTitle}
+          eDueDate={paper.dueDate}
+          eTheme={paper.theme}
           setIsModalOpen={setIsEditRollModalOpen}
         />
       )}
       {isDeleteRollModalOpen && (
-        <DeleteRoll paperId={paperId} setIsModalOpen={setIsDeleteRollModalOpen} />
+        <DeleteRoll paperId={paper.paperId} setIsModalOpen={setIsDeleteRollModalOpen} />
       )}
 
       {isShareRollModalOpen && (
         <ChangeShareRoll
-          paperUrl={`${CLIENT_PAPER_URL}${paperUrl}`}
+          paperUrl={`${CLIENT_PAPER_URL}${paper.paperUrl}`}
           setIsModalOpen={setIsShareRollModalOpen}
         />
       )}

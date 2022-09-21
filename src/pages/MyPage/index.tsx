@@ -5,20 +5,21 @@ import Header from '@/components/layout/Header'
 import MyPageItem from './MyPageItem'
 import CreateRoll from '../CreateRoll'
 import { getPaperAPI } from '@/api/user'
-import PaperType from '@/utils/rollingPaper/Paper.type'
 
 import { ReactComponent as PaperAirplaneIcon } from '@/assets/paper-airplane.svg'
+import { LOAD_PAPER, usePaper } from '@/store/paper'
 
 const MyPage = () => {
   const [isAddRollModalOpen, setIsAddRollModalOpen] = useState(false)
-  const [papers, setPapers] = useState<PaperType[]>([])
+  const { state, dispatch } = usePaper()
+
   const handleClickAddRoll = () => {
     setIsAddRollModalOpen((prev) => !prev)
   }
 
   const getData = async () => {
-    const { result } = await getPaperAPI()
-    setPapers(result)
+    const papers = await getPaperAPI()
+    dispatch({ type: LOAD_PAPER, payload: papers })
   }
 
   useEffect(() => {
@@ -37,8 +38,8 @@ const MyPage = () => {
           <span>오픈 날짜</span>
         </div>
         {/* Main Area */}
-        {papers.map((user) => (
-          <MyPageItem key={user.paperId} user={user} />
+        {state.map((paper) => (
+          <MyPageItem key={paper.paperId} paper={paper} />
         ))}
       </section>
       <button className={styles.paperAddButton} onClick={handleClickAddRoll}>
