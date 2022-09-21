@@ -1,29 +1,29 @@
-import { useState } from 'react'
-import { ReactComponent as PaperAirplaneIcon } from '@/assets/paper-airplane.svg'
+import { useEffect, useState } from 'react'
+import styles from './myPage.module.scss'
 
 import Header from '@/components/layout/Header'
-import styles from './myPage.module.scss'
 import MyPageItem from './MyPageItem'
 import CreateRoll from '../CreateRoll'
+import { getPaperAPI } from '@/api/user'
+import PaperType from '@/utils/rollingPaper/Paper.type'
 
-const USER_DATA = [
-  {
-    id: 1,
-    title: '3학년 2반 친구들',
-    dueDate: '2022.12.16'
-  },
-  {
-    id: 2,
-    title: '2022 여름캠프',
-    dueDate: '2023.05.01'
-  }
-]
+import { ReactComponent as PaperAirplaneIcon } from '@/assets/paper-airplane.svg'
 
 const MyPage = () => {
   const [isAddRollModalOpen, setIsAddRollModalOpen] = useState(false)
+  const [papers, setPapers] = useState<PaperType[]>([])
   const handleClickAddRoll = () => {
     setIsAddRollModalOpen((prev) => !prev)
   }
+
+  const getData = async () => {
+    const { result } = await getPaperAPI()
+    setPapers(result)
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
 
   return (
     <div className={styles.myPageContainer}>
@@ -37,8 +37,8 @@ const MyPage = () => {
           <span>오픈 날짜</span>
         </div>
         {/* Main Area */}
-        {USER_DATA.map((user) => (
-          <MyPageItem key={user.id} user={user} />
+        {papers.map((user) => (
+          <MyPageItem key={user.paperId} user={user} />
         ))}
       </section>
       <button className={styles.paperAddButton} onClick={handleClickAddRoll}>

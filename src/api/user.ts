@@ -69,3 +69,13 @@ export const deletePaperAPI = async (paperId: number, deleteYd: string = 'y') =>
     console.log(error, 'delete rolling paper error')
   }
 }
+
+// 롤링페이퍼 생성
+export const getPaperAPI = async () => {
+  try {
+    const res = await axiosClient.get(PAPER)
+    return res.data
+  } catch (error) {
+    console.log(error, 'get rolling paper error')
+  }
+}
