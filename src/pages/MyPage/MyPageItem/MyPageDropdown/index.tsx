@@ -4,8 +4,7 @@ import styles from './myPageDropdown.module.scss'
 import EditRoll from '@/pages/ChangeRoll/EditRoll'
 import DeleteRoll from '@/pages/ChangeRoll/DeleteRoll'
 import ChangeShareRoll from '@/pages/ChangeRoll/ChangeShareRoll'
-
-const CLIENT_URL = 'https://rolling-pager-client.vercel.app/rollingpaper/'
+import { CLIENT_PAPER_URL } from '@/config/commonLink'
 
 const MyPageDropDown = ({ isVisible }: { isVisible: boolean }) => {
   // NOTE: 추후 변경 필요. 상위 setFunction 내려받기. myPage -> dropdown
@@ -52,7 +51,7 @@ const MyPageDropDown = ({ isVisible }: { isVisible: boolean }) => {
 
       {isShareRollModalOpen && (
         <ChangeShareRoll
-          paperUrl={`${CLIENT_URL}${paperUrl}`}
+          paperUrl={`${CLIENT_PAPER_URL}${paperUrl}`}
           setIsModalOpen={setIsShareRollModalOpen}
         />
       )}

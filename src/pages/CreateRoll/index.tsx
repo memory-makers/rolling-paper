@@ -4,8 +4,7 @@ import Modal from '@/components/Modal'
 import MakeRoll from './contents/MakeRoll'
 import CreateShareRoll from './contents/CreateShareRoll'
 import { setPaperAPI } from '@/api/user'
-
-const CLIENT_URL = 'https://rolling-pager-client.vercel.app/rollingpaper/'
+import { CLIENT_PAPER_URL } from '@/config/commonLink'
 
 interface Props {
   setIsModalOpen: (state: boolean) => void
@@ -21,7 +20,7 @@ const CreateRoll = ({ setIsModalOpen }: Props) => {
 
   const handleButtonClick: MouseEventHandler<HTMLButtonElement> = async (e) => {
     const paperUrl = await getPaperUrl()
-    setPaperUrl(`${CLIENT_URL}${paperUrl}`)
+    setPaperUrl(`${CLIENT_PAPER_URL}${paperUrl}`)
     setIsNextStep(true)
   }
 
