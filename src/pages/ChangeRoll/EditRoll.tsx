@@ -5,6 +5,7 @@ import styles from './editRoll.module.scss'
 import Modal from '@/components/Modal'
 import { ModalButton, ModalInput, ModalText } from '@/components/Modal/ModalItem'
 import { editPaperAPI } from '@/api/user'
+import { EDIT_PAPER, usePaper } from '@/store/paper'
 
 interface Props {
   paperId: number
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, setIsModalOpen }: Props) => {
+  const { dispatch } = usePaper()
   const [paperTitle, setPaperTitle] = useState(ePaperTitle)
   const [dueDate, setDueDate] = useState(eDueDate)
   const [theme, setTheme] = useState(eTheme)
@@ -32,7 +34,9 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, setIsModalOpen }: Pr
   }
 
   const handleButtonClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    editPaperAPI(paperId, paperTitle, dueDate, theme)
+    const editedPaper = { paperId, paperTitle, dueDate, theme }
+    editPaperAPI(editedPaper)
+    dispatch({ type: EDIT_PAPER, payload: editedPaper })
     setIsModalOpen(false)
   }
 

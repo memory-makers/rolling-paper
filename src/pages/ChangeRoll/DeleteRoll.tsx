@@ -1,6 +1,7 @@
 import { deletePaperAPI } from '@/api/user'
 import Modal from '@/components/Modal'
 import { ModalButton, ModalText } from '@/components/Modal/ModalItem'
+import { DELETE_PAPER, usePaper } from '@/store/paper'
 
 interface Props {
   paperId: number
@@ -8,11 +9,14 @@ interface Props {
 }
 
 const DeleteRoll = ({ paperId, setIsModalOpen }: Props) => {
+  const { dispatch } = usePaper()
+
   const handleCancelClick = () => {
     setIsModalOpen(false)
   }
   const handleDeleteClick = () => {
     deletePaperAPI(paperId)
+    dispatch({ type: DELETE_PAPER, payload: { paperId } })
     setIsModalOpen(false)
   }
 

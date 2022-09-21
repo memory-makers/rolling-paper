@@ -3,14 +3,16 @@ import { MouseEventHandler, useState } from 'react'
 import Modal from '@/components/Modal'
 import MakeRoll from './contents/MakeRoll'
 import CreateShareRoll from './contents/CreateShareRoll'
-import { setPaperAPI } from '@/api/user'
+import { PaperAPIResponse, setPaperAPI } from '@/api/user'
 import { CLIENT_PAPER_URL } from '@/config/commonLink'
+import { ADD_PAPER, usePaper } from '@/store/paper'
 
 interface Props {
   setIsModalOpen: (state: boolean) => void
 }
 
 const CreateRoll = ({ setIsModalOpen }: Props) => {
+  const { dispatch } = usePaper()
   const [paperTitle, setPaperTitle] = useState('')
   const [dueDate, setDueDate] = useState('')
   const [theme, setTheme] = useState('light')
@@ -19,18 +21,26 @@ const CreateRoll = ({ setIsModalOpen }: Props) => {
   const [isNextStep, setIsNextStep] = useState(false)
 
   const handleButtonClick: MouseEventHandler<HTMLButtonElement> = async (e) => {
-    const paperUrl = await getPaperUrl()
-    setPaperUrl(`${CLIENT_PAPER_URL}${paperUrl}`)
-    setIsNextStep(true)
-  }
+    if (!paperTitle || !dueDate) return
 
-  const getPaperUrl = async () => {
     const {
       result: {
-        paper: { paperUrl }
+        paper: { paperId, paperUrl }
       }
-    } = await setPaperAPI(paperTitle, dueDate, theme)
-    return paperUrl
+    } = (await setPaperAPI({ paperTitle, dueDate, theme })) as PaperAPIResponse
+
+    dispatch({
+      type: ADD_PAPER,
+      payload: {
+        paperTitle,
+        dueDate,
+        theme,
+        paperId,
+        paperUrl
+      }
+    })
+    setPaperUrl(`${CLIENT_PAPER_URL}${paperUrl}`)
+    setIsNextStep(true)
   }
 
   return (
