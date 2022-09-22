@@ -87,8 +87,7 @@ export const editPaperAPI = async ({ paperId, paperTitle, dueDate, theme }: Edit
 // 롤링페이퍼 삭제
 export const deletePaperAPI = async (paperId: number) => {
   try {
-    const data = { paper: { paperId, deleteYn: 'y' } }
-    const res = await axiosClient.put(PAPER, data)
+    const res = await axiosClient.delete(`${PAPER}/${paperId}`)
     return res
   } catch (error) {
     console.log(error, 'delete rolling paper error')
