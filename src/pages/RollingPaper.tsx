@@ -1,5 +1,9 @@
-import { test_API } from '@/api'
-import { fetchCards_API, fetchStickers_API, updateStickers_API } from '@/api/rollingpaper'
+import {
+  fetchCards_API,
+  fetchPaperId_API,
+  fetchStickers_API,
+  updateStickers_API
+} from '@/api/rollingpaper'
 import Header from '@/components/layout/Header'
 import Buttons from '@/components/rollingpaper/Buttons'
 import CardModal from '@/components/rollingpaper/CardModal'
@@ -16,20 +20,21 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 const RollingPaper = () => {
-  const rollingPaperId = useParams().rollingPaperId
+  const urlId = useParams().rollingPaperId
+  const [rollingPaperId, setRollingPaperId] = useState(0)
   const [isCardDetailVisible, setIsCardDetailVisible] = useState(false)
   const [isModifyMode, setIsModifyMode] = useState(false)
   const [cardIndex, setCardIndex] = useState<number>(0)
-  const [cards, setCards] = useState<CardType[]>(Object.values(cardDummy))
+  const [cards, setCards] = useState<CardType[]>([])
   const [stickers, setStickers] = useState<StickerType[]>([])
   const [newStickers, setNewStickers] = useState<StickerType[]>([...stickers])
   const rollingpaperName = '3학년 2반 친구들'
 
   useEffect(() => {
-    console.log(rollingPaperId)
+    fetchPaperId_API(urlId, setRollingPaperId)
     fetchCards_API(rollingPaperId, setCards)
     fetchStickers_API(rollingPaperId, setStickers)
-  }, [])
+  }, [rollingPaperId])
 
   const handleClickCard = useCallback(
     (id: number) => {
@@ -57,7 +62,6 @@ const RollingPaper = () => {
   }, [cardIndex, cards])
 
   const handleModifyDone = () => {
-    console.log(newStickers)
     updateStickers_API(rollingPaperId, newStickers, stickers, setStickers)
     setIsModifyMode(false)
   }
@@ -87,13 +91,15 @@ const RollingPaper = () => {
         )}
       </Content>
       <GotoLoginButton />
-      <CardModal
-        card={cards[cardIndex]}
-        setIsCardDetailVisible={setIsCardDetailVisible}
-        isCardDetailVisible={isCardDetailVisible}
-        handlePrev={handlePrev}
-        handleNext={handleNext}
-      />
+      {cards[cardIndex] && (
+        <CardModal
+          card={cards[cardIndex]}
+          setIsCardDetailVisible={setIsCardDetailVisible}
+          isCardDetailVisible={isCardDetailVisible}
+          handlePrev={handlePrev}
+          handleNext={handleNext}
+        />
+      )}
     </>
   )
 }
