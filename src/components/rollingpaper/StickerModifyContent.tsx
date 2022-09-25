@@ -22,9 +22,7 @@ const StickerModifyContent = ({ newStickers, setNewStickers }: ContentProps) => 
     setNewStickers([...newStickers, newSticker])
   }
   const handleUpdateStickers = (newSticker: StickerType) => {
-    console.log(newSticker)
     setNewStickers([...newStickers.filter((sticker) => sticker.id !== newSticker.id), newSticker])
-    console.log(JSON.stringify(newStickers))
   }
   const handleDeleteSticker = (id: number) => {
     setNewStickers([...newStickers.filter((sticker) => sticker.id !== id)])
