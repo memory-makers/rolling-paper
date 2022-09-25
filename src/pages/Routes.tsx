@@ -17,7 +17,7 @@ export const Routes = () => {
         <Route path="/editor" element={<Editor />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/rollingpaper/:rollingPaperId" element={<RollingPaper />}></Route>
-        <Route path="/sending" element={<Sending nickname="레몬은 귀여워" />} />
+        <Route path="/sending" element={<Sending />} />
         <Route path="/modalTest" element={<ModalTest />} />
         <Route path="/modalCallTest" element={<ModalCallTest />} />
         <Route path="/kakao" element={<KakaoRedirect />} />

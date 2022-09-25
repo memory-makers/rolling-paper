@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styles from './checkSendingCard.module.scss'
 
 import Modal from '@/components/Modal'
@@ -9,15 +10,17 @@ interface Props {
 }
 
 const CheckSendingCard = ({ setIsModalOpen }: Props) => {
+  const navigate = useNavigate()
   const [isFail, setIsFail] = useState(false)
 
   const handleCancelClick = () => {
     setIsModalOpen(false)
   }
-  const handleDeleteClick = () => {
+  const handleSendClick = () => {
     // console.log('카드 전송하기 클릭')
     setIsFail(true)
-    // setIsModalOpen(false)
+    setIsModalOpen(false)
+    navigate('/sending')
   }
 
   return (
@@ -29,7 +32,7 @@ const CheckSendingCard = ({ setIsModalOpen }: Props) => {
       <ModalButton type="button" size="small" color="secondary" onClick={handleCancelClick}>
         취소
       </ModalButton>
-      <ModalButton type="button" size="small" onClick={handleDeleteClick}>
+      <ModalButton type="button" size="small" onClick={handleSendClick}>
         전송
       </ModalButton>
     </Modal>
