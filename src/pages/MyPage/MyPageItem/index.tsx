@@ -14,7 +14,7 @@ interface Props {
 }
 
 const MyPageItem = ({ user }: { user: Props }) => {
-  const [isDropdown, setIsDropdown] = useState<boolean>(false)
+  const [isDropdown, setIsDropdown] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
 
   const handleClickDropdownList = () => {
@@ -31,22 +31,14 @@ const MyPageItem = ({ user }: { user: Props }) => {
         <div className={styles.paperInfoWrap}>
           <p>{user.title}</p>
           <button type="button" onClick={handleClickVisible}>
-            { isVisible ? (
-              <EyeIcon  />
-            ) : (
-              <EyeOffIcon  />
-            )}
+            {isVisible ? <EyeIcon /> : <EyeOffIcon />}
             {/* <LockIcon  /> */}
           </button>
         </div>
         <div className={styles.openDateWrap}>
           <p>{user.dueDate}</p>
           <button type="button" onClick={handleClickDropdownList}>
-            {isDropdown ? (
-                <ArrowDownIcon />
-            ) : (
-              <ArrowUpIcon />
-            )}
+            {isDropdown ? <ArrowDownIcon /> : <ArrowUpIcon />}
           </button>
         </div>
       </div>
