@@ -17,23 +17,26 @@ import cardDummy from '@/utils/rollingPaper/cardDummy'
 import StickerType from '@/utils/rollingPaper/Sticker.type'
 import stickerDummy from '@/utils/rollingPaper/stickerDummy'
 import React, { useCallback, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams, useSearchParams } from 'react-router-dom'
 
 const RollingPaper = () => {
   const urlId = useParams().rollingPaperId
+  const [searchParams, setSearchParams] = useSearchParams()
+  const query = !!searchParams.get('sticker-mode')
+  const stickerMode = !!query
   const [rollingPaperId, setRollingPaperId] = useState(0)
   const [isCardDetailVisible, setIsCardDetailVisible] = useState(false)
-  const [isModifyMode, setIsModifyMode] = useState(false)
+  const [isModifyMode, setIsModifyMode] = useState(stickerMode)
   const [cardIndex, setCardIndex] = useState<number>(0)
   const [cards, setCards] = useState<CardType[]>([])
   const [stickers, setStickers] = useState<StickerType[]>([])
-  const [newStickers, setNewStickers] = useState<StickerType[]>([...stickers])
+  const [newStickers, setNewStickers] = useState<StickerType[]>([])
   const rollingpaperName = '3학년 2반 친구들'
 
   useEffect(() => {
     fetchPaperId_API(urlId, setRollingPaperId)
     fetchCards_API(rollingPaperId, setCards)
-    fetchStickers_API(rollingPaperId, setStickers)
+    fetchStickers_API(rollingPaperId, setStickers, setNewStickers)
   }, [rollingPaperId])
 
   const handleClickCard = useCallback(
@@ -66,11 +69,10 @@ const RollingPaper = () => {
     setIsModifyMode(false)
   }
 
-  const handleModifyMode = useCallback(() => {
+  const handleModifyMode = () => {
     if (!isModifyMode) setNewStickers([...stickers])
     setIsModifyMode(!isModifyMode)
-  }, [isModifyMode])
-
+  }
   return (
     <>
       <Header text={rollingpaperName} type="title-button">
@@ -84,11 +86,12 @@ const RollingPaper = () => {
         )}
       </Header>
       <Content cards={cards} handleClickCard={handleClickCard}>
-        {isModifyMode ? (
-          <StickerModifyContent newStickers={newStickers} setNewStickers={setNewStickers} />
-        ) : (
-          <StickerContent stickers={stickers} />
-        )}
+        <StickerModifyContent
+          isModifyMode={isModifyMode}
+          newStickers={newStickers}
+          setNewStickers={setNewStickers}
+        />
+        <StickerContent isModifyMode={isModifyMode} stickers={stickers} />
       </Content>
       <EditorButton />
       {cards[cardIndex] && (
