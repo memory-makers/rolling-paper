@@ -9,6 +9,7 @@
   margin: 0 auto;
   padding: 16px;
   height: 100%;
+  width: 100%;
 }
 
 .card {
@@ -195,7 +196,7 @@
   width: 100%;
 }
 
-.goto-login-btn {
+.editor-btn {
   z-index: 101;
   position: absolute;
   width: 263px;

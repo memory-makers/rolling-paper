@@ -2,14 +2,40 @@ import CardType from '@/utils/rollingPaper/Card.type'
 import StickerType from '@/utils/rollingPaper/Sticker.type'
 import { axiosClient } from '.'
 
+export const fetchPaperId_API = async (
+  urlId: string | undefined,
+  setRollingPaperId: (data: number) => void
+) => {
+  try {
+    if (!urlId) return
+    const res = await axiosClient.get(`papers/url`, { params: { paperUrl: urlId } })
+    const data = res.data as UrlResponse
+    setRollingPaperId(data.result.paperId)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+interface UrlResponse {
+  code: number
+  isSuccess: boolean
+  message: string
+  success: boolean
+  result: {
+    paperId: number
+    status: string
+  }
+}
+
 export const fetchCards_API = async (
-  paperId: string | undefined,
+  paperId: number | undefined,
   setCards: (data: CardType[]) => void
 ) => {
   try {
     if (!paperId) return
     const res = await axiosClient.get(`cards/${paperId}`)
     const data = res.data as CardResponse
+    if (!data.result.card) return
     const cards = data.result.card.map((card) => {
       return {
         content: card.cardText,
@@ -47,7 +73,7 @@ interface Card {
 }
 
 export const fetchStickers_API = async (
-  paperId: string | undefined,
+  paperId: number | undefined,
   setStickers: (data: StickerType[]) => void
 ) => {
   try {
@@ -55,7 +81,8 @@ export const fetchStickers_API = async (
     const params = { paperId: paperId }
     const res = await axiosClient.get(`stickers`, { params })
     const data = res.data as StickersResponse
-    const stickers = data.result.sticker.map((sticker) => {
+    if (!data.result.stickers) return
+    const stickers = data.result.stickers.map((sticker) => {
       return {
         id: sticker.stickerId,
         size: sticker.stickerSize,
@@ -68,7 +95,6 @@ export const fetchStickers_API = async (
       } as StickerType
     })
     setStickers(stickers)
-    console.log(res)
   } catch (error) {
     console.log(error)
   }
@@ -81,17 +107,17 @@ interface StickersResponse {
   message: string
   result: {
     status: string
-    sticker: Sticker[]
+    stickers: Sticker[]
   }
 }
-interface StickerResponse {
+interface UpdateStickersResponse {
   code: number
   success: boolean
   isSuccess: boolean
   message: string
   result: {
     status: string
-    stickers: Sticker
+    sticker: Sticker[]
   }
 }
 
@@ -118,7 +144,7 @@ interface Sticker {
 }
 
 export const updateStickers_API = async (
-  rollingpaperId: string | undefined,
+  rollingpaperId: number | undefined,
   newStickers: StickerType[],
   stickers: StickerType[],
   setStickers: (data: StickerType[]) => void
@@ -172,7 +198,8 @@ export const updateStickers_API = async (
       }
     })
     const res = await axiosClient.post(`stickers`, reqStickers)
-    const resData = res.data as StickersResponse
+    const resData = res.data as UpdateStickersResponse
+    if (!resData.result.sticker) return
     const resStickers = resData.result.sticker.map((sticker) => {
       return {
         id: sticker.stickerId,
