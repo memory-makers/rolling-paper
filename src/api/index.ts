@@ -7,16 +7,14 @@ export const axiosClient = axios.create()
 axiosClient.interceptors.request.use(
   (config) => {
     const token = tokenStore.getAccessToken()
-    if (!token) {
-      return
-    }
+
     if (!config.headers) config.headers = {}
     config.baseURL = BASE_URL
     config.headers['Content-Type'] = 'application/json'
     config.headers['Accept'] = 'application/json'
     config.headers['Access-Control-Allow-Origin'] = '*'
     config.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-    config.headers['Authorization'] = `Bearer ${token}`
+    if (token) config.headers['Authorization'] = `Bearer ${token}`
     // config.withCredentials = true
     return config
   },

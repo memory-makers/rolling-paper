@@ -10,7 +10,7 @@ import { ReactComponent as RotateIcon } from '@/assets/rotate-icn.svg'
 interface StickerProps {
   sticker: StickerType
   handleUpdateStickers: (newSticker: StickerType) => void
-  handleDeleteSticker: (id: string) => void
+  handleDeleteSticker: (id: number) => void
 }
 const stringPropertyToNumber = (attr: string) => {
   return parseInt(attr.slice(0, -2))

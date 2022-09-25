@@ -17,7 +17,7 @@ const Card = ({ rotateDeg, card, handleClick }: CardProps) => {
       style={{ transform: rotateDeg }}
       onClick={handleClick}
     >
-      <div>{card.content}</div>
+      <div className={classNames(styles.text, styles[card.fontColor])}>{card.content}</div>
     </div>
   )
 }

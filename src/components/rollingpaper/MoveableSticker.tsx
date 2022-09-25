@@ -23,10 +23,10 @@ import Moveable, {
 interface StickerProps {
   sticker: StickerType
   handleUpdateStickers: (newSticker: StickerType) => void
-  handleDeleteSticker: (id: string) => void
+  handleDeleteSticker: (id: number) => void
 }
 
-const getStickerStyle = (type: string, id: string) => {
+const getStickerStyle = (type: string, id: number) => {
   return {
     backgroundImage: `url(/imgs/${type}.png)`,
     zIndex: `${id}`
