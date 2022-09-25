@@ -1,9 +1,10 @@
 import { test_API } from '@/api'
-import { fetchCards_API } from '@/api/rollingpaper'
+import { fetchCards_API, fetchStickers_API, updateStickers_API } from '@/api/rollingpaper'
 import Header from '@/components/layout/Header'
 import Buttons from '@/components/rollingpaper/Buttons'
 import CardModal from '@/components/rollingpaper/CardModal'
 import Content from '@/components/rollingpaper/Content'
+import GotoLoginButton from '@/components/rollingpaper/GotoLoginButton'
 import ModifyModeButtons from '@/components/rollingpaper/ModifyModeButtons'
 import StickerContent from '@/components/rollingpaper/StickerContent'
 import StickerModifyContent from '@/components/rollingpaper/StickerModifyContent'
@@ -20,15 +21,14 @@ const RollingPaper = () => {
   const [isModifyMode, setIsModifyMode] = useState(false)
   const [cardIndex, setCardIndex] = useState<number>(0)
   const [cards, setCards] = useState<CardType[]>(Object.values(cardDummy))
-  const [stickers, setStickers] = useState<StickerType[]>(stickerDummy)
+  const [stickers, setStickers] = useState<StickerType[]>([])
   const [newStickers, setNewStickers] = useState<StickerType[]>([...stickers])
   const rollingpaperName = '3학년 2반 친구들'
 
   useEffect(() => {
     console.log(rollingPaperId)
-    if (rollingPaperId) {
-      fetchCards_API(rollingPaperId, setCards)
-    }
+    fetchCards_API(rollingPaperId, setCards)
+    fetchStickers_API(rollingPaperId, setStickers)
   }, [])
 
   const handleClickCard = useCallback(
@@ -56,11 +56,11 @@ const RollingPaper = () => {
     }
   }, [cardIndex, cards])
 
-  const handleModifyDone = useCallback(() => {
+  const handleModifyDone = () => {
     console.log(newStickers)
-    setStickers([...newStickers])
+    updateStickers_API(rollingPaperId, newStickers, stickers, setStickers)
     setIsModifyMode(false)
-  }, [newStickers])
+  }
 
   const handleModifyMode = useCallback(() => {
     if (!isModifyMode) setNewStickers([...stickers])
@@ -86,7 +86,7 @@ const RollingPaper = () => {
           <StickerContent stickers={stickers} />
         )}
       </Content>
-
+      <GotoLoginButton />
       <CardModal
         card={cards[cardIndex]}
         setIsCardDetailVisible={setIsCardDetailVisible}

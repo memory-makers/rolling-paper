@@ -32,7 +32,7 @@ const CardModal = ({
       <div
         className={classNames(styles['card-content'], styles[card.background], styles[card.font])}
       >
-        {card.content}
+        <div className={classNames(styles['text'], styles[card.fontColor])}>{card.content}</div>
       </div>
       <div className={styles['card-btns']}>
         <PrevIcon onClick={handlePrev} className={styles['prev-btn']} />
