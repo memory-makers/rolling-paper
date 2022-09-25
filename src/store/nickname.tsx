@@ -1,4 +1,4 @@
-import { createContext, Dispatch, ReactNode, useContext, useMemo, useReducer } from 'react'
+import { createContext, Dispatch, ReactNode, useContext, useReducer } from 'react'
 
 export const LOAD_NAME = 'LOAD_NAME'
 export const EDIT_NAME = 'EDIT_NAME'

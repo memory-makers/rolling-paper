@@ -6,16 +6,19 @@ import { ThemeProvider } from './store/theme'
 import Layout from './components/layout/Layout'
 import { PaperProvider } from './store/paper'
 import { NameProvider } from './store/nickname'
+import { UrlNameProvider } from './store/urlNickname'
 
 function App() {
   return (
     <ThemeProvider>
       <NameProvider>
-        <PaperProvider>
-          <Layout>
-            <Routes />
-          </Layout>
-        </PaperProvider>
+        <UrlNameProvider>
+          <PaperProvider>
+            <Layout>
+              <Routes />
+            </Layout>
+          </PaperProvider>
+        </UrlNameProvider>
       </NameProvider>
     </ThemeProvider>
   )

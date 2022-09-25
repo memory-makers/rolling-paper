@@ -6,7 +6,38 @@ const PAPER = 'papers'
 
 export const KAKAO_LOGIN_URL = `${import.meta.env.VITE_BASE_URL}/oauth2/authorization/kakao`
 
-// 닉네임 설정
+// paperUrl로 paperId 조회
+interface GetPaperIdAPIResponse {
+  result: Result
+}
+
+interface Result {
+  paperId: number
+  status: string
+}
+
+export const getPaperIdAPI = async (paperUrl: string) => {
+  try {
+    const { data } = await axiosClient.get<GetPaperIdAPIResponse>(`${PAPER}/url`, {
+      params: { paperUrl }
+    })
+    return data.result.paperId
+  } catch (error) {
+    console.log(error, 'get paperId error')
+  }
+}
+
+// paperId로 token없이 nickname 조회
+export const getIdToNicknameAPI = async (paperId: number) => {
+  try {
+    const { data } = await axiosClient.get(`${PAPER}/${paperId}/nickname`)
+    return data.result.nickname
+  } catch (error) {
+    console.log(error, 'get paperId to nickname error')
+  }
+}
+
+// 토큰 닉네임 설정
 export const setNicknameAPI = async (nickname: string | null) => {
   try {
     if (!nickname) return
@@ -18,7 +49,7 @@ export const setNicknameAPI = async (nickname: string | null) => {
   }
 }
 
-// 닉네임 조회
+// 토큰 닉네임 조회
 export const getNicknameAPI = async () => {
   try {
     const res = await axiosClient.get(`${NICKNAME}/nickname`)
@@ -27,6 +58,8 @@ export const getNicknameAPI = async () => {
     console.log(error, 'get nickname error')
   }
 }
+
+// 롤링페이퍼 생성
 export interface PaperAPIResponse {
   result: Result
 }
@@ -55,7 +88,6 @@ interface AddPaperAPIParams {
   theme: string | null
 }
 
-// 롤링페이퍼 생성
 export const setPaperAPI = async ({ paperTitle, dueDate, theme }: AddPaperAPIParams) => {
   try {
     const paper = { paper: { paperTitle, dueDate, theme } }
@@ -66,6 +98,7 @@ export const setPaperAPI = async ({ paperTitle, dueDate, theme }: AddPaperAPIPar
   }
 }
 
+// 롤링페이퍼 수정
 interface EditPaperAPIParams {
   paperId: number
   paperTitle: string | null
@@ -73,7 +106,6 @@ interface EditPaperAPIParams {
   theme: string | null
 }
 
-// 롤링페이퍼 수정
 export const editPaperAPI = async ({ paperId, paperTitle, dueDate, theme }: EditPaperAPIParams) => {
   try {
     const data = { paper: { paperId, paperTitle, dueDate, theme } }

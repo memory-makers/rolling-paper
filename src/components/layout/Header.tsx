@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useLocation, useParams } from 'react-router-dom'
 import classNames from 'classnames'
 
-import { getNicknameAPI } from '@/api/user'
+import { getIdToNicknameAPI, getNicknameAPI, getPaperIdAPI } from '@/api/user'
 import { useTheme } from '@/store/theme'
 import { LOAD_NAME, useName } from '@/store/nickname'
+import { LOAD_URL_NAME, useUrlName } from '@/store/urlNickname'
 import MakeNickname from '@/pages/Nickname/MakeNickname'
 import EditNickname from '@/pages/Nickname/EditNickname'
 import tokenStore from '@/api/tokenStore'
@@ -22,26 +24,49 @@ const Header = ({ children, text, type }: HeaderProps) => {
   const buttonVisible = type === 'only-button' || type === 'title-button'
 
   const token = tokenStore.getAccessToken()
+  const { rollingPaperId } = useParams()
+  const { pathname } = useLocation()
+  const [isMypage, setIsMypage] = useState(false)
+
   const { nameState, nameDispatch } = useName()
+  const { urlNameState, urlNameDispatch } = useUrlName()
   const [isInitModalOpen, setIsInitModalOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
   const handleClickEditModal = () => {
-    if (!token) return
+    if (!token || !isMypage) return
     setIsEditModalOpen((prev) => !prev)
   }
 
   const getNickname = async () => {
-    // TODO: 추후 '익명'이 아닌, token 없는경우 url에서 nickname불러온 값으로 변경 필요.
-    if (!token) return nameDispatch({ type: LOAD_NAME, payload: '익명' })
-
     const nickname = await getNicknameAPI()
     if (!nickname) setIsInitModalOpen((prev) => !prev)
     else nameDispatch({ type: LOAD_NAME, payload: nickname })
   }
 
+  const getPaperIdNickname = async () => {
+    if (!rollingPaperId) return
+    const paperId = await getPaperIdAPI(rollingPaperId)
+    if (!paperId) return
+    const urlNickname = await getIdToNicknameAPI(paperId)
+    return urlNameDispatch({ type: LOAD_URL_NAME, payload: urlNickname })
+  }
+  console.log('urlNameState', urlNameState)
+
+  const name = useMemo(() => {
+    if (!isMypage) return urlNameState
+    else return nameState
+  }, [nameState, urlNameState])
+
   useEffect(() => {
-    getNickname()
+    if (pathname.includes('mypage')) {
+      getNickname()
+      setIsMypage(true)
+    }
+    if (pathname.includes('rollingpaper')) {
+      getPaperIdNickname()
+      setIsMypage(false)
+    }
   }, [])
 
   return (
@@ -49,7 +74,7 @@ const Header = ({ children, text, type }: HeaderProps) => {
       {titleVisible && (
         <div>
           <button type="button" onClick={handleClickEditModal}>
-            <span className="header_name">{nameState}</span>
+            <span className="header_name">{name}</span>
             <span>님의</span>
           </button>
           <br />
