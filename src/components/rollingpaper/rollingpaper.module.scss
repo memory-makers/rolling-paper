@@ -82,6 +82,13 @@
     }
   }
 }
+.text {
+  @each $colorKey, $colorValue in colors.$colorMap {
+    &.#{$colorKey} {
+      color: $colorValue;
+    }
+  }
+}
 .card-btns {
   display: flex;
   align-items: center;
@@ -153,6 +160,10 @@
     }
   }
 }
+.sticker-modal svg {
+  cursor: pointer;
+}
+
 .sticker-modal-content {
   transition: all 0.3s ease-out;
   opacity: 1;
@@ -166,13 +177,33 @@
   justify-items: center;
 }
 
-.sticker-content {
+.sticker-modify-content {
   z-index: 100;
   width: 100%;
   position: absolute;
   height: 100%;
 }
+.sticker-content {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  pointer-events: none;
+}
+
 .sticker-container {
   position: relative;
   width: 100%;
+}
+
+.goto-login-btn {
+  z-index: 101;
+  position: absolute;
+  width: 263px;
+  height: 44px;
+  background: #f05a39;
+  border: 1px solid #f05a39;
+  border-radius: 20px;
+  bottom: 36px;
+  color: colors.$white;
+  @include txt.typograpy('basic', 24px);
 }
