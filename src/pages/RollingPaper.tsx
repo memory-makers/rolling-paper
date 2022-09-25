@@ -17,13 +17,16 @@ import cardDummy from '@/utils/rollingPaper/cardDummy'
 import StickerType from '@/utils/rollingPaper/Sticker.type'
 import stickerDummy from '@/utils/rollingPaper/stickerDummy'
 import React, { useCallback, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams, useSearchParams } from 'react-router-dom'
 
 const RollingPaper = () => {
   const urlId = useParams().rollingPaperId
+  const [searchParams, setSearchParams] = useSearchParams()
+  const query = !!searchParams.get('sticker-mode')
+  const stickerMode = !!query
   const [rollingPaperId, setRollingPaperId] = useState(0)
   const [isCardDetailVisible, setIsCardDetailVisible] = useState(false)
-  const [isModifyMode, setIsModifyMode] = useState(false)
+  const [isModifyMode, setIsModifyMode] = useState(stickerMode)
   const [cardIndex, setCardIndex] = useState<number>(0)
   const [cards, setCards] = useState<CardType[]>([])
   const [stickers, setStickers] = useState<StickerType[]>([])
