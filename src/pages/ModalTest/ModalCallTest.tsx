@@ -9,6 +9,7 @@ import ChangeShareRoll from '../ChangeRoll/ChangeShareRoll'
 import DeleteRoll from '../ChangeRoll/DeleteRoll'
 import MakeNickname from '../Nickname/MakeNickname'
 import EditNickname from '../Nickname/EditNickname'
+import CheckLogout from '../CheckLogout'
 
 const ModalCallTest = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -32,7 +33,8 @@ const ModalCallTest = () => {
         <ChangeShareRoll setIsModalOpen={setIsModalOpen} paperUrl={'user.paperUrl'} />
       )} */}
       {/* {isModalOpen && <DeleteRoll setIsModalOpen={setIsModalOpen} />} */}
-      {isModalOpen && <CheckSendingCard setIsModalOpen={setIsModalOpen} />}
+      {/* {isModalOpen && <CheckSendingCard setIsModalOpen={setIsModalOpen} />} */}
+      {isModalOpen && <CheckLogout setIsModalOpen={setIsModalOpen} />}
     </>
   )
 }

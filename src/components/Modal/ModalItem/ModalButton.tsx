@@ -4,8 +4,8 @@ import styles from './modalButton.module.scss'
 
 interface Props {
   type: 'button' | 'submit'
-  onClick: MouseEventHandler<HTMLButtonElement>
   children: ReactNode
+  onClick?: MouseEventHandler<HTMLButtonElement>
   size?: 'normal' | 'small'
   color?: 'primary' | 'secondary'
 }

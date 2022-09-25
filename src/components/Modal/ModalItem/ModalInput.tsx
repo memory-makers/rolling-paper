@@ -7,11 +7,22 @@ interface Props {
   name: string
   onChange?: ChangeEventHandler<HTMLInputElement>
   value?: string
+  min?: string
+  maxLength?: number
   readOnly?: boolean
   isAddIcon?: boolean
 }
 
-const ModalInput = ({ type, name, onChange, value, readOnly, isAddIcon }: Props) => {
+const ModalInput = ({
+  type,
+  name,
+  onChange,
+  value,
+  min,
+  maxLength,
+  readOnly,
+  isAddIcon
+}: Props) => {
   return (
     <input
       type={type}
@@ -19,6 +30,8 @@ const ModalInput = ({ type, name, onChange, value, readOnly, isAddIcon }: Props)
       name={name}
       onChange={onChange}
       value={value}
+      min={min}
+      maxLength={maxLength}
       readOnly={readOnly}
     />
   )

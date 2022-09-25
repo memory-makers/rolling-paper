@@ -1,23 +1,42 @@
-import { ReactComponent as PaperAirplaneIcon } from '@/assets/paper-airplane.svg'
+import { useEffect, useState } from 'react'
+import styles from './myPage.module.scss'
 
 import Header from '@/components/layout/Header'
-import styles from './myPage.module.scss'
 import MyPageItem from './MyPageItem'
+import CreateRoll from '../CreateRoll'
+import { getPaperAPI } from '@/api/user'
 
-const USER_DATA = [
-  {
-    id: 1,
-    title: '3학년 2반 친구들',
-    dueDate: '2022.12.16'
-  },
-  {
-    id: 2,
-    title: '2022 여름캠프',
-    dueDate: '2023.05.01'
-  }
-]
+import { ReactComponent as PaperAirplaneIcon } from '@/assets/paper-airplane.svg'
+import { LOAD_PAPER, usePaper } from '@/store/paper'
 
 const MyPage = () => {
+  const [isAddRollModalOpen, setIsAddRollModalOpen] = useState(false)
+  const { state, dispatch } = usePaper()
+
+  const handleClickAddRoll = () => {
+    setIsAddRollModalOpen((prev) => !prev)
+  }
+
+  const getData = async () => {
+    const papers = await getPaperAPI()
+    if (!papers) return
+    const usedPapers = papers.map((item) => {
+      return {
+        paperId: item.paperId,
+        paperTitle: item.paperTitle,
+        dueDate: item.dueDate,
+        theme: item.theme,
+        paperUrl: item.paperUrl
+      }
+    })
+
+    dispatch({ type: LOAD_PAPER, payload: usedPapers })
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
   return (
     <div className={styles.myPageContainer}>
       {/* Header Area */}
@@ -30,13 +49,14 @@ const MyPage = () => {
           <span>오픈 날짜</span>
         </div>
         {/* Main Area */}
-        {USER_DATA.map((user) => (
-          <MyPageItem key={user.id} user={user} />
+        {state.map((paper) => (
+          <MyPageItem key={paper.paperId} paper={paper} />
         ))}
       </section>
-      <button className={styles.paperAddButton}>
+      <button className={styles.paperAddButton} onClick={handleClickAddRoll}>
         <PaperAirplaneIcon />
       </button>
+      {isAddRollModalOpen && <CreateRoll setIsModalOpen={setIsAddRollModalOpen} />}
     </div>
   )
 }
