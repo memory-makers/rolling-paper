@@ -19,7 +19,18 @@ const MyPage = () => {
 
   const getData = async () => {
     const papers = await getPaperAPI()
-    dispatch({ type: LOAD_PAPER, payload: papers })
+    if (!papers) return
+    const usedPapers = papers.map((item) => {
+      return {
+        paperId: item.paperId,
+        paperTitle: item.paperTitle,
+        dueDate: item.dueDate,
+        theme: item.theme,
+        paperUrl: item.paperUrl
+      }
+    })
+
+    dispatch({ type: LOAD_PAPER, payload: usedPapers })
   }
 
   useEffect(() => {

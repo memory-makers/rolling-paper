@@ -1,23 +1,44 @@
-import { createContext, ReactNode, useContext, useReducer } from 'react'
-
-/**
- *
- * 1. 페이퍼 생성하기
- * 2. 페이퍼 수정하기
- * 3. 페이서 삭제하기
- */
+import { createContext, Dispatch, ReactNode, useContext, useMemo, useReducer } from 'react'
 
 export const LOAD_PAPER = 'LOAD_PAPER'
 export const ADD_PAPER = 'ADD_PAPER'
 export const EDIT_PAPER = 'EDIT_PAPER'
 export const DELETE_PAPER = 'DELETE_PAPER'
 
-type PaperType = typeof LOAD_PAPER | typeof ADD_PAPER | typeof EDIT_PAPER | typeof DELETE_PAPER
-/**
- * action 객체  = {type: '', payload: ''}
- */
-type Action = { type: PaperType; payload?: any }
-type Dispatch = (action: Action) => void
+type LoadPaperType = typeof LOAD_PAPER
+type AddPaperType = typeof ADD_PAPER
+type EditPaperType = typeof EDIT_PAPER
+type DeletePaperType = typeof DELETE_PAPER
+
+type Action =
+  | {
+      type: LoadPaperType
+      payload: {
+        paperId: number
+        paperTitle: string
+        dueDate: string
+        theme: string
+        paperUrl: string
+      }[]
+    }
+  | {
+      type: AddPaperType
+      payload: {
+        paperId: number
+        paperTitle: string
+        dueDate: string
+        theme: string
+        paperUrl: string
+      }
+    }
+  | {
+      type: EditPaperType
+      payload: { paperId: number; paperTitle: string; dueDate: string; theme: string }
+    }
+  | { type: DeletePaperType; payload: { paperId: number } }
+
+type PaperDispatch = Dispatch<Action>
+
 type State = {
   paperId: number
   paperTitle: string
@@ -26,9 +47,7 @@ type State = {
   paperUrl: string
 }
 
-type PaperProviderProps = { children: ReactNode }
-
-const PaperStateContext = createContext<{ state: State[]; dispatch: Dispatch } | undefined>(
+const PaperStateContext = createContext<{ state: State[]; dispatch: PaperDispatch } | undefined>(
   undefined
 )
 
@@ -43,14 +62,12 @@ function paperReducer(state: State[], action: Action) {
     }
 
     case 'EDIT_PAPER': {
-      console.log('action.payload = ', action.payload)
       const papers = state.map((item) => {
         if (item.paperId === action.payload.paperId) {
           return { ...item, ...action.payload }
         }
         return item
       })
-      console.log('papers = ', papers)
       return papers
     }
 
@@ -59,14 +76,18 @@ function paperReducer(state: State[], action: Action) {
     }
 
     default: {
-      throw new Error(`Unhandled action type: ${action.type}`)
+      throw new Error(`Unhandled action type: ${JSON.stringify(action)}`)
     }
   }
 }
 
-function PaperProvider({ children }: PaperProviderProps) {
+interface Props {
+  children: ReactNode
+}
+
+function PaperProvider({ children }: Props) {
   const [state, dispatch] = useReducer(paperReducer, [])
-  const value = { state, dispatch }
+  const value = useMemo(() => ({ state, dispatch }), [state])
   return <PaperStateContext.Provider value={value}>{children}</PaperStateContext.Provider>
 }
 

@@ -33,7 +33,8 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, setIsModalOpen }: Pr
     setTheme(e.currentTarget.value)
   }
 
-  const handleButtonClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+  const handleButtonClick = () => {
+    if (!paperTitle || !dueDate) return
     const editedPaper = { paperId, paperTitle, dueDate, theme }
     editPaperAPI(editedPaper)
     dispatch({ type: EDIT_PAPER, payload: editedPaper })
