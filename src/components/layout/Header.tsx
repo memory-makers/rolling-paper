@@ -49,14 +49,16 @@ const Header = ({ children, text, type }: HeaderProps) => {
     const paperId = await getPaperIdAPI(rollingPaperId)
     if (!paperId) return
     const urlNickname = await getIdToNicknameAPI(paperId)
-    return urlNameDispatch({ type: LOAD_URL_NAME, payload: urlNickname })
+    return urlNameDispatch({
+      type: LOAD_URL_NAME,
+      payload: { paperUrl: rollingPaperId, paperId, hostName: urlNickname }
+    })
   }
-  console.log('urlNameState', urlNameState)
 
   const name = useMemo(() => {
-    if (!isMypage) return urlNameState
+    if (!isMypage) return urlNameState.hostName
     else return nameState
-  }, [nameState, urlNameState])
+  }, [nameState, urlNameState.hostName])
 
   useEffect(() => {
     if (pathname.includes('mypage')) {

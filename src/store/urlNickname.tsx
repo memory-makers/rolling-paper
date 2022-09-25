@@ -1,4 +1,4 @@
-import { createContext, Dispatch, ReactNode, useContext, useReducer } from 'react'
+import { createContext, Dispatch, ReactNode, useContext, useMemo, useReducer } from 'react'
 
 export const LOAD_URL_NAME = 'LOAD_URL_NAME'
 
@@ -6,12 +6,12 @@ type NameType = typeof LOAD_URL_NAME
 
 type Action = {
   type: NameType
-  payload: string
+  payload: { paperUrl: string; paperId: number; hostName: string }
 }
 
 type UrlNameDispatch = Dispatch<Action>
 
-type State = string
+type State = { paperUrl: string; paperId: number; hostName: string }
 
 const UrlNameStateContext = createContext<
   { urlNameState: State; urlNameDispatch: UrlNameDispatch } | undefined
@@ -33,8 +33,12 @@ interface Props {
 }
 
 function UrlNameProvider({ children }: Props) {
-  const [urlNameState, urlNameDispatch] = useReducer(urlNameReducer, '')
-  const value = { urlNameState, urlNameDispatch }
+  const [urlNameState, urlNameDispatch] = useReducer(urlNameReducer, {
+    paperUrl: '',
+    paperId: 0,
+    hostName: ''
+  })
+  const value = useMemo(() => ({ urlNameState, urlNameDispatch }), [urlNameState])
   return <UrlNameStateContext.Provider value={value}>{children}</UrlNameStateContext.Provider>
 }
 
