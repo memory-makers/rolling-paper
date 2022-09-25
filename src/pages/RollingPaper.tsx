@@ -8,7 +8,7 @@ import Header from '@/components/layout/Header'
 import Buttons from '@/components/rollingpaper/Buttons'
 import CardModal from '@/components/rollingpaper/CardModal'
 import Content from '@/components/rollingpaper/Content'
-import GotoLoginButton from '@/components/rollingpaper/GotoLoginButton'
+import EditorButton from '@/components/rollingpaper/EditorButton'
 import ModifyModeButtons from '@/components/rollingpaper/ModifyModeButtons'
 import StickerContent from '@/components/rollingpaper/StickerContent'
 import StickerModifyContent from '@/components/rollingpaper/StickerModifyContent'
@@ -90,7 +90,7 @@ const RollingPaper = () => {
           <StickerContent stickers={stickers} />
         )}
       </Content>
-      <GotoLoginButton />
+      <EditorButton />
       {cards[cardIndex] && (
         <CardModal
           card={cards[cardIndex]}
