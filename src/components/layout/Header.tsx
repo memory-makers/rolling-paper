@@ -3,6 +3,7 @@ import classNames from 'classnames'
 
 import { getNicknameAPI } from '@/api/user'
 import { useTheme } from '@/store/theme'
+import { LOAD_NAME, useName } from '@/store/nickname'
 import MakeNickname from '@/pages/Nickname/MakeNickname'
 import EditNickname from '@/pages/Nickname/EditNickname'
 
@@ -19,7 +20,7 @@ const Header = ({ children, text, type }: HeaderProps) => {
   const titleVisible = type === 'only-title' || type === 'title-button'
   const buttonVisible = type === 'only-button' || type === 'title-button'
 
-  const [name, setName] = useState('')
+  const { nameState, nameDispatch } = useName()
   const [isInitModalOpen, setIsInitModalOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
@@ -30,7 +31,7 @@ const Header = ({ children, text, type }: HeaderProps) => {
   const getNickname = async () => {
     const nickname = await getNicknameAPI()
     if (!nickname) setIsInitModalOpen((prev) => !prev)
-    else setName(nickname)
+    else nameDispatch({ type: LOAD_NAME, payload: nickname })
   }
 
   useEffect(() => {
@@ -42,7 +43,7 @@ const Header = ({ children, text, type }: HeaderProps) => {
       {titleVisible && (
         <div>
           <button type="button" onClick={handleClickEditModal}>
-            <span className="header_name">{name}</span>
+            <span className="header_name">{nameState}</span>
             <span>님의</span>
           </button>
           <br />
@@ -50,10 +51,8 @@ const Header = ({ children, text, type }: HeaderProps) => {
         </div>
       )}
       {buttonVisible && children}
-      {isInitModalOpen && <MakeNickname setIsModalOpen={setIsInitModalOpen} setName={setName} />}
-      {isEditModalOpen && (
-        <EditNickname setIsModalOpen={setIsEditModalOpen} name={name} setName={setName} />
-      )}
+      {isInitModalOpen && <MakeNickname setIsModalOpen={setIsInitModalOpen} />}
+      {isEditModalOpen && <EditNickname setIsModalOpen={setIsEditModalOpen} />}
     </header>
   )
 }

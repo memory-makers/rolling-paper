@@ -3,22 +3,22 @@ import { ChangeEventHandler, FormEvent, useState } from 'react'
 import Modal from '@/components/Modal'
 import { ModalButton, ModalInput, ModalText } from '@/components/Modal/ModalItem'
 import { setNicknameAPI } from '@/api/user'
+import { EDIT_NAME, useName } from '@/store/nickname'
 
 interface Props {
-  name: string
-  setName: (state: string) => void
   setIsModalOpen: (state: boolean) => void
 }
 
-const EditNickname = ({ name, setName, setIsModalOpen }: Props) => {
-  const [nickname, setNickname] = useState(name)
+const EditNickname = ({ setIsModalOpen }: Props) => {
+  const { nameState, nameDispatch } = useName()
+  const [nickname, setNickname] = useState(nameState)
 
   const handleNicknameChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setNickname(e.currentTarget.value)
   }
   const handleSubmitSave = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    setName(nickname)
+    nameDispatch({ type: EDIT_NAME, payload: nickname })
     setNicknameAPI(nickname)
     setIsModalOpen(false)
   }

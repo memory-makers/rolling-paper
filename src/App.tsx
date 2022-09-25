@@ -5,15 +5,18 @@ import { Routes } from './pages/Routes'
 import { ThemeProvider } from './store/theme'
 import Layout from './components/layout/Layout'
 import { PaperProvider } from './store/paper'
+import { NameProvider } from './store/nickname'
 
 function App() {
   return (
     <ThemeProvider>
-      <PaperProvider>
-        <Layout>
-          <Routes />
-        </Layout>
-      </PaperProvider>
+      <NameProvider>
+        <PaperProvider>
+          <Layout>
+            <Routes />
+          </Layout>
+        </PaperProvider>
+      </NameProvider>
     </ThemeProvider>
   )
 }
