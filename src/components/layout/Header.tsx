@@ -6,6 +6,7 @@ import { useTheme } from '@/store/theme'
 import { LOAD_NAME, useName } from '@/store/nickname'
 import MakeNickname from '@/pages/Nickname/MakeNickname'
 import EditNickname from '@/pages/Nickname/EditNickname'
+import tokenStore from '@/api/tokenStore'
 
 type HeaderType = 'only-button' | 'title-button' | 'only-title'
 
@@ -20,15 +21,20 @@ const Header = ({ children, text, type }: HeaderProps) => {
   const titleVisible = type === 'only-title' || type === 'title-button'
   const buttonVisible = type === 'only-button' || type === 'title-button'
 
+  const token = tokenStore.getAccessToken()
   const { nameState, nameDispatch } = useName()
   const [isInitModalOpen, setIsInitModalOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
 
   const handleClickEditModal = () => {
+    if (!token) return
     setIsEditModalOpen((prev) => !prev)
   }
 
   const getNickname = async () => {
+    // TODO: 추후 '익명'이 아닌, token 없는경우 url에서 nickname불러온 값으로 변경 필요.
+    if (!token) return nameDispatch({ type: LOAD_NAME, payload: '익명' })
+
     const nickname = await getNicknameAPI()
     if (!nickname) setIsInitModalOpen((prev) => !prev)
     else nameDispatch({ type: LOAD_NAME, payload: nickname })
