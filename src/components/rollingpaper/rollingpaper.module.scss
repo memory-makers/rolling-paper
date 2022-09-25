@@ -183,12 +183,23 @@
   width: 100%;
   position: absolute;
   height: 100%;
+  opacity: 0;
+  &.modify-mode {
+    opacity: 1;
+  }
+  transition: opacity 0.5s ease;
 }
+
 .sticker-content {
   width: 100%;
   position: absolute;
   height: 100%;
   pointer-events: none;
+  opacity: 1;
+  &.modify-mode {
+    opacity: 0;
+  }
+  transition: opacity 0.5s ease;
 }
 
 .sticker-container {

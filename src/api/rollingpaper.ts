@@ -74,7 +74,8 @@ interface Card {
 
 export const fetchStickers_API = async (
   paperId: number | undefined,
-  setStickers: (data: StickerType[]) => void
+  setStickers: (data: StickerType[]) => void,
+  setNewStickers: (data: StickerType[]) => void
 ) => {
   try {
     if (!paperId) return
@@ -95,6 +96,7 @@ export const fetchStickers_API = async (
       } as StickerType
     })
     setStickers(stickers)
+    setNewStickers(stickers)
   } catch (error) {
     console.log(error)
   }
@@ -109,26 +111,6 @@ interface StickersResponse {
     status: string
     stickers: Sticker[]
   }
-}
-interface UpdateStickersResponse {
-  code: number
-  success: boolean
-  isSuccess: boolean
-  message: string
-  result: {
-    status: string
-    sticker: Sticker[]
-  }
-}
-
-interface StickerRequest {
-  paperId: number
-  rotate: number
-  scale: number
-  stickerSize: number
-  type: string
-  x: number
-  y: number
 }
 
 interface Sticker {
@@ -198,9 +180,9 @@ export const updateStickers_API = async (
       }
     })
     const res = await axiosClient.post(`stickers`, reqStickers)
-    const resData = res.data as UpdateStickersResponse
-    if (!resData.result.sticker) return
-    const resStickers = resData.result.sticker.map((sticker) => {
+    const resData = res.data as StickersResponse
+    if (!resData.result.stickers) return
+    const resStickers = resData.result.stickers.map((sticker) => {
       return {
         id: sticker.stickerId,
         size: sticker.stickerSize,
