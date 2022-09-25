@@ -27,13 +27,13 @@ const RollingPaper = () => {
   const [cardIndex, setCardIndex] = useState<number>(0)
   const [cards, setCards] = useState<CardType[]>([])
   const [stickers, setStickers] = useState<StickerType[]>([])
-  const [newStickers, setNewStickers] = useState<StickerType[]>([...stickers])
+  const [newStickers, setNewStickers] = useState<StickerType[]>([])
   const rollingpaperName = '3학년 2반 친구들'
 
   useEffect(() => {
     fetchPaperId_API(urlId, setRollingPaperId)
     fetchCards_API(rollingPaperId, setCards)
-    fetchStickers_API(rollingPaperId, setStickers)
+    fetchStickers_API(rollingPaperId, setStickers, setNewStickers)
   }, [rollingPaperId])
 
   const handleClickCard = useCallback(
@@ -66,11 +66,10 @@ const RollingPaper = () => {
     setIsModifyMode(false)
   }
 
-  const handleModifyMode = useCallback(() => {
+  const handleModifyMode = () => {
     if (!isModifyMode) setNewStickers([...stickers])
     setIsModifyMode(!isModifyMode)
-  }, [isModifyMode])
-
+  }
   return (
     <>
       <Header text={rollingpaperName} type="title-button">
@@ -84,11 +83,12 @@ const RollingPaper = () => {
         )}
       </Header>
       <Content cards={cards} handleClickCard={handleClickCard}>
-        {isModifyMode ? (
-          <StickerModifyContent newStickers={newStickers} setNewStickers={setNewStickers} />
-        ) : (
-          <StickerContent stickers={stickers} />
-        )}
+        <StickerModifyContent
+          isModifyMode={isModifyMode}
+          newStickers={newStickers}
+          setNewStickers={setNewStickers}
+        />
+        <StickerContent isModifyMode={isModifyMode} stickers={stickers} />
       </Content>
       <EditorButton />
       {cards[cardIndex] && (

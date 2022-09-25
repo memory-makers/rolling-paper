@@ -1,17 +1,20 @@
 import CardType from '@/utils/rollingPaper/Card.type'
 import cardDummy from '@/utils/rollingPaper/cardDummy'
 import StickerType from '@/utils/rollingPaper/Sticker.type'
+import classNames from 'classnames'
 import React from 'react'
 import Card from './Card'
 import styles from './rollingpaper.module.scss'
 import Sticker from './Sticker'
 interface ContentProps {
+  isModifyMode: boolean
   stickers: StickerType[]
 }
 
-const StickerContent = ({ stickers }: ContentProps) => {
+const StickerContent = ({ isModifyMode, stickers }: ContentProps) => {
+  const modifyMode = isModifyMode ? 'modify-mode' : ''
   return (
-    <div className={styles['sticker-content']}>
+    <div className={classNames(styles['sticker-content'], styles[modifyMode])}>
       {stickers.map((sticker) => (
         <Sticker isFloating={true} key={sticker.id} sticker={sticker} />
       ))}
