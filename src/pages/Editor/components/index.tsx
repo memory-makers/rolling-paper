@@ -1,4 +1,4 @@
-export * from './BackGroundOption'
+export * from './BackgroundOption'
 export * from './CompleteButton'
 export * from './FontOption'
 export * from './Paper'

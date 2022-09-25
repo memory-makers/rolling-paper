@@ -4,7 +4,7 @@ import cx from 'classnames'
 import { useEditor, useOutsideClick } from './hooks'
 
 import {
-  BackGroundOption,
+  BackgroundOption,
   CompleteButton,
   EditorSelectOption,
   editorSelectOptionList,
@@ -105,7 +105,7 @@ const Editor = () => {
             <div className={styles['editor-select-option-container']}>
               <div className={cx(styles['editor-select-option-list'], styles['paper-color'])}>
                 {paperColorList.map((p) => (
-                  <BackGroundOption
+                  <BackgroundOption
                     key={p}
                     value={p}
                     onChange={handleChangePaperColor}
