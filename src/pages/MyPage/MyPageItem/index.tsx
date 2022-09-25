@@ -30,7 +30,7 @@ const MyPageItem = ({ user }: { user: Props }) => {
       <div className={styles.roll}>
         <div className={styles.paperInfoWrap}>
           <p>{user.title}</p>
-          <button type="button" onClick={handleClickVisible}>
+          <button type="button">
             {isVisible ? <EyeIcon /> : <EyeOffIcon />}
             {/* <LockIcon  /> */}
           </button>
@@ -43,7 +43,9 @@ const MyPageItem = ({ user }: { user: Props }) => {
         </div>
       </div>
       <div className={styles.dropdown}>
-        {isDropdown && <MyPageDropDown isVisible={isVisible} />}
+        {isDropdown && (
+          <MyPageDropDown isVisible={isVisible} handleClickVisible={handleClickVisible} />
+        )}
       </div>
     </div>
   )
