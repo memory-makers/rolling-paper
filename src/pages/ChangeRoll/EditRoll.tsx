@@ -1,4 +1,4 @@
-import { ChangeEventHandler, MouseEventHandler, useEffect, useState } from 'react'
+import { ChangeEventHandler, useState } from 'react'
 import cx from 'classnames'
 import styles from './editRoll.module.scss'
 
@@ -6,6 +6,7 @@ import Modal from '@/components/Modal'
 import { ModalButton, ModalInput, ModalText } from '@/components/Modal/ModalItem'
 import { editPaperAPI } from '@/api/user'
 import { EDIT_PAPER, usePaper } from '@/store/paper'
+import { convertDaysFromToday } from '@/utils/rollingPaper/paper'
 
 interface Props {
   paperId: number
@@ -49,10 +50,17 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, setIsModalOpen }: Pr
         type="text"
         name="paperTitle"
         value={paperTitle}
+        maxLength={45}
         onChange={handlePaperTitleChange}
       />
       <ModalText type="label">언제 열어보시겠어요?</ModalText>
-      <ModalInput type="date" name="dueDate" value={dueDate} onChange={handleDueDateChange} />
+      <ModalInput
+        type="date"
+        name="dueDate"
+        value={dueDate}
+        min={convertDaysFromToday(0)}
+        onChange={handleDueDateChange}
+      />
       <ModalText type="label">테마를 선택해주세요!</ModalText>
       <div className={styles.radioWrapper}>
         <label htmlFor="light" className={styles.radioLabel}>
@@ -85,7 +93,7 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, setIsModalOpen }: Pr
       </div>
       <ModalButton type="button" onClick={handleButtonClick}>
         완료
-      </ModalButton>{' '}
+      </ModalButton>
     </Modal>
   )
 }

@@ -6,6 +6,7 @@ import CreateShareRoll from './contents/CreateShareRoll'
 import { PaperAPIResponse, setPaperAPI } from '@/api/user'
 import { CLIENT_PAPER_URL } from '@/config/commonLink'
 import { ADD_PAPER, usePaper } from '@/store/paper'
+import { convertDaysFromToday } from '@/utils/rollingPaper/paper'
 
 interface Props {
   setIsModalOpen: (state: boolean) => void
@@ -14,7 +15,7 @@ interface Props {
 const CreateRoll = ({ setIsModalOpen }: Props) => {
   const { dispatch } = usePaper()
   const [paperTitle, setPaperTitle] = useState('')
-  const [dueDate, setDueDate] = useState('')
+  const [dueDate, setDueDate] = useState(convertDaysFromToday(7))
   const [theme, setTheme] = useState('light')
 
   const [paperUrl, setPaperUrl] = useState('test')
@@ -48,6 +49,7 @@ const CreateRoll = ({ setIsModalOpen }: Props) => {
       {!isNextStep && (
         <MakeRoll
           handleButtonClick={handleButtonClick}
+          dueDate={dueDate}
           setPaperTitle={setPaperTitle}
           setDueDate={setDueDate}
           setTheme={setTheme}
