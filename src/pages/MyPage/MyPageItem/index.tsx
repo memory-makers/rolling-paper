@@ -13,7 +13,7 @@ interface Props {
   dueDate: string
 }
 
-const MyPageItem = ({ user }: { user: Props }) => {
+const MyPageItem = ({ paper }: { paper: Props }) => {
   const [isDropdown, setIsDropdown] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
 
@@ -29,14 +29,14 @@ const MyPageItem = ({ user }: { user: Props }) => {
     <div className={styles.myPageMainContent}>
       <div className={styles.roll}>
         <div className={styles.paperInfoWrap}>
-          <p>{user.title}</p>
+          <p>{paper.title}</p>
           <button type="button">
             {isVisible ? <EyeIcon /> : <EyeOffIcon />}
             {/* <LockIcon  /> */}
           </button>
         </div>
         <div className={styles.openDateWrap}>
-          <p>{user.dueDate}</p>
+          <p>{paper.dueDate}</p>
           <button type="button" onClick={handleClickDropdownList}>
             {isDropdown ? <ArrowDownIcon /> : <ArrowUpIcon />}
           </button>

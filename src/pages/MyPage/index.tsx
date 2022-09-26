@@ -24,16 +24,16 @@ const MyPage = () => {
       <div className={styles.myPageHeader}>
         <Header text="롤링페이퍼 저장소" type="only-title" />
       </div>
-      <section>
+      <>
         <div className={styles.myPageContentTitle}>
           <span>롤링 페이퍼 이름</span>
           <span>오픈 날짜</span>
         </div>
         {/* Main Area */}
-        {USER_DATA.map((user) => (
-          <MyPageItem key={user.id} user={user} />
+        {USER_DATA.map((paper) => (
+          <MyPageItem key={paper.id} paper={paper} />
         ))}
-      </section>
+      </>
       <button className={styles.paperAddButton}>
         <PaperAirplaneIcon />
       </button>
