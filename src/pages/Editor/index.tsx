@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useRef, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import cx from 'classnames'
 
 import { useEditor, useOutsideClick } from './hooks'
@@ -8,7 +8,6 @@ import {
   CompleteButton,
   EditorSelectOption,
   editorSelectOptionList,
-  EditorSelectType,
   FontOption,
   Paper,
   ShareButton,
@@ -19,6 +18,12 @@ import styles from './editor.module.scss'
 
 const Editor = () => {
   const {
+    nickName,
+    handleChangeNickName,
+    paperContent,
+    handleChangePaperContent,
+    editorType,
+    handleChangeEditorType,
     paperColor,
     handleChangePaperColor,
     textColor,
@@ -35,19 +40,8 @@ const Editor = () => {
   // 초기값
   // 닉네임이 있을 경우 : 닉네임
   // 닉네임이 없을 경우 : 익명 (요청 시)
-  const [nickName, setNickName] = useState('')
-  const [paperContent, setPaperContent] = useState('')
-  const [editorType, setEditorType] = useState(editorSelectOptionList[0])
   const [editorSelectOptionVisible, setEditorSelectOptionVisible] = useState(true)
   const editorSelectOptionRef = useRef(null)
-
-  const handleChangeNickName = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setNickName(e.target.value)
-  }, [])
-
-  const handleChangePaperContent = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
-    setPaperContent(e.target.value)
-  }, [])
 
   const handleOpenEditorSelectOption = useCallback(() => {
     setEditorSelectOptionVisible(true)
@@ -57,10 +51,6 @@ const Editor = () => {
     setEditorSelectOptionVisible(false)
   }, [])
   useOutsideClick(editorSelectOptionRef, handleCloseEditorSelectOption)
-
-  const handleChangeEditorType = useCallback((type: EditorSelectType) => {
-    setEditorType(type)
-  }, [])
 
   const handleClickShareButton = () => {
     // TODO: 공유

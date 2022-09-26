@@ -2,15 +2,13 @@ import { ReactNode } from 'react'
 import cx from 'classnames'
 import styles from './selectEditorOption.module.scss'
 
-export type EditorSelectType = '배경' | '텍스트'
-
 interface EditorSelectOptionProps {
-  type: EditorSelectType
-  onChangeType: (value: EditorSelectType) => void
+  type: string
+  onChangeType: (value: string) => void
   children: ReactNode
 }
 
-export const editorSelectOptionList: EditorSelectType[] = ['배경', '텍스트']
+export const editorSelectOptionList = ['배경', '텍스트']
 
 export const EditorSelectOption = ({
   // visible,
