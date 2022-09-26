@@ -5,7 +5,7 @@ import { ReactComponent as ArrowUpIcon } from '@/assets/arrow-up.svg'
 // import { ReactComponent as LockIcon } from '@/assets/lock.svg'
 
 import styles from './myPageItem.module.scss'
-import { useState } from 'react'
+import { useState, useRef, useEffect, BaseSyntheticEvent } from 'react'
 import MyPageDropDown from './MyPageDropdown'
 import PaperType from '@/utils/rollingPaper/Paper.type'
 
@@ -14,19 +14,31 @@ interface Props {
 }
 
 const MyPageItem = ({ paper }: Props) => {
-  const [isDropdown, setIsDropdown] = useState<boolean>(false)
+  const [isDropdown, setIsDropdown] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
-
+  const dropdownRef = useRef<HTMLDivElement>(null)
   const handleClickDropdownList = () => {
-    setIsDropdown((prev) => !prev)
+    setIsDropdown(!isDropdown)
   }
 
   const handleClickVisible = () => {
-    setIsVisible((prevState) => !prevState)
+    setIsVisible(!isVisible)
   }
 
+  useEffect(() => {
+    const handleClickCloseDropdown = (e: BaseSyntheticEvent | MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setIsDropdown(false)
+      }
+    }
+    document.addEventListener('click', handleClickCloseDropdown, true)
+    return () => {
+      document.removeEventListener('click', handleClickCloseDropdown, true)
+    }
+  }, [dropdownRef])
+
   return (
-    <div className={styles.myPageMainContent}>
+    <div className={styles.myPageMainContent} ref={dropdownRef}>
       <div className={styles.roll}>
         <div className={styles.paperInfoWrap}>
           <p>{paper.paperTitle}</p>
@@ -42,9 +54,7 @@ const MyPageItem = ({ paper }: Props) => {
           </button>
         </div>
       </div>
-      <div className={styles.dropdown}>
-        {isDropdown && <MyPageDropDown paper={paper} isVisible={isVisible} />}
-      </div>
+        <MyPageDropDown paper={paper} isVisible={isVisible} isDropdown={isDropdown} handleClickVisible={handleClickVisible} />
     </div>
   )
 }

@@ -1,30 +1,31 @@
 @use '/src/styles/colors.scss';
+@use '/src/styles//abstracts/responsive';
 
 // Main Area
 .myPageMainContent {
   position: relative;
   width: 90%;
-  height: 85px;
-  padding-top: 16px;
   margin: 18px auto;
 
   .roll {
     display: flex;
+    justify-content: center;
     height: 78px;
-    border: 1px solid colors.$point;
     border-radius: 28px;
 
     .paperInfoWrap {
       display: flex;
-      flex: 1 1 50%;
+      width: 200px;
       justify-content: space-between;
       align-items: center;
-      padding: 0 12px;
       background: colors.$point;
+      padding: 0 12px;
+      border: 1px solid colors.$point;
       border-top-left-radius: 28px;
       border-bottom-left-radius: 28px;
 
       p {
+        word-break: keep-all;
         color: colors.$white;
       }
 
@@ -36,11 +37,12 @@
 
     .openDateWrap {
       display: flex;
-      flex: 1 1 50%;
+      width: 180px;
       justify-content: center;
       align-items: center;
       background-color: colors.$white;
       padding-left: 12px;
+      border: 1px solid colors.$point;
       border-top-right-radius: 28px;
       border-bottom-right-radius: 28px;
 
@@ -49,5 +51,14 @@
         padding-right: 12px;
       }
     }
+  }
+}
+
+@include responsive.mobileOnly {
+  .paperInfoWrap {
+    min-width: 170px;
+  }
+  .openDateWrap {
+    min-width: 150px;
   }
 }
