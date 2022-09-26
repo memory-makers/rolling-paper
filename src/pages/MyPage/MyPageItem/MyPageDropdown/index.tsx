@@ -1,21 +1,25 @@
 import styles from './myPageDropdown.module.scss'
+import cx from 'classnames'
 
 const MyPageDropDown = ({
   isVisible,
+  isDropdown,
   handleClickVisible
 }: {
   isVisible: boolean
+  isDropdown: boolean
   handleClickVisible: () => void
 }) => {
   const handleClickShare = () => {
     confirm('공유하기를 진행하시겠습니까?')
   }
+
   const handleClickDelete = () => {
     confirm('삭제하기를 진행하시겠습니까?')
   }
 
   return (
-    <section className={styles.dropdown}>
+    <section className={cx(styles.dropdown, { [styles.isActive]: isDropdown })}>
       <button type="button" onClick={handleClickShare}>
         공유하기
       </button>

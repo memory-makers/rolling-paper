@@ -1,15 +1,25 @@
 @use '/src/styles/colors.scss';
+@use '/src/styles//abstracts/responsive';
 
 .dropdown {
   position: absolute;
-  top: 80px;
-  right: 12px;
-  width: 128px;
+  right: 0;
+  top: 60px;
+  margin: 0 10px 0 auto;
+  width: 160px;
   height: 120px;
   background: colors.$white;
   border: 1px solid colors.$point;
-  border-radius: 12px;
+  border-radius: 8px;
+  transform: translateY(-20px);
+  visibility: hidden;
+  transition: transform 300ms ease, visibility 150ms;
   z-index: 2;
+
+  &.isActive {
+    visibility: visible;
+    transform: translateY(0);
+  }
 
   button:not(:last-child) {
     border-bottom: 1px solid colors.$point;
@@ -25,5 +35,11 @@
     &:hover {
       font-weight: 900;
     }
+  }
+}
+@include responsive.mobileOnly {
+  .dropdown {
+    width: 135px;
+    margin: 0 -10px 0 auto;
   }
 }
