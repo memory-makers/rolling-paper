@@ -1,19 +1,21 @@
-import { ChangeEventHandler, MouseEventHandler } from 'react'
+import { ChangeEventHandler, MouseEventHandler, useEffect, useMemo } from 'react'
 import styles from './makeRoll.module.scss'
 import cx from 'classnames'
 
 import { ModalButton, ModalInput, ModalText } from '@/components/Modal/ModalItem'
+import { convertDaysFromToday } from '@/utils/rollingPaper/paper'
 
 interface Props {
   handleButtonClick: MouseEventHandler<HTMLButtonElement>
-  setTitle: (state: string) => void
+  dueDate: string
+  setPaperTitle: (state: string) => void
   setDueDate: (state: string) => void
-  setPaperTheme: (state: string) => void
+  setTheme: (state: string) => void
 }
 
-const MakeRoll = ({ handleButtonClick, setTitle, setDueDate, setPaperTheme }: Props) => {
+const MakeRoll = ({ handleButtonClick, dueDate, setPaperTitle, setDueDate, setTheme }: Props) => {
   const handleTitleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setTitle(e.currentTarget.value)
+    setPaperTitle(e.currentTarget.value)
   }
 
   const handleDueDateChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -21,7 +23,7 @@ const MakeRoll = ({ handleButtonClick, setTitle, setDueDate, setPaperTheme }: Pr
   }
 
   const handleThemeChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setPaperTheme(e.currentTarget.value)
+    setTheme(e.currentTarget.value)
   }
 
   return (
@@ -29,10 +31,16 @@ const MakeRoll = ({ handleButtonClick, setTitle, setDueDate, setPaperTheme }: Pr
       <ModalText type="title">롤링 페이퍼를 만들어볼까요?</ModalText>
 
       <ModalText type="label">롤링페이퍼 이름을 적어주세요</ModalText>
-      <ModalInput type="text" name="title" onChange={handleTitleChange} />
+      <ModalInput type="text" name="title" maxLength={45} onChange={handleTitleChange} />
 
       <ModalText type="label">언제 열어보시겠어요?</ModalText>
-      <ModalInput type="date" name="dueDate" onChange={handleDueDateChange} />
+      <ModalInput
+        type="date"
+        name="dueDate"
+        min={convertDaysFromToday(0)}
+        value={dueDate}
+        onChange={handleDueDateChange}
+      />
 
       <ModalText type="label">테마를 선택해주세요!</ModalText>
       <div className={styles.radioWrapper}>

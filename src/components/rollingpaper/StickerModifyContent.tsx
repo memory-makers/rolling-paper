@@ -4,12 +4,15 @@ import RndSticker from './RndSticker'
 import styles from './rollingpaper.module.scss'
 import StickerModal from './StickerModal'
 import MoveableSticker from './MoveableSticker'
+import classNames from 'classnames'
 interface ContentProps {
+  isModifyMode: boolean
   newStickers: StickerType[]
   setNewStickers: (newStickers: StickerType[]) => void
 }
 
-const StickerModifyContent = ({ newStickers, setNewStickers }: ContentProps) => {
+const StickerModifyContent = ({ isModifyMode, newStickers, setNewStickers }: ContentProps) => {
+  const modifyMode = isModifyMode ? 'modify-mode' : ''
   const handleCreateNewSticker = (type: StickerShape) => {
     const newSticker = {
       id: Math.floor(Math.random() * 1000),
@@ -22,15 +25,13 @@ const StickerModifyContent = ({ newStickers, setNewStickers }: ContentProps) => 
     setNewStickers([...newStickers, newSticker])
   }
   const handleUpdateStickers = (newSticker: StickerType) => {
-    console.log(newSticker)
     setNewStickers([...newStickers.filter((sticker) => sticker.id !== newSticker.id), newSticker])
-    console.log(JSON.stringify(newStickers))
   }
   const handleDeleteSticker = (id: number) => {
     setNewStickers([...newStickers.filter((sticker) => sticker.id !== id)])
   }
   return (
-    <div className={styles['sticker-modify-content']}>
+    <div className={classNames(styles['sticker-modify-content'], styles[modifyMode])}>
       <div className={styles['sticker-container']}>
         {newStickers.map((sticker) => (
           <MoveableSticker

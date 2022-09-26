@@ -1,21 +1,29 @@
-import { ChangeEventHandler, MouseEventHandler, useEffect, useState } from 'react'
+import { ChangeEventHandler, useState } from 'react'
 import cx from 'classnames'
 import styles from './editRoll.module.scss'
 
 import Modal from '@/components/Modal'
 import { ModalButton, ModalInput, ModalText } from '@/components/Modal/ModalItem'
+import { editPaperAPI } from '@/api/user'
+import { EDIT_PAPER, usePaper } from '@/store/paper'
+import { convertDaysFromToday } from '@/utils/rollingPaper/paper'
 
 interface Props {
+  paperId: number
+  ePaperTitle: string
+  eDueDate: string
+  eTheme: string
   setIsModalOpen: (state: boolean) => void
 }
 
-const EditRoll = ({ setIsModalOpen }: Props) => {
-  const [title, setTitle] = useState('')
-  const [dueDate, setDueDate] = useState('')
-  const [paperTheme, setPaperTheme] = useState('light')
+const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, setIsModalOpen }: Props) => {
+  const { dispatch } = usePaper()
+  const [paperTitle, setPaperTitle] = useState(ePaperTitle)
+  const [dueDate, setDueDate] = useState(eDueDate)
+  const [theme, setTheme] = useState(eTheme)
 
-  const handleTitleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setTitle(e.currentTarget.value)
+  const handlePaperTitleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setPaperTitle(e.currentTarget.value)
   }
 
   const handleDueDateChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -23,38 +31,47 @@ const EditRoll = ({ setIsModalOpen }: Props) => {
   }
 
   const handleThemeChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setPaperTheme(e.currentTarget.value)
+    setTheme(e.currentTarget.value)
   }
 
-  const handleButtonClick: MouseEventHandler<HTMLButtonElement> = (e) => {
-    // console.log('버튼 클릭시 롤링페이퍼 수정', title, dueDate, paperTheme)
+  const handleButtonClick = () => {
+    if (!paperTitle || !dueDate) return
+    const editedPaper = { paperId, paperTitle, dueDate, theme }
+    editPaperAPI(editedPaper)
+    dispatch({ type: EDIT_PAPER, payload: editedPaper })
     setIsModalOpen(false)
   }
-
-  useEffect(() => {
-    setTitle('3학년 2반 친구들')
-    setDueDate('2022-12-16')
-    setPaperTheme('dark')
-  }, [])
 
   return (
     <Modal setIsModalOpen={setIsModalOpen}>
       <ModalText type="title">롤링 페이퍼를 만들어볼까요?</ModalText>
       <ModalText type="label">롤링페이퍼 이름을 적어주세요</ModalText>
-      <ModalInput type="text" name="title" value={title} onChange={handleTitleChange} />
+      <ModalInput
+        type="text"
+        name="paperTitle"
+        value={paperTitle}
+        maxLength={45}
+        onChange={handlePaperTitleChange}
+      />
       <ModalText type="label">언제 열어보시겠어요?</ModalText>
-      <ModalInput type="date" name="dueDate" value={dueDate} onChange={handleDueDateChange} />
+      <ModalInput
+        type="date"
+        name="dueDate"
+        value={dueDate}
+        min={convertDaysFromToday(0)}
+        onChange={handleDueDateChange}
+      />
       <ModalText type="label">테마를 선택해주세요!</ModalText>
       <div className={styles.radioWrapper}>
         <label htmlFor="light" className={styles.radioLabel}>
           <input
             type="radio"
-            name="paperTheme"
+            name="theme"
             id="light"
             value="light"
             onChange={handleThemeChange}
             className={styles.radioInputField}
-            checked={paperTheme === 'light'}
+            checked={theme === 'light'}
           />
           <span>라이트 테마</span>
           <div className={styles.radioColor} />
@@ -63,12 +80,12 @@ const EditRoll = ({ setIsModalOpen }: Props) => {
         <label htmlFor="dark" className={styles.radioLabel}>
           <input
             type="radio"
-            name="paperTheme"
+            name="theme"
             id="dark"
             value="dark"
             onChange={handleThemeChange}
             className={styles.radioInputField}
-            checked={paperTheme === 'dark'}
+            checked={theme === 'dark'}
           />
           <span>다크 테마</span>
           <div className={cx(styles.radioColor, styles.darkColor)} />
@@ -76,7 +93,7 @@ const EditRoll = ({ setIsModalOpen }: Props) => {
       </div>
       <ModalButton type="button" onClick={handleButtonClick}>
         완료
-      </ModalButton>{' '}
+      </ModalButton>
     </Modal>
   )
 }

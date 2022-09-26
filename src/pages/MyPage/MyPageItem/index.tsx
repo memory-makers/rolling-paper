@@ -7,13 +7,13 @@ import { ReactComponent as ArrowUpIcon } from '@/assets/arrow-up.svg'
 import styles from './myPageItem.module.scss'
 import { useState, useRef, useEffect, BaseSyntheticEvent } from 'react'
 import MyPageDropDown from './MyPageDropdown'
+import PaperType from '@/utils/rollingPaper/Paper.type'
+
 interface Props {
-  id: number
-  title: string
-  dueDate: string
+  paper: PaperType
 }
 
-const MyPageItem = ({ paper }: { paper: Props }) => {
+const MyPageItem = ({ paper }: Props) => {
   const [isDropdown, setIsDropdown] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
@@ -41,8 +41,8 @@ const MyPageItem = ({ paper }: { paper: Props }) => {
     <div className={styles.myPageMainContent} ref={dropdownRef}>
       <div className={styles.roll}>
         <div className={styles.paperInfoWrap}>
-          <p>{paper.title}</p>
-          <button type="button">
+          <p>{paper.paperTitle}</p>
+          <button type="button" onClick={handleClickVisible}>
             {isVisible ? <EyeIcon /> : <EyeOffIcon />}
             {/* <LockIcon  /> */}
           </button>
@@ -54,11 +54,7 @@ const MyPageItem = ({ paper }: { paper: Props }) => {
           </button>
         </div>
       </div>
-      <MyPageDropDown
-        isVisible={isVisible}
-        isDropdown={isDropdown}
-        handleClickVisible={handleClickVisible}
-      />
+        <MyPageDropDown paper={paper} isVisible={isVisible} isDropdown={isDropdown} handleClickVisible={handleClickVisible} />
     </div>
   )
 }

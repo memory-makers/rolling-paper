@@ -5,16 +5,17 @@
   position: absolute;
   right: 0;
   top: 60px;
-  margin: 0 10px 0 auto;
   width: 160px;
   height: 120px;
   background: colors.$white;
   border: 1px solid colors.$point;
   border-radius: 8px;
+  margin: 0 10px 0 auto;
   transform: translateY(-20px);
   visibility: hidden;
   transition: transform 300ms ease, visibility 150ms;
   z-index: 2;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
   &.isActive {
     visibility: visible;
