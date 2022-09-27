@@ -1,6 +1,6 @@
 import colors from '@/styles/colors.module.scss'
 
-export const PAPER_COLOR_LIST = Object.freeze([
+export const CARD_COLOR_LIST = Object.freeze([
   colors.cardRed,
   colors.cardBlue,
   colors.cardGreen,
@@ -9,7 +9,7 @@ export const PAPER_COLOR_LIST = Object.freeze([
   colors.cardWhite
 ])
 
-export const TEXT_COLOR_LIST = Object.freeze([
+export const FONT_COLOR_LIST = Object.freeze([
   '#000000',
   colors.textRed,
   colors.textBlue,
@@ -18,7 +18,7 @@ export const TEXT_COLOR_LIST = Object.freeze([
   colors.textYellow
 ])
 
-export const FONT_LIST = Object.freeze([
+export const FONT_STYLE_LIST = Object.freeze([
   'LeeSeoyun',
   'PyeongChangPeace-Light',
   'NanumGothic',

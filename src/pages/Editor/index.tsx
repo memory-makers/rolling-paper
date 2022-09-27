@@ -18,28 +18,26 @@ import styles from './editor.module.scss'
 
 const Editor = () => {
   const {
-    nickName,
-    handleChangeNickName,
-    paperContent,
-    handleChangePaperContent,
+    rollingPaperId,
+    cardWriter,
+    handleChangeCardWriter,
+    cardText,
+    handleChangeCardText,
     editorType,
     handleChangeEditorType,
-    paperColor,
-    handleChangePaperColor,
-    textColor,
-    handleChangeTextColor,
-    font,
-    handleChangeFont,
+    cardColor,
+    handleChangeCardColor,
+    fontColor,
+    handleChangeFontColor,
+    fontStyle,
+    handleChangeFontStyle,
+    removeAllEditorValue,
 
-    paperColorList,
-    textColorList,
-    fontList
+    cardColorList,
+    fontColorList,
+    fontStyleList
   } = useEditor()
 
-  // TODO: nickname
-  // 초기값
-  // 닉네임이 있을 경우 : 닉네임
-  // 닉네임이 없을 경우 : 익명 (요청 시)
   const [editorSelectOptionVisible, setEditorSelectOptionVisible] = useState(true)
   const editorSelectOptionRef = useRef(null)
 
@@ -63,23 +61,23 @@ const Editor = () => {
   return (
     <div className={styles.editor}>
       <div className={styles['editor-header']}>
-        <ShareButton />
-        <CompleteButton />
+        {/* <ShareButton /> */}
+        <CompleteButton onClick={handleClickCompleteButton} />
       </div>
       <div className={styles['editor-body']}>
         <div className={styles['editor-nickname']}>
           <label>
             {`From. `}
-            <input placeholder="" value={nickName} onChange={handleChangeNickName} />
+            <input placeholder="" value={cardWriter} onChange={handleChangeCardWriter} />
           </label>
           <p>익명으로 보내고 싶으시면 비워주세요 😃</p>
         </div>
         <Paper
-          value={paperContent}
-          onChange={handleChangePaperContent}
-          backgroundColor={paperColor}
-          fontFamily={font}
-          color={textColor}
+          value={cardText}
+          onChange={handleChangeCardText}
+          backgroundColor={cardColor}
+          fontFamily={fontStyle}
+          color={fontColor}
         />
       </div>
 
@@ -94,12 +92,12 @@ const Editor = () => {
           {editorType === editorSelectOptionList[0] && (
             <div className={styles['editor-select-option-container']}>
               <div className={cx(styles['editor-select-option-list'], styles['paper-color'])}>
-                {paperColorList.map((p) => (
+                {cardColorList.map((p) => (
                   <BackgroundOption
                     key={p}
                     value={p}
-                    onChange={handleChangePaperColor}
-                    checked={p === paperColor}
+                    onChange={handleChangeCardColor}
+                    checked={p === cardColor}
                   />
                 ))}
               </div>
@@ -110,12 +108,12 @@ const Editor = () => {
               <div>
                 <div className={styles['editor-select-title']}>글꼴</div>
                 <div className={styles['editor-select-option-list']}>
-                  {fontList.map((f) => (
+                  {fontStyleList.map((f) => (
                     <FontOption
                       key={f}
                       value={f}
-                      onChange={handleChangeFont}
-                      checked={f === font}
+                      onChange={handleChangeFontStyle}
+                      checked={f === fontStyle}
                     />
                   ))}
                 </div>
@@ -123,12 +121,12 @@ const Editor = () => {
               <div>
                 <div className={styles['editor-select-title']}>글자 색</div>
                 <div className={styles['editor-select-option-list']}>
-                  {textColorList.map((t) => (
+                  {fontColorList.map((t) => (
                     <TextColorOption
                       key={t}
                       value={t}
-                      onChange={handleChangeTextColor}
-                      checked={t === textColor}
+                      onChange={handleChangeFontColor}
+                      checked={t === fontColor}
                     />
                   ))}
                 </div>

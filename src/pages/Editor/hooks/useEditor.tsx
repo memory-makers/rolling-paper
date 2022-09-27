@@ -1,10 +1,11 @@
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { debounce } from 'lodash'
+import { useParams } from 'react-router-dom'
+
+import { fetchPaperId_API } from '@/api/rollingpaper'
 
 import { editorSelectOptionList } from '../components'
-
-import { PAPER_COLOR_LIST, TEXT_COLOR_LIST, FONT_LIST } from '../constants'
-import { useParams } from 'react-router-dom'
+import { CARD_COLOR_LIST, FONT_COLOR_LIST, FONT_STYLE_LIST } from '../constants'
 
 export type onChangeType = (value: ChangeEvent<HTMLInputElement>) => void
 
@@ -16,29 +17,34 @@ const saveEditorValue = (key: string, value: string) => {
   localStorage.setItem(`EDITOR_${key}`, value)
 }
 const removeAllEditorValue = () => {
-  ;['urlId', 'nickName', 'paperContent', 'editorType', 'paperColor', 'font', 'textColor'].forEach(
+  ;['urlId', 'cardWriter', 'cardText', 'editorType', 'cardColor', 'fontStyle', 'fontColor'].forEach(
     (key) => localStorage.removeItem(`EDITOR_${key}`)
   )
 }
 
 export const useEditor = () => {
   const urlId = useParams().rollingPaperId
-  const [nickName, setNickName] = useState('')
-  const [paperContent, setPaperContent] = useState('')
+  const [rollingPaperId, setRollingPaperId] = useState(0)
+  const [cardWriter, setCardWriter] = useState('')
+  const [cardText, setCardText] = useState('')
 
   const [editorType, setEditorType] = useState(editorSelectOptionList[0])
-  const [paperColor, setPaperColor] = useState(PAPER_COLOR_LIST[0])
-  const [font, setFont] = useState(FONT_LIST[0])
-  const [textColor, setTextColor] = useState(TEXT_COLOR_LIST[0])
+  const [cardColor, setCardColor] = useState(CARD_COLOR_LIST[0])
+  const [fontStyle, setFontStyle] = useState(FONT_STYLE_LIST[0])
+  const [fontColor, setFontColor] = useState(FONT_COLOR_LIST[0])
 
   const getAllSavedEditorValue = useCallback(() => {
-    setNickName(getEditorValue('nickName') || '')
-    setPaperContent(getEditorValue('paperContent') || '')
+    setCardWriter(getEditorValue('cardWriter') || '')
+    setCardText(getEditorValue('cardText') || '')
     setEditorType(getEditorValue('editorType') || editorSelectOptionList[0])
-    setPaperColor(getEditorValue('paperColor') || PAPER_COLOR_LIST[0])
-    setFont(getEditorValue('font') || FONT_LIST[0])
-    setTextColor(getEditorValue('textColor') || TEXT_COLOR_LIST[0])
+    setCardColor(getEditorValue('cardColor') || CARD_COLOR_LIST[0])
+    setFontStyle(getEditorValue('fontStyle') || FONT_STYLE_LIST[0])
+    setFontColor(getEditorValue('fontColor') || FONT_COLOR_LIST[0])
   }, [])
+
+  useEffect(() => {
+    fetchPaperId_API(urlId, setRollingPaperId)
+  }, [urlId])
 
   useEffect(() => {
     if (!urlId) {
@@ -56,29 +62,29 @@ export const useEditor = () => {
     getAllSavedEditorValue()
   }, [])
 
-  const _debounceSaveNickName = useCallback(
-    debounce((_nickName) => saveEditorValue('nickName', _nickName), 500),
+  const _debounceSaveCardWriter = useCallback(
+    debounce((_cardWriter) => saveEditorValue('cardWriter', _cardWriter), 500),
     []
   )
-  const _debounceSavePaperContent = useCallback(
-    debounce((_paperContent) => saveEditorValue('paperContent', _paperContent), 500),
+  const _debounceSaveCardText = useCallback(
+    debounce((_cardText) => saveEditorValue('cardText', _cardText), 500),
     []
   )
 
   useEffect(() => {
-    _debounceSaveNickName(nickName)
-  }, [nickName])
+    _debounceSaveCardWriter(cardWriter)
+  }, [cardWriter])
 
   useEffect(() => {
-    _debounceSavePaperContent(paperContent)
-  }, [paperContent])
+    _debounceSaveCardText(cardText)
+  }, [cardText])
 
-  const handleChangeNickName = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setNickName(e.target.value)
+  const handleChangeCardWriter = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    setCardWriter(e.target.value)
   }, [])
 
-  const handleChangePaperContent = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
-    setPaperContent(e.target.value)
+  const handleChangeCardText = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
+    setCardText(e.target.value)
   }, [])
 
   const handleChangeEditorType = useCallback((type: string) => {
@@ -86,37 +92,39 @@ export const useEditor = () => {
     saveEditorValue('editorType', type)
   }, [])
 
-  const handleChangePaperColor: onChangeType = useCallback((e) => {
-    setPaperColor(e.target.value)
-    saveEditorValue('paperColor', e.target.value)
+  const handleChangeCardColor: onChangeType = useCallback((e) => {
+    setCardColor(e.target.value)
+    saveEditorValue('cardColor', e.target.value)
   }, [])
 
-  const handleChangeFont: onChangeType = useCallback((e) => {
-    setFont(e.target.value)
-    saveEditorValue('font', e.target.value)
+  const handleChangeFontStyle: onChangeType = useCallback((e) => {
+    setFontStyle(e.target.value)
+    saveEditorValue('fontStyle', e.target.value)
   }, [])
 
-  const handleChangeTextColor: onChangeType = useCallback((e) => {
-    setTextColor(e.target.value)
-    saveEditorValue('textColor', e.target.value)
+  const handleChangeFontColor: onChangeType = useCallback((e) => {
+    setFontColor(e.target.value)
+    saveEditorValue('fontColor', e.target.value)
   }, [])
 
   return {
-    nickName,
-    handleChangeNickName,
-    paperContent,
-    handleChangePaperContent,
+    rollingPaperId,
+    cardWriter,
+    handleChangeCardWriter,
+    cardText,
+    handleChangeCardText,
     editorType,
     handleChangeEditorType,
-    paperColor,
-    handleChangePaperColor,
-    textColor,
-    handleChangeTextColor,
-    font,
-    handleChangeFont,
+    cardColor,
+    handleChangeCardColor,
+    fontColor,
+    handleChangeFontColor,
+    fontStyle,
+    handleChangeFontStyle,
+    removeAllEditorValue,
 
-    paperColorList: PAPER_COLOR_LIST,
-    textColorList: TEXT_COLOR_LIST,
-    fontList: FONT_LIST
+    cardColorList: CARD_COLOR_LIST,
+    fontColorList: FONT_COLOR_LIST,
+    fontStyleList: FONT_STYLE_LIST
   }
 }
