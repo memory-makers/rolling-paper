@@ -1,8 +1,8 @@
 import { useCallback, useRef, useState } from 'react'
 import cx from 'classnames'
 
+import { updateCard_API } from '@/api/rollingpaper'
 import { useEditor, useOutsideClick } from './hooks'
-
 import {
   BackgroundOption,
   CompleteButton,
@@ -13,12 +13,13 @@ import {
   ShareButton,
   TextColorOption
 } from './components'
+import CheckSendingCard from '../WriterRoll/CheckSendingCard'
 
 import styles from './editor.module.scss'
 
 const Editor = () => {
   const {
-    rollingPaperId,
+    paperId,
     cardWriter,
     handleChangeCardWriter,
     cardText,
@@ -39,6 +40,7 @@ const Editor = () => {
   } = useEditor()
 
   const [editorSelectOptionVisible, setEditorSelectOptionVisible] = useState(true)
+  const [isCheckSendingModalOpen, setIsCheckSendingModalOpen] = useState(false)
   const editorSelectOptionRef = useRef(null)
 
   const handleOpenEditorSelectOption = useCallback(() => {
@@ -50,18 +52,29 @@ const Editor = () => {
   }, [])
   useOutsideClick(editorSelectOptionRef, handleCloseEditorSelectOption)
 
-  const handleClickShareButton = () => {
-    // TODO: 공유
+  const handleClickCompleteButton = () => {
+    setIsCheckSendingModalOpen(true)
   }
 
-  const handleClickCompleteButton = () => {
-    // TODO: 완료
+  const handleSendCard = async () => {
+    const card = {
+      cardColor,
+      cardId: 0,
+      cardText,
+      cardWriter,
+      fontColor,
+      fontStyle,
+      paperId
+    }
+    const res = await updateCard_API(card)
+    if (!res) return false
+    removeAllEditorValue()
+    return true
   }
 
   return (
     <div className={styles.editor}>
       <div className={styles['editor-header']}>
-        {/* <ShareButton /> */}
         <CompleteButton onClick={handleClickCompleteButton} />
       </div>
       <div className={styles['editor-body']}>
@@ -135,6 +148,10 @@ const Editor = () => {
           )}
         </EditorSelectOption>
       </div>
+
+      {isCheckSendingModalOpen && (
+        <CheckSendingCard setIsModalOpen={setIsCheckSendingModalOpen} callback={handleSendCard} />
+      )}
     </div>
   )
 }

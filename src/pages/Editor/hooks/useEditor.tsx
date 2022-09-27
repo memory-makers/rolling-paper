@@ -24,7 +24,7 @@ const removeAllEditorValue = () => {
 
 export const useEditor = () => {
   const urlId = useParams().rollingPaperId
-  const [rollingPaperId, setRollingPaperId] = useState(0)
+  const [paperId, setPaperId] = useState(0)
   const [cardWriter, setCardWriter] = useState('')
   const [cardText, setCardText] = useState('')
 
@@ -43,7 +43,7 @@ export const useEditor = () => {
   }, [])
 
   useEffect(() => {
-    fetchPaperId_API(urlId, setRollingPaperId)
+    fetchPaperId_API(urlId, setPaperId)
   }, [urlId])
 
   useEffect(() => {
@@ -108,7 +108,7 @@ export const useEditor = () => {
   }, [])
 
   return {
-    rollingPaperId,
+    paperId,
     cardWriter,
     handleChangeCardWriter,
     cardText,
