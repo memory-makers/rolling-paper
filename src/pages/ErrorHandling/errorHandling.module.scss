@@ -1,0 +1,48 @@
+@use '/src/styles/colors.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    margin-top: 100px;
+    font-size: 28px;
+  }
+
+  p {
+    font-size: 20px;
+  }
+
+  .flyIcon {
+    margin-top: 40px;
+    svg {
+      width: 170px;
+      height: 100px;
+    }
+  }
+
+  .goBackButton {
+    margin-top: 40px;
+    border-radius: 20px;
+    width: 230px;
+    height: 44px;
+    line-height: 44px;
+    font-size: 24px;
+    border: solid 1px colors.$point;
+    color: colors.$point;
+    background-color: colors.$white;
+  }
+
+  .goHomeButton {
+    margin-top: 20px;
+    border-radius: 20px;
+    width: 230px;
+    height: 44px;
+    line-height: 44px;
+    font-size: 24px;
+    color: colors.$white;
+    background-color: colors.$point;
+  }
+}
