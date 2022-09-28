@@ -1,16 +1,22 @@
+import { useNavigate } from 'react-router-dom'
+
 import Modal from '@/components/Modal'
 import { ModalButton, ModalText } from '@/components/Modal/ModalItem'
+import tokenStore from '@/api/tokenStore'
 
 interface Props {
   setIsModalOpen: (state: boolean) => void
 }
 
 const CheckLogout = ({ setIsModalOpen }: Props) => {
+  const navigate = useNavigate()
+
   const handleCancelClick = () => {
     setIsModalOpen(false)
   }
   const handleDeleteClick = () => {
-    // console.log('로그아웃 처리')
+    tokenStore.clearToken()
+    navigate('/')
     setIsModalOpen(false)
   }
 
