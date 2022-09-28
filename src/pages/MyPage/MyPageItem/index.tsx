@@ -17,6 +17,7 @@ const MyPageItem = ({ paper }: Props) => {
   const [isDropdown, setIsDropdown] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+
   const handleClickDropdownList = () => {
     setIsDropdown(!isDropdown)
   }
@@ -42,10 +43,7 @@ const MyPageItem = ({ paper }: Props) => {
       <div className={styles.roll}>
         <div className={styles.paperInfoWrap}>
           <p>{paper.paperTitle}</p>
-          <button type="button" onClick={handleClickVisible}>
-            {isVisible ? <EyeIcon /> : <EyeOffIcon />}
-            {/* <LockIcon  /> */}
-          </button>
+          {isVisible ? <EyeIcon /> : <EyeOffIcon />}
         </div>
         <div className={styles.openDateWrap}>
           <p>{paper.dueDate}</p>
@@ -54,7 +52,12 @@ const MyPageItem = ({ paper }: Props) => {
           </button>
         </div>
       </div>
-        <MyPageDropDown paper={paper} isVisible={isVisible} isDropdown={isDropdown} handleClickVisible={handleClickVisible} />
+      <MyPageDropDown
+        paper={paper}
+        isVisible={isVisible}
+        isDropdown={isDropdown}
+        handleClickVisible={handleClickVisible}
+      />
     </div>
   )
 }
