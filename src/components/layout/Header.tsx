@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import classNames from 'classnames'
+import styles from './header.module.scss'
 
 import { getIdToNicknameAPI, getNicknameAPI, getPaperIdAPI } from '@/api/user'
 import { useTheme } from '@/store/theme'
@@ -9,6 +10,9 @@ import { LOAD_URL_NAME, useUrlName } from '@/store/urlNickname'
 import MakeNickname from '@/pages/Nickname/MakeNickname'
 import EditNickname from '@/pages/Nickname/EditNickname'
 import tokenStore from '@/api/tokenStore'
+import CheckLogout from '@/pages/CheckLogout'
+
+import { ReactComponent as LogoutIcon } from '@/assets/logout.svg'
 
 type HeaderType = 'only-button' | 'title-button' | 'only-title'
 
@@ -32,10 +36,15 @@ const Header = ({ children, text, type }: HeaderProps) => {
   const { urlNameState, urlNameDispatch } = useUrlName()
   const [isInitModalOpen, setIsInitModalOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false)
 
   const handleClickEditModal = () => {
     if (!token || !isMypage) return
     setIsEditModalOpen((prev) => !prev)
+  }
+
+  const handleClickLogout = () => {
+    setIsLogoutModalOpen((prev) => !prev)
   }
 
   const getNickname = async () => {
@@ -83,9 +92,16 @@ const Header = ({ children, text, type }: HeaderProps) => {
           <span>{text}</span>
         </div>
       )}
+      {isMypage && (
+        <button type="button" className={styles.logoutButton} onClick={handleClickLogout}>
+          <LogoutIcon />
+        </button>
+      )}
       {buttonVisible && children}
+
       {isInitModalOpen && <MakeNickname setIsModalOpen={setIsInitModalOpen} />}
       {isEditModalOpen && <EditNickname setIsModalOpen={setIsEditModalOpen} />}
+      {isLogoutModalOpen && <CheckLogout setIsModalOpen={setIsLogoutModalOpen} />}
     </header>
   )
 }
