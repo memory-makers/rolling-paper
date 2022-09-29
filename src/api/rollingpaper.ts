@@ -68,8 +68,23 @@ interface Card {
   cardText: string
   fontColor: string
   fontStyle: string
-  paperId: string
+  paperId: string | number
   cardWriter: string
+}
+
+export const updateCard_API = async (card: Card) => {
+  try {
+    if (!card.paperId) return
+    const res = await axiosClient.post('cards', card)
+
+    if (!res.data.success) {
+      return false
+    }
+
+    return true
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 export const fetchStickers_API = async (
