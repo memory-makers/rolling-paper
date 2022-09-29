@@ -25,7 +25,11 @@
       border-bottom-left-radius: 28px;
 
       p {
-        word-break: keep-all;
+        width: 90%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        word-break: break-all;
         color: colors.$white;
       }
 

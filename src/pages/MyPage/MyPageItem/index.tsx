@@ -8,7 +8,7 @@ import styles from './myPageItem.module.scss'
 import { useState, useRef, useEffect, BaseSyntheticEvent } from 'react'
 import MyPageDropDown from './MyPageDropdown'
 import PaperType from '@/utils/rollingPaper/Paper.type'
-
+import { useNavigate } from 'react-router-dom'
 interface Props {
   paper: PaperType
 }
@@ -17,12 +17,18 @@ const MyPageItem = ({ paper }: Props) => {
   const [isDropdown, setIsDropdown] = useState(false)
   const [isVisible, setIsVisible] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
+  const navigate = useNavigate()
+
   const handleClickDropdownList = () => {
     setIsDropdown(!isDropdown)
   }
 
   const handleClickVisible = () => {
     setIsVisible(!isVisible)
+  }
+
+  const handleClickMoveToPaperDetail = () => {
+    navigate(`/rollingpaper/${paper.paperUrl}`)
   }
 
   useEffect(() => {
@@ -40,21 +46,27 @@ const MyPageItem = ({ paper }: Props) => {
   return (
     <div className={styles.myPageMainContent} ref={dropdownRef}>
       <div className={styles.roll}>
-        <div className={styles.paperInfoWrap}>
+        <button
+          type="button"
+          className={styles.paperInfoWrap}
+          onClick={handleClickMoveToPaperDetail}
+        >
           <p>{paper.paperTitle}</p>
-          <button type="button" onClick={handleClickVisible}>
-            {isVisible ? <EyeIcon /> : <EyeOffIcon />}
-            {/* <LockIcon  /> */}
-          </button>
-        </div>
+          {isVisible ? <EyeIcon /> : <EyeOffIcon />}
+        </button>
         <div className={styles.openDateWrap}>
           <p>{paper.dueDate}</p>
           <button type="button" onClick={handleClickDropdownList}>
-            {isDropdown ? <ArrowDownIcon /> : <ArrowUpIcon />}
+            {isDropdown ? <ArrowUpIcon /> : <ArrowDownIcon />}
           </button>
         </div>
       </div>
-        <MyPageDropDown paper={paper} isVisible={isVisible} isDropdown={isDropdown} handleClickVisible={handleClickVisible} />
+      <MyPageDropDown
+        paper={paper}
+        isVisible={isVisible}
+        isDropdown={isDropdown}
+        handleClickVisible={handleClickVisible}
+      />
     </div>
   )
 }
