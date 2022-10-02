@@ -8,19 +8,27 @@ import ModalTest from './ModalTest/ModalTest'
 import ModalCallTest from './ModalTest/ModalCallTest'
 import Sending from './Sending/Sending'
 import KakaoRedirect from './KakaoRedirect'
+import NotFound from './ErrorHandling/NotFound'
+import NotLogin from './ErrorHandling/NotLogin'
+import tokenStore from '@/api/tokenStore'
 
 export const Routes = () => {
+  const token = tokenStore.getAccessToken()
+
   return (
     <BrowserRouter>
       <ReactRouterRoutes>
         <Route path="/" element={<Home />} />
-        <Route path="/editor" element={<Editor />} />
-        <Route path="/mypage" element={<MyPage />} />
-        <Route path="/rollingpaper/:rollingPaperId" element={<RollingPaper />}></Route>
-        <Route path="/sending" element={<Sending />} />
-        <Route path="/modalTest" element={<ModalTest />} />
-        <Route path="/modalCallTest" element={<ModalCallTest />} />
-        <Route path="/kakao" element={<KakaoRedirect />} />
+        <Route path="rollingpaper">
+          <Route path=":rollingPaperId" element={<RollingPaper />} />
+          <Route path=":rollingPaperId/editor" element={<Editor />} />
+        </Route>
+        <Route path="sending" element={<Sending />} />
+        <Route path="modalTest" element={<ModalTest />} />
+        <Route path="modalCallTest" element={<ModalCallTest />} />
+        <Route path="kakao" element={<KakaoRedirect />} />
+        <Route path="/mypage" element={token ? <MyPage /> : <NotLogin />} />
+        <Route path="*" element={<NotFound />} />
       </ReactRouterRoutes>
     </BrowserRouter>
   )

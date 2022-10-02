@@ -7,18 +7,26 @@ import { ModalButton, ModalText } from '@/components/Modal/ModalItem'
 
 interface Props {
   setIsModalOpen: (state: boolean) => void
+  callback?: (() => void) | (() => Promise<boolean>) | undefined
 }
 
-const CheckSendingCard = ({ setIsModalOpen }: Props) => {
+const CheckSendingCard = ({ setIsModalOpen, callback }: Props) => {
   const navigate = useNavigate()
   const [isFail, setIsFail] = useState(false)
 
   const handleCancelClick = () => {
     setIsModalOpen(false)
   }
-  const handleSendClick = () => {
-    // console.log('카드 전송하기 클릭')
-    // setIsFail(true)
+
+  const handleSendClick = async () => {
+    if (!callback) return
+    const res = await callback()
+    if (!res) {
+      setIsFail(true)
+      return
+    }
+
+    setIsFail(false)
     setIsModalOpen(false)
     navigate('/sending')
   }

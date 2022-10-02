@@ -13,6 +13,8 @@
   }
 
   .myPageContentTitle {
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -20,6 +22,18 @@
     border-top: 1.5px solid colors.$myPageBlack;
     border-bottom: 1.5px solid colors.$myPageBlack;
     font-size: 20px;
+    backdrop-filter: blur(4px);
+    z-index: 3;
+  }
+
+  .myPageMain {
+    height: 95%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+  }
+
+  .myPageMain::-webkit-scrollbar {
+    display: none;
   }
 
   // Paper Add Button
