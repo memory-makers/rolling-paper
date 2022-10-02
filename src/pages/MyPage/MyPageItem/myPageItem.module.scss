@@ -16,7 +16,7 @@
     .paperInfoWrap {
       display: flex;
       width: 200px;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       background: colors.$point;
       padding: 0 12px;
@@ -31,11 +31,6 @@
         text-overflow: ellipsis;
         word-break: break-all;
         color: colors.$white;
-      }
-
-      button > svg {
-        width: 25px;
-        height: 22px;
       }
     }
 

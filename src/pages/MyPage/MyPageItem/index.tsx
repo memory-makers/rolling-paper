@@ -1,8 +1,5 @@
-import { ReactComponent as EyeOffIcon } from '@/assets/eye-off.svg'
-import { ReactComponent as EyeIcon } from '@/assets/eye.svg'
 import { ReactComponent as ArrowDownIcon } from '@/assets/arrow-down.svg'
 import { ReactComponent as ArrowUpIcon } from '@/assets/arrow-up.svg'
-// import { ReactComponent as LockIcon } from '@/assets/lock.svg'
 
 import styles from './myPageItem.module.scss'
 import { useState, useRef, useEffect, BaseSyntheticEvent } from 'react'
@@ -15,16 +12,11 @@ interface Props {
 
 const MyPageItem = ({ paper }: Props) => {
   const [isDropdown, setIsDropdown] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
   const navigate = useNavigate()
 
   const handleClickDropdownList = () => {
     setIsDropdown(!isDropdown)
-  }
-
-  const handleClickVisible = () => {
-    setIsVisible(!isVisible)
   }
 
   const handleClickMoveToPaperDetail = () => {
@@ -52,7 +44,6 @@ const MyPageItem = ({ paper }: Props) => {
           onClick={handleClickMoveToPaperDetail}
         >
           <p>{paper.paperTitle}</p>
-          {isVisible ? <EyeIcon /> : <EyeOffIcon />}
         </button>
         <div className={styles.openDateWrap}>
           <p>{paper.dueDate}</p>
@@ -61,12 +52,7 @@ const MyPageItem = ({ paper }: Props) => {
           </button>
         </div>
       </div>
-      <MyPageDropDown
-        paper={paper}
-        isVisible={isVisible}
-        isDropdown={isDropdown}
-        handleClickVisible={handleClickVisible}
-      />
+      <MyPageDropDown paper={paper} isDropdown={isDropdown} />
     </div>
   )
 }
