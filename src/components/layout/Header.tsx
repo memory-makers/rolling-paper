@@ -37,6 +37,8 @@ const Header = ({ children, text, type }: HeaderProps) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false)
 
+  const isPathRollingpaper = pathname.includes('rollingpaper')
+
   const handleClickEditModal = () => {
     if (!token || !isMypage) return
     setIsEditModalOpen((prev) => !prev)
@@ -83,7 +85,11 @@ const Header = ({ children, text, type }: HeaderProps) => {
     <header className={classNames('header', state.theme, type)}>
       {titleVisible && (
         <div>
-          <button type="button" onClick={handleClickEditModal}>
+          <button
+            type="button"
+            className={classNames({ ['isCursor']: isPathRollingpaper })}
+            onClick={handleClickEditModal}
+          >
             <span className="header_name">{name}</span>
             {name && <span>님의</span>}
           </button>
