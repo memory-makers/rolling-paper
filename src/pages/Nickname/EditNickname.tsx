@@ -10,17 +10,20 @@ interface Props {
 }
 
 const EditNickname = ({ setIsModalOpen }: Props) => {
-  const { nameState, nameDispatch } = useName()
+  const { state: nameState, dispatch: nameDispatch } = useName()
   const [nickname, setNickname] = useState(nameState)
+  const [message, setMessage] = useState('')
 
   const handleNicknameChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setNickname(e.currentTarget.value)
   }
   const handleSubmitSave = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (!nickname) return
-    nameDispatch({ type: EDIT_NAME, payload: nickname })
-    setNicknameAPI(nickname)
+    if (!nickname) return setMessage('닉네임을 입력해주세요!')
+    const newNickname = nickname.trim()
+    if (!newNickname) return setMessage('공백이 아닌 내용을 입력해주세요!')
+    nameDispatch({ type: EDIT_NAME, payload: newNickname })
+    setNicknameAPI(newNickname)
     setIsModalOpen(false)
   }
 
@@ -36,9 +39,10 @@ const EditNickname = ({ setIsModalOpen }: Props) => {
           type="text"
           name="nickname"
           value={nickname}
-          maxLength={16}
+          maxLength={14}
           onChange={handleNicknameChange}
         />
+        <ModalText type="warning">{message}</ModalText>
         <ModalButton type="submit">완료</ModalButton>
       </form>
     </Modal>
