@@ -87,7 +87,7 @@ const Header = ({ children, text, type }: HeaderProps) => {
         <div>
           <button
             type="button"
-            className={classNames({ ['isCursor']: isPathRollingpaper })}
+            className={classNames({ isCursor: isPathRollingpaper })}
             onClick={handleClickEditModal}
           >
             <span className="header_name">{name}</span>
