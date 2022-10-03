@@ -31,8 +31,8 @@ const Header = ({ children, text, type }: HeaderProps) => {
   const { pathname } = useLocation()
   const [isMypage, setIsMypage] = useState(false)
 
-  const { nameState, nameDispatch } = useName()
-  const { urlNameState, urlNameDispatch } = useUrlName()
+  const { state: nameState, dispatch: nameDispatch } = useName()
+  const { state: urlNameState, dispatch: urlNameDispatch } = useUrlName()
   const [isInitModalOpen, setIsInitModalOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false)

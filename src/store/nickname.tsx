@@ -9,14 +9,10 @@ type Action = {
   type: NameType
   payload: string
 }
-
-type NameDispatch = Dispatch<Action>
-
+type dispatch = Dispatch<Action>
 type State = string
 
-const NameStateContext = createContext<
-  { nameState: State; nameDispatch: NameDispatch } | undefined
->(undefined)
+const NameStateContext = createContext<{ state: State; dispatch: dispatch } | undefined>(undefined)
 
 function nameReducer(state: State, action: Action) {
   switch (action.type) {
@@ -39,8 +35,8 @@ interface Props {
 }
 
 function NameProvider({ children }: Props) {
-  const [nameState, nameDispatch] = useReducer(nameReducer, '')
-  const value = { nameState, nameDispatch }
+  const [state, dispatch] = useReducer(nameReducer, '')
+  const value = { state, dispatch }
   return <NameStateContext.Provider value={value}>{children}</NameStateContext.Provider>
 }
 
