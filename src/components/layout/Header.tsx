@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import classNames from 'classnames'
-import styles from './header.module.scss'
 
 import { getIdToNicknameAPI, getNicknameAPI, getPaperIdAPI } from '@/api/user'
 import { useTheme } from '@/store/theme'
@@ -93,7 +92,7 @@ const Header = ({ children, text, type }: HeaderProps) => {
         </div>
       )}
       {isMypage && (
-        <button type="button" className={styles.logoutButton} onClick={handleClickLogout}>
+        <button type="button" className="logout_button" onClick={handleClickLogout}>
           <LogoutIcon />
         </button>
       )}

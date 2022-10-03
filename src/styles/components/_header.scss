@@ -23,3 +23,13 @@
   justify-content: space-around;
   height: 100%;
 }
+.logout_button {
+  width: 30px;
+  height: 30px;
+
+  svg {
+    width: 30px;
+    height: 30px;
+    fill: $modalLabel;
+  }
+}
