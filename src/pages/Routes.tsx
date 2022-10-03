@@ -29,6 +29,7 @@ export const Routes = () => {
         <Route path="kakao" element={<KakaoRedirect />} />
         <Route path="/mypage" element={token ? <MyPage /> : <NotLogin />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/not-found" element={<NotFound />} />
       </ReactRouterRoutes>
     </BrowserRouter>
   )

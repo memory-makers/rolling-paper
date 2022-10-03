@@ -1,17 +1,20 @@
 import CardType from '@/utils/rollingPaper/Card.type'
 import StickerType from '@/utils/rollingPaper/Sticker.type'
+import { NavigateFunction } from 'react-router-dom'
 import { axiosClient } from '.'
 
 export const fetchPaperId_API = async (
   urlId: string | undefined,
-  setRollingPaperId: (data: number) => void
+  setRollingPaperId: (data: number) => void,
+  navigate: NavigateFunction
 ) => {
   try {
-    if (!urlId) return
+    if (!urlId) navigate('/')
     const res = await axiosClient.get(`papers/url`, { params: { paperUrl: urlId } })
     const data = res.data as UrlResponse
     setRollingPaperId(data.result.paperId)
   } catch (error) {
+    navigate('/not-found')
     console.log(error)
   }
 }

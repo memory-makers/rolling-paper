@@ -17,11 +17,12 @@ import cardDummy from '@/utils/rollingPaper/cardDummy'
 import StickerType from '@/utils/rollingPaper/Sticker.type'
 import stickerDummy from '@/utils/rollingPaper/stickerDummy'
 import React, { useCallback, useEffect, useState } from 'react'
-import { useLocation, useParams, useSearchParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 
 const RollingPaper = () => {
   const urlId = useParams().rollingPaperId
   const [searchParams, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
   const query = !!searchParams.get('sticker-mode')
   const stickerMode = !!query
   const [rollingPaperId, setRollingPaperId] = useState(0)
@@ -34,7 +35,7 @@ const RollingPaper = () => {
   const rollingpaperName = '3학년 2반 친구들'
 
   useEffect(() => {
-    fetchPaperId_API(urlId, setRollingPaperId)
+    fetchPaperId_API(urlId, setRollingPaperId, navigate)
     fetchCards_API(rollingPaperId, setCards)
     fetchStickers_API(rollingPaperId, setStickers, setNewStickers)
   }, [rollingPaperId])
