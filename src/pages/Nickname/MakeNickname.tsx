@@ -18,6 +18,7 @@ const MakeNickname = ({ setIsModalOpen }: Props) => {
   }
   const handleSubmitSave = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    if (!nickname) return
     nameDispatch({ type: EDIT_NAME, payload: nickname })
     setNicknameAPI(nickname)
     setIsModalOpen(false)
@@ -31,7 +32,7 @@ const MakeNickname = ({ setIsModalOpen }: Props) => {
           닉네임을 설정해볼까요?
         </ModalText>
         <ModalText type="label">닉네임</ModalText>
-        <ModalInput type="text" name="nickname" onChange={handleNicknameChange} />
+        <ModalInput type="text" name="nickname" maxLength={16} onChange={handleNicknameChange} />
         <ModalButton type="submit">완료</ModalButton>
       </form>
     </Modal>
