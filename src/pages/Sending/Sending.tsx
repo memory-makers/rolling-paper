@@ -21,7 +21,8 @@ const Sending = () => {
   }
 
   const handleBackClick = () => {
-    navigate(-1)
+    if (!urlNameState.paperUrl) navigate(-1)
+    navigate(`/rollingpaper/${urlNameState.paperUrl}`)
   }
 
   const handleStickerClick = () => {
