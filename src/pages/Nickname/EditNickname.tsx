@@ -39,7 +39,7 @@ const EditNickname = ({ setIsModalOpen }: Props) => {
           type="text"
           name="nickname"
           value={nickname}
-          maxLength={14}
+          maxLength={12}
           onChange={handleNicknameChange}
         />
         <ModalText type="warning">{message}</ModalText>
