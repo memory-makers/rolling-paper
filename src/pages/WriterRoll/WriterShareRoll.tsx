@@ -8,24 +8,20 @@ import { ReactComponent as ShareIcon } from '@/assets/share.svg'
 
 interface Props {
   setIsModalOpen: (state: boolean) => void
-  paperUrl: string
 }
 
-const WriterShareRoll = ({ setIsModalOpen, paperUrl }: Props) => {
-  const shareData = {
-    title: `홍길동님의 롤링페이퍼`,
-    text: `홍길동님에게 롤링페이퍼를 써보아요!`,
-    url: paperUrl
+declare global {
+  interface Window {
+    kakao: any
   }
+}
 
+const WriterShareRoll = ({ setIsModalOpen }: Props) => {
   const handleClipboardCopyClick = () => {
-    navigator.clipboard.writeText(paperUrl)
+    navigator.clipboard.writeText(window.location.toString())
   }
 
-  const handleShareClick = () => {
-    navigator.clipboard.writeText(paperUrl)
-    navigator.share(shareData)
-  }
+  const handleShareClick = () => {}
 
   return (
     <Modal setIsModalOpen={setIsModalOpen}>
@@ -36,7 +32,13 @@ const WriterShareRoll = ({ setIsModalOpen, paperUrl }: Props) => {
 
       <ModalText type="label">롤링페이퍼 링크</ModalText>
       <div className={styles.shareInputWrapper}>
-        <ModalInput type="text" name="title" value={paperUrl} readOnly isAddIcon />
+        <ModalInput
+          type="text"
+          name="title"
+          value={window.location.toString()}
+          readOnly
+          isAddIcon
+        />
         <button type="button" className={styles.shareIconButton} onClick={handleClipboardCopyClick}>
           <ClipboardIcon />
         </button>
