@@ -14,8 +14,10 @@
   padding: 32px;
   &.light {
     background-color: $mainBg;
+    color: #000;
   }
   &.dark {
     background-color: $darkBg;
+    color: #fff;
   }
 }

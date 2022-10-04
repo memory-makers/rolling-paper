@@ -38,7 +38,7 @@ const MoveableSticker = ({ sticker, handleUpdateStickers, handleDeleteSticker }:
   const [bounds, setBounds] = useState({ x: 380, y: 50 })
   const [style, setStyle] = useState({
     rotate: sticker.rotate || 1,
-    translate: [sticker.x || 0, sticker.y || 0],
+    translate: [sticker.x || 30, sticker.y || 30],
     size: sticker.size || 60
   })
   useEffect(() => {
@@ -135,7 +135,7 @@ const MoveableSticker = ({ sticker, handleUpdateStickers, handleDeleteSticker }:
         origin={true}
         edge={true}
         renderDirections={['nw', 'n', 'ne', 'w', 'e', 'sw', 's', 'se']}
-        bounds={{ left: 0, top: 0, right: bounds.x, bottom: bounds.y }}
+        bounds={{ left: 10, top: 36, right: bounds.x - 40, bottom: bounds.y }}
         throttleRotate={0}
         throttleDrag={0}
         onResizeStart={handleResizeStart}

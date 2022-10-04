@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Modal from '@/components/Modal'
 import { ModalButton, ModalText } from '@/components/Modal/ModalItem'
 import tokenStore from '@/api/tokenStore'
+import { logout_API } from '@/api'
 
 interface Props {
   setIsModalOpen: (state: boolean) => void
@@ -16,6 +17,7 @@ const CheckLogout = ({ setIsModalOpen }: Props) => {
   }
   const handleDeleteClick = () => {
     tokenStore.clearToken()
+    logout_API()
     navigate('/')
     setIsModalOpen(false)
   }

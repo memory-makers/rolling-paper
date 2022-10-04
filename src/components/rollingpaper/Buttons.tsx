@@ -6,11 +6,12 @@ import WriterShareRoll from '@/pages/WriterRoll/WriterShareRoll'
 
 interface ButtonsProps {
   handleModifyMode: () => void
+  beforeOpen: boolean
 }
 
 const kakao = (window as any).kakao
 
-const Buttons = ({ handleModifyMode }: ButtonsProps) => {
+const Buttons = ({ beforeOpen, handleModifyMode }: ButtonsProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleClickButton = useCallback(() => {
@@ -19,7 +20,7 @@ const Buttons = ({ handleModifyMode }: ButtonsProps) => {
 
   return (
     <div className="header_buttons">
-      <HeaderButton handleClick={handleModifyMode} icon={<StickerIcon />} />
+      {beforeOpen && <HeaderButton handleClick={handleModifyMode} icon={<StickerIcon />} />}
       <HeaderButton handleClick={handleClickButton} icon={<ShareIcon />} />
       {isModalOpen && <WriterShareRoll setIsModalOpen={setIsModalOpen} />}
     </div>

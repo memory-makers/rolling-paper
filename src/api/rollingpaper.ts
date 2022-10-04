@@ -217,3 +217,39 @@ export const updateStickers_API = async (
     console.log(error)
   }
 }
+
+interface PaperResponse {
+  code: number
+  isSuccess: boolean
+  message: string
+  success: boolean
+  result: { paper: RollingPaperType }
+}
+
+export interface RollingPaperType {
+  paperId: number
+  paperTitle: string
+  theme: string
+  paperUrl: string
+  deleteYn: string
+  userId: string
+  createdAt: Date
+  updatedAt: Date
+  dueDate: Date
+}
+export const fetchRollingPaper_API = async (
+  paperId: number | undefined,
+  setRollingPaper: (data: RollingPaperType) => void,
+  navigate: NavigateFunction
+) => {
+  try {
+    if (!paperId) return
+    const res = await axiosClient.get(`papers/${paperId}`)
+    const data = res.data as PaperResponse
+    if (!data.result.paper) return
+    setRollingPaper(data.result.paper)
+  } catch (error) {
+    console.log(error)
+    navigate('/not-found')
+  }
+}
