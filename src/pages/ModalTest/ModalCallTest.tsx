@@ -27,7 +27,7 @@ const ModalCallTest = () => {
       {/* {isModalOpen && <MakeNickname setIsModalOpen={setIsModalOpen} />} */}
       {/* {isModalOpen && <EditNickname setIsModalOpen={setIsModalOpen} />} */}
       {/* {isModalOpen && <CheckSendingCard setIsModalOpen={setIsModalOpen} />} */}
-      {isModalOpen && <WriterShareRoll setIsModalOpen={setIsModalOpen} paperUrl="user.paperUrl" />}
+      {/* {isModalOpen && <WriterShareRoll setIsModalOpen={setIsModalOpen} paperUrl="user.paperUrl" />} */}
       {/* {isModalOpen && <EditRoll setIsModalOpen={setIsModalOpen} />} */}
       {/* {isModalOpen && (
         <ChangeShareRoll setIsModalOpen={setIsModalOpen} paperUrl={'user.paperUrl'} />
