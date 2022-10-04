@@ -1,3 +1,4 @@
+import { colorObject } from '../constants'
 import { onChangeType } from '../hooks'
 import styles from './backgroundOption.module.scss'
 
@@ -19,7 +20,7 @@ export const BackgroundOption = ({
         onChange={onChange}
         checked={checked}
       />
-      <span style={{ backgroundColor: value }} />
+      <span style={{ backgroundColor: colorObject[value] }} />
     </label>
   )
 }

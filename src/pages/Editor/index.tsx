@@ -3,6 +3,7 @@ import cx from 'classnames'
 
 import { updateCard_API } from '@/api/rollingpaper'
 import { useEditor, useOutsideClick } from './hooks'
+import { colorObject, fontObject } from './constants'
 import {
   BackgroundOption,
   CompleteButton,
@@ -88,9 +89,9 @@ const Editor = () => {
         <Paper
           value={cardText}
           onChange={handleChangeCardText}
-          backgroundColor={cardColor}
-          fontFamily={fontStyle}
-          color={fontColor}
+          backgroundColor={colorObject[cardColor]}
+          fontFamily={fontObject[fontStyle]}
+          color={colorObject[fontColor]}
         />
       </div>
 

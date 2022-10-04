@@ -1,5 +1,5 @@
 import { onChangeType } from '../hooks'
-import { TEXT_COLOR_OPTION_TEXT } from '../constants'
+import { colorObject, TEXT_COLOR_OPTION_TEXT } from '../constants'
 
 export const TextColorOption = ({
   value,
@@ -20,7 +20,7 @@ export const TextColorOption = ({
         onChange={onChange}
         checked={checked}
       />
-      <span style={{ color: value }}>{TEXT_COLOR_OPTION_TEXT}</span>
+      <span style={{ color: colorObject[value] }}>{TEXT_COLOR_OPTION_TEXT}</span>
     </label>
   )
 }

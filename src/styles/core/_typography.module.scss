@@ -1,0 +1,7 @@
+@use 'typography';
+
+:export {
+  @each $key, $value in typography.$fontFamilyMap {
+    #{unquote($key)}: $value;
+  }
+}
