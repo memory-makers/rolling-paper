@@ -17,11 +17,21 @@ declare global {
 }
 
 const WriterShareRoll = ({ setIsModalOpen }: Props) => {
-  const handleClipboardCopyClick = () => {
-    navigator.clipboard.writeText(window.location.toString())
+  const paperUrl = window.location.href
+  const shareData = {
+    title: `홍길동님의 롤링페이퍼`,
+    text: `홍길동님에게 롤링페이퍼를 써보아요!`,
+    url: paperUrl
   }
 
-  const handleShareClick = () => {}
+  const handleClipboardCopyClick = () => {
+    navigator.clipboard.writeText(paperUrl)
+  }
+
+  const handleShareClick = () => {
+    navigator.clipboard.writeText(paperUrl)
+    navigator.share(shareData)
+  }
 
   return (
     <Modal setIsModalOpen={setIsModalOpen}>
@@ -32,13 +42,7 @@ const WriterShareRoll = ({ setIsModalOpen }: Props) => {
 
       <ModalText type="label">롤링페이퍼 링크</ModalText>
       <div className={styles.shareInputWrapper}>
-        <ModalInput
-          type="text"
-          name="title"
-          value={window.location.toString()}
-          readOnly
-          isAddIcon
-        />
+        <ModalInput type="text" name="title" value={paperUrl} readOnly isAddIcon />
         <button type="button" className={styles.shareIconButton} onClick={handleClipboardCopyClick}>
           <ClipboardIcon />
         </button>
