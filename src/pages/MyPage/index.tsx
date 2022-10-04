@@ -49,9 +49,11 @@ const MyPage = () => {
           <span>오픈 날짜</span>
         </div>
         {/* Main Area */}
-        {state.map((paper) => (
-          <MyPageItem key={paper.paperId} paper={paper} />
-        ))}
+        <div className={styles.paperList}>
+          {state.map((paper) => (
+            <MyPageItem key={paper.paperId} paper={paper} />
+          ))}
+        </div>
       </section>
       <button className={styles.paperAddButton} onClick={handleClickAddRoll}>
         <PaperAirplaneIcon />

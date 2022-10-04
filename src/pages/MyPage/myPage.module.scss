@@ -11,29 +11,32 @@
     line-height: 32px;
     margin-bottom: 18px;
   }
-
-  .myPageContentTitle {
-    position: sticky;
-    top: 0;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 50px;
-    border-top: 1.5px solid colors.$myPageBlack;
-    border-bottom: 1.5px solid colors.$myPageBlack;
-    font-size: 20px;
-    backdrop-filter: blur(4px);
-    z-index: 3;
-  }
-
   .myPageMain {
     height: 95%;
-    overflow-y: scroll;
-    scrollbar-width: none;
-  }
 
-  .myPageMain::-webkit-scrollbar {
-    display: none;
+    .myPageContentTitle {
+      position: sticky;
+      top: 0;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 50px;
+      border-top: 1.5px solid colors.$myPageBlack;
+      border-bottom: 1.5px solid colors.$myPageBlack;
+      font-size: 20px;
+      z-index: 3;
+    }
+
+    .paperList {
+      height: 95%;
+      margin-top: 10px;
+      overflow-y: scroll;
+      scrollbar-width: none;
+    }
+
+    .paperList::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   // Paper Add Button

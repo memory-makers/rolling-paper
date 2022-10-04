@@ -36,7 +36,10 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, setIsModalOpen }: Pr
 
   const handleButtonClick = () => {
     if (!paperTitle || !dueDate) return
-    const editedPaper = { paperId, paperTitle, dueDate, theme }
+    const newPaperTitle = paperTitle.trim()
+    if (!newPaperTitle) return
+
+    const editedPaper = { paperId, paperTitle: newPaperTitle, dueDate, theme }
     editPaperAPI(editedPaper)
     dispatch({ type: EDIT_PAPER, payload: editedPaper })
     setIsModalOpen(false)
@@ -44,13 +47,13 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, setIsModalOpen }: Pr
 
   return (
     <Modal setIsModalOpen={setIsModalOpen}>
-      <ModalText type="title">롤링 페이퍼를 만들어볼까요?</ModalText>
+      <ModalText type="title">롤링 페이퍼를 수정해볼까요?</ModalText>
       <ModalText type="label">롤링페이퍼 이름을 적어주세요</ModalText>
       <ModalInput
         type="text"
         name="paperTitle"
         value={paperTitle}
-        maxLength={45}
+        maxLength={40}
         onChange={handlePaperTitleChange}
       />
       <ModalText type="label">언제 열어보시겠어요?</ModalText>
