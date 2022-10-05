@@ -5,6 +5,9 @@ const NICKNAME = 'members'
 const PAPER = 'papers'
 
 export const KAKAO_LOGIN_URL = `${import.meta.env.VITE_BASE_URL}/oauth2/authorization/kakao`
+export const KAKAO_LOGOUT_URL = `https://kauth.kakao.com/oauth/logout?client_id=${
+  import.meta.env.VITE_KAKAO_CLIENT_ID
+}&logout_redirect_uri=http://localhost:5173/logout`
 
 // paperUrl로 paperId 조회
 interface GetPaperIdAPIResponse {

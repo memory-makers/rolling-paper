@@ -1,22 +1,17 @@
-import { useNavigate } from 'react-router-dom'
-
 import Modal from '@/components/Modal'
 import { ModalButton, ModalText } from '@/components/Modal/ModalItem'
-import tokenStore from '@/api/tokenStore'
+import { KAKAO_LOGOUT_URL } from '@/api/user'
 
 interface Props {
   setIsModalOpen: (state: boolean) => void
 }
 
 const CheckLogout = ({ setIsModalOpen }: Props) => {
-  const navigate = useNavigate()
-
   const handleCancelClick = () => {
     setIsModalOpen(false)
   }
   const handleDeleteClick = () => {
-    tokenStore.clearToken()
-    navigate('/')
+    window.location.replace(KAKAO_LOGOUT_URL)
     setIsModalOpen(false)
   }
 
