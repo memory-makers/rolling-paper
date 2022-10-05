@@ -1,25 +1,34 @@
 import { ReactComponent as ArrowDownIcon } from '@/assets/arrow-down.svg'
 import { ReactComponent as ArrowUpIcon } from '@/assets/arrow-up.svg'
+import { useState, useRef, useEffect, BaseSyntheticEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import styles from './myPageItem.module.scss'
-import { useState, useRef, useEffect, BaseSyntheticEvent } from 'react'
-import MyPageDropDown from './MyPageDropdown'
+import { convertTimeAndOffsetToDate } from '@/utils/rollingPaper/paper'
+
 import PaperType from '@/utils/rollingPaper/Paper.type'
-import { useNavigate } from 'react-router-dom'
+import MyPageDropDown from './MyPageDropdown'
 interface Props {
   paper: PaperType
+  isOpenPaper: any
+  changeOpenPaperState: any
 }
 
-const MyPageItem = ({ paper }: Props) => {
+const MyPageItem = ({ paper, isOpenPaper, changeOpenPaperState }: Props) => {
   const [isDropdown, setIsDropdown] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
-  const navigate = useNavigate()
 
+  const navigate = useNavigate()
   const handleClickDropdownList = () => {
     setIsDropdown(!isDropdown)
   }
 
   const handleClickMoveToPaperDetail = () => {
+    const openDate = paper.dueDate
+    const currentDate = convertTimeAndOffsetToDate()
+    if (openDate !== currentDate) {
+      return changeOpenPaperState(true)
+    }
     navigate(`/rollingpaper/${paper.paperUrl}`)
   }
 

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback, useRef } from 'react'
 import styles from './myPage.module.scss'
-
+import cx from 'classnames'
 import Header from '@/components/layout/Header'
 import MyPageItem from './MyPageItem'
 import CreateRoll from '../CreateRoll'
@@ -11,7 +11,13 @@ import { LOAD_PAPER, usePaper } from '@/store/paper'
 
 const MyPage = () => {
   const [isAddRollModalOpen, setIsAddRollModalOpen] = useState(false)
+  const [isOpenPaper, setIsOpenPaper] = useState(false)
   const { state, dispatch } = usePaper()
+  const mounted = useRef(false)
+
+  const changeOpenPaperState = useCallback((value: boolean) => {
+    setIsOpenPaper(value)
+  }, [])
 
   const handleClickAddRoll = () => {
     setIsAddRollModalOpen((prev) => !prev)
@@ -37,6 +43,19 @@ const MyPage = () => {
     getData()
   }, [])
 
+  useEffect(() => {
+    if (mounted.current) {
+      const timer = setTimeout(() => {
+        changeOpenPaperState(false)
+      }, 1500)
+      return () => {
+        clearTimeout(timer)
+      }
+    } else {
+      mounted.current = true
+    }
+  }, [isOpenPaper])
+
   return (
     <div className={styles.myPageContainer}>
       <div className={styles.myPageHeader}>
@@ -48,13 +67,24 @@ const MyPage = () => {
           <span>오픈 날짜</span>
         </div>
         {state.map((paper) => (
-          <MyPageItem key={paper.paperId} paper={paper} />
+          <MyPageItem
+            key={paper.paperId}
+            paper={paper}
+            isOpenPaper={isOpenPaper}
+            changeOpenPaperState={changeOpenPaperState}
+          />
         ))}
       </section>
       <button className={styles.paperAddButton} onClick={handleClickAddRoll}>
         <PaperAirplaneIcon />
       </button>
       {isAddRollModalOpen && <CreateRoll setIsModalOpen={setIsAddRollModalOpen} />}
+      {
+        <div className={cx(styles.openFloatMessage, { [styles.isActive]: isOpenPaper })}>
+          <p>해당 롤링페이퍼는</p>
+          <p>아직 오픈 날짜가 안지났어요~</p>
+        </div>
+      }
     </div>
   )
 }

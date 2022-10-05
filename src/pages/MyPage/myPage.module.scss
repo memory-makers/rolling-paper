@@ -1,5 +1,15 @@
 @use '/src/styles/colors.scss';
 
+@keyframes shake {
+  from {
+    transform: translateX(-1px);
+  }
+
+  to {
+    transform: translateX(2px);
+  }
+}
+
 .myPageContainer {
   width: 100%;
   height: 100%;
@@ -58,6 +68,33 @@
     .myPageContentMain {
       display: flex;
       justify-content: space-around;
+    }
+  }
+
+  .openFloatMessage {
+    position: absolute;
+    top: 50%;
+    left: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 50px;
+    padding: 8px;
+    border-radius: 4px;
+    margin: 0 auto;
+    background-color: colors.$myPageBlack;
+    opacity: 0;
+    transition: opacity 300ms;
+    &.isActive {
+      animation: shake 100ms ease 7;
+      opacity: 1;
+    }
+
+    p {
+      color: colors.$white;
+      text-align: center;
     }
   }
 }
