@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import classNames from 'classnames'
-import styles from './header.module.scss'
 
 import { getIdToNicknameAPI, getNicknameAPI, getPaperIdAPI } from '@/api/user'
 import { useTheme } from '@/store/theme'
@@ -32,11 +31,13 @@ const Header = ({ children, text, type }: HeaderProps) => {
   const { pathname } = useLocation()
   const [isMypage, setIsMypage] = useState(false)
 
-  const { nameState, nameDispatch } = useName()
-  const { urlNameState, urlNameDispatch } = useUrlName()
+  const { state: nameState, dispatch: nameDispatch } = useName()
+  const { state: urlNameState, dispatch: urlNameDispatch } = useUrlName()
   const [isInitModalOpen, setIsInitModalOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false)
+
+  const isPathRollingpaper = pathname.includes('rollingpaper')
 
   const handleClickEditModal = () => {
     if (!token || !isMypage) return
@@ -84,16 +85,20 @@ const Header = ({ children, text, type }: HeaderProps) => {
     <header className={classNames('header', state.theme, type)}>
       {titleVisible && (
         <div>
-          <button type="button" onClick={handleClickEditModal}>
+          <button
+            type="button"
+            className={classNames({ isCursor: isPathRollingpaper })}
+            onClick={handleClickEditModal}
+          >
             <span className="header_name">{name}</span>
-            <span>님의</span>
+            {name && <span>님의</span>}
           </button>
           <br />
           <span>{text}</span>
         </div>
       )}
       {isMypage && (
-        <button type="button" className={styles.logoutButton} onClick={handleClickLogout}>
+        <button type="button" className="logout_button" onClick={handleClickLogout}>
           <LogoutIcon />
         </button>
       )}

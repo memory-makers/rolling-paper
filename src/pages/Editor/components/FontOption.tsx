@@ -1,5 +1,5 @@
 import { onChangeType } from '../hooks'
-import { FONT_OPTION_TEXT } from '../constants'
+import { fontObject, FONT_OPTION_TEXT } from '../constants'
 
 export const FontOption = ({
   value,
@@ -20,7 +20,7 @@ export const FontOption = ({
         onChange={onChange}
         checked={checked}
       />
-      <span style={{ fontFamily: value }}>{FONT_OPTION_TEXT}</span>
+      <span style={{ fontFamily: fontObject[value] }}>{FONT_OPTION_TEXT}</span>
     </label>
   )
 }

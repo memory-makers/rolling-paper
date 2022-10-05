@@ -1,0 +1,80 @@
+@use '/src/styles/colors.scss';
+@use '/src/styles//abstracts/responsive';
+
+.myPageMainContent {
+  position: relative;
+  width: 90%;
+  margin: 18px auto;
+
+  .roll {
+    display: flex;
+    justify-content: center;
+    height: 78px;
+    border-radius: 28px;
+
+    .paperInfoWrap {
+      display: flex;
+      width: 200px;
+      justify-content: space-between;
+      align-items: center;
+      background: #e4e4e4;
+      padding: 0 12px;
+      border-radius: 28px 0 0 28px;
+
+      @keyframes loading {
+        0% {
+          transform: translateX(0);
+        }
+        50%,
+        100% {
+          transform: translateX(140px);
+        }
+      }
+
+      .textArea::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 50px;
+        height: 100%;
+        background: linear-gradient(to right, #f2f2f2, #ffffff, #f2f2f2);
+        animation: loading 1.4s infinite linear;
+      }
+
+      .textArea {
+        overflow: hidden;
+        position: relative;
+        width: 140px;
+        height: 24px;
+        background-color: #f4f4f4;
+        border-radius: 5px;
+      }
+
+      button > svg {
+        width: 25px;
+        height: 22px;
+      }
+    }
+
+    .openDateWrap {
+      display: flex;
+      width: 180px;
+      justify-content: center;
+      align-items: center;
+      background-color: colors.$white;
+      padding-left: 12px;
+      border-top-right-radius: 28px;
+      border-bottom-right-radius: 28px;
+    }
+  }
+}
+
+@include responsive.mobileOnly {
+  .paperInfoWrap {
+    min-width: 170px;
+  }
+  .openDateWrap {
+    min-width: 150px;
+  }
+}

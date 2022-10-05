@@ -9,13 +9,12 @@ type Action = {
   payload: { paperUrl: string; paperId: number; hostName: string }
 }
 
-type UrlNameDispatch = Dispatch<Action>
-
+type dispatch = Dispatch<Action>
 type State = { paperUrl: string; paperId: number; hostName: string }
 
-const UrlNameStateContext = createContext<
-  { urlNameState: State; urlNameDispatch: UrlNameDispatch } | undefined
->(undefined)
+const UrlNameStateContext = createContext<{ state: State; dispatch: dispatch } | undefined>(
+  undefined
+)
 
 function urlNameReducer(state: State, action: Action) {
   switch (action.type) {
@@ -33,12 +32,12 @@ interface Props {
 }
 
 function UrlNameProvider({ children }: Props) {
-  const [urlNameState, urlNameDispatch] = useReducer(urlNameReducer, {
+  const [state, dispatch] = useReducer(urlNameReducer, {
     paperUrl: '',
     paperId: 0,
     hostName: ''
   })
-  const value = useMemo(() => ({ urlNameState, urlNameDispatch }), [urlNameState])
+  const value = useMemo(() => ({ state, dispatch }), [state])
   return <UrlNameStateContext.Provider value={value}>{children}</UrlNameStateContext.Provider>
 }
 

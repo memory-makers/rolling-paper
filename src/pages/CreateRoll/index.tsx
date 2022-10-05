@@ -23,17 +23,19 @@ const CreateRoll = ({ setIsModalOpen }: Props) => {
 
   const handleButtonClick: MouseEventHandler<HTMLButtonElement> = async (e) => {
     if (!paperTitle || !dueDate) return
+    const newPaperTitle = paperTitle.trim()
+    if (!newPaperTitle) return
 
     const {
       result: {
         paper: { paperId, paperUrl }
       }
-    } = (await setPaperAPI({ paperTitle, dueDate, theme })) as PaperAPIResponse
+    } = (await setPaperAPI({ paperTitle: newPaperTitle, dueDate, theme })) as PaperAPIResponse
 
     dispatch({
       type: ADD_PAPER,
       payload: {
-        paperTitle,
+        paperTitle: newPaperTitle,
         dueDate,
         theme,
         paperId,

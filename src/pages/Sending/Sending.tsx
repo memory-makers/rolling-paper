@@ -12,7 +12,7 @@ import { ReactComponent as LogoTextIcon } from '@/assets/logo-text.svg'
 
 const Sending = () => {
   const navigate = useNavigate()
-  const { urlNameState } = useUrlName()
+  const { state: urlNameState } = useUrlName()
 
   const shareData = {
     title: `${urlNameState.hostName}님의 롤링페이퍼`,
@@ -21,7 +21,8 @@ const Sending = () => {
   }
 
   const handleBackClick = () => {
-    navigate(-1)
+    if (!urlNameState.paperUrl) navigate(-1)
+    navigate(`/rollingpaper/${urlNameState.paperUrl}`)
   }
 
   const handleStickerClick = () => {

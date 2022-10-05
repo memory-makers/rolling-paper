@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useRef } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import styles from './myPage.module.scss'
 import cx from 'classnames'
 import Header from '@/components/layout/Header'
@@ -15,9 +15,9 @@ const MyPage = () => {
   const { state, dispatch } = usePaper()
   const mounted = useRef(false)
 
-  const changeOpenPaperState = useCallback((value: boolean) => {
+  const changeOpenPaperState = (value: boolean) => {
     setIsOpenPaper(value)
-  }, [])
+  }
 
   const handleClickAddRoll = () => {
     setIsAddRollModalOpen((prev) => !prev)
@@ -70,7 +70,6 @@ const MyPage = () => {
           <MyPageItem
             key={paper.paperId}
             paper={paper}
-            isOpenPaper={isOpenPaper}
             changeOpenPaperState={changeOpenPaperState}
           />
         ))}
