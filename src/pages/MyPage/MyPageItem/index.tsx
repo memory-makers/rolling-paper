@@ -10,11 +10,10 @@ import PaperType from '@/utils/rollingPaper/Paper.type'
 import MyPageDropDown from './MyPageDropdown'
 interface Props {
   paper: PaperType
-  isOpenPaper: any
-  changeOpenPaperState: any
+  changeOpenPaperState: (value: boolean) => void
 }
 
-const MyPageItem = ({ paper, isOpenPaper, changeOpenPaperState }: Props) => {
+const MyPageItem = ({ paper, changeOpenPaperState }: Props) => {
   const [isDropdown, setIsDropdown] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
 
