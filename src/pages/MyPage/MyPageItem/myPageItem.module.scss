@@ -16,26 +16,22 @@
     .paperInfoWrap {
       display: flex;
       width: 200px;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       background: colors.$point;
-      padding: 0 12px;
       border: 1px solid colors.$point;
       border-top-left-radius: 28px;
       border-bottom-left-radius: 28px;
 
       p {
         width: 90%;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
         overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
+        -webkit-line-clamp: 2;
         word-break: break-all;
+        text-overflow: ellipsis;
         color: colors.$white;
-      }
-
-      button > svg {
-        width: 25px;
-        height: 22px;
       }
     }
 
@@ -51,8 +47,9 @@
       border-bottom-right-radius: 28px;
 
       p {
-        color: colors.$myPageBlack;
         padding-right: 12px;
+        white-space: nowrap;
+        color: colors.$myPageBlack;
       }
     }
   }
@@ -60,7 +57,7 @@
 
 @include responsive.mobileOnly {
   .paperInfoWrap {
-    min-width: 170px;
+    min-width: 150px;
   }
   .openDateWrap {
     min-width: 150px;

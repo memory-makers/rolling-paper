@@ -10,16 +10,14 @@ import PaperType from '@/utils/rollingPaper/Paper.type'
 
 interface Props {
   paper: PaperType
-  isVisible: boolean
   isDropdown: boolean
-  handleClickVisible: () => void
 }
 
-const MyPageDropDown = ({ paper, isVisible, isDropdown, handleClickVisible }: Props) => {
+const MyPageDropDown = ({ paper, isDropdown }: Props) => {
   const [isShareRollModalOpen, setIsShareRollModalOpen] = useState(false)
   const [isEditRollModalOpen, setIsEditRollModalOpen] = useState(false)
   const [isDeleteRollModalOpen, setIsDeleteRollModalOpen] = useState(false)
-  
+
   const handleClickShare = () => {
     setIsShareRollModalOpen((prev) => !prev)
   }
@@ -42,7 +40,6 @@ const MyPageDropDown = ({ paper, isVisible, isDropdown, handleClickVisible }: Pr
       <button type="button" onClick={handleClickDelete}>
         삭제 하기
       </button>
-      <button type="button" onClick={handleClickVisible}>{isVisible ? '모두 보기' : '나만 보기'}</button>
       {isEditRollModalOpen && (
         <EditRoll
           paperId={paper.paperId}

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import styles from './myPage.module.scss'
-
+import cx from 'classnames'
 import Header from '@/components/layout/Header'
 import MyPageItem from './MyPageItem'
 import CreateRoll from '../CreateRoll'
@@ -11,7 +11,13 @@ import { LOAD_PAPER, usePaper } from '@/store/paper'
 
 const MyPage = () => {
   const [isAddRollModalOpen, setIsAddRollModalOpen] = useState(false)
+  const [isOpenPaper, setIsOpenPaper] = useState(false)
   const { state, dispatch } = usePaper()
+  const mounted = useRef(false)
+
+  const changeOpenPaperState = (value: boolean) => {
+    setIsOpenPaper(value)
+  }
 
   const handleClickAddRoll = () => {
     setIsAddRollModalOpen((prev) => !prev)
@@ -37,9 +43,21 @@ const MyPage = () => {
     getData()
   }, [])
 
+  useEffect(() => {
+    if (mounted.current) {
+      const timer = setTimeout(() => {
+        changeOpenPaperState(false)
+      }, 1500)
+      return () => {
+        clearTimeout(timer)
+      }
+    } else {
+      mounted.current = true
+    }
+  }, [isOpenPaper])
+
   return (
     <div className={styles.myPageContainer}>
-      {/* Header Area */}
       <div className={styles.myPageHeader}>
         <Header text="롤링페이퍼 저장소" type="only-title" />
       </div>
@@ -48,17 +66,24 @@ const MyPage = () => {
           <span>롤링 페이퍼 이름</span>
           <span>오픈 날짜</span>
         </div>
-        {/* Main Area */}
-        <div className={styles.paperList}>
-          {state.map((paper) => (
-            <MyPageItem key={paper.paperId} paper={paper} />
-          ))}
-        </div>
+        {state.map((paper) => (
+          <MyPageItem
+            key={paper.paperId}
+            paper={paper}
+            changeOpenPaperState={changeOpenPaperState}
+          />
+        ))}
       </section>
       <button className={styles.paperAddButton} onClick={handleClickAddRoll}>
         <PaperAirplaneIcon />
       </button>
       {isAddRollModalOpen && <CreateRoll setIsModalOpen={setIsAddRollModalOpen} />}
+      {
+        <div className={cx(styles.openFloatMessage, { [styles.isActive]: isOpenPaper })}>
+          <p>해당 롤링페이퍼는</p>
+          <p>아직 오픈 날짜가 안지났어요~</p>
+        </div>
+      }
     </div>
   )
 }

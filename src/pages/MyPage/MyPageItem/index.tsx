@@ -1,33 +1,33 @@
-import { ReactComponent as EyeOffIcon } from '@/assets/eye-off.svg'
-import { ReactComponent as EyeIcon } from '@/assets/eye.svg'
 import { ReactComponent as ArrowDownIcon } from '@/assets/arrow-down.svg'
 import { ReactComponent as ArrowUpIcon } from '@/assets/arrow-up.svg'
-// import { ReactComponent as LockIcon } from '@/assets/lock.svg'
+import { useState, useRef, useEffect, BaseSyntheticEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import styles from './myPageItem.module.scss'
-import { useState, useRef, useEffect, BaseSyntheticEvent } from 'react'
-import MyPageDropDown from './MyPageDropdown'
+import { convertTimeAndOffsetToDate } from '@/utils/rollingPaper/paper'
+
 import PaperType from '@/utils/rollingPaper/Paper.type'
-import { useNavigate } from 'react-router-dom'
+import MyPageDropDown from './MyPageDropdown'
 interface Props {
   paper: PaperType
+  changeOpenPaperState: (value: boolean) => void
 }
 
-const MyPageItem = ({ paper }: Props) => {
+const MyPageItem = ({ paper, changeOpenPaperState }: Props) => {
   const [isDropdown, setIsDropdown] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
-  const navigate = useNavigate()
 
+  const navigate = useNavigate()
   const handleClickDropdownList = () => {
     setIsDropdown(!isDropdown)
   }
 
-  const handleClickVisible = () => {
-    setIsVisible(!isVisible)
-  }
-
   const handleClickMoveToPaperDetail = () => {
+    const openDate = paper.dueDate
+    const currentDate = convertTimeAndOffsetToDate()
+    if (openDate !== currentDate) {
+      return changeOpenPaperState(true)
+    }
     navigate(`/rollingpaper/${paper.paperUrl}`)
   }
 
@@ -52,7 +52,6 @@ const MyPageItem = ({ paper }: Props) => {
           onClick={handleClickMoveToPaperDetail}
         >
           <p>{paper.paperTitle}</p>
-          {isVisible ? <EyeIcon /> : <EyeOffIcon />}
         </button>
         <div className={styles.openDateWrap}>
           <p>{paper.dueDate}</p>
@@ -61,12 +60,7 @@ const MyPageItem = ({ paper }: Props) => {
           </button>
         </div>
       </div>
-      <MyPageDropDown
-        paper={paper}
-        isVisible={isVisible}
-        isDropdown={isDropdown}
-        handleClickVisible={handleClickVisible}
-      />
+      <MyPageDropDown paper={paper} isDropdown={isDropdown} />
     </div>
   )
 }
