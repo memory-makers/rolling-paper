@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import tokenStore, { Token } from '@/api/tokenStore'
 
-const KakaoRedirect = () => {
+const KakaoLoginRedirect = () => {
   const token: Token = new URL(window.location.href).searchParams.get('token') || undefined
 
   useEffect(() => {
@@ -18,4 +18,4 @@ const KakaoRedirect = () => {
   return <></>
 }
 
-export default KakaoRedirect
+export default KakaoLoginRedirect
