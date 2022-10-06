@@ -34,7 +34,7 @@ const ModalCallTest = () => {
       )} */}
       {/* {isModalOpen && <DeleteRoll setIsModalOpen={setIsModalOpen} />} */}
       {/* {isModalOpen && <CheckSendingCard setIsModalOpen={setIsModalOpen} />} */}
-      {isModalOpen && <CheckLogout setIsModalOpen={setIsModalOpen} />}
+      {/* {isModalOpen && <CheckLogout setIsModalOpen={setIsModalOpen} />} */}
     </>
   )
 }

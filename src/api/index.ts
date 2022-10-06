@@ -41,3 +41,10 @@ export const test_API = async () => {
     console.log(err, 'err')
   }
 }
+export const logout_API = async () => {
+  try {
+    return await axiosClient.get('logout')
+  } catch (err: unknown) {
+    console.log(err, 'err')
+  }
+}

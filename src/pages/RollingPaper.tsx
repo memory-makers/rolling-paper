@@ -1,7 +1,9 @@
 import {
   fetchCards_API,
   fetchPaperId_API,
+  fetchRollingPaper_API,
   fetchStickers_API,
+  RollingPaperType,
   updateStickers_API
 } from '@/api/rollingpaper'
 import Header from '@/components/layout/Header'
@@ -10,18 +12,20 @@ import CardModal from '@/components/rollingpaper/CardModal'
 import Content from '@/components/rollingpaper/Content'
 import EditorButton from '@/components/rollingpaper/EditorButton'
 import ModifyModeButtons from '@/components/rollingpaper/ModifyModeButtons'
+import OpenDate from '@/components/rollingpaper/OpenDate'
 import StickerContent from '@/components/rollingpaper/StickerContent'
 import StickerModifyContent from '@/components/rollingpaper/StickerModifyContent'
+import { useTheme } from '@/store/theme'
 import CardType from '@/utils/rollingPaper/Card.type'
-import cardDummy from '@/utils/rollingPaper/cardDummy'
+import { dateDiffFormat } from '@/utils/rollingPaper/dateDiffFormat'
 import StickerType from '@/utils/rollingPaper/Sticker.type'
-import stickerDummy from '@/utils/rollingPaper/stickerDummy'
-import React, { useCallback, useEffect, useState } from 'react'
-import { useLocation, useParams, useSearchParams } from 'react-router-dom'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 
 const RollingPaper = () => {
   const urlId = useParams().rollingPaperId
   const [searchParams, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
   const query = !!searchParams.get('sticker-mode')
   const stickerMode = !!query
   const [rollingPaperId, setRollingPaperId] = useState(0)
@@ -31,13 +35,27 @@ const RollingPaper = () => {
   const [cards, setCards] = useState<CardType[]>([])
   const [stickers, setStickers] = useState<StickerType[]>([])
   const [newStickers, setNewStickers] = useState<StickerType[]>([])
-  const rollingpaperName = '3학년 2반 친구들'
+  const [rollingPaper, setRollingPaper] = useState<RollingPaperType | null>(null)
+  const [beforeOpen, setBeforeOpen] = useState(true)
+  const [untilOpen, setUntilOpen] = useState('')
+  const { state, dispatch } = useTheme()
 
   useEffect(() => {
-    fetchPaperId_API(urlId, setRollingPaperId)
+    fetchPaperId_API(urlId, setRollingPaperId, navigate)
     fetchCards_API(rollingPaperId, setCards)
     fetchStickers_API(rollingPaperId, setStickers, setNewStickers)
+    fetchRollingPaper_API(rollingPaperId, setRollingPaper, navigate)
   }, [rollingPaperId])
+
+  useEffect(() => {
+    console.log(rollingPaper)
+    if (rollingPaper?.dueDate) {
+      const dateDiff = dateDiffFormat(rollingPaper.dueDate)
+      setBeforeOpen(dateDiff.beforeOpen)
+      setUntilOpen(dateDiff.untilOpen)
+    }
+    if (state.theme !== rollingPaper?.theme) dispatch({ type: 'toggle' })
+  }, [rollingPaper])
 
   const handleClickCard = useCallback(
     (id: number) => {
@@ -73,16 +91,16 @@ const RollingPaper = () => {
     if (!isModifyMode) setNewStickers([...stickers])
     setIsModifyMode(!isModifyMode)
   }
-  return (
+  return rollingPaper ? (
     <>
-      <Header text={rollingpaperName} type="title-button">
+      <Header text={rollingPaper.paperTitle} type="title-button">
         {isModifyMode ? (
           <ModifyModeButtons
             handleModifyMode={handleModifyMode}
             handleModifyDone={handleModifyDone}
           />
         ) : (
-          <Buttons handleModifyMode={handleModifyMode} />
+          <Buttons beforeOpen={beforeOpen} handleModifyMode={handleModifyMode} />
         )}
       </Header>
       <Content cards={cards} handleClickCard={handleClickCard}>
@@ -93,7 +111,8 @@ const RollingPaper = () => {
         />
         <StickerContent isModifyMode={isModifyMode} stickers={stickers} />
       </Content>
-      <EditorButton />
+      <OpenDate untilOpen={untilOpen} beforeOpen={beforeOpen} />
+      {beforeOpen && <EditorButton />}
       {cards[cardIndex] && (
         <CardModal
           card={cards[cardIndex]}
@@ -104,6 +123,8 @@ const RollingPaper = () => {
         />
       )}
     </>
+  ) : (
+    <></>
   )
 }
 
