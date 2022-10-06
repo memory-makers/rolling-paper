@@ -20,10 +20,8 @@ export const Routes = () => {
     <BrowserRouter>
       <ReactRouterRoutes>
         <Route path="/" element={<Home />} />
-        <Route path="rollingpaper">
-          <Route path=":rollingPaperId" element={<RollingPaper />} />
-          <Route path=":rollingPaperId/editor" element={<Editor />} />
-        </Route>
+        <Route path="/rollingpaper/:rollingPaperId" element={<RollingPaper />} />
+        <Route path="/rollingpaper/:rollingPaperId/editor" element={<Editor />} />
         <Route path="sending" element={<Sending />} />
         <Route path="modalTest" element={<ModalTest />} />
         <Route path="modalCallTest" element={<ModalCallTest />} />
@@ -31,6 +29,7 @@ export const Routes = () => {
         <Route path="/mypage" element={token ? <MyPage /> : <NotLogin />} />
         <Route path="logout" element={<KakaoLogoutRedirect />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/not-found" element={<NotFound />} />
       </ReactRouterRoutes>
     </BrowserRouter>
   )

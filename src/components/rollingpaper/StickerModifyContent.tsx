@@ -42,7 +42,7 @@ const StickerModifyContent = ({ isModifyMode, newStickers, setNewStickers }: Con
           />
         ))}
       </div>
-      <StickerModal handleCreateNewSticker={handleCreateNewSticker} />
+      {isModifyMode && <StickerModal handleCreateNewSticker={handleCreateNewSticker} />}
     </div>
   )
 }

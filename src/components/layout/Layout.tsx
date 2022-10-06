@@ -7,10 +7,12 @@ interface LayoutProps {
 
 const Layout = ({ children }: LayoutProps) => {
   const { state, dispatch } = useTheme()
+  const isDark =
+    window.location.href.includes('rollingpaper') && state.theme === 'dark' ? 'dark' : 'light'
   return (
     <div
       // onClick={() => dispatch({ type: "toggle" })}
-      className={`layout ${state.theme}`}
+      className={`layout ${isDark}`}
     >
       {children}
     </div>

@@ -1,6 +1,6 @@
 import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { debounce } from 'lodash'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { fetchPaperId_API } from '@/api/rollingpaper'
 
@@ -24,6 +24,8 @@ const removeAllEditorValue = () => {
 
 export const useEditor = () => {
   const urlId = useParams().rollingPaperId
+
+  const navigate = useNavigate()
   const [paperId, setPaperId] = useState(0)
   const [cardWriter, setCardWriter] = useState('')
   const [cardText, setCardText] = useState('')
@@ -43,7 +45,7 @@ export const useEditor = () => {
   }, [])
 
   useEffect(() => {
-    fetchPaperId_API(urlId, setPaperId)
+    fetchPaperId_API(urlId, setPaperId, navigate)
   }, [urlId])
 
   useEffect(() => {

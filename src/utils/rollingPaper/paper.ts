@@ -4,6 +4,14 @@ export const convertTimeToDate = (time: number) => {
   return date
 }
 
+// 현재 날짜를 구하는 함수
+export const convertTimeAndOffsetToDate = () => {
+  const date = new Date()
+  const offset = date.getTimezoneOffset() * 60000
+  const currentDate = new Date(date.getTime() - offset).toISOString().slice(0, 10)
+  return currentDate
+}
+
 // n일 후 날짜 구하기 (1 : 1일후, -1 : 1일전)
 export const convertDaysFromToday = (days: number) => {
   const today = new Date()

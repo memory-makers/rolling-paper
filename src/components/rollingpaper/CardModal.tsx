@@ -6,6 +6,7 @@ import styles from './rollingpaper.module.scss'
 import { ReactComponent as CloseIcon } from '@/assets/close-icn.svg'
 import { ReactComponent as PrevIcon } from '@/assets/prev-icn.svg'
 import { ReactComponent as NextIcon } from '@/assets/next-icn.svg'
+import { useTheme } from '@/store/theme'
 
 interface CardModalProps {
   card: CardType
@@ -23,8 +24,12 @@ const CardModal = ({
   handleNext
 }: CardModalProps) => {
   const display = isCardDetailVisible ? 'flex' : 'none'
+  const { state, dispatch } = useTheme()
   return (
-    <div className={styles['card-modal']} style={{ display: display }}>
+    <div
+      className={classNames(styles['card-modal'], styles[state.theme])}
+      style={{ display: display }}
+    >
       <CloseIcon
         className={styles['close-btn']}
         onClick={() => setIsCardDetailVisible(!isCardDetailVisible)}
