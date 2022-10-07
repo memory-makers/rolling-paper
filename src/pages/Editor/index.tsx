@@ -62,7 +62,7 @@ const Editor = () => {
       cardColor,
       cardId: 0,
       cardText,
-      cardWriter,
+      cardWriter: cardWriter || '익명',
       fontColor,
       fontStyle,
       paperId
