@@ -77,7 +77,7 @@
   .openFloatMessage {
     position: absolute;
     top: 50%;
-    left: 150px;
+    left: calc(50% - 100px);
     display: flex;
     flex-direction: column;
     justify-content: center;
