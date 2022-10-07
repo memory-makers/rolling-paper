@@ -9,6 +9,7 @@ interface Props {
   value?: string
   min?: string
   maxLength?: number
+  placeholder?: string
   readOnly?: boolean
   isAddIcon?: boolean
 }
@@ -20,6 +21,7 @@ const ModalInput = ({
   value,
   min,
   maxLength,
+  placeholder,
   readOnly,
   isAddIcon
 }: Props) => {
@@ -32,6 +34,7 @@ const ModalInput = ({
       value={value}
       min={min}
       maxLength={maxLength}
+      placeholder={placeholder}
       readOnly={readOnly}
     />
   )

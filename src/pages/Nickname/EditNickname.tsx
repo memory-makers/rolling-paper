@@ -39,7 +39,8 @@ const EditNickname = ({ setIsModalOpen }: Props) => {
           type="text"
           name="nickname"
           value={nickname}
-          maxLength={12}
+          maxLength={8}
+          placeholder="8글자 이내로 나를 표현해봐요!"
           onChange={handleNicknameChange}
         />
         <ModalText type="warning">{message}</ModalText>

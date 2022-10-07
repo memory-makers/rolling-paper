@@ -35,7 +35,13 @@ const MakeNickname = ({ setIsModalOpen }: Props) => {
           닉네임을 설정해볼까요?
         </ModalText>
         <ModalText type="label">닉네임</ModalText>
-        <ModalInput type="text" name="nickname" maxLength={12} onChange={handleNicknameChange} />
+        <ModalInput
+          type="text"
+          name="nickname"
+          maxLength={8}
+          placeholder="8글자 이내로 나를 표현해봐요!"
+          onChange={handleNicknameChange}
+        />
         <ModalText type="warning">{message}</ModalText>
         <ModalButton type="submit">완료</ModalButton>
       </form>
