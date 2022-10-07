@@ -107,11 +107,18 @@ interface EditPaperAPIParams {
   paperTitle: string | null
   dueDate: string | null
   theme: string | null
+  paperUrl: string
 }
 
-export const editPaperAPI = async ({ paperId, paperTitle, dueDate, theme }: EditPaperAPIParams) => {
+export const editPaperAPI = async ({
+  paperId,
+  paperTitle,
+  dueDate,
+  theme,
+  paperUrl
+}: EditPaperAPIParams) => {
   try {
-    const data = { paper: { paperId, paperTitle, dueDate, theme } }
+    const data = { paper: { paperId, paperTitle, dueDate, theme, paperUrl } }
     const res = await axiosClient.put<PaperAPIResponse>(PAPER, data)
     return res
   } catch (error) {
