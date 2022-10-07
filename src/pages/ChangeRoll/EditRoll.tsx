@@ -53,7 +53,7 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, setIsModalOpen }: Pr
         type="text"
         name="paperTitle"
         value={paperTitle}
-        maxLength={40}
+        maxLength={20}
         onChange={handlePaperTitleChange}
       />
       <ModalText type="label">언제 열어보시겠어요?</ModalText>
