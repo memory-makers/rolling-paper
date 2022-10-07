@@ -11,7 +11,7 @@ import EditNickname from '@/pages/Nickname/EditNickname'
 import tokenStore from '@/api/tokenStore'
 import CheckLogout from '@/pages/CheckLogout'
 
-import { ReactComponent as LogoutIcon } from '@/assets/logout.svg'
+import LogoutImg from '/imgs/logout.png'
 
 type HeaderType = 'only-button' | 'title-button' | 'only-title'
 
@@ -99,7 +99,7 @@ const Header = ({ children, text, type }: HeaderProps) => {
       )}
       {isMypage && (
         <button type="button" className="logout_button" onClick={handleClickLogout}>
-          <LogoutIcon />
+          <img src={LogoutImg} className="" alt="logout" />
         </button>
       )}
       {buttonVisible && children}
