@@ -66,13 +66,15 @@ const MyPage = () => {
           <span>롤링 페이퍼 이름</span>
           <span>오픈 날짜</span>
         </div>
-        {state.map((paper) => (
-          <MyPageItem
-            key={paper.paperId}
-            paper={paper}
-            changeOpenPaperState={changeOpenPaperState}
-          />
-        ))}
+        <div className={styles.paperList}>
+          {state.map((paper) => (
+            <MyPageItem
+              key={paper.paperId}
+              paper={paper}
+              changeOpenPaperState={changeOpenPaperState}
+            />
+          ))}
+        </div>
       </section>
       <button className={styles.paperAddButton} onClick={handleClickAddRoll}>
         <PaperAirplaneIcon />
