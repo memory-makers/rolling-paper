@@ -23,9 +23,10 @@ const MyPageItem = ({ paper, changeOpenPaperState }: Props) => {
   }
 
   const handleClickMoveToPaperDetail = () => {
-    const openDate = paper.dueDate
+    const openDate = new Date(paper.dueDate).getTime() / 1000 / 60 / 60 / 24
     const currentDate = convertTimeAndOffsetToDate()
-    if (openDate !== currentDate) {
+    const diff = currentDate - openDate
+    if (diff < 0) {
       return changeOpenPaperState(true)
     }
     navigate(`/rollingpaper/${paper.paperUrl}`)

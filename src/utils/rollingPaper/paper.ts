@@ -9,7 +9,7 @@ export const convertTimeAndOffsetToDate = () => {
   const date = new Date()
   const offset = date.getTimezoneOffset() * 60000
   const currentDate = new Date(date.getTime() - offset).toISOString().slice(0, 10)
-  return currentDate
+  return new Date(currentDate).getTime() / 1000 / 60 / 60 / 24
 }
 
 // n일 후 날짜 구하기 (1 : 1일후, -1 : 1일전)
