@@ -13,10 +13,11 @@ interface Props {
   ePaperTitle: string
   eDueDate: string
   eTheme: string
+  paperUrl: string
   setIsModalOpen: (state: boolean) => void
 }
 
-const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, setIsModalOpen }: Props) => {
+const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, paperUrl, setIsModalOpen }: Props) => {
   const { dispatch } = usePaper()
   const [paperTitle, setPaperTitle] = useState(ePaperTitle)
   const [dueDate, setDueDate] = useState(eDueDate)
@@ -39,7 +40,7 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, setIsModalOpen }: Pr
     const newPaperTitle = paperTitle.trim()
     if (!newPaperTitle) return
 
-    const editedPaper = { paperId, paperTitle: newPaperTitle, dueDate, theme }
+    const editedPaper = { paperId, paperTitle: newPaperTitle, dueDate, theme, paperUrl }
     editPaperAPI(editedPaper)
     dispatch({ type: EDIT_PAPER, payload: editedPaper })
     setIsModalOpen(false)
@@ -53,7 +54,7 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, setIsModalOpen }: Pr
         type="text"
         name="paperTitle"
         value={paperTitle}
-        maxLength={40}
+        maxLength={20}
         onChange={handlePaperTitleChange}
       />
       <ModalText type="label">언제 열어보시겠어요?</ModalText>

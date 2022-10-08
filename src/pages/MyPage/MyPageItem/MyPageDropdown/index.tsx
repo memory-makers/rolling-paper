@@ -46,6 +46,7 @@ const MyPageDropDown = ({ paper, isDropdown }: Props) => {
           ePaperTitle={paper.paperTitle}
           eDueDate={paper.dueDate}
           eTheme={paper.theme}
+          paperUrl={paper.paperUrl}
           setIsModalOpen={setIsEditRollModalOpen}
         />
       )}

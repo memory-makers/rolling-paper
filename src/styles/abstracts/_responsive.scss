@@ -1,6 +1,8 @@
 @function getMinBreakpoint($media) {
   @if $media == M {
     @return 375px;
+  } @else if $media == XD {
+    @return 480px;
   } @else if $media == ML {
     @return 600px;
   } @else if $media == SD {
@@ -23,6 +25,8 @@
 @function getMaxBreakpoint($media) {
   @if $media == M {
     @return 375px - 1px;
+  } @else if $media == XD {
+    @return 480px - 1px;
   } @else if $media == ML {
     @return 600px - 1px;
   } @else if $media == SD {
@@ -50,7 +54,11 @@
 
 @mixin only($media) {
   @if $media == M {
-    @media only screen and (min-width: getMinBreakpoint(M)) and (max-width: getMaxBreakpoint(ML)) {
+    @media only screen and (min-width: getMinBreakpoint(M)) and (max-width: getMaxBreakpoint(XD)) {
+      @content;
+    }
+  } @else if $media == XD {
+    @media only screen and (min-width: getMinBreakpoint(XD)) and (max-width: getMaxBreakpoint(ML)) {
       @content;
     }
   } @else if $media == ML {

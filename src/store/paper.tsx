@@ -33,7 +33,13 @@ type Action =
     }
   | {
       type: EditPaperType
-      payload: { paperId: number; paperTitle: string; dueDate: string; theme: string }
+      payload: {
+        paperId: number
+        paperTitle: string
+        dueDate: string
+        theme: string
+        paperUrl: string
+      }
     }
   | { type: DeletePaperType; payload: { paperId: number } }
 
