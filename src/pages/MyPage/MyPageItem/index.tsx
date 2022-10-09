@@ -3,6 +3,7 @@ import { ReactComponent as ArrowUpIcon } from '@/assets/arrow-up.svg'
 import { useState, useRef, useEffect, BaseSyntheticEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import cx from 'classnames'
 import styles from './myPageItem.module.scss'
 import { convertTimeAndOffsetToDate } from '@/utils/rollingPaper/paper'
 
@@ -16,19 +17,22 @@ interface Props {
 const MyPageItem = ({ paper, changeOpenPaperState }: Props) => {
   const [isDropdown, setIsDropdown] = useState(false)
   const dropdownRef = useRef<HTMLDivElement>(null)
-
+  const [isOpened, setIsOpened] = useState(false)
+  const openDateRef = useRef<HTMLParagraphElement>(null)
   const navigate = useNavigate()
   const handleClickDropdownList = () => {
     setIsDropdown(!isDropdown)
   }
 
-  const handleClickMoveToPaperDetail = () => {
-    const openDate = new Date(paper.dueDate).getTime() / 1000 / 60 / 60 / 24
+  const getDiffBetweenDate = (date: string): number => {
+    const openDate = new Date(date).getTime() / 1000 / 60 / 60 / 24
     const currentDate = convertTimeAndOffsetToDate()
-    const diff = currentDate - openDate
-    if (diff < 0) {
-      return changeOpenPaperState(true)
-    }
+    return currentDate - openDate
+  }
+
+  const handleClickMoveToPaperDetail = () => {
+    const diff = getDiffBetweenDate(paper.dueDate)
+    if (diff < 0) return changeOpenPaperState(true)
     navigate(`/rollingpaper/${paper.paperUrl}`)
   }
 
@@ -44,6 +48,13 @@ const MyPageItem = ({ paper, changeOpenPaperState }: Props) => {
     }
   }, [dropdownRef])
 
+  useEffect(() => {
+    const date = openDateRef.current?.textContent
+    if (!date) return
+    const diff = getDiffBetweenDate(date)
+    if (diff < 0) setIsOpened(true)
+  }, [isOpened])
+
   return (
     <div className={styles.myPageMainContent} ref={dropdownRef}>
       <div className={styles.roll}>
@@ -55,7 +66,9 @@ const MyPageItem = ({ paper, changeOpenPaperState }: Props) => {
           <p>{paper.paperTitle}</p>
         </button>
         <div className={styles.openDateWrap}>
-          <p>{paper.dueDate}</p>
+          <p className={cx(styles.dueDate, { [styles.isOpened]: isOpened })} ref={openDateRef}>
+            {paper.dueDate}
+          </p>
           <button type="button" onClick={handleClickDropdownList}>
             {isDropdown ? <ArrowUpIcon /> : <ArrowDownIcon />}
           </button>

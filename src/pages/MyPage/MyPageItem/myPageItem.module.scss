@@ -46,10 +46,14 @@
       border-top-right-radius: 28px;
       border-bottom-right-radius: 28px;
 
-      p {
+      .dueDate {
         padding-right: 12px;
         white-space: nowrap;
         color: colors.$myPageBlack;
+
+        &.isOpened {
+          color: colors.$textGray;
+        }
       }
     }
   }
