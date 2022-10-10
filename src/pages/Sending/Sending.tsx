@@ -1,22 +1,17 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './sending.module.scss'
 
+import ShareRoll from '../ShareRoll'
 import { ModalButton } from '@/components/Modal/ModalItem'
 import { useUrlName } from '@/store/urlNickname'
 
-import { CLIENT_PAPER_URL } from '@/config/commonLink'
 import { ArrowLeftIcon, LogoArtIcon, LogoTextIcon } from '@/assets'
 
 const Sending = () => {
   const navigate = useNavigate()
   const { state: urlNameState } = useUrlName()
-
-  const shareData = {
-    title: `${urlNameState.hostName}님의 롤링페이퍼`,
-    text: `${urlNameState.hostName}님에게 롤링페이퍼를 써보아요!`,
-    url: `${CLIENT_PAPER_URL}${urlNameState.paperUrl}`
-  }
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleBackClick = () => {
     if (!urlNameState.paperUrl) navigate(-1)
@@ -28,8 +23,7 @@ const Sending = () => {
   }
 
   const handleShareClick = () => {
-    navigator.clipboard.writeText(`${CLIENT_PAPER_URL}${urlNameState.paperUrl}`)
-    navigator.share(shareData)
+    setIsModalOpen((prev) => !prev)
   }
 
   const handleHomeClick = () => {
@@ -77,6 +71,12 @@ const Sending = () => {
           </ModalButton>
         </div>
       </div>
+
+      {isModalOpen && (
+        <ShareRoll paperUrl={urlNameState.paperUrl} setIsModalOpen={setIsModalOpen}>
+          다른 친구들도 카드를 <br /> 써보라고 공유해줄까요?
+        </ShareRoll>
+      )}
     </div>
   )
 }
