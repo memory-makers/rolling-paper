@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import classNames from 'classnames'
 
-import { getIdToNicknameAPI, getNicknameAPI, getPaperIdAPI } from '@/api/user'
+import { getNicknameAPI } from '@/api/user'
 import { useTheme } from '@/store/theme'
 import { LOAD_NAME, useName } from '@/store/nickname'
 import { LOAD_URL_NAME, useUrlName } from '@/store/urlNickname'
@@ -10,6 +10,7 @@ import MakeNickname from '@/pages/Nickname/MakeNickname'
 import EditNickname from '@/pages/Nickname/EditNickname'
 import tokenStore from '@/api/tokenStore'
 import CheckLogout from '@/pages/CheckLogout'
+import { convertUrlToHostData } from '@/utils/rollingPaper/paper'
 
 import LogoutImg from '/imgs/logout.png'
 
@@ -56,12 +57,11 @@ const Header = ({ children, text, type }: HeaderProps) => {
 
   const getPaperIdNickname = async () => {
     if (!rollingPaperId) return
-    const paperId = await getPaperIdAPI(rollingPaperId)
-    if (!paperId) return
-    const urlNickname = await getIdToNicknameAPI(paperId)
+    const hostData = await convertUrlToHostData(rollingPaperId)
+    if (!hostData) return
     return urlNameDispatch({
       type: LOAD_URL_NAME,
-      payload: { paperUrl: rollingPaperId, paperId, hostName: urlNickname }
+      payload: hostData
     })
   }
 

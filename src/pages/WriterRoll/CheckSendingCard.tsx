@@ -1,9 +1,11 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import styles from './checkSendingCard.module.scss'
 
 import Modal from '@/components/Modal'
 import { ModalButton, ModalText } from '@/components/Modal/ModalItem'
+import { convertUrlToHostData } from '@/utils/rollingPaper/paper'
+import { LOAD_URL_NAME, useUrlName } from '@/store/urlNickname'
 
 interface Props {
   setIsModalOpen: (state: boolean) => void
@@ -12,6 +14,8 @@ interface Props {
 
 const CheckSendingCard = ({ setIsModalOpen, callback }: Props) => {
   const navigate = useNavigate()
+  const { rollingPaperId } = useParams()
+  const { dispatch: urlNameDispatch } = useUrlName()
   const [isFail, setIsFail] = useState(false)
 
   const handleCancelClick = () => {
@@ -26,9 +30,22 @@ const CheckSendingCard = ({ setIsModalOpen, callback }: Props) => {
       return
     }
 
+    getPaperIdNickname()
     setIsFail(false)
     setIsModalOpen(false)
     navigate('/sending')
+  }
+
+  const getPaperIdNickname = async () => {
+    if (sessionStorage.getItem('rolling-host')) return
+
+    if (!rollingPaperId) return
+    const hostData = await convertUrlToHostData(rollingPaperId)
+    if (!hostData) return
+    return urlNameDispatch({
+      type: LOAD_URL_NAME,
+      payload: hostData
+    })
   }
 
   return (

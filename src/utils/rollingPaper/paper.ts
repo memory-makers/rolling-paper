@@ -1,3 +1,5 @@
+import { getIdToNicknameAPI, getPaperIdAPI } from '@/api/user'
+
 // 타임스탬프 값을 '2022-00-00' 값으로 변환
 export const convertTimeToDate = (time: number) => {
   const date = new Date(time).toISOString().slice(0, 10)
@@ -17,4 +19,14 @@ export const convertDaysFromToday = (days: number) => {
   const today = new Date()
   const newDay = new Date(today.setDate(today.getDate() + days)).toISOString().slice(0, 10)
   return newDay
+}
+
+// url의 rollingPaperId(uuid)에서 paperUrl, paperId, hostName 변환
+export const convertUrlToHostData = async (rollingPaperId: string) => {
+  const paperId = await getPaperIdAPI(rollingPaperId)
+  if (!paperId) return
+  const urlNickname = await getIdToNicknameAPI(paperId)
+  if (!urlNickname) return
+  const data = { paperUrl: rollingPaperId, paperId, hostName: urlNickname }
+  return data
 }
