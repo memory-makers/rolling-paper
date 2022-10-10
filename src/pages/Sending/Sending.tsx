@@ -33,6 +33,7 @@ const Sending = () => {
   }
 
   const handleHomeClick = () => {
+    sessionStorage.removeItem('rolling_host')
     navigate('/')
   }
 
