@@ -64,16 +64,16 @@ const Sending = () => {
         <div className={styles.buttonContainer}>
           {urlNameState.hostName && (
             <>
-              <ModalButton type="button" onClick={handleStickerClick}>
+              <ModalButton type="button" onClick={handleStickerClick} color="secondary">
                 스티커로 꾸며볼까? ★
               </ModalButton>
-              <ModalButton type="button" onClick={handleShareClick}>
+              <ModalButton type="button" onClick={handleShareClick} color="secondary">
                 친구들한테 공유해볼까?
               </ModalButton>
             </>
           )}
           <ModalButton type="button" onClick={handleHomeClick}>
-            나도 만들어볼까?
+            나도 만들어볼래!
           </ModalButton>
         </div>
       </div>
