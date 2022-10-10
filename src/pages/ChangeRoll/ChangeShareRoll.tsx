@@ -1,7 +1,9 @@
+import { useState } from 'react'
 import styles from '@/styles/pages/_shareRoll.module.scss'
 
 import Modal from '@/components/Modal'
 import { ModalButton, ModalInput, ModalText } from '@/components/Modal/ModalItem'
+import PopupCopy from '@/components/Modal/PopupCopy'
 
 import { ReactComponent as ClipboardIcon } from '@/assets/Text-files.svg'
 import { ReactComponent as ShareIcon } from '@/assets/share.svg'
@@ -12,6 +14,9 @@ interface Props {
 }
 
 const ChangeShareRoll = ({ setIsModalOpen, paperUrl }: Props) => {
+  const [isPopupActive, setIsPopupActive] = useState(false)
+  let popupDelay: NodeJS.Timer
+
   const shareData = {
     title: `홍길동님의 롤링페이퍼`,
     text: `홍길동님에게 롤링페이퍼를 써보아요!`,
@@ -20,6 +25,12 @@ const ChangeShareRoll = ({ setIsModalOpen, paperUrl }: Props) => {
 
   const handleClipboardCopyClick = () => {
     navigator.clipboard.writeText(paperUrl)
+
+    setIsPopupActive(true)
+    if (popupDelay) clearTimeout(popupDelay)
+    popupDelay = setTimeout(() => {
+      setIsPopupActive(false)
+    }, 1000)
   }
 
   const handleShareClick = () => {
@@ -45,6 +56,8 @@ const ChangeShareRoll = ({ setIsModalOpen, paperUrl }: Props) => {
         <span>공유하기</span>
         <ShareIcon />
       </ModalButton>
+
+      <PopupCopy isActive={isPopupActive} />
     </Modal>
   )
 }
