@@ -34,14 +34,19 @@ const Sending = () => {
   const hostnameText = useMemo(() => {
     if (!urlNameState.hostName) return
     return '님에게 보낼'
-  }, [])
+  }, [urlNameState.hostName])
+
+  const backArrowText = useMemo(() => {
+    if (!urlNameState.paperUrl) return '이전으로'
+    return '전체보기'
+  }, [urlNameState.paperUrl])
 
   return (
     <div className={styles.container}>
       <header>
         <button type="button" className={styles.backArrowButton} onClick={handleBackClick}>
           <ArrowLeftIcon />
-          <span>이전화면</span>
+          <span>{backArrowText}</span>
         </button>
       </header>
 
