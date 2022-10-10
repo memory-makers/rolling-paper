@@ -6,9 +6,7 @@ import { ModalButton } from '@/components/Modal/ModalItem'
 import { useUrlName } from '@/store/urlNickname'
 
 import { CLIENT_PAPER_URL } from '@/config/commonLink'
-import { ReactComponent as BackArrowIcon } from '@/assets/back-arrow.svg'
-import { ReactComponent as LogoArtIcon } from '@/assets/logo-art.svg'
-import { ReactComponent as LogoTextIcon } from '@/assets/logo-text.svg'
+import { ArrowLeftIcon, LogoArtIcon, LogoTextIcon } from '@/assets'
 
 const Sending = () => {
   const navigate = useNavigate()
@@ -47,7 +45,8 @@ const Sending = () => {
     <div className={styles.container}>
       <header>
         <button type="button" className={styles.backArrowButton} onClick={handleBackClick}>
-          <BackArrowIcon />
+          <ArrowLeftIcon />
+          <span>이전화면</span>
         </button>
       </header>
 

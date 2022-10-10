@@ -4,6 +4,7 @@
 export { ReactComponent as ArrowDownIcon } from './arrow-down.svg'
 export { ReactComponent as ArrowUpIcon } from './arrow-up.svg'
 export { ReactComponent as BackArrowIcon } from './back-arrow.svg'
+export { ReactComponent as ArrowLeftIcon } from './arrow-left.svg'
 
 export { ReactComponent as CloseIcon } from './close-icn.svg'
 export { ReactComponent as ClosedModal } from './closed-modal.svg'

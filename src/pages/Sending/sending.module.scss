@@ -4,8 +4,18 @@
   width: 100%;
   header {
     .backArrowButton {
-      width: 45px;
+      display: flex;
+      align-items: center;
       margin: 0;
+      svg {
+        width: 20px;
+        fill: colors.$point;
+      }
+      span {
+        color: colors.$point;
+        padding: 5px;
+        font-size: 22px;
+      }
     }
   }
 
