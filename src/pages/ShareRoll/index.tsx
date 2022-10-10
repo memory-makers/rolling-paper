@@ -4,7 +4,7 @@ import Modal from '@/components/Modal'
 import ShareRollItem from './ShareRollItem'
 
 interface Props {
-  paperUrl: string
+  paperUrl: string | undefined
   children: ReactNode
   setIsModalOpen: (state: boolean) => void
 }

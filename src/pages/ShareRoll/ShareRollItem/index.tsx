@@ -8,13 +8,13 @@ import { CLIENT_PAPER_URL } from '@/config/commonLink'
 import { ClipboardIcon, ShareIcon2 } from '@/assets'
 
 interface Props {
-  paperUrl: string
+  paperUrl: string | undefined
   children: ReactNode
 }
 
 const ShareRollItem = ({ paperUrl, children }: Props) => {
   const [isPopupActive, setIsPopupActive] = useState(false)
-  const fullPaperUrl = `${CLIENT_PAPER_URL}${paperUrl}`
+  const fullPaperUrl = paperUrl ? `${CLIENT_PAPER_URL}${paperUrl}` : '유효하지 않은 URL입니다.'
   let popupDelay: NodeJS.Timer
 
   const shareData = {
@@ -45,15 +45,21 @@ const ShareRollItem = ({ paperUrl, children }: Props) => {
       <ModalText type="label">롤링페이퍼 링크</ModalText>
       <div className={styles.shareInputWrapper}>
         <ModalInput type="text" name="title" value={fullPaperUrl} readOnly isAddIcon />
-        <button type="button" className={styles.shareIconButton} onClick={handleClipboardCopyClick}>
+        <button
+          type="button"
+          className={styles.shareIconButton}
+          onClick={handleClipboardCopyClick}
+          disabled={!paperUrl}
+        >
           <ClipboardIcon />
         </button>
       </div>
-
-      <ModalButton type="button" onClick={handleShareClick}>
-        <span>공유하기</span>
-        <ShareIcon2 />
-      </ModalButton>
+      {!!paperUrl && (
+        <ModalButton type="button" onClick={handleShareClick}>
+          <span>공유하기</span>
+          <ShareIcon2 />
+        </ModalButton>
+      )}
 
       <PopupCopy isActive={isPopupActive} />
     </>
