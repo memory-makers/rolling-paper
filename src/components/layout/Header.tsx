@@ -66,8 +66,8 @@ const Header = ({ children, text, type }: HeaderProps) => {
   }
 
   const name = useMemo(() => {
-    if (!isMypage) return urlNameState.hostName
-    else return nameState
+    if (isMypage) return nameState
+    return urlNameState.hostName
   }, [nameState, urlNameState.hostName])
 
   useEffect(() => {
@@ -75,6 +75,9 @@ const Header = ({ children, text, type }: HeaderProps) => {
       getNickname()
       setIsMypage(true)
     }
+  }, [])
+
+  useEffect(() => {
     if (pathname.includes('rollingpaper')) {
       getPaperIdNickname()
       setIsMypage(false)
