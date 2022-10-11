@@ -2,9 +2,8 @@ import { MouseEventHandler, useState } from 'react'
 
 import Modal from '@/components/Modal'
 import MakeRoll from './contents/MakeRoll'
-import CreateShareRoll from './contents/CreateShareRoll'
+import ShareRollItem from '../ShareRoll/ShareRollItem'
 import { PaperAPIResponse, setPaperAPI } from '@/api/user'
-import { CLIENT_PAPER_URL } from '@/config/commonLink'
 import { ADD_PAPER, usePaper } from '@/store/paper'
 import { convertDaysFromToday } from '@/utils/rollingPaper/paper'
 
@@ -18,7 +17,7 @@ const CreateRoll = ({ setIsModalOpen }: Props) => {
   const [dueDate, setDueDate] = useState(convertDaysFromToday(7))
   const [theme, setTheme] = useState('light')
 
-  const [paperUrl, setPaperUrl] = useState('test')
+  const [paperUrl, setPaperUrl] = useState('')
   const [isNextStep, setIsNextStep] = useState(false)
 
   const handleButtonClick: MouseEventHandler<HTMLButtonElement> = async (e) => {
@@ -42,7 +41,7 @@ const CreateRoll = ({ setIsModalOpen }: Props) => {
         paperUrl
       }
     })
-    setPaperUrl(`${CLIENT_PAPER_URL}${paperUrl}`)
+    setPaperUrl(paperUrl)
     setIsNextStep(true)
   }
 
@@ -58,7 +57,11 @@ const CreateRoll = ({ setIsModalOpen }: Props) => {
         />
       )}
 
-      {isNextStep && <CreateShareRoll paperUrl={paperUrl} />}
+      {isNextStep && (
+        <ShareRollItem paperUrl={paperUrl}>
+          롤링 페이퍼를 만들었어요! <br /> 이제 친구들에게 써달라고 <br /> 말해볼까요?
+        </ShareRollItem>
+      )}
     </Modal>
   )
 }

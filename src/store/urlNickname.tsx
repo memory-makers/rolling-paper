@@ -19,6 +19,7 @@ const UrlNameStateContext = createContext<{ state: State; dispatch: dispatch } |
 function urlNameReducer(state: State, action: Action) {
   switch (action.type) {
     case 'LOAD_URL_NAME': {
+      sessionStorage.setItem('rolling_host', JSON.stringify(action.payload))
       return action.payload
     }
     default: {
@@ -31,12 +32,14 @@ interface Props {
   children: ReactNode
 }
 
+const INITIAL_STATE: State = JSON.parse(sessionStorage.getItem('rolling_host')!) || {
+  paperUrl: '',
+  paperId: 0,
+  hostName: ''
+}
+
 function UrlNameProvider({ children }: Props) {
-  const [state, dispatch] = useReducer(urlNameReducer, {
-    paperUrl: '',
-    paperId: 0,
-    hostName: ''
-  })
+  const [state, dispatch] = useReducer(urlNameReducer, INITIAL_STATE)
   const value = useMemo(() => ({ state, dispatch }), [state])
   return <UrlNameStateContext.Provider value={value}>{children}</UrlNameStateContext.Provider>
 }

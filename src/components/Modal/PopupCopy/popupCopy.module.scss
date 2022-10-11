@@ -1,0 +1,25 @@
+@use '/src/styles/colors.scss';
+
+.openFloatMessage {
+  position: absolute;
+  top: -60px;
+  left: calc(50% - 70px);
+  width: 140px;
+  height: 40px;
+  padding: 8px;
+  border-radius: 4px;
+  margin: 0 auto;
+  background-color: colors.$myPageBlack;
+  opacity: 0;
+  transition: opacity 300ms;
+
+  &.isActive {
+    opacity: 1;
+  }
+
+  p {
+    font-size: 16px;
+    color: colors.$white;
+    text-align: center;
+  }
+}

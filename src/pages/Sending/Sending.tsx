@@ -1,24 +1,17 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './sending.module.scss'
 
+import ShareRoll from '../ShareRoll'
 import { ModalButton } from '@/components/Modal/ModalItem'
 import { useUrlName } from '@/store/urlNickname'
 
-import { CLIENT_PAPER_URL } from '@/config/commonLink'
-import { ReactComponent as BackArrowIcon } from '@/assets/back-arrow.svg'
-import { ReactComponent as LogoArtIcon } from '@/assets/logo-art.svg'
-import { ReactComponent as LogoTextIcon } from '@/assets/logo-text.svg'
+import { ArrowLeftIcon, LogoArtIcon, LogoTextIcon } from '@/assets'
 
 const Sending = () => {
   const navigate = useNavigate()
   const { state: urlNameState } = useUrlName()
-
-  const shareData = {
-    title: `${urlNameState.hostName}님의 롤링페이퍼`,
-    text: `${urlNameState.hostName}님에게 롤링페이퍼를 써보아요!`,
-    url: `${CLIENT_PAPER_URL}${urlNameState.paperUrl}`
-  }
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleBackClick = () => {
     if (!urlNameState.paperUrl) navigate(-1)
@@ -30,24 +23,30 @@ const Sending = () => {
   }
 
   const handleShareClick = () => {
-    navigator.clipboard.writeText(`${CLIENT_PAPER_URL}${urlNameState.paperUrl}`)
-    navigator.share(shareData)
+    setIsModalOpen((prev) => !prev)
   }
 
   const handleHomeClick = () => {
+    sessionStorage.removeItem('rolling_host')
     navigate('/')
   }
 
   const hostnameText = useMemo(() => {
     if (!urlNameState.hostName) return
     return '님에게 보낼'
-  }, [])
+  }, [urlNameState.hostName])
+
+  const backArrowText = useMemo(() => {
+    if (!urlNameState.paperUrl) return '이전으로'
+    return '전체보기'
+  }, [urlNameState.paperUrl])
 
   return (
     <div className={styles.container}>
       <header>
         <button type="button" className={styles.backArrowButton} onClick={handleBackClick}>
-          <BackArrowIcon />
+          <ArrowLeftIcon />
+          <span>{backArrowText}</span>
         </button>
       </header>
 
@@ -64,19 +63,25 @@ const Sending = () => {
         <div className={styles.buttonContainer}>
           {urlNameState.hostName && (
             <>
-              <ModalButton type="button" onClick={handleStickerClick}>
+              <ModalButton type="button" onClick={handleStickerClick} color="secondary">
                 스티커로 꾸며볼까? ★
               </ModalButton>
-              <ModalButton type="button" onClick={handleShareClick}>
+              <ModalButton type="button" onClick={handleShareClick} color="secondary">
                 친구들한테 공유해볼까?
               </ModalButton>
             </>
           )}
           <ModalButton type="button" onClick={handleHomeClick}>
-            나도 만들어볼까?
+            나도 만들어볼래!
           </ModalButton>
         </div>
       </div>
+
+      {isModalOpen && (
+        <ShareRoll paperUrl={urlNameState.paperUrl} setIsModalOpen={setIsModalOpen}>
+          다른 친구들도 카드를 <br /> 써보라고 공유해줄까요?
+        </ShareRoll>
+      )}
     </div>
   )
 }

@@ -31,9 +31,20 @@ export const getPaperIdAPI = async (paperUrl: string) => {
 }
 
 // paperId로 token없이 nickname 조회
+interface getIdToNicknameAPIResponse {
+  result: Result
+}
+
+interface Result {
+  nickname: string
+  status: string
+}
+
 export const getIdToNicknameAPI = async (paperId: number) => {
   try {
-    const { data } = await axiosClient.get(`${PAPER}/${paperId}/nickname`)
+    const { data } = await axiosClient.get<getIdToNicknameAPIResponse>(
+      `${PAPER}/${paperId}/nickname`
+    )
     return data.result.nickname
   } catch (error) {
     console.log(error, 'get paperId to nickname error')

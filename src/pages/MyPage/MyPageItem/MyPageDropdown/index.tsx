@@ -2,10 +2,9 @@ import { useState } from 'react'
 import styles from './myPageDropdown.module.scss'
 import cx from 'classnames'
 
+import ShareRoll from '@/pages/ShareRoll'
 import EditRoll from '@/pages/ChangeRoll/EditRoll'
 import DeleteRoll from '@/pages/ChangeRoll/DeleteRoll'
-import ChangeShareRoll from '@/pages/ChangeRoll/ChangeShareRoll'
-import { CLIENT_PAPER_URL } from '@/config/commonLink'
 import PaperType from '@/utils/rollingPaper/Paper.type'
 
 interface Props {
@@ -55,10 +54,9 @@ const MyPageDropDown = ({ paper, isDropdown }: Props) => {
       )}
 
       {isShareRollModalOpen && (
-        <ChangeShareRoll
-          paperUrl={`${CLIENT_PAPER_URL}${paper.paperUrl}`}
-          setIsModalOpen={setIsShareRollModalOpen}
-        />
+        <ShareRoll paperUrl={paper.paperUrl} setIsModalOpen={setIsShareRollModalOpen}>
+          롤링페이퍼를 친구들에게 <br /> 작성해달라고 공유해볼까요?
+        </ShareRoll>
       )}
     </section>
   )
