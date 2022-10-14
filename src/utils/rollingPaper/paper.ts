@@ -9,6 +9,7 @@ export const convertTimeToDate = (time: number) => {
 // 현재 날짜를 구하는 함수
 export const convertTimeAndOffsetToDate = () => {
   const date = new Date()
+  date.setHours(0, 0, 0, 0)
   const offset = date.getTimezoneOffset() * 60000
   const currentDate = new Date(date.getTime() - offset).toISOString().slice(0, 10)
   return new Date(currentDate).getTime() / 1000 / 60 / 60 / 24

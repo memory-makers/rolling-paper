@@ -37,7 +37,7 @@ const MakeRoll = ({ handleButtonClick, dueDate, setPaperTitle, setDueDate, setTh
       <ModalInput
         type="date"
         name="dueDate"
-        min={convertDaysFromToday(0)}
+        min={convertDaysFromToday(1)}
         value={dueDate}
         onChange={handleDueDateChange}
       />

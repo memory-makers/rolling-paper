@@ -62,7 +62,7 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, paperUrl, setIsModal
         type="date"
         name="dueDate"
         value={dueDate}
-        min={convertDaysFromToday(0)}
+        min={convertDaysFromToday(1)}
         onChange={handleDueDateChange}
       />
       <ModalText type="label">테마를 선택해주세요!</ModalText>
