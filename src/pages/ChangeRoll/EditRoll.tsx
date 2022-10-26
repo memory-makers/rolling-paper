@@ -23,6 +23,8 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, paperUrl, setIsModal
   const [dueDate, setDueDate] = useState(eDueDate)
   const [theme, setTheme] = useState(eTheme)
 
+  const [message, setMessage] = useState('')
+
   const handlePaperTitleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setPaperTitle(e.currentTarget.value)
   }
@@ -36,13 +38,14 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, paperUrl, setIsModal
   }
 
   const handleButtonClick = () => {
-    if (!paperTitle || !dueDate) return
+    if (!dueDate) return
+    if (!paperTitle) return setMessage('롤링페이퍼 이름을 입력해주세요!')
     const newPaperTitle = paperTitle.trim()
-    if (!newPaperTitle) return
+    if (!newPaperTitle) return setMessage('공백이 아닌 내용을 입력해주세요!')
 
-    const editedPaper = { paperId, paperTitle: newPaperTitle, dueDate, theme, paperUrl }
+    const editedPaper = { paperId, paperTitle: newPaperTitle, dueDate, theme }
     editPaperAPI(editedPaper)
-    dispatch({ type: EDIT_PAPER, payload: editedPaper })
+    dispatch({ type: EDIT_PAPER, payload: { ...editedPaper, paperUrl } })
     setIsModalOpen(false)
   }
 
@@ -57,6 +60,8 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, paperUrl, setIsModal
         maxLength={20}
         onChange={handlePaperTitleChange}
       />
+      {message && <ModalText type="warning">{message}</ModalText>}
+
       <ModalText type="label">언제 열어보시겠어요?</ModalText>
       <ModalInput
         type="date"
@@ -65,6 +70,7 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, paperUrl, setIsModal
         min={convertDaysFromToday(1)}
         onChange={handleDueDateChange}
       />
+
       <ModalText type="label">테마를 선택해주세요!</ModalText>
       <div className={styles.radioWrapper}>
         <label htmlFor="light" className={styles.radioLabel}>

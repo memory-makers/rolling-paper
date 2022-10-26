@@ -1,4 +1,4 @@
-import { ChangeEventHandler, MouseEventHandler, useEffect, useMemo } from 'react'
+import { ChangeEventHandler, MouseEventHandler } from 'react'
 import styles from './makeRoll.module.scss'
 import cx from 'classnames'
 
@@ -7,13 +7,21 @@ import { convertDaysFromToday } from '@/utils/rollingPaper/paper'
 
 interface Props {
   handleButtonClick: MouseEventHandler<HTMLButtonElement>
+  message: string
   dueDate: string
   setPaperTitle: (state: string) => void
   setDueDate: (state: string) => void
   setTheme: (state: string) => void
 }
 
-const MakeRoll = ({ handleButtonClick, dueDate, setPaperTitle, setDueDate, setTheme }: Props) => {
+const MakeRoll = ({
+  handleButtonClick,
+  message,
+  dueDate,
+  setPaperTitle,
+  setDueDate,
+  setTheme
+}: Props) => {
   const handleTitleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setPaperTitle(e.currentTarget.value)
   }
@@ -32,6 +40,7 @@ const MakeRoll = ({ handleButtonClick, dueDate, setPaperTitle, setDueDate, setTh
 
       <ModalText type="label">롤링페이퍼 이름을 적어주세요</ModalText>
       <ModalInput type="text" name="title" maxLength={20} onChange={handleTitleChange} />
+      {message && <ModalText type="warning">{message}</ModalText>}
 
       <ModalText type="label">언제 열어보시겠어요?</ModalText>
       <ModalInput
