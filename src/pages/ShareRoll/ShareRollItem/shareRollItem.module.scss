@@ -1,3 +1,5 @@
+@use '/src/styles/colors.scss';
+
 .shareInputWrapper {
   position: relative;
   .shareIconButton {
@@ -5,5 +7,9 @@
     right: 14px;
     top: 26px;
     cursor: pointer;
+
+    &:active {
+      top: 27px;
+    }
   }
 }
