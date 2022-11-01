@@ -26,9 +26,7 @@ const CreateRoll = ({ setIsModalOpen }: Props) => {
     if (!newPaperTitle) return
 
     const {
-      result: {
-        paper: { paperId, paperUrl }
-      }
+      result: { paperId, paperUrl }
     } = (await setPaperAPI({ paperTitle: newPaperTitle, dueDate, theme })) as PaperAPIResponse
 
     dispatch({

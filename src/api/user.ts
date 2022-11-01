@@ -79,7 +79,8 @@ export interface PaperAPIResponse {
 }
 
 interface Result {
-  paper: Paper
+  paperId: number
+  paperUrl: string
   status: string
 }
 
@@ -104,7 +105,7 @@ interface AddPaperAPIParams {
 
 export const setPaperAPI = async ({ paperTitle, dueDate, theme }: AddPaperAPIParams) => {
   try {
-    const paper = { paper: { paperTitle, dueDate, theme } }
+    const paper = { paperTitle, dueDate, theme }
     const { data } = await axiosClient.post<PaperAPIResponse>(PAPER, paper)
     return data
   } catch (error) {
@@ -129,7 +130,7 @@ export const editPaperAPI = async ({
   paperUrl
 }: EditPaperAPIParams) => {
   try {
-    const data = { paper: { paperId, paperTitle, dueDate, theme, paperUrl } }
+    const data = { paperId, paperTitle, dueDate, theme, paperUrl }
     const res = await axiosClient.put<PaperAPIResponse>(PAPER, data)
     return res
   } catch (error) {

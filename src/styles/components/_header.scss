@@ -4,6 +4,7 @@
 .header {
   display: flex;
   width: 100%;
+  padding: 0 8px;
   justify-content: space-between;
   @include typograpy('basic', 32px);
   min-height: 140px;
@@ -30,4 +31,14 @@
 }
 .isCursor {
   cursor: text;
+}
+
+.rollingpaper-buttons {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+  button {
+    margin-bottom: 4px;
+  }
 }
