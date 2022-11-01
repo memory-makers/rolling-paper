@@ -42,7 +42,7 @@ const MakeNickname = ({ setIsModalOpen }: Props) => {
           placeholder="8글자 이내로 나를 표현해봐요!"
           onChange={handleNicknameChange}
         />
-        <ModalText type="warning">{message}</ModalText>
+        {message && <ModalText type="warning">{message}</ModalText>}
         <ModalButton type="submit">완료</ModalButton>
       </form>
     </Modal>

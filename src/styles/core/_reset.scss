@@ -13,6 +13,7 @@
 html {
   line-height: 1.5;
   -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
   -moz-tab-size: 4;
   tab-size: 4;
   font-family: 'LeeSeoyun', 'fontFamily.sans', ui-sans-serif, system-ui, -apple-system,
@@ -191,4 +192,9 @@ video {
 }
 [hidden] {
   display: none;
+}
+
+button:focus,
+input:focus {
+  outline: none;
 }
