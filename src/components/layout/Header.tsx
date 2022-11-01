@@ -18,7 +18,7 @@ type HeaderType = 'only-button' | 'title-button' | 'only-title'
 
 interface HeaderProps {
   children?: React.ReactNode
-  text: string
+  text?: string
   type: HeaderType
 }
 // 공통으로 사용하는 헤더입니다.

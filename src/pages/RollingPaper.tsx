@@ -10,6 +10,7 @@ import Header from '@/components/layout/Header'
 import Buttons from '@/components/rollingpaper/Buttons'
 import CardModal from '@/components/rollingpaper/CardModal'
 import Content from '@/components/rollingpaper/Content'
+import Content2 from '@/components/rollingpaper/Content'
 import EditorButton from '@/components/rollingpaper/EditorButton'
 import ModifyModeButtons from '@/components/rollingpaper/ModifyModeButtons'
 import OpenDate from '@/components/rollingpaper/OpenDate'
@@ -48,7 +49,6 @@ const RollingPaper = () => {
   }, [rollingPaperId])
 
   useEffect(() => {
-    console.log(rollingPaper)
     if (rollingPaper?.dueDate) {
       const dateDiff = dateDiffFormat(rollingPaper.dueDate)
       setBeforeOpen(dateDiff.beforeOpen)
@@ -93,24 +93,29 @@ const RollingPaper = () => {
   }
   return rollingPaper ? (
     <>
-      <Header text={rollingPaper.paperTitle} type="title-button">
-        {isModifyMode ? (
-          <ModifyModeButtons
-            handleModifyMode={handleModifyMode}
-            handleModifyDone={handleModifyDone}
-          />
-        ) : (
-          <Buttons beforeOpen={beforeOpen} handleModifyMode={handleModifyMode} />
-        )}
-      </Header>
-      <Content cards={cards} handleClickCard={handleClickCard}>
+      {/* <Header type="title-button"> */}
+      {isModifyMode ? (
+        <ModifyModeButtons
+          handleModifyMode={handleModifyMode}
+          handleModifyDone={handleModifyDone}
+        />
+      ) : (
+        <Buttons beforeOpen={beforeOpen} handleModifyMode={handleModifyMode} />
+      )}
+      {/* </Header> */}
+      <Content2
+        isModifyMode={isModifyMode}
+        title={rollingPaper.paperTitle}
+        cards={cards}
+        handleClickCard={handleClickCard}
+      >
         <StickerModifyContent
           isModifyMode={isModifyMode}
           newStickers={newStickers}
           setNewStickers={setNewStickers}
         />
         <StickerContent isModifyMode={isModifyMode} stickers={stickers} />
-      </Content>
+      </Content2>
       <OpenDate untilOpen={untilOpen} beforeOpen={beforeOpen} />
       {beforeOpen && <EditorButton />}
       {cards[cardIndex] && (

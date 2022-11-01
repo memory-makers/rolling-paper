@@ -21,7 +21,7 @@ const Buttons = ({ beforeOpen, handleModifyMode }: ButtonsProps) => {
   }, [isModalOpen])
 
   return (
-    <div className="header_buttons">
+    <div className="rollingpaper-buttons">
       {beforeOpen && <HeaderButton handleClick={handleModifyMode} icon={<StickerIcon />} />}
       <HeaderButton handleClick={handleClickButton} icon={<ShareIcon />} />
       {isModalOpen && (

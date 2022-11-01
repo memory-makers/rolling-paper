@@ -19,8 +19,8 @@ export const Routes = () => {
   return (
     <BrowserRouter>
       <ReactRouterRoutes>
-        <Route path="/" element={<Home />} />
         <Route path="/rollingpaper/:rollingPaperId" element={<RollingPaper />} />
+        <Route path="/" element={<Home />} />
         <Route path="/rollingpaper/:rollingPaperId/editor" element={<Editor />} />
         <Route path="sending" element={<Sending />} />
         <Route path="modalTest" element={<ModalTest />} />
