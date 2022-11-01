@@ -6,6 +6,13 @@ export const convertTimeToDate = (time: number) => {
   return date
 }
 
+// '2022-00-00' 값을 '2022년 00월 00일' 값으로 변환
+export const convertDateStringFormat = (date: string) => {
+  const splitDate = date.split('-')
+  const newDate = splitDate[0] + '년 ' + splitDate[1] + '월 ' + splitDate[2] + '일'
+  return newDate
+}
+
 // 현재 날짜를 구하는 함수
 export const convertTimeAndOffsetToDate = () => {
   const date = new Date()
