@@ -1,7 +1,8 @@
 @use '/src/styles/colors.scss';
 
 .modalButton {
-  height: 44px;
+  width: 100%;
+  height: 48px;
   margin-top: 28px;
   border: 1px solid colors.$modalPoint;
   border-radius: 20px;
