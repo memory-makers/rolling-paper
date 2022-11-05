@@ -10,10 +10,10 @@ interface CardProps {
   handleClick: () => void
 }
 
-const Card = ({ rotateDeg, card, handleClick }: CardProps) => {
+const Card2 = ({ rotateDeg, card, handleClick }: CardProps) => {
   return (
     <div
-      className={classNames(styles.card, styles[card.background], styles[card.font])}
+      className={classNames(styles.card2, styles[card.background], styles[card.font])}
       style={{ transform: rotateDeg }}
       onClick={handleClick}
     >
@@ -22,4 +22,4 @@ const Card = ({ rotateDeg, card, handleClick }: CardProps) => {
   )
 }
 
-export default Card
+export default Card2

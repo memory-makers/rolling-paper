@@ -4,6 +4,7 @@ import Card from '@/components/home/Card'
 import colors from '@/styles/colors.module.scss'
 
 import styles from './index.module.scss'
+import { Logo } from '@/assets'
 
 const cardOption = [
   {
@@ -74,18 +75,18 @@ const cardOption = [
 const Home = () => {
   return (
     <div className={styles.home}>
-      <div>
-        <img className="logo" src={`./imgs/logo.png`} />
-      </div>
-      <div className={styles['card-container']}>
-        {cardOption.map(({ content, style }) => (
-          <Card key={content} content={content} cardStyle={style} />
-        ))}
-      </div>
-      <div className={styles['home-description']}>
-        추억의 롤링페이퍼에서
-        <br />
-        추억을 만들고 간직하세요!
+      <Logo />
+      <div className={styles['home-content']}>
+        <div className={styles['card-container']}>
+          {cardOption.map(({ content, style }) => (
+            <Card key={content} content={content} cardStyle={style} />
+          ))}
+        </div>
+        <div className={styles['home-description']}>
+          추억의 롤링페이퍼에서
+          <br />
+          추억을 만들고 간직하세요!
+        </div>
       </div>
       <KakaoButton />
     </div>

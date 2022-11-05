@@ -10,7 +10,6 @@ import Header from '@/components/layout/Header'
 import Buttons from '@/components/rollingpaper/Buttons'
 import CardModal from '@/components/rollingpaper/CardModal'
 import Content from '@/components/rollingpaper/Content'
-import Content2 from '@/components/rollingpaper/Content'
 import EditorButton from '@/components/rollingpaper/EditorButton'
 import ModifyModeButtons from '@/components/rollingpaper/ModifyModeButtons'
 import OpenDate from '@/components/rollingpaper/OpenDate'
@@ -20,8 +19,8 @@ import { useTheme } from '@/store/theme'
 import CardType from '@/utils/rollingPaper/Card.type'
 import { dateDiffFormat } from '@/utils/rollingPaper/dateDiffFormat'
 import StickerType from '@/utils/rollingPaper/Sticker.type'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 
 const RollingPaper = () => {
   const urlId = useParams().rollingPaperId
@@ -93,7 +92,6 @@ const RollingPaper = () => {
   }
   return rollingPaper ? (
     <>
-      {/* <Header type="title-button"> */}
       {isModifyMode ? (
         <ModifyModeButtons
           handleModifyMode={handleModifyMode}
@@ -102,8 +100,7 @@ const RollingPaper = () => {
       ) : (
         <Buttons beforeOpen={beforeOpen} handleModifyMode={handleModifyMode} />
       )}
-      {/* </Header> */}
-      <Content2
+      <Content
         isModifyMode={isModifyMode}
         title={rollingPaper.paperTitle}
         cards={cards}
@@ -115,7 +112,7 @@ const RollingPaper = () => {
           setNewStickers={setNewStickers}
         />
         <StickerContent isModifyMode={isModifyMode} stickers={stickers} />
-      </Content2>
+      </Content>
       <OpenDate untilOpen={untilOpen} beforeOpen={beforeOpen} />
       {beforeOpen && <EditorButton />}
       {cards[cardIndex] && (
