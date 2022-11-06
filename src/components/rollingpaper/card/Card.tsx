@@ -1,7 +1,7 @@
 import CardType from '@/utils/rollingPaper/Card.type'
 import React from 'react'
 import colors from '@/styles/colors.scss'
-import styles from './rollingpaper.module.scss'
+import styles from './card.module.scss'
 import fonts from '@/styles/core/_typography.scss'
 import classNames from 'classnames'
 interface CardProps {
@@ -10,10 +10,10 @@ interface CardProps {
   handleClick: () => void
 }
 
-const Card2 = ({ rotateDeg, card, handleClick }: CardProps) => {
+const Card = ({ rotateDeg, card, handleClick }: CardProps) => {
   return (
     <div
-      className={classNames(styles.card2, styles[card.background], styles[card.font])}
+      className={classNames(styles.card, styles[card.background], styles[card.font])}
       style={{ transform: rotateDeg }}
       onClick={handleClick}
     >
@@ -22,4 +22,4 @@ const Card2 = ({ rotateDeg, card, handleClick }: CardProps) => {
   )
 }
 
-export default Card2
+export default Card

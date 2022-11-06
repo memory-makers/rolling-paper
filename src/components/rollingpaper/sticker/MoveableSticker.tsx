@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import StickerType, { StickerShape } from '@/utils/rollingPaper/Sticker.type'
 import classNames from 'classnames'
-import styles from './rollingpaper.module.scss'
-import { ReactComponent as StickerBorder } from '@/assets/sticker-border.svg'
+import styles from './sticker.module.scss'
 import { ReactComponent as DeleteIcon } from '@/assets/delete-icn.svg'
-import { ReactComponent as RotateIcon } from '@/assets/rotate-icn.svg'
 import Moveable, {
   OnDrag,
   OnDragEnd,
@@ -14,10 +12,7 @@ import Moveable, {
   OnResizeStart,
   OnRotate,
   OnRotateEnd,
-  OnRotateStart,
-  OnScale,
-  OnScaleEnd,
-  OnScaleStart
+  OnRotateStart
 } from 'react-moveable'
 
 interface StickerProps {
@@ -113,9 +108,9 @@ const MoveableSticker = ({ sticker, handleUpdateStickers, handleDeleteSticker }:
   }
 
   return (
-    <div className={styles['container']}>
+    <div className={styles['sticker-container']}>
       <div
-        className={classNames(styles.sticker, `sticker-${sticker.id}`)}
+        className={classNames(styles['sticker'], `sticker-${sticker.id}`)}
         style={getStickerStyle(sticker.type, sticker.id)}
       >
         <DeleteIcon
@@ -123,7 +118,6 @@ const MoveableSticker = ({ sticker, handleUpdateStickers, handleDeleteSticker }:
           onClick={() => handleDeleteSticker(sticker.id)}
         />
       </div>
-
       <Moveable
         target={target}
         rotatable={true}

@@ -1,5 +1,9 @@
 //movable reset
 @use '../colors';
+
+// library style
+
+// movable sticker style
 .moveable-control,
 .moveable-line {
   background: $point !important;
@@ -17,6 +21,7 @@
   top: 15px !important;
 }
 
+//r eact-zoom-pan-pinch
 .card-wrapper {
   display: flex;
   align-items: center;
@@ -28,6 +33,16 @@
 .card-content-wrapper {
   min-height: 100vh !important;
   min-width: 100% !important;
+  .paper-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 32px;
+    margin: 50px;
+    .title {
+      color: colors.$subPoint;
+    }
+  }
 }
 .card-content-component {
   display: flex;
@@ -37,15 +52,4 @@
   display: grid !important;
   padding: 32px;
   margin: 0 auto;
-}
-
-.paper-title {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 32px;
-  margin: 50px;
-  .title {
-    color: colors.$subPoint;
-  }
 }

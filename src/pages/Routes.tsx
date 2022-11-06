@@ -3,7 +3,7 @@ import { Route, Routes as ReactRouterRoutes, BrowserRouter } from 'react-router-
 import Editor from './Editor'
 import Home from './Home'
 import MyPage from './MyPage/index'
-import RollingPaper from './RollingPaper'
+import RollingPaper from './RollinPaper/RollingPaper'
 import ModalTest from './ModalTest/ModalTest'
 import ModalCallTest from './ModalTest/ModalCallTest'
 import Sending from './Sending/Sending'

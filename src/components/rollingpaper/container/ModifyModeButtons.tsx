@@ -1,5 +1,5 @@
 import React from 'react'
-import HeaderButton from '../buttons/HeaderButton'
+import HeaderButton from '../../buttons/HeaderButton'
 interface ButtonsProps {
   handleModifyMode: () => void
   handleModifyDone: () => void

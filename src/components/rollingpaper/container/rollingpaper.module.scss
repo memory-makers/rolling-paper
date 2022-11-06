@@ -112,30 +112,6 @@
   scrollbar-width: none; /* Firefox */
 }
 
-.card-content {
-  width: 100%;
-  font-size: 32px;
-  padding: 66px 40px;
-  box-sizing: border-box;
-  border-radius: 20px;
-  @each $colorKey, $colorValue in colors.$colorMap {
-    &.#{$colorKey} {
-      background-color: $colorValue;
-    }
-  }
-  @each $fontKey, $fontValue in txt.$fontFamilyMap {
-    &.#{$fontKey} {
-      font-family: $fontValue;
-    }
-  }
-}
-.text {
-  @each $colorKey, $colorValue in colors.$colorMap {
-    &.#{$colorKey} {
-      color: $colorValue;
-    }
-  }
-}
 .card-btns {
   display: flex;
   align-items: center;
@@ -188,40 +164,6 @@
   position: absolute;
   bottom: -30px;
   right: -30px;
-}
-
-.sticker-modal {
-  position: absolute;
-  z-index: 999;
-  bottom: 0px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: all 0.3s ease-out;
-  &.isClosed {
-    bottom: -400px;
-    & div {
-      opacity: 0;
-      padding: 0;
-    }
-  }
-}
-.sticker-modal svg {
-  cursor: pointer;
-}
-
-.sticker-modal-content {
-  transition: all 0.3s ease-out;
-  opacity: 1;
-  display: grid;
-  width: 100%;
-  height: 400px;
-  background: rgba(0, 0, 0, 0.8);
-  grid-template-columns: repeat(3, 1fr);
-  padding: 30px;
-  align-items: center;
-  justify-items: center;
 }
 
 .sticker-modify-content {

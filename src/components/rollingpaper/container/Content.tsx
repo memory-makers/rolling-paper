@@ -4,7 +4,7 @@ import { LOAD_URL_NAME, useUrlName } from '@/store/urlNickname'
 import { convertUrlToHostData } from '@/utils/rollingPaper/paper'
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 import CardType from '@/utils/rollingPaper/Card.type'
-import Card from './Card'
+import Card from '../card/Card'
 interface ContentProps {
   title: string
   handleClickCard: (index: number) => void
@@ -28,7 +28,8 @@ const Content = ({ isModifyMode, title, cards, handleClickCard, children }: Cont
   }
   useEffect(() => {
     getPaperIdNickname()
-  }, [])
+  }, [urlNameState])
+
   const half = Math.ceil(Math.sqrt(cards.length))
   const modifyModeDisable = isModifyMode
     ? {
