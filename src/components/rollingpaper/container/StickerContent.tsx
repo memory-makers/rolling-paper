@@ -3,9 +3,9 @@ import cardDummy from '@/utils/rollingPaper/cardDummy'
 import StickerType from '@/utils/rollingPaper/Sticker.type'
 import classNames from 'classnames'
 import React from 'react'
-import Card from './Card'
+import Card from '../card/Card'
 import styles from './rollingpaper.module.scss'
-import Sticker from './Sticker'
+import Sticker from '../sticker/Sticker'
 interface ContentProps {
   isModifyMode: boolean
   stickers: StickerType[]

@@ -2,28 +2,23 @@
 @use '@/styles/core/_typography.scss' as txt;
 .content {
   position: relative;
-  display: grid;
-  overflow-y: scroll;
-  overflow-x: visible;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-flow: row dense;
-  align-content: start;
+  // display: grid;
+  // overflow-y: scroll;
+  // overflow-x: hidden;
+  // grid-template-columns: repeat(2, 1fr);
+  // grid-auto-flow: row dense;
+  // align-content: start;
   margin: 0 auto;
   padding: 16px;
   padding-bottom: 260px;
   height: 100%;
   min-height: 100vh;
-  width: 100%;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .content::-webkit-scrollbar {
   display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.content {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
 }
 
 .card {
@@ -59,6 +54,31 @@
     }
   }
 }
+.card2 {
+  cursor: pointer;
+  font-size: 16px;
+  box-sizing: border-box;
+  padding: 20px;
+  width: 100%;
+  min-height: 200px;
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.25);
+
+  border-radius: 20px;
+  @each $colorKey, $colorValue in colors.$colorMap {
+    &.#{$colorKey} {
+      background-color: $colorValue;
+    }
+  }
+  @each $fontKey, $fontValue in txt.$fontFamilyMap {
+    &.#{$fontKey} {
+      font-family: $fontValue;
+    }
+  }
+}
 
 .card-modal {
   z-index: 20;
@@ -72,6 +92,7 @@
   &.light {
     background: rgba(255, 248, 235, 0.8);
   }
+
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -79,36 +100,18 @@
   justify-content: center;
   overflow-y: scroll;
   box-sizing: border-box;
-  padding: 66px 16px 16px;
-  margin-bottom: 66px;
+  padding: 200px 16px 68px 16px;
   svg {
     cursor: pointer;
   }
-}
-.card-content {
-  width: 100%;
-  font-size: 32px;
-  padding: 66px 40px;
-  box-sizing: border-box;
-  border-radius: 20px;
-  @each $colorKey, $colorValue in colors.$colorMap {
-    &.#{$colorKey} {
-      background-color: $colorValue;
-    }
+
+  &::-webkit-scrollbar {
+    display: none;
   }
-  @each $fontKey, $fontValue in txt.$fontFamilyMap {
-    &.#{$fontKey} {
-      font-family: $fontValue;
-    }
-  }
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
-.text {
-  @each $colorKey, $colorValue in colors.$colorMap {
-    &.#{$colorKey} {
-      color: $colorValue;
-    }
-  }
-}
+
 .card-btns {
   display: flex;
   align-items: center;
@@ -163,43 +166,10 @@
   right: -30px;
 }
 
-.sticker-modal {
-  position: absolute;
-  z-index: 999;
-  bottom: 0px;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: all 0.3s ease-out;
-  &.isClosed {
-    bottom: -400px;
-    & div {
-      opacity: 0;
-      padding: 0;
-    }
-  }
-}
-.sticker-modal svg {
-  cursor: pointer;
-}
-
-.sticker-modal-content {
-  transition: all 0.3s ease-out;
-  opacity: 1;
-  display: grid;
-  width: 100%;
-  height: 400px;
-  background: rgba(0, 0, 0, 0.8);
-  grid-template-columns: repeat(3, 1fr);
-  padding: 30px;
-  align-items: center;
-  justify-items: center;
-}
-
 .sticker-modify-content {
-  z-index: 100;
-  width: 100%;
+  z-index: 8;
+  // width: 100%;
+  // height: 100%;
   position: absolute;
   height: 100%;
   opacity: 0;
@@ -212,7 +182,8 @@
 }
 
 .sticker-content {
-  width: 100%;
+  // width: 100%;
+  // height: 100%;
   position: absolute;
   height: 100%;
   pointer-events: none;
@@ -225,19 +196,19 @@
 
 .sticker-container {
   position: relative;
-  width: 100%;
+  // width: 100%;
 }
 
 .editor-btn {
   z-index: 101;
   position: absolute;
   width: 263px;
-  height: 44px;
-  background: #f05a39;
+  height: 48px;
+  background: #fff;
+  color: colors.$point;
   border: 1px solid #f05a39;
   border-radius: 20px;
   bottom: 36px;
-  color: colors.$white;
   @include txt.typograpy('basic', 24px);
 }
 

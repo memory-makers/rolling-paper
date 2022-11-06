@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import HeaderButton from '../buttons/HeaderButton'
+import HeaderButton from '../../buttons/HeaderButton'
 import ShareRoll from '@/pages/ShareRoll'
 import { ReactComponent as StickerIcon } from '@/assets/sticker-icn.svg'
 import { ReactComponent as ShareIcon } from '@/assets/share-icn.svg'
@@ -21,7 +21,7 @@ const Buttons = ({ beforeOpen, handleModifyMode }: ButtonsProps) => {
   }, [isModalOpen])
 
   return (
-    <div className="header_buttons">
+    <div className="rollingpaper-buttons">
       {beforeOpen && <HeaderButton handleClick={handleModifyMode} icon={<StickerIcon />} />}
       <HeaderButton handleClick={handleClickButton} icon={<ShareIcon />} />
       {isModalOpen && (

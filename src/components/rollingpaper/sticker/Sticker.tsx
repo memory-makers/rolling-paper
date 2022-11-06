@@ -1,7 +1,7 @@
 import React from 'react'
 import StickerType, { StickerShape } from '@/utils/rollingPaper/Sticker.type'
 import classNames from 'classnames'
-import styles from './rollingpaper.module.scss'
+import styles from './sticker.module.scss'
 
 interface StickerProps {
   isFloating?: boolean
@@ -20,7 +20,7 @@ const Sticker = ({ isFloating, sticker, handleStickerClick }: StickerProps) => {
   }
   return (
     <div
-      className={classNames(styles.sticker, isFloating && styles['isFloating'])}
+      className={classNames(styles['sticker'], isFloating && styles['isFloating'])}
       style={style}
       onClick={handleStickerClick}
     />

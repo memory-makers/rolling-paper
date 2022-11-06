@@ -7,20 +7,20 @@ import {
   updateStickers_API
 } from '@/api/rollingpaper'
 import Header from '@/components/layout/Header'
-import Buttons from '@/components/rollingpaper/Buttons'
-import CardModal from '@/components/rollingpaper/CardModal'
-import Content from '@/components/rollingpaper/Content'
-import EditorButton from '@/components/rollingpaper/EditorButton'
-import ModifyModeButtons from '@/components/rollingpaper/ModifyModeButtons'
-import OpenDate from '@/components/rollingpaper/OpenDate'
-import StickerContent from '@/components/rollingpaper/StickerContent'
-import StickerModifyContent from '@/components/rollingpaper/StickerModifyContent'
+import Buttons from '@/components/rollingpaper/container/Buttons'
+import CardModal from '@/components/rollingpaper/modal/CardModal'
+import Content from '@/components/rollingpaper/container/Content'
+import EditorButton from '@/components/rollingpaper/button/EditorButton'
+import ModifyModeButtons from '@/components/rollingpaper/container/ModifyModeButtons'
+import OpenDate from '@/components/rollingpaper/container/OpenDate'
+import StickerContent from '@/components/rollingpaper/container/StickerContent'
+import StickerModifyContent from '@/components/rollingpaper/container/StickerModifyContent'
 import { useTheme } from '@/store/theme'
 import CardType from '@/utils/rollingPaper/Card.type'
 import { dateDiffFormat } from '@/utils/rollingPaper/dateDiffFormat'
 import StickerType from '@/utils/rollingPaper/Sticker.type'
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import React, { useCallback, useEffect, useState } from 'react'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 
 const RollingPaper = () => {
   const urlId = useParams().rollingPaperId
@@ -48,7 +48,6 @@ const RollingPaper = () => {
   }, [rollingPaperId])
 
   useEffect(() => {
-    console.log(rollingPaper)
     if (rollingPaper?.dueDate) {
       const dateDiff = dateDiffFormat(rollingPaper.dueDate)
       setBeforeOpen(dateDiff.beforeOpen)
@@ -93,17 +92,20 @@ const RollingPaper = () => {
   }
   return rollingPaper ? (
     <>
-      <Header text={rollingPaper.paperTitle} type="title-button">
-        {isModifyMode ? (
-          <ModifyModeButtons
-            handleModifyMode={handleModifyMode}
-            handleModifyDone={handleModifyDone}
-          />
-        ) : (
-          <Buttons beforeOpen={beforeOpen} handleModifyMode={handleModifyMode} />
-        )}
-      </Header>
-      <Content cards={cards} handleClickCard={handleClickCard}>
+      {isModifyMode ? (
+        <ModifyModeButtons
+          handleModifyMode={handleModifyMode}
+          handleModifyDone={handleModifyDone}
+        />
+      ) : (
+        <Buttons beforeOpen={beforeOpen} handleModifyMode={handleModifyMode} />
+      )}
+      <Content
+        isModifyMode={isModifyMode}
+        title={rollingPaper.paperTitle}
+        cards={cards}
+        handleClickCard={handleClickCard}
+      >
         <StickerModifyContent
           isModifyMode={isModifyMode}
           newStickers={newStickers}

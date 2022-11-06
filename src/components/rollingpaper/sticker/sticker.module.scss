@@ -1,0 +1,29 @@
+.sticker {
+  cursor: pointer;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 60px;
+  height: 60px;
+  &.isFloating {
+    position: absolute;
+  }
+  &.rnd {
+    position: absolute;
+  }
+}
+
+.sticker-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.delete-icn {
+  width: 20px;
+  height: 20px;
+  z-index: 999;
+  position: absolute;
+  top: -38px;
+  right: -35px;
+}
