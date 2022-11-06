@@ -14,12 +14,12 @@ export const CARD_COLOR_LIST: readonly string[] = Object.freeze([
 ])
 
 export const FONT_COLOR_LIST: readonly string[] = Object.freeze([
-  'textBlack',
   'textRed',
   'textBlue',
   'textGreen',
-  'textPurple',
-  'textYellow'
+  'textPink',
+  'textOrange',
+  'textBlack'
 ])
 
 export const FONT_STYLE_LIST: readonly string[] = Object.freeze([
