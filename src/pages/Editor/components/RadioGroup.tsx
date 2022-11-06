@@ -29,6 +29,7 @@ export const RadioGroup = ({
             style={{ backgroundColor: colorObject[option] }}
           />
           <CheckIcon
+            fill="#ffffff"
             className={cx(styles['radio-checked'], {
               [styles['radio-checked-visible']]: option === value
             })}
