@@ -9,6 +9,8 @@ import { convertTimeAndOffsetToDate } from '@/utils/rollingPaper/paper'
 
 import PaperType from '@/utils/rollingPaper/Paper.type'
 import MyPageDropDown from './MyPageDropdown'
+import BlockRoll from '@/pages/BlockRoll'
+
 interface Props {
   paper: PaperType
   changeOpenPaperState: (value: boolean) => void
@@ -19,6 +21,7 @@ const MyPageItem = ({ paper, changeOpenPaperState }: Props) => {
   const dropdownRef = useRef<HTMLDivElement>(null)
   const [isOpened, setIsOpened] = useState(false)
   const openDateRef = useRef<HTMLParagraphElement>(null)
+  const [isBlockRollModalOpen, setIsBlockRollModalOpen] = useState(false)
   const navigate = useNavigate()
   const handleClickDropdownList = () => {
     setIsDropdown(!isDropdown)
@@ -32,7 +35,7 @@ const MyPageItem = ({ paper, changeOpenPaperState }: Props) => {
 
   const handleClickMoveToPaperDetail = () => {
     const diff = getDiffBetweenDate(paper.dueDate)
-    if (diff < 0) return changeOpenPaperState(true)
+    if (diff < 0) return setIsBlockRollModalOpen(true)
     navigate(`/rollingpaper/${paper.paperUrl}`)
   }
 
@@ -75,6 +78,9 @@ const MyPageItem = ({ paper, changeOpenPaperState }: Props) => {
         </div>
       </div>
       <MyPageDropDown paper={paper} isDropdown={isDropdown} />
+      {isBlockRollModalOpen && (
+        <BlockRoll date={paper.dueDate} setIsModalOpen={setIsBlockRollModalOpen} />
+      )}
     </div>
   )
 }
