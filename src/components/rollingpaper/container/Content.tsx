@@ -51,7 +51,7 @@ const Content = ({ isModifyMode, title, cards, handleClickCard, children }: Cont
     <div className="card-wrapper">
       <TransformWrapper
         {...modifyModeDisable}
-        initialScale={1}
+        initialScale={0.8}
         centerOnInit={true}
         minScale={0.5}
         wheel={{ step: 0.2 }}

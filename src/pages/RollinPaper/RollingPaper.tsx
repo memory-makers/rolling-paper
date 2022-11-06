@@ -21,6 +21,7 @@ import { dateDiffFormat } from '@/utils/rollingPaper/dateDiffFormat'
 import StickerType from '@/utils/rollingPaper/Sticker.type'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import classNames from 'classnames'
 
 const RollingPaper = () => {
   const urlId = useParams().rollingPaperId
@@ -91,7 +92,7 @@ const RollingPaper = () => {
     setIsModifyMode(!isModifyMode)
   }
   return rollingPaper ? (
-    <>
+    <div className={classNames('rollingpaper-container', state.theme)}>
       {isModifyMode ? (
         <ModifyModeButtons
           handleModifyMode={handleModifyMode}
@@ -124,7 +125,7 @@ const RollingPaper = () => {
           handleNext={handleNext}
         />
       )}
-    </>
+    </div>
   ) : (
     <></>
   )
