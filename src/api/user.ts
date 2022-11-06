@@ -84,23 +84,10 @@ interface Result {
   status: string
 }
 
-interface Paper {
-  paperId: number
-  paperTitle: string
-  theme: string
-  paperUrl: string
-  deleteYn?: any
-  openStatus?: any
-  userId: string
-  createdAt?: any
-  updatedAt?: any
-  dueDate: number
-}
-
 interface AddPaperAPIParams {
-  paperTitle: string | null
-  dueDate: string | null
-  theme: string | null
+  paperTitle: string
+  dueDate: string
+  theme: string
 }
 
 export const setPaperAPI = async ({ paperTitle, dueDate, theme }: AddPaperAPIParams) => {
@@ -116,23 +103,17 @@ export const setPaperAPI = async ({ paperTitle, dueDate, theme }: AddPaperAPIPar
 // 롤링페이퍼 수정
 interface EditPaperAPIParams {
   paperId: number
-  paperTitle: string | null
-  dueDate: string | null
-  theme: string | null
-  paperUrl: string
+  paperTitle: string
+  dueDate: string
+  theme: string
 }
 
-export const editPaperAPI = async ({
-  paperId,
-  paperTitle,
-  dueDate,
-  theme,
-  paperUrl
-}: EditPaperAPIParams) => {
+export const editPaperAPI = async ({ paperId, paperTitle, dueDate, theme }: EditPaperAPIParams) => {
   try {
-    const data = { paperId, paperTitle, dueDate, theme, paperUrl }
-    const res = await axiosClient.put<PaperAPIResponse>(PAPER, data)
-    return res
+    const paper = { paperId, paperTitle, dueDate, theme }
+    const { data } = await axiosClient.put(PAPER, paper)
+    console.log('res', data)
+    return data
   } catch (error) {
     console.log(error, 'edit rolling paper error')
   }

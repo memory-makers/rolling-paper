@@ -19,11 +19,13 @@ const CreateRoll = ({ setIsModalOpen }: Props) => {
 
   const [paperUrl, setPaperUrl] = useState('')
   const [isNextStep, setIsNextStep] = useState(false)
+  const [message, setMessage] = useState('')
 
   const handleButtonClick: MouseEventHandler<HTMLButtonElement> = async (e) => {
-    if (!paperTitle || !dueDate) return
+    if (!dueDate) return
+    if (!paperTitle) return setMessage('롤링페이퍼 이름을 입력해주세요!')
     const newPaperTitle = paperTitle.trim()
-    if (!newPaperTitle) return
+    if (!newPaperTitle) return setMessage('공백이 아닌 내용을 입력해주세요!')
 
     const {
       result: { paperId, paperUrl }
@@ -48,6 +50,7 @@ const CreateRoll = ({ setIsModalOpen }: Props) => {
       {!isNextStep && (
         <MakeRoll
           handleButtonClick={handleButtonClick}
+          message={message}
           dueDate={dueDate}
           setPaperTitle={setPaperTitle}
           setDueDate={setDueDate}

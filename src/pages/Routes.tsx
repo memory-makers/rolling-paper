@@ -12,6 +12,7 @@ import KakaoLogoutRedirect from './KakaoLogoutRedirect'
 import NotFound from './ErrorHandling/NotFound'
 import NotLogin from './ErrorHandling/NotLogin'
 import tokenStore from '@/api/tokenStore'
+import NotPermission from './ErrorHandling/NotPermission'
 
 export const Routes = () => {
   const token = tokenStore.getAccessToken()
@@ -30,6 +31,7 @@ export const Routes = () => {
         <Route path="logout" element={<KakaoLogoutRedirect />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/not-found" element={<NotFound />} />
+        <Route path="/not-permission" element={<NotPermission />} />
       </ReactRouterRoutes>
     </BrowserRouter>
   )
