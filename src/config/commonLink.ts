@@ -3,7 +3,7 @@ export const CLIENT_PAPER_URL = `${CLIENT_URL}/rollingpaper/`
 export const LOCAL_URL = 'http://localhost:5173'
 
 export const checkProdOrDev = () => {
-  if (process.env.VITE_NODE_ENV === 'production') {
+  if (import.meta.env.VITE_NODE_ENV === 'production') {
     return CLIENT_URL
   }
   return LOCAL_URL
