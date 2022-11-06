@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import StickerType, { StickerShape } from '@/utils/rollingPaper/Sticker.type'
 import classNames from 'classnames'
-import styles from './rollingpaper.module.scss'
-import { ReactComponent as StickerBorder } from '@/assets/sticker-border.svg'
+import styles from './sticker.module.scss'
 import { ReactComponent as DeleteIcon } from '@/assets/delete-icn.svg'
-import { ReactComponent as RotateIcon } from '@/assets/rotate-icn.svg'
 import Moveable, {
   OnDrag,
   OnDragEnd,
@@ -14,10 +12,7 @@ import Moveable, {
   OnResizeStart,
   OnRotate,
   OnRotateEnd,
-  OnRotateStart,
-  OnScale,
-  OnScaleEnd,
-  OnScaleStart
+  OnRotateStart
 } from 'react-moveable'
 
 interface StickerProps {
@@ -48,11 +43,11 @@ const MoveableSticker = ({ sticker, handleUpdateStickers, handleDeleteSticker }:
     target.style.transform =
       `translate(${style.translate[0]}px, ${style.translate[1]}px)` + `rotate(${style.rotate}deg)`
     setTarget(target)
-    const layout = document.querySelector('.layout') as HTMLElement
-    layout &&
+    const content = document.querySelector('.card-content-component') as HTMLElement
+    content &&
       setBounds({
-        x: layout.clientWidth - 60,
-        y: layout.clientHeight - 200
+        x: content.offsetWidth,
+        y: content.offsetHeight
       })
   }, [])
 
@@ -113,9 +108,9 @@ const MoveableSticker = ({ sticker, handleUpdateStickers, handleDeleteSticker }:
   }
 
   return (
-    <div className={styles['container']}>
+    <div className={styles['sticker-container']}>
       <div
-        className={classNames(styles.sticker, `sticker-${sticker.id}`)}
+        className={classNames(styles['sticker'], `sticker-${sticker.id}`)}
         style={getStickerStyle(sticker.type, sticker.id)}
       >
         <DeleteIcon
@@ -123,7 +118,6 @@ const MoveableSticker = ({ sticker, handleUpdateStickers, handleDeleteSticker }:
           onClick={() => handleDeleteSticker(sticker.id)}
         />
       </div>
-
       <Moveable
         target={target}
         rotatable={true}
@@ -135,7 +129,7 @@ const MoveableSticker = ({ sticker, handleUpdateStickers, handleDeleteSticker }:
         origin={true}
         edge={true}
         renderDirections={['nw', 'n', 'ne', 'w', 'e', 'sw', 's', 'se']}
-        bounds={{ left: 10, top: 36, right: bounds.x - 40, bottom: bounds.y }}
+        bounds={{ left: -100, top: -100, right: bounds.x + 100, bottom: bounds.y + 100 }}
         throttleRotate={0}
         throttleDrag={0}
         onResizeStart={handleResizeStart}

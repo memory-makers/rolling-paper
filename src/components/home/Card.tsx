@@ -1,4 +1,5 @@
-import React from 'react';
+import classNames from 'classnames'
+import React from 'react'
 import styles from './home.module.scss'
 
 interface CardProps {
@@ -8,12 +9,10 @@ interface CardProps {
 
 const Card = ({ content, cardStyle }: CardProps) => {
   return (
-    <div className={styles.card} style={cardStyle}>
-      <div className={styles['card-content']}>
-        {content}
-      </div>
+    <div className={classNames(styles.card, 'card')} style={cardStyle}>
+      <div className={styles['card-content']}>{content}</div>
     </div>
-  );
-};
+  )
+}
 
-export default Card;
+export default Card

@@ -3,7 +3,7 @@ import { Route, Routes as ReactRouterRoutes, BrowserRouter } from 'react-router-
 import Editor from './Editor'
 import Home from './Home'
 import MyPage from './MyPage/index'
-import RollingPaper from './RollingPaper'
+import RollingPaper from './RollinPaper/RollingPaper'
 import ModalTest from './ModalTest/ModalTest'
 import ModalCallTest from './ModalTest/ModalCallTest'
 import Sending from './Sending/Sending'
@@ -20,8 +20,8 @@ export const Routes = () => {
   return (
     <BrowserRouter>
       <ReactRouterRoutes>
-        <Route path="/" element={<Home />} />
         <Route path="/rollingpaper/:rollingPaperId" element={<RollingPaper />} />
+        <Route path="/" element={<Home />} />
         <Route path="/rollingpaper/:rollingPaperId/editor" element={<Editor />} />
         <Route path="sending" element={<Sending />} />
         <Route path="modalTest" element={<ModalTest />} />

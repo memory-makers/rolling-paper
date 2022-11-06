@@ -9,14 +9,7 @@ const Layout = ({ children }: LayoutProps) => {
   const { state, dispatch } = useTheme()
   const isDark =
     window.location.href.includes('rollingpaper') && state.theme === 'dark' ? 'dark' : 'light'
-  return (
-    <div
-      // onClick={() => dispatch({ type: "toggle" })}
-      className={`layout ${isDark}`}
-    >
-      {children}
-    </div>
-  )
+  return <div className={`layout ${isDark}`}>{children}</div>
 }
 
 export default Layout

@@ -1,9 +1,8 @@
 import React from 'react'
 import StickerType, { StickerShape } from '@/utils/rollingPaper/Sticker.type'
-import RndSticker from './RndSticker'
 import styles from './rollingpaper.module.scss'
-import StickerModal from './StickerModal'
-import MoveableSticker from './MoveableSticker'
+import StickerModal from '../modal/StickerModal'
+import MoveableSticker from '../sticker/MoveableSticker'
 import classNames from 'classnames'
 interface ContentProps {
   isModifyMode: boolean

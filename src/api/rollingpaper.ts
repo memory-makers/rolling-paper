@@ -223,7 +223,7 @@ interface PaperResponse {
   isSuccess: boolean
   message: string
   success: boolean
-  result: { paper: RollingPaperType }
+  result: RollingPaperType
 }
 
 export interface RollingPaperType {
@@ -246,8 +246,8 @@ export const fetchRollingPaper_API = async (
     if (!paperId) return
     const res = await axiosClient.get(`papers/${paperId}`)
     const data = res.data as PaperResponse
-    if (!data.result.paper) return
-    setRollingPaper(data.result.paper)
+    if (!data.result) return
+    setRollingPaper(data.result)
   } catch (error) {
     console.log(error)
     navigate('/not-found')
