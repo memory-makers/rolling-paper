@@ -2,18 +2,11 @@ import { useCallback, useRef, useState } from 'react'
 import cx from 'classnames'
 
 import { updateCard_API } from '@/api/rollingpaper'
+import { ArrowDownIconWhite } from '@/assets'
+
 import { useEditor, useOutsideClick } from './hooks'
 import { colorObject, fontObject } from './constants'
-import {
-  BackgroundOption,
-  CompleteButton,
-  EditorSelectOption,
-  editorSelectOptionList,
-  FontOption,
-  Paper,
-  ShareButton,
-  TextColorOption
-} from './components'
+import { CompleteButton, Paper, RadioGroup, Select } from './components'
 import CheckSendingCard from '../WriterRoll/CheckSendingCard'
 
 import styles from './editor.module.scss'
@@ -25,8 +18,6 @@ const Editor = () => {
     handleChangeCardWriter,
     cardText,
     handleChangeCardText,
-    editorType,
-    handleChangeEditorType,
     cardColor,
     handleChangeCardColor,
     fontColor,
@@ -44,8 +35,8 @@ const Editor = () => {
   const [isCheckSendingModalOpen, setIsCheckSendingModalOpen] = useState(false)
   const editorSelectOptionRef = useRef(null)
 
-  const handleOpenEditorSelectOption = useCallback(() => {
-    setEditorSelectOptionVisible(true)
+  const handleToggleEditorSelectOption = useCallback(() => {
+    setEditorSelectOptionVisible((prev) => !prev)
   }, [])
 
   const handleCloseEditorSelectOption = useCallback(() => {
@@ -97,57 +88,42 @@ const Editor = () => {
 
       <div
         ref={editorSelectOptionRef}
-        className={cx(styles['editor-select'], {
+        className={cx(styles['editor-select-container'], {
           [styles.visible]: editorSelectOptionVisible
         })}
-        onClick={handleOpenEditorSelectOption}
       >
-        <EditorSelectOption type={editorType} onChangeType={handleChangeEditorType}>
-          {editorType === editorSelectOptionList[0] && (
-            <div className={styles['editor-select-option-container']}>
-              <div className={cx(styles['editor-select-option-list'], styles['paper-color'])}>
-                {cardColorList.map((p) => (
-                  <BackgroundOption
-                    key={p}
-                    value={p}
-                    onChange={handleChangeCardColor}
-                    checked={p === cardColor}
-                  />
-                ))}
-              </div>
+        <div
+          className={styles['editor-select-toggle-container']}
+          onClick={handleToggleEditorSelectOption}
+        >
+          <div className={styles['editor-select-toggle']}>
+            <ArrowDownIconWhite />
+          </div>
+        </div>
+        <div className={styles['editor-select']}>
+          <div className={styles['editor-select-body']}>
+            <div className={styles['editor-select-type']}>
+              <div className={styles['editor-select-type-title']}>배경</div>
+              <RadioGroup
+                options={cardColorList}
+                value={cardColor}
+                onChange={handleChangeCardColor}
+              />
             </div>
-          )}
-          {editorType === editorSelectOptionList[1] && (
-            <div className={styles['editor-select-option-container']}>
-              <div>
-                <div className={styles['editor-select-title']}>글꼴</div>
-                <div className={styles['editor-select-option-list']}>
-                  {fontStyleList.map((f) => (
-                    <FontOption
-                      key={f}
-                      value={f}
-                      onChange={handleChangeFontStyle}
-                      checked={f === fontStyle}
-                    />
-                  ))}
-                </div>
-              </div>
-              <div>
-                <div className={styles['editor-select-title']}>글자 색</div>
-                <div className={styles['editor-select-option-list']}>
-                  {fontColorList.map((t) => (
-                    <TextColorOption
-                      key={t}
-                      value={t}
-                      onChange={handleChangeFontColor}
-                      checked={t === fontColor}
-                    />
-                  ))}
-                </div>
-              </div>
+            <div className={styles['editor-select-type']}>
+              <div className={styles['editor-select-type-title']}>폰트</div>
+              <Select options={fontStyleList} value={fontStyle} onChange={handleChangeFontStyle} />
             </div>
-          )}
-        </EditorSelectOption>
+            <div className={styles['editor-select-type']}>
+              <div className={styles['editor-select-type-title']}>글자 색</div>
+              <RadioGroup
+                options={fontColorList}
+                value={fontColor}
+                onChange={handleChangeFontColor}
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
       {isCheckSendingModalOpen && (

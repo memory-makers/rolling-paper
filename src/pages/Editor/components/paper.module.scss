@@ -3,5 +3,9 @@
   height: 100%;
   padding: 66px 30px;
   font-size: 32px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
   resize: none;
+  outline: none !important;
 }

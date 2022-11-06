@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { fetchPaperId_API } from '@/api/rollingpaper'
 
-import { editorSelectOptionList } from '../components'
 import { CARD_COLOR_LIST, FONT_COLOR_LIST, FONT_STYLE_LIST } from '../constants'
 
 export type onChangeType = (value: ChangeEvent<HTMLInputElement>) => void
@@ -30,7 +29,6 @@ export const useEditor = () => {
   const [cardWriter, setCardWriter] = useState('')
   const [cardText, setCardText] = useState('')
 
-  const [editorType, setEditorType] = useState(editorSelectOptionList[0])
   const [cardColor, setCardColor] = useState(CARD_COLOR_LIST[0])
   const [fontStyle, setFontStyle] = useState(FONT_STYLE_LIST[0])
   const [fontColor, setFontColor] = useState(FONT_COLOR_LIST[0])
@@ -38,7 +36,6 @@ export const useEditor = () => {
   const getAllSavedEditorValue = useCallback(() => {
     setCardWriter(getEditorValue('cardWriter') || '')
     setCardText(getEditorValue('cardText') || '')
-    setEditorType(getEditorValue('editorType') || editorSelectOptionList[0])
     setCardColor(getEditorValue('cardColor') || CARD_COLOR_LIST[0])
     setFontStyle(getEditorValue('fontStyle') || FONT_STYLE_LIST[0])
     setFontColor(getEditorValue('fontColor') || FONT_COLOR_LIST[0])
@@ -89,19 +86,14 @@ export const useEditor = () => {
     setCardText(e.target.value)
   }, [])
 
-  const handleChangeEditorType = useCallback((type: string) => {
-    setEditorType(type)
-    saveEditorValue('editorType', type)
-  }, [])
-
   const handleChangeCardColor: onChangeType = useCallback((e) => {
     setCardColor(e.target.value)
     saveEditorValue('cardColor', e.target.value)
   }, [])
 
-  const handleChangeFontStyle: onChangeType = useCallback((e) => {
-    setFontStyle(e.target.value)
-    saveEditorValue('fontStyle', e.target.value)
+  const handleChangeFontStyle = useCallback((_fontStyle: string) => {
+    setFontStyle(_fontStyle)
+    saveEditorValue('fontStyle', _fontStyle)
   }, [])
 
   const handleChangeFontColor: onChangeType = useCallback((e) => {
@@ -115,8 +107,6 @@ export const useEditor = () => {
     handleChangeCardWriter,
     cardText,
     handleChangeCardText,
-    editorType,
-    handleChangeEditorType,
     cardColor,
     handleChangeCardColor,
     fontColor,

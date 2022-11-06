@@ -8,10 +8,7 @@
   width: 100%;
   height: 100%;
   padding: 42px 24px;
-  svg {
-    width: 100%;
-    height: auto;
-  }
+
   .home-content {
     display: flex;
     flex-direction: column;
@@ -20,6 +17,7 @@
     padding: 0 35px;
   }
   .card-container {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(3, minmax(85px, 1fr));
     grid-template-rows: repeat(3, minmax(85px, 1fr));
@@ -29,7 +27,7 @@
   }
 
   .home-description {
-    margin: 16px 0;
+    margin: 24px 0;
     text-align: center;
     line-height: 32px;
     @include txt.typograpy('basic', 24px, 400);
