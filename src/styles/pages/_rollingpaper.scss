@@ -1,6 +1,24 @@
 //movable reset
 @use '../colors';
 
+// page
+.rollingpaper-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  &.light {
+    background-color: $mainBg;
+    color: #000;
+  }
+  &.dark {
+    background-color: $darkBg;
+    color: #fff;
+  }
+}
+
 // library style
 
 // movable sticker style
@@ -47,6 +65,7 @@
 .card-content-component {
   display: flex;
   flex-direction: column;
+  margin: 64px;
 }
 .card-content {
   display: grid !important;
