@@ -11,12 +11,5 @@
   min-width: 380px;
   width: 100%;
   height: 100vh;
-  &.light {
-    background-color: $mainBg;
-    color: #000;
-  }
-  &.dark {
-    background-color: $darkBg;
-    color: #fff;
-  }
+  background-color: $mainBg;
 }
