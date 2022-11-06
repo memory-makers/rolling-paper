@@ -28,7 +28,7 @@ const Content = ({ isModifyMode, title, cards, handleClickCard, children }: Cont
   }
   useEffect(() => {
     getPaperIdNickname()
-  }, [urlNameState])
+  }, [])
 
   const half = Math.ceil(Math.sqrt(cards.length))
   const modifyModeDisable = isModifyMode
