@@ -3,6 +3,7 @@
 .editor {
   width: 100%;
   height: 100%;
+  padding: 12px;
 
   .editor-header {
     display: flex;
@@ -21,6 +22,7 @@
     .editor-nickname {
       margin-bottom: 12px;
       font-size: 24px;
+      color: colors.$textBlack;
 
       label {
         display: flex;
@@ -41,42 +43,49 @@
     }
   }
 
-  .editor-select {
+  .editor-select-container {
     position: absolute;
     left: 0;
     bottom: 0;
     width: 100%;
     height: 40%;
-    transform: translateY(calc(100% - 60px));
+    transform: translateY(calc(100% - 28px));
     transition: all 0.5s;
 
     &.visible {
       transform: translateY(0);
     }
 
-    .editor-select-option-container {
+    .editor-select-toggle-container {
+      display: flex;
+      justify-content: center;
+
+      .editor-select-toggle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80px;
+        height: 28px;
+        border-radius: 20px 20px 0 0;
+        background-color: colors.$point;
+        cursor: pointer;
+      }
+    }
+
+    .editor-select {
       width: 100%;
       height: 100%;
-      padding: 24px;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.2);
 
-      .editor-select-title {
-        font-size: 24px;
-        font-weight: 400;
-        font-family: 'LeeSeoyun';
-        color: colors.$white;
-      }
-
-      .editor-select-option-list {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-
-        input[type='radio']:checked {
-          accent-color: colors.$point;
-        }
-
-        &.paper-color {
-          row-gap: 36px;
+      .editor-select-body {
+        .editor-select-type {
+          .editor-select-type-title {
+            padding-left: 10px;
+            font-size: 24px;
+            font-weight: 400;
+            color: colors.$white;
+          }
         }
       }
     }
