@@ -18,10 +18,9 @@ export const RadioGroup = ({
   <div className={styles['radio-group-container']}>
     <div className={styles['radio-group']}>
       {options.map((option) => (
-        <div className={cx(styles['radio-container'])}>
+        <div key={option} className={cx(styles['radio-container'])}>
           <input
             className={cx(styles.radio)}
-            key={option}
             type="checkbox"
             checked={option === value}
             value={option}

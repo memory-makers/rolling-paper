@@ -58,6 +58,7 @@ export const Select = ({
           <ul className={styles['select-dropdown-list']}>
             {options.map((option) => (
               <li
+                key={option}
                 onClick={() => handleSelectItem(option)}
                 className={cx(styles['select-dropdown-option'], {
                   [styles['select-dropdown-option-checked']]: option === value
