@@ -58,9 +58,9 @@ export const getIdToNicknameAPI = async (paperId: number) => {
 export const setNicknameAPI = async (nickname: string | null) => {
   try {
     if (!nickname) return
-    const data = { nickname }
-    const res = await axiosClient.put(NICKNAME, data)
-    return res
+    const name = { nickname }
+    const { data } = await axiosClient.put(NICKNAME, name)
+    return data
   } catch (error) {
     console.log(error, 'set nickname error')
   }
@@ -69,8 +69,8 @@ export const setNicknameAPI = async (nickname: string | null) => {
 // 토큰 닉네임 조회
 export const getNicknameAPI = async () => {
   try {
-    const res = await axiosClient.get(`${NICKNAME}/nickname`)
-    return res.data
+    const { data } = await axiosClient.get<string>(`${NICKNAME}/nickname`)
+    return data
   } catch (error) {
     console.log(error, 'get nickname error')
   }
