@@ -15,6 +15,10 @@ const BlockRoll = ({ date, setIsModalOpen }: Props) => {
     if (date) return convertDateStringFormat(date)
   }, [date])
 
+  const handleClickApply = () => {
+    setIsModalOpen(false)
+  }
+
   return (
     <Modal setIsModalOpen={setIsModalOpen}>
       <ModalText type="title">
@@ -27,7 +31,9 @@ const BlockRoll = ({ date, setIsModalOpen }: Props) => {
         <span className={styles.point}>오픈 날짜 이후</span>부터 <br />
         확인할 수 있어요!
       </ModalText>
-      <ModalButton type="button">확인</ModalButton>
+      <ModalButton type="button" onClick={handleClickApply}>
+        확인
+      </ModalButton>
     </Modal>
   )
 }
