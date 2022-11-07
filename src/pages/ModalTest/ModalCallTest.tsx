@@ -8,7 +8,8 @@ import { ModalButton } from '@/components/Modal/ModalItem'
 // import MakeNickname from '../Nickname/MakeNickname'
 // import EditNickname from '../Nickname/EditNickname'
 // import CheckLogout from '../CheckLogout'
-import ShareRoll from '../ShareRoll'
+// import ShareRoll from '../ShareRoll'
+import BlockRoll from '../BlockRoll'
 
 const ModalCallTest = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -30,11 +31,12 @@ const ModalCallTest = () => {
       {/* {isModalOpen && <DeleteRoll setIsModalOpen={setIsModalOpen} />} */}
       {/* {isModalOpen && <CheckSendingCard setIsModalOpen={setIsModalOpen} />} */}
       {/* {isModalOpen && <CheckLogout setIsModalOpen={setIsModalOpen} />} */}
-      {isModalOpen && (
+      {/* {isModalOpen && (
         <ShareRoll setIsModalOpen={setIsModalOpen} paperUrl="aaa-aaa-aaa">
           롤링페이퍼를 친구들에게 <br /> 작성해달라고 공유해볼까요?
         </ShareRoll>
-      )}
+      )} */}
+      {isModalOpen && <BlockRoll setIsModalOpen={setIsModalOpen} date="2022-10-12" />}
     </>
   )
 }

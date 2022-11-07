@@ -51,7 +51,7 @@ const Header = ({ children, text, type }: HeaderProps) => {
 
   const getNickname = async () => {
     const nickname = await getNicknameAPI()
-    if (!nickname) setIsInitModalOpen((prev) => !prev)
+    if (!nickname) setIsInitModalOpen(true)
     else nameDispatch({ type: LOAD_NAME, payload: nickname })
   }
 
@@ -94,6 +94,7 @@ const Header = ({ children, text, type }: HeaderProps) => {
             onClick={handleClickEditModal}
           >
             <span className="header_name">{name}</span>
+            {!name && <span className="header_name">[☞ 닉네임 설정하기]</span>}
             {name && <span>님의</span>}
           </button>
           <br />
