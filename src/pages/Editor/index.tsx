@@ -96,7 +96,12 @@ const Editor = () => {
           className={styles['editor-select-toggle-container']}
           onClick={handleToggleEditorSelectOption}
         >
-          <div className={styles['editor-select-toggle']}>
+          <div
+            className={cx(styles['editor-select-toggle'], {
+              [styles['editor-select-toggle-down']]: editorSelectOptionVisible,
+              [styles['editor-select-toggle-up']]: !editorSelectOptionVisible
+            })}
+          >
             <ArrowDownIconWhite />
           </div>
         </div>
