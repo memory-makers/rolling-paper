@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from 'react'
 import cx from 'classnames'
 import { ArrowDownIcon, ArrowUpIcon } from '@/assets'
 import { useOutsideClick } from '../hooks'
-import { FONT_STYLE_OPTION_TITLE } from '../constants'
+import { fontObject, FONT_STYLE_OPTION_TITLE } from '../constants'
 
 import styles from './select.module.scss'
 
@@ -42,7 +42,11 @@ export const Select = ({
         [styles['select-container-open']]: open
       })}
     >
-      <div className={styles['select-selector']} onClick={handleToggleSelectDropdown}>
+      <div
+        className={styles['select-selector']}
+        style={{ fontFamily: fontObject[value] }}
+        onClick={handleToggleSelectDropdown}
+      >
         {FONT_STYLE_OPTION_TITLE[value]}
       </div>
       <div className={styles['select-arrow']}>
@@ -58,6 +62,7 @@ export const Select = ({
                 className={cx(styles['select-dropdown-option'], {
                   [styles['select-dropdown-option-checked']]: option === value
                 })}
+                style={{ fontFamily: fontObject[option] }}
               >
                 {FONT_STYLE_OPTION_TITLE[option]}
               </li>

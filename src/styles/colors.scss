@@ -8,12 +8,14 @@ $cardBeige: #ffdebf;
 $cardWhite: #ffffff;
 
 // text color
-$textRed: #e56262;
-$textBlue: #3498f5;
-$textGreen: #93c860;
-$textPurple: #f372a0;
-$textYellow: #f58b28;
-$textBlack: #212121;
+$textRed: #e66262;
+$textBlue: #3499f5;
+$textGreen: #94c960;
+$textPink: #f373a1;
+$textOrange: #f58b29;
+$textPurple: #ad00ff;
+$textYellow: #ffd600;
+$textBlack: #3e372b;
 $textGray: #a4a4a4;
 
 // main color
@@ -49,6 +51,8 @@ $colorMap: (
   'textRed': $textRed,
   'textBlue': $textBlue,
   'textGreen': $textGreen,
+  'textPink': $textPink,
+  'textOrange': $textOrange,
   'textPurple': $textPurple,
   'textYellow': $textYellow,
   'textBlack': $textBlack,
