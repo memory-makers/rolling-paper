@@ -94,7 +94,6 @@ const Header = ({ children, text, type }: HeaderProps) => {
             onClick={handleClickEditModal}
           >
             <span className="header_name">{name}</span>
-            {!name && <span className="header_name">[☞ 닉네임 설정하기]</span>}
             {name && <span>님의</span>}
           </button>
           <br />
