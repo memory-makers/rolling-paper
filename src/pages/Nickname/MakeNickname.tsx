@@ -1,6 +1,6 @@
 import { ChangeEventHandler, FormEvent, useState } from 'react'
+import styles from '@/components/Modal/modal.module.scss'
 
-import Modal from '@/components/Modal'
 import { ModalButton, ModalInput, ModalText } from '@/components/Modal/ModalItem'
 import { setNicknameAPI } from '@/api/user'
 import { EDIT_NAME, useName } from '@/store/nickname'
@@ -28,24 +28,26 @@ const MakeNickname = ({ setIsModalOpen }: Props) => {
   }
 
   return (
-    <Modal setIsModalOpen={setIsModalOpen}>
-      <form onSubmit={handleSubmitSave}>
-        <ModalText type="title">
-          내가 누구인지 알 수 있도록 <br />
-          닉네임을 설정해볼까요?
-        </ModalText>
-        <ModalText type="label">닉네임</ModalText>
-        <ModalInput
-          type="text"
-          name="nickname"
-          maxLength={8}
-          placeholder="8글자 이내로 나를 표현해봐요!"
-          onChange={handleNicknameChange}
-        />
-        {message && <ModalText type="warning">{message}</ModalText>}
-        <ModalButton type="submit">완료</ModalButton>
-      </form>
-    </Modal>
+    <div className={styles.modalContainer}>
+      <div className={styles.modalBody}>
+        <form onSubmit={handleSubmitSave}>
+          <ModalText type="title">
+            내가 누구인지 알 수 있도록 <br />
+            닉네임을 설정해볼까요?
+          </ModalText>
+          <ModalText type="label">닉네임</ModalText>
+          <ModalInput
+            type="text"
+            name="nickname"
+            maxLength={8}
+            placeholder="8글자 이내로 나를 표현해봐요!"
+            onChange={handleNicknameChange}
+          />
+          {message && <ModalText type="warning">{message}</ModalText>}
+          <ModalButton type="submit">완료</ModalButton>
+        </form>
+      </div>
+    </div>
   )
 }
 

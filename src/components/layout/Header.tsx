@@ -1,16 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
 import classNames from 'classnames'
 
 import { getNicknameAPI } from '@/api/user'
 import { useTheme } from '@/store/theme'
 import { LOAD_NAME, useName } from '@/store/nickname'
-import { LOAD_URL_NAME, useUrlName } from '@/store/urlNickname'
 import MakeNickname from '@/pages/Nickname/MakeNickname'
 import EditNickname from '@/pages/Nickname/EditNickname'
 import tokenStore from '@/api/tokenStore'
 import CheckLogout from '@/pages/CheckLogout'
-import { convertUrlToHostData } from '@/utils/rollingPaper/paper'
 
 import LogoutImg from '/imgs/logout.png'
 
@@ -28,20 +25,14 @@ const Header = ({ children, text, type }: HeaderProps) => {
   const buttonVisible = type === 'only-button' || type === 'title-button'
 
   const token = tokenStore.getAccessToken()
-  const { rollingPaperId } = useParams()
-  const { pathname } = useLocation()
-  const [isMypage, setIsMypage] = useState(false)
 
   const { state: nameState, dispatch: nameDispatch } = useName()
-  const { state: urlNameState, dispatch: urlNameDispatch } = useUrlName()
   const [isInitModalOpen, setIsInitModalOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
   const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false)
 
-  const isPathRollingpaper = pathname.includes('rollingpaper')
-
   const handleClickEditModal = () => {
-    if (!token || !isMypage) return
+    if (!token) return
     setIsEditModalOpen((prev) => !prev)
   }
 
@@ -51,61 +42,33 @@ const Header = ({ children, text, type }: HeaderProps) => {
 
   const getNickname = async () => {
     const nickname = await getNicknameAPI()
-    if (!nickname) setIsInitModalOpen(true)
-    else nameDispatch({ type: LOAD_NAME, payload: nickname })
-  }
-
-  const getPaperIdNickname = async () => {
-    if (!rollingPaperId) return
-    const hostData = await convertUrlToHostData(rollingPaperId)
-    if (!hostData) return
-    return urlNameDispatch({
-      type: LOAD_URL_NAME,
-      payload: hostData
-    })
+    if (!nickname) return setIsInitModalOpen(true)
+    nameDispatch({ type: LOAD_NAME, payload: nickname })
   }
 
   const name = useMemo(() => {
-    if (isMypage) return nameState
-    return urlNameState.hostName
-  }, [nameState, urlNameState.hostName])
+    return nameState
+  }, [nameState])
 
   useEffect(() => {
-    if (pathname.includes('mypage')) {
-      getNickname()
-      setIsMypage(true)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (pathname.includes('rollingpaper')) {
-      getPaperIdNickname()
-      setIsMypage(false)
-    }
+    getNickname()
   }, [])
 
   return (
     <header className={classNames('header', state.theme, type)}>
       {titleVisible && (
         <div>
-          <button
-            type="button"
-            className={classNames({ isCursor: isPathRollingpaper })}
-            onClick={handleClickEditModal}
-          >
+          <button type="button" onClick={handleClickEditModal}>
             <span className="header_name">{name}</span>
-            {!name && <span className="header_name">[☞ 닉네임 설정하기]</span>}
             {name && <span>님의</span>}
           </button>
           <br />
           <span>{text}</span>
         </div>
       )}
-      {isMypage && (
-        <button type="button" className="logout_button" onClick={handleClickLogout}>
-          <img src={LogoutImg} className="" alt="logout" />
-        </button>
-      )}
+      <button type="button" className="logout_button" onClick={handleClickLogout}>
+        <img src={LogoutImg} className="" alt="logout" />
+      </button>
       {buttonVisible && children}
 
       {isInitModalOpen && <MakeNickname setIsModalOpen={setIsInitModalOpen} />}

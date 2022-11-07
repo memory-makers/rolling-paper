@@ -22,6 +22,8 @@ import StickerType from '@/utils/rollingPaper/Sticker.type'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import classNames from 'classnames'
+import { convertUrlToHostData } from '@/utils/rollingPaper/paper'
+import { LOAD_URL_NAME, useUrlName } from '@/store/urlNickname'
 
 const RollingPaper = () => {
   const urlId = useParams().rollingPaperId
@@ -40,6 +42,7 @@ const RollingPaper = () => {
   const [beforeOpen, setBeforeOpen] = useState(true)
   const [untilOpen, setUntilOpen] = useState('')
   const { state, dispatch } = useTheme()
+  const { dispatch: urlNameDispatch } = useUrlName()
 
   useEffect(() => {
     fetchPaperId_API(urlId, setRollingPaperId, navigate)
@@ -56,6 +59,20 @@ const RollingPaper = () => {
     }
     if (state.theme !== rollingPaper?.theme) dispatch({ type: 'toggle' })
   }, [rollingPaper])
+
+  const getPaperIdNickname = async () => {
+    if (!urlId) return
+    const hostData = await convertUrlToHostData(urlId)
+    if (!hostData) return
+    return urlNameDispatch({
+      type: LOAD_URL_NAME,
+      payload: hostData
+    })
+  }
+
+  useEffect(() => {
+    getPaperIdNickname()
+  }, [])
 
   const handleClickCard = useCallback(
     (id: number) => {
