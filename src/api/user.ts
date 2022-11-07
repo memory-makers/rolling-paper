@@ -40,7 +40,6 @@ interface getIdToNicknameAPIResponse {
 
 interface Result {
   nickname: string
-  status: string
 }
 
 export const getIdToNicknameAPI = async (paperId: number) => {
@@ -69,8 +68,8 @@ export const setNicknameAPI = async (nickname: string | null) => {
 // 토큰 닉네임 조회
 export const getNicknameAPI = async () => {
   try {
-    const res = await axiosClient.get(`${NICKNAME}/nickname`)
-    return res.data
+    const { data } = await axiosClient.get(`${NICKNAME}/nickname`)
+    return data.result
   } catch (error) {
     console.log(error, 'get nickname error')
   }
