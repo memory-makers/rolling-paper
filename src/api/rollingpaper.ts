@@ -80,7 +80,7 @@ export const updateCard_API = async (card: Card) => {
     if (!card.paperId) return
     const res = await axiosClient.post('cards', card)
 
-    if (!res.data.success) {
+    if (!res.data) {
       return false
     }
 
