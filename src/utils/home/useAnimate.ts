@@ -11,7 +11,7 @@ function useAnimate() {
     if (logoRef.current) {
       gsap
         .timeline()
-        .set(logoQ('Line'), { opacity: 0 })
+        .set(logoQ('line'), { opacity: 0 })
         .set(logoQ('.text'), { opacity: 0 })
         .fromTo(
           logoQ('.plane'),
@@ -19,7 +19,7 @@ function useAnimate() {
           { opacity: 1, x: 0, y: 0, duration: 1, ease: Back.easeOut }
         )
         .fromTo(
-          logoQ('.plane-left Line'),
+          logoQ('.plane-left line'),
           {
             scaleX: 0,
             transformOrigin: 'right'
@@ -27,7 +27,7 @@ function useAnimate() {
           { opacity: 1, scaleX: 1, duration: 0.5 }
         )
         .fromTo(
-          logoQ('.plane-right Line'),
+          logoQ('.plane-right line'),
           {
             scaleX: 0,
             transformOrigin: 'left'

@@ -1,11 +1,10 @@
 import { ReactNode, useState } from 'react'
 import styles from './shareRollItem.module.scss'
-
 import { ModalButton, ModalInput, ModalText } from '@/components/Modal/ModalItem'
 import PopupCopy from '@/components/Modal/PopupCopy'
 
 import { CLIENT_PAPER_URL } from '@/config/commonLink'
-import { ClipboardIcon, ShareIcon2 } from '@/assets'
+import { ClipboardIcon, DownloadIcon, ShareIcon2 } from '@/assets'
 
 interface Props {
   paperUrl: string | undefined
@@ -38,6 +37,12 @@ const ShareRollItem = ({ paperUrl, children }: Props) => {
     navigator.share(shareData)
   }
 
+  const handleImageDownloadClick = () => {
+    const rollingpaper = document.getElementById('rollingpaper-container')
+    if (rollingpaper) {
+    }
+  }
+
   return (
     <>
       <ModalText type="title">{children}</ModalText>
@@ -54,13 +59,18 @@ const ShareRollItem = ({ paperUrl, children }: Props) => {
           <ClipboardIcon />
         </button>
       </div>
-      {!!paperUrl && (
-        <ModalButton type="button" onClick={handleShareClick}>
-          <span>공유하기</span>
-          <ShareIcon2 />
+      <div className={styles.buttons}>
+        {!!paperUrl && (
+          <ModalButton type="button" onClick={handleShareClick}>
+            <span>공유하기</span>
+            <ShareIcon2 />
+          </ModalButton>
+        )}
+        <ModalButton type="button" onClick={handleImageDownloadClick}>
+          <span>이미지로 저장하기</span>
+          <DownloadIcon />
         </ModalButton>
-      )}
-
+      </div>
       <PopupCopy isActive={isPopupActive} />
     </>
   )

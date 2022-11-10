@@ -24,6 +24,7 @@ export { ReactComponent as PrevIcon } from './prev-icn.svg'
 export { ReactComponent as RotateIcon } from './rotate-icn.svg'
 
 export { ReactComponent as ShareIcon } from './share-icn.svg'
+export { ReactComponent as DownloadIcon } from './download-icn.svg'
 export { ReactComponent as ShareIcon2 } from './share.svg'
 export { ReactComponent as StickerBorder } from './sticker-border.svg'
 export { ReactComponent as StickerIcon } from './sticker-icn.svg'

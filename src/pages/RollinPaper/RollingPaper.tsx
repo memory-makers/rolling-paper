@@ -109,7 +109,7 @@ const RollingPaper = () => {
     setIsModifyMode(!isModifyMode)
   }
   return rollingPaper ? (
-    <div className={classNames('rollingpaper-container', state.theme)}>
+    <div id="rollingpaper-container" className={classNames('rollingpaper-container', state.theme)}>
       {isModifyMode ? (
         <ModifyModeButtons
           handleModifyMode={handleModifyMode}

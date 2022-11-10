@@ -197,7 +197,7 @@ export const updateStickers_API = async (
         })
       }
     })
-    const res = await axiosClient.post(`stickers`, reqStickers)
+    const res = await axiosClient.post(`stickers?paperId=${paperId}`, reqStickers)
     const resData = res.data as StickersResponse
     if (!resData.result.stickers) return
     const resStickers = resData.result.stickers.map((sticker) => {
