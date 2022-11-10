@@ -38,7 +38,7 @@ export const fetchCards_API = async (
     if (!paperId) return
     const res = await axiosClient.get(`cards/${paperId}`)
     const data = res.data as CardResponse
-    if (!data.result.card) return
+    if (!data.result) return
     const cards = data.result.card.map((card) => {
       return {
         content: card.cardText,
@@ -100,7 +100,7 @@ export const fetchStickers_API = async (
     const params = { paperId: paperId }
     const res = await axiosClient.get(`stickers`, { params })
     const data = res.data as StickersResponse
-    if (!data.result.stickers) return
+    if (!data.result) return
     const stickers = data.result.stickers.map((sticker) => {
       return {
         id: sticker.stickerId,
@@ -199,7 +199,7 @@ export const updateStickers_API = async (
     })
     const res = await axiosClient.post(`stickers?paperId=${paperId}`, reqStickers)
     const resData = res.data as StickersResponse
-    if (!resData.result.stickers) return
+    if (!resData.result) return
     const resStickers = resData.result.stickers.map((sticker) => {
       return {
         id: sticker.stickerId,
