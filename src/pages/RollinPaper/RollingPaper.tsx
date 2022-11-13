@@ -1,3 +1,4 @@
+import React, { useCallback, useEffect, useState } from 'react'
 import {
   fetchCards_API,
   fetchPaperId_API,
@@ -19,11 +20,11 @@ import { useTheme } from '@/store/theme'
 import CardType from '@/utils/rollingPaper/Card.type'
 import { dateDiffFormat } from '@/utils/rollingPaper/dateDiffFormat'
 import StickerType from '@/utils/rollingPaper/Sticker.type'
-import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import classNames from 'classnames'
 import { convertUrlToHostData } from '@/utils/rollingPaper/paper'
 import { LOAD_URL_NAME, useUrlName } from '@/store/urlNickname'
+import HomeButton from '@/components/rollingpaper/button/HomeButton'
 
 const RollingPaper = () => {
   const urlId = useParams().rollingPaperId
@@ -110,6 +111,7 @@ const RollingPaper = () => {
   }
   return rollingPaper ? (
     <div id="rollingpaper-container" className={classNames('rollingpaper-container', state.theme)}>
+      <HomeButton />
       {isModifyMode ? (
         <ModifyModeButtons
           handleModifyMode={handleModifyMode}

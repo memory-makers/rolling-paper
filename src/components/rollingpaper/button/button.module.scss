@@ -18,3 +18,14 @@
   bottom: 36px;
   @include txt.typograpy('basic', 24px);
 }
+
+.home-btn {
+  z-index: 101;
+  position: absolute;
+  top: 20px;
+  left: 8px;
+  height: 68px;
+  width: auto;
+  cursor: pointer;
+  backdrop-filter: blur(0.3px);
+}

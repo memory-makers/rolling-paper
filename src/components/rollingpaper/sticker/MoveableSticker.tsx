@@ -84,7 +84,6 @@ const MoveableSticker = ({ sticker, handleUpdateStickers, handleDeleteSticker }:
   }
   const handleRotateEnd = (e: OnRotateEnd) => {
     if (e.lastEvent) {
-      console.log(e.target)
       style.rotate = e.lastEvent.beforeRotate
       handleUpdateStickers({ ...sticker, rotate: style.rotate })
     }
