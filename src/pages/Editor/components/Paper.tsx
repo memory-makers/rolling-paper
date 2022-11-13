@@ -22,6 +22,7 @@ export const Paper = ({ value, onChange, backgroundColor, color, fontFamily }: P
       value={value}
       onChange={onChange}
       spellCheck={false}
+      maxLength={200}
     />
   )
 }

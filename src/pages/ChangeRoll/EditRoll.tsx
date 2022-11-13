@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useState } from 'react'
+import { ChangeEventHandler, KeyboardEventHandler, useState } from 'react'
 import cx from 'classnames'
 import styles from './editRoll.module.scss'
 
@@ -27,6 +27,10 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, paperUrl, setIsModal
 
   const handlePaperTitleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setPaperTitle(e.currentTarget.value)
+  }
+
+  const handleDueDateInputKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
+    e.preventDefault()
   }
 
   const handleDueDateChange: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -69,6 +73,7 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, paperUrl, setIsModal
         value={dueDate}
         min={convertDaysFromToday(1)}
         onChange={handleDueDateChange}
+        onKeyDown={handleDueDateInputKeyDown}
       />
 
       <ModalText type="label">테마를 선택해주세요!</ModalText>
