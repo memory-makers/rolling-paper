@@ -45,6 +45,7 @@
 .text {
   display: flex;
   word-break: break-all;
+  white-space: pre-wrap;
   width: 100%;
   @each $colorKey, $colorValue in colors.$colorMap {
     &.#{$colorKey} {

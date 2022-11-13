@@ -1,18 +1,29 @@
 import { ReactNode, useState } from 'react'
 import styles from './shareRollItem.module.scss'
 import { ModalButton, ModalInput, ModalText } from '@/components/Modal/ModalItem'
-import PopupCopy from '@/components/Modal/PopupCopy'
 
 import { CLIENT_PAPER_URL } from '@/config/commonLink'
 import { ClipboardIcon, DownloadIcon, ShareIcon2 } from '@/assets'
+import { checkBrowser } from '@/utils/common/checkBrowser'
+import Popup from '@/components/Modal/Popup'
+import { toPng, toSvg } from 'html-to-image'
+import _, { size } from 'lodash'
+import { useTheme } from '@/store/theme'
+import colors from '@/styles/colors.scss'
 
 interface Props {
   paperUrl: string | undefined
   children: ReactNode
+  size?: { width: number; height: number }
 }
 
-const ShareRollItem = ({ paperUrl, children }: Props) => {
+function filter(node: HTMLElement) {
+  return node.tagName !== 'i'
+}
+const ShareRollItem = ({ paperUrl, children, size }: Props) => {
   const [isPopupActive, setIsPopupActive] = useState(false)
+  const [popupContent, setPopupContent] = useState('')
+  const { state, dispatch } = useTheme()
   const fullPaperUrl = paperUrl ? `${CLIENT_PAPER_URL}${paperUrl}` : '유효하지 않은 URL입니다.'
   let popupDelay: NodeJS.Timer
 
@@ -26,6 +37,7 @@ const ShareRollItem = ({ paperUrl, children }: Props) => {
     navigator.clipboard.writeText(fullPaperUrl)
 
     setIsPopupActive(true)
+    setPopupContent('링크 복사 완료!')
     if (popupDelay) clearTimeout(popupDelay)
     popupDelay = setTimeout(() => {
       setIsPopupActive(false)
@@ -38,8 +50,31 @@ const ShareRollItem = ({ paperUrl, children }: Props) => {
   }
 
   const handleImageDownloadClick = () => {
-    const rollingpaper = document.getElementById('rollingpaper-container')
-    if (rollingpaper) {
+    const rollingpaper = document.getElementsByClassName(
+      'card-content-wrapper'
+    )[0] as HTMLDivElement
+    if (checkBrowser()) {
+      setPopupContent('(IE, Safari X)\n다른 브라우저로 시도해주세요.')
+      setIsPopupActive(true)
+      if (popupDelay) clearTimeout(popupDelay)
+      popupDelay = setTimeout(() => {
+        setIsPopupActive(false)
+      }, 1000)
+    } else {
+      if (rollingpaper && size) {
+        toSvg(rollingpaper, {
+          height: size.height,
+          width: size.width,
+          backgroundColor: state.theme === 'dark' ? '#352e20' : '#fff8eb'
+        }).then((image) => {
+          const link = window.document.createElement('a')
+          link.setAttribute('style', 'display:none; width: 100%;')
+          link.setAttribute('crossorigin', 'anonymous')
+          link.download = `rollingpaper_${paperUrl}` + '.svg'
+          link.href = image
+          link.click()
+        })
+      }
     }
   }
 
@@ -66,12 +101,14 @@ const ShareRollItem = ({ paperUrl, children }: Props) => {
             <ShareIcon2 />
           </ModalButton>
         )}
-        <ModalButton type="button" onClick={handleImageDownloadClick}>
-          <span>이미지로 저장하기</span>
-          <DownloadIcon />
-        </ModalButton>
+        {
+          <ModalButton type="button" onClick={handleImageDownloadClick}>
+            <span>이미지로 저장하기</span>
+            <DownloadIcon />
+          </ModalButton>
+        }
       </div>
-      <PopupCopy isActive={isPopupActive} />
+      <Popup isActive={isPopupActive} content={popupContent} />
     </>
   )
 }

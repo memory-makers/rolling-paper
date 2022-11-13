@@ -8,11 +8,12 @@ import { ReactComponent as ShareIcon } from '@/assets/share-icn.svg'
 interface ButtonsProps {
   handleModifyMode: () => void
   beforeOpen: boolean
+  size?: { width: number; height: number }
 }
 
 const kakao = (window as any).kakao
 
-const Buttons = ({ beforeOpen, handleModifyMode }: ButtonsProps) => {
+const Buttons = ({ beforeOpen, handleModifyMode, size }: ButtonsProps) => {
   const { rollingPaperId } = useParams()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -25,7 +26,7 @@ const Buttons = ({ beforeOpen, handleModifyMode }: ButtonsProps) => {
       {beforeOpen && <HeaderButton handleClick={handleModifyMode} icon={<StickerIcon />} />}
       <HeaderButton handleClick={handleClickButton} icon={<ShareIcon />} />
       {isModalOpen && (
-        <ShareRoll paperUrl={rollingPaperId} setIsModalOpen={setIsModalOpen}>
+        <ShareRoll size={size} paperUrl={rollingPaperId} setIsModalOpen={setIsModalOpen}>
           다른 친구들도 롤링페이퍼를 <br /> 써보라고 공유해줄까요?
         </ShareRoll>
       )}

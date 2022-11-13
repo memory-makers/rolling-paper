@@ -11,9 +11,17 @@ interface ContentProps {
   cards: CardType[]
   isModifyMode: boolean
   children: JSX.Element[]
+  setSize: ({ width, height }: { width: number; height: number }) => void
 }
 
-const Content = ({ isModifyMode, title, cards, handleClickCard, children }: ContentProps) => {
+const Content = ({
+  isModifyMode,
+  title,
+  cards,
+  handleClickCard,
+  children,
+  setSize
+}: ContentProps) => {
   const { rollingPaperId } = useParams()
   const { state: urlNameState, dispatch: urlNameDispatch } = useUrlName()
   const [scale, setScale] = useState(1.0)
@@ -34,7 +42,7 @@ const Content = ({ isModifyMode, title, cards, handleClickCard, children }: Cont
   useEffect(() => {
     const layout = document.querySelector('.layout') as HTMLDivElement
     const cardContent = document.querySelector('.card-content-component') as HTMLDivElement
-
+    setSize({ width: cardContent.offsetWidth, height: cardContent.offsetHeight })
     if (cardContent && ref.current && !isModifyMode) {
       const scaleHeight = layout.offsetHeight / cardContent.offsetHeight
       const scaleWidth = layout.offsetWidth / cardContent.offsetWidth

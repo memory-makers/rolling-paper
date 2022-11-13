@@ -42,6 +42,7 @@ const RollingPaper = () => {
   const [rollingPaper, setRollingPaper] = useState<RollingPaperType | null>(null)
   const [beforeOpen, setBeforeOpen] = useState(true)
   const [untilOpen, setUntilOpen] = useState('')
+  const [size, setSize] = useState({ width: 0, height: 0 })
   const { state, dispatch } = useTheme()
   const { dispatch: urlNameDispatch } = useUrlName()
 
@@ -118,9 +119,10 @@ const RollingPaper = () => {
           handleModifyDone={handleModifyDone}
         />
       ) : (
-        <Buttons beforeOpen={beforeOpen} handleModifyMode={handleModifyMode} />
+        <Buttons size={size} beforeOpen={beforeOpen} handleModifyMode={handleModifyMode} />
       )}
       <Content
+        setSize={setSize}
         isModifyMode={isModifyMode}
         title={rollingPaper.paperTitle}
         cards={cards}
