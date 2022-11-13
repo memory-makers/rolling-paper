@@ -114,7 +114,6 @@ export const editPaperAPI = async ({ paperId, paperTitle, dueDate, theme }: Edit
   try {
     const paper = { paperId, paperTitle, dueDate, theme }
     const { data } = await axiosClient.put(PAPER, paper)
-    console.log('res', data)
     return data
   } catch (error) {
     console.log(error, 'edit rolling paper error')

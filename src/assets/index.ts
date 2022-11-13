@@ -11,6 +11,7 @@ export { ReactComponent as CloseIcon } from './close-icn.svg'
 export { ReactComponent as ClosedModal } from './closed-modal.svg'
 export { ReactComponent as DeleteIcon } from './delete-icn.svg'
 
+export { ReactComponent as LogoIcon } from './logo.svg'
 export { ReactComponent as LogoArtIcon } from './logo-art.svg'
 export { ReactComponent as LogoTextIcon } from './logo-text.svg'
 export { ReactComponent as LogoLeftIcon } from './logo-left.svg'
