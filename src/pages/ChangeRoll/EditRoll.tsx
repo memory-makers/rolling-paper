@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useState } from 'react'
+import { ChangeEventHandler, KeyboardEventHandler, useState } from 'react'
 import cx from 'classnames'
 import styles from './editRoll.module.scss'
 
@@ -29,7 +29,7 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, paperUrl, setIsModal
     setPaperTitle(e.currentTarget.value)
   }
 
-  const handleDueDateInputKeyDown: ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleDueDateInputKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault()
   }
 

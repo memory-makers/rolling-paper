@@ -1,4 +1,4 @@
-import { ChangeEventHandler, MouseEventHandler } from 'react'
+import { ChangeEventHandler, KeyboardEventHandler, MouseEventHandler } from 'react'
 import styles from './makeRoll.module.scss'
 import cx from 'classnames'
 
@@ -26,7 +26,7 @@ const MakeRoll = ({
     setPaperTitle(e.currentTarget.value)
   }
 
-  const handleDueDateInputKeyDown: ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleDueDateInputKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
     e.preventDefault()
   }
 
