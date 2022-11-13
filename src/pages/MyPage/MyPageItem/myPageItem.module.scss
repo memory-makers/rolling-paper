@@ -3,57 +3,51 @@
 
 // Main Area
 .myPageMainContent {
-  position: relative;
-  width: 90%;
-  margin: 18px auto;
-
+  &:hover {
+    background: colors.$cardRed;
+  }
   .roll {
     display: flex;
     justify-content: center;
-    height: 78px;
-    border-radius: 28px;
+    padding: 16px 0;
+    border-bottom: 1px solid colors.$grayMid;
 
     .paperInfoWrap {
       display: flex;
-      width: 200px;
+      flex: 1 1 200px;
       justify-content: center;
       align-items: center;
-      background: colors.$point;
-      border: 1px solid colors.$point;
-      border-top-left-radius: 28px;
-      border-bottom-left-radius: 28px;
 
       p {
         width: 90%;
         display: -webkit-box;
+        padding-left: 8px;
         -webkit-box-orient: vertical;
         overflow: hidden;
         -webkit-line-clamp: 2;
         word-break: break-all;
         text-overflow: ellipsis;
-        color: colors.$white;
+        text-align: start;
+        color: colors.$textBlack;
       }
+    }
+
+    .openStatusWrap {
+      display: flex;
+      flex: 1 1 15%;
     }
 
     .openDateWrap {
       display: flex;
-      width: 180px;
+      flex: 1 1 35%;
       justify-content: center;
       align-items: center;
-      background-color: colors.$white;
       padding-left: 12px;
-      border: 1px solid colors.$point;
-      border-top-right-radius: 28px;
-      border-bottom-right-radius: 28px;
 
       .dueDate {
         padding-right: 12px;
         white-space: nowrap;
         color: colors.$myPageBlack;
-
-        &.isOpened {
-          color: colors.$textGray;
-        }
       }
     }
   }
