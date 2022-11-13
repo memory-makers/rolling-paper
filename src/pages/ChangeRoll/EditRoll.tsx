@@ -29,6 +29,10 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, paperUrl, setIsModal
     setPaperTitle(e.currentTarget.value)
   }
 
+  const handleDueDateInputKeyDown: ChangeEventHandler<HTMLInputElement> = (e) => {
+    e.preventDefault()
+  }
+
   const handleDueDateChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setDueDate(e.currentTarget.value)
   }
@@ -69,6 +73,7 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, paperUrl, setIsModal
         value={dueDate}
         min={convertDaysFromToday(1)}
         onChange={handleDueDateChange}
+        onKeyDown={handleDueDateInputKeyDown}
       />
 
       <ModalText type="label">테마를 선택해주세요!</ModalText>

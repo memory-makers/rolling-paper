@@ -26,6 +26,10 @@ const MakeRoll = ({
     setPaperTitle(e.currentTarget.value)
   }
 
+  const handleDueDateInputKeyDown: ChangeEventHandler<HTMLInputElement> = (e) => {
+    e.preventDefault()
+  }
+
   const handleDueDateChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setDueDate(e.currentTarget.value)
   }
@@ -49,6 +53,7 @@ const MakeRoll = ({
         min={convertDaysFromToday(1)}
         value={dueDate}
         onChange={handleDueDateChange}
+        onKeyDown={handleDueDateInputKeyDown}
       />
 
       <ModalText type="label">테마를 선택해주세요!</ModalText>
