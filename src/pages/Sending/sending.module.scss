@@ -3,15 +3,20 @@
 .container {
   width: 100%;
   height: 100%;
+
   header {
+    padding: 16px;
+
     .backArrowButton {
       display: flex;
       align-items: center;
       margin: 0;
+
       svg {
         width: 20px;
         fill: colors.$point;
       }
+
       span {
         color: colors.$point;
         padding: 5px;
@@ -21,7 +26,7 @@
   }
 
   .contents {
-    margin-top: 30px;
+    margin-top: 25px;
     display: flex;
     flex-direction: column;
     justify-content: center;
