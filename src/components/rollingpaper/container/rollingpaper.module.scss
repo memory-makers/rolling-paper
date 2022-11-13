@@ -6,7 +6,7 @@
   padding: 16px;
   padding-bottom: 260px;
   height: 100%;
-  min-height: 100vh;
+  min-height: 100%;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
@@ -15,155 +15,14 @@
   display: none;
 }
 
-.card {
-  cursor: pointer;
-  font-size: 16px;
-  box-sizing: border-box;
-  padding: 20px;
-  width: 100%;
-  min-width: 160px;
-  min-height: 160px;
-  aspect-ratio: 1 / 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  div {
-    width: 100%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-    word-wrap: break-word;
-  }
-  border-radius: 20px;
-  @each $colorKey, $colorValue in colors.$colorMap {
-    &.#{$colorKey} {
-      background-color: $colorValue;
-    }
-  }
-  @each $fontKey, $fontValue in txt.$fontFamilyMap {
-    &.#{$fontKey} {
-      font-family: $fontValue;
-    }
-  }
-}
-.card2 {
-  cursor: pointer;
-  font-size: 16px;
-  box-sizing: border-box;
-  padding: 20px;
-  width: 100%;
-  min-height: 200px;
-  height: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.25);
-
-  border-radius: 20px;
-  @each $colorKey, $colorValue in colors.$colorMap {
-    &.#{$colorKey} {
-      background-color: $colorValue;
-    }
-  }
-  @each $fontKey, $fontValue in txt.$fontFamilyMap {
-    &.#{$fontKey} {
-      font-family: $fontValue;
-    }
-  }
-}
-
-.card-modal {
-  z-index: 20;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  &.dark {
-    background: rgba(115, 109, 98, 0.8);
-  }
-  &.light {
-    background: rgba(255, 248, 235, 0.8);
-  }
-
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow-y: scroll;
-  box-sizing: border-box;
-  padding: 200px 16px 68px 16px;
-  svg {
-    cursor: pointer;
-  }
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-.card-btns {
-  display: flex;
-  align-items: center;
-  margin-top: 66px;
-  font-size: 32px;
-  width: 100%;
-  justify-content: space-between;
-}
-.close-btn {
-  position: absolute;
-  top: 100px;
-  right: 20px;
-}
-.container {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.sticker {
-  cursor: pointer;
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 60px;
-  height: 60px;
-  &.isFloating {
-    position: absolute;
-  }
-  &.rnd {
-    position: absolute;
-  }
-}
 .border {
   position: absolute;
   top: -10px;
   left: -10px;
 }
-.delete-icn {
-  width: 20px;
-  height: 20px;
-  z-index: 999;
-  position: absolute;
-  top: -38px;
-  right: -35px;
-}
-.rotate-icn {
-  width: 20px;
-  height: 20px;
-  z-index: 999;
-  position: absolute;
-  bottom: -30px;
-  right: -30px;
-}
 
 .sticker-modify-content {
   z-index: 8;
-  // width: 100%;
-  // height: 100%;
   position: absolute;
   height: 100%;
   opacity: 0;
@@ -176,8 +35,6 @@
 }
 
 .sticker-content {
-  // width: 100%;
-  // height: 100%;
   position: absolute;
   height: 100%;
   pointer-events: none;
@@ -186,24 +43,6 @@
     opacity: 0;
   }
   transition: opacity 0.5s ease;
-}
-
-.sticker-container {
-  position: relative;
-  // width: 100%;
-}
-
-.editor-btn {
-  z-index: 101;
-  position: absolute;
-  width: 263px;
-  height: 48px;
-  background: #fff;
-  color: colors.$point;
-  border: 1px solid #f05a39;
-  border-radius: 20px;
-  bottom: 36px;
-  @include txt.typograpy('basic', 24px);
 }
 
 .until-open {

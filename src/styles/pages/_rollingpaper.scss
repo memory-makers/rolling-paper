@@ -8,7 +8,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   &.light {
     background-color: $mainBg;
     color: #000;
@@ -40,16 +40,16 @@
 }
 
 //react-zoom-pan-pinch
+
+// 864 5133
 .card-wrapper {
   display: flex;
-  align-items: center;
-  justify-content: center;
   width: 100%;
-  height: 100vh;
-  overflow: hidden;
+  height: 100%;
 }
 .card-content-wrapper {
-  min-height: 100vh !important;
+  display: block;
+  min-height: 100% !important;
   min-width: 100% !important;
   .paper-title {
     display: flex;
@@ -63,6 +63,8 @@
   }
 }
 .card-content-component {
+  position: absolute;
+  top: 0;
   display: flex;
   flex-direction: column;
   margin: 64px;

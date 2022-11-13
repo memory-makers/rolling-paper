@@ -43,6 +43,9 @@
   }
 }
 .text {
+  display: flex;
+  word-break: break-all;
+  width: 100%;
   @each $colorKey, $colorValue in colors.$colorMap {
     &.#{$colorKey} {
       color: $colorValue;

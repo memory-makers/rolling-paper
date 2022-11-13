@@ -4,13 +4,20 @@ import styles from './rollingpaper.module.scss'
 import StickerModal from '../modal/StickerModal'
 import MoveableSticker from '../sticker/MoveableSticker'
 import classNames from 'classnames'
+import { ReactZoomPanPinchHandlers } from 'react-zoom-pan-pinch'
 interface ContentProps {
   isModifyMode: boolean
   newStickers: StickerType[]
   setNewStickers: (newStickers: StickerType[]) => void
+  setTransform?: any
 }
 
-const StickerModifyContent = ({ isModifyMode, newStickers, setNewStickers }: ContentProps) => {
+const StickerModifyContent = ({
+  setTransform,
+  isModifyMode,
+  newStickers,
+  setNewStickers
+}: ContentProps) => {
   const modifyMode = isModifyMode ? 'modify-mode' : ''
   const handleCreateNewSticker = (type: StickerShape) => {
     const newSticker = {
@@ -18,10 +25,11 @@ const StickerModifyContent = ({ isModifyMode, newStickers, setNewStickers }: Con
       size: 60,
       type: type,
       paperId: 1,
-      x: 0,
-      y: 0
+      x: 100,
+      y: 100
     } as StickerType
     setNewStickers([...newStickers, newSticker])
+    setTransform(100, 100, 1, 300, 'easeOut')
   }
   const handleUpdateStickers = (newSticker: StickerType) => {
     setNewStickers([...newStickers.filter((sticker) => sticker.id !== newSticker.id), newSticker])
