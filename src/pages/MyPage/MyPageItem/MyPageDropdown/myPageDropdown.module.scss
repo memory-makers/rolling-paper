@@ -3,8 +3,7 @@
 
 .dropdown {
   position: absolute;
-  right: 0;
-  top: 65px;
+  right: 20px;
   width: 160px;
   height: 120px;
   background: colors.$white;
@@ -35,6 +34,7 @@
 
     &:hover {
       font-weight: 900;
+      background: rgba(colors.$pointLow, 0.2);
     }
   }
 }
