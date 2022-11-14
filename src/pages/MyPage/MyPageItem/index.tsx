@@ -10,6 +10,7 @@ import { convertTimeAndOffsetToDate } from '@/utils/rollingPaper/paper'
 import PaperType from '@/utils/rollingPaper/Paper.type'
 import MyPageDropDown from './MyPageDropdown'
 import BlockRoll from '@/pages/BlockRoll'
+import OpenState from '@/pages/MyPage/MyPageItem/OpenState'
 
 interface Props {
   paper: PaperType
@@ -55,7 +56,7 @@ const MyPageItem = ({ paper, changeOpenPaperState }: Props) => {
     const date = openDateRef.current?.textContent
     if (!date) return
     const diff = getDiffBetweenDate(date)
-    if (diff < 0) setIsOpened(true)
+    if (diff >= 0) setIsOpened(true)
   }, [isOpened])
 
   return (
@@ -68,8 +69,11 @@ const MyPageItem = ({ paper, changeOpenPaperState }: Props) => {
         >
           <p>{paper.paperTitle}</p>
         </button>
+        <div className={styles.openStatusWrap}>
+          <OpenState className={cx({ [styles.isOpened]: isOpened })} isOpened={isOpened} />
+        </div>
         <div className={styles.openDateWrap}>
-          <p className={cx(styles.dueDate, { [styles.isOpened]: isOpened })} ref={openDateRef}>
+          <p className={styles.dueDate} ref={openDateRef}>
             {paper.dueDate}
           </p>
           <button type="button" onClick={handleClickDropdownList}>

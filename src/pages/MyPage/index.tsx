@@ -63,8 +63,9 @@ const MyPage = () => {
       </div>
       <section className={styles.myPageMain}>
         <div className={styles.myPageContentTitle}>
-          <span>롤링 페이퍼 이름</span>
-          <span>오픈 날짜</span>
+          <span className={styles.paperName}>롤링 페이퍼 이름</span>
+          <span className={styles.openStatus}>상태</span>
+          <span className={styles.openDate}>오픈 날짜</span>
         </div>
         <div className={styles.paperList}>
           {state.map((paper) => (
