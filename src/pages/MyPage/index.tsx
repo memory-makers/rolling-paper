@@ -81,12 +81,6 @@ const MyPage = () => {
         <PaperAirplaneIcon />
       </button>
       {isAddRollModalOpen && <CreateRoll setIsModalOpen={setIsAddRollModalOpen} />}
-      {
-        <div className={cx(styles.openFloatMessage, { [styles.isActive]: isOpenPaper })}>
-          <p>해당 롤링페이퍼는</p>
-          <p>아직 오픈 날짜가 안지났어요~</p>
-        </div>
-      }
     </div>
   )
 }
