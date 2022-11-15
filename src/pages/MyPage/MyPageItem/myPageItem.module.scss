@@ -19,7 +19,7 @@
       align-items: center;
 
       p {
-        width: 90%;
+        width: 95%;
         display: -webkit-box;
         padding-left: 8px;
         -webkit-box-orient: vertical;
@@ -35,6 +35,7 @@
     .openStatusWrap {
       display: flex;
       flex: 1 1 15%;
+      align-items: center;
     }
 
     .openDateWrap {
@@ -43,6 +44,10 @@
       justify-content: center;
       align-items: center;
       padding-left: 12px;
+
+      & button {
+        display: flex;
+      }
 
       .dueDate {
         padding-right: 12px;
@@ -55,7 +60,7 @@
 
 @include responsive.mobileOnly {
   .paperInfoWrap {
-    min-width: 150px;
+    min-width: 120px;
   }
   .openDateWrap {
     min-width: 150px;

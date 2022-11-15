@@ -70,13 +70,13 @@ const MyPageItem = ({ paper, changeOpenPaperState }: Props) => {
           <p>{paper.paperTitle}</p>
         </button>
         <div className={styles.openStatusWrap}>
-          <OpenState className={cx({ [styles.isOpened]: isOpened })} isOpened={isOpened} />
+          <OpenState isOpened={isOpened} />
         </div>
         <div className={styles.openDateWrap}>
-          <p className={styles.dueDate} ref={openDateRef}>
-            {paper.dueDate}
-          </p>
           <button type="button" onClick={handleClickDropdownList}>
+            <p className={styles.dueDate} ref={openDateRef}>
+              {paper.dueDate}
+            </p>
             {isDropdown ? <ArrowUpIcon /> : <ArrowDownIcon />}
           </button>
         </div>
