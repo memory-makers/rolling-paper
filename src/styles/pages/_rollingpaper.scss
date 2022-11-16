@@ -51,16 +51,6 @@
   display: block;
   min-height: 100% !important;
   min-width: 100% !important;
-  .paper-title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 32px;
-    margin: 50px;
-    .title {
-      color: colors.$subPoint;
-    }
-  }
 }
 .card-content-component {
   position: absolute;
@@ -74,4 +64,41 @@
   padding: 32px;
   margin: 0 auto;
   align-items: center;
+}
+
+#vr-loading {
+  transition: all 0.3s;
+  display: none;
+  width: 100vw;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(4px);
+}
+.loading-text {
+  font-size: 40px;
+  color: $point;
+  text-align: center;
+}
+
+#virtual-rollingpaper {
+  position: absolute;
+  left: 0;
+  z-index: -100;
+  flex-direction: column;
+  padding: 100px;
+  &.light {
+    background-color: $mainBg;
+    color: #000;
+  }
+  &.dark {
+    background-color: $darkBg;
+    color: #fff;
+  }
 }

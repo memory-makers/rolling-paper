@@ -25,6 +25,7 @@ import classNames from 'classnames'
 import { convertUrlToHostData } from '@/utils/rollingPaper/paper'
 import { LOAD_URL_NAME, useUrlName } from '@/store/urlNickname'
 import HomeButton from '@/components/rollingpaper/button/HomeButton'
+import VirtualRollingPaper from '@/components/rollingpaper/container/VirtualRollingpaper'
 
 const RollingPaper = () => {
   const urlId = useParams().rollingPaperId
@@ -42,7 +43,6 @@ const RollingPaper = () => {
   const [rollingPaper, setRollingPaper] = useState<RollingPaperType | null>(null)
   const [beforeOpen, setBeforeOpen] = useState(true)
   const [untilOpen, setUntilOpen] = useState('')
-  const [size, setSize] = useState({ width: 0, height: 0 })
   const { state, dispatch } = useTheme()
   const { dispatch: urlNameDispatch } = useUrlName()
 
@@ -61,20 +61,6 @@ const RollingPaper = () => {
     }
     if (state.theme !== rollingPaper?.theme) dispatch({ type: 'toggle' })
   }, [rollingPaper])
-
-  const getPaperIdNickname = async () => {
-    if (!urlId) return
-    const hostData = await convertUrlToHostData(urlId)
-    if (!hostData) return
-    return urlNameDispatch({
-      type: LOAD_URL_NAME,
-      payload: hostData
-    })
-  }
-
-  useEffect(() => {
-    getPaperIdNickname()
-  }, [])
 
   const handleClickCard = useCallback(
     (id: number) => {
@@ -119,10 +105,9 @@ const RollingPaper = () => {
           handleModifyDone={handleModifyDone}
         />
       ) : (
-        <Buttons size={size} beforeOpen={beforeOpen} handleModifyMode={handleModifyMode} />
+        <Buttons beforeOpen={beforeOpen} handleModifyMode={handleModifyMode} />
       )}
       <Content
-        setSize={setSize}
         isModifyMode={isModifyMode}
         title={rollingPaper.paperTitle}
         cards={cards}

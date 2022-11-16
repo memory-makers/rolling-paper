@@ -7,13 +7,12 @@ interface Props {
   paperUrl: string | undefined
   children: ReactNode
   setIsModalOpen: (state: boolean) => void
-  size?: { width: number; height: number }
 }
 
-const ShareRoll = ({ paperUrl, children, setIsModalOpen, size }: Props) => {
+const ShareRoll = ({ paperUrl, children, setIsModalOpen }: Props) => {
   return (
     <Modal setIsModalOpen={setIsModalOpen}>
-      <ShareRollItem paperUrl={paperUrl} children={children} size={size} />
+      <ShareRollItem paperUrl={paperUrl} children={children} />
     </Modal>
   )
 }

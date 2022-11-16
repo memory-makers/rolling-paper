@@ -7,20 +7,19 @@ import { ClipboardIcon, DownloadIcon, ShareIcon2 } from '@/assets'
 import { checkBrowser } from '@/utils/common/checkBrowser'
 import Popup from '@/components/Modal/Popup'
 import { toPng, toSvg } from 'html-to-image'
-import _, { size } from 'lodash'
+import _ from 'lodash'
 import { useTheme } from '@/store/theme'
 import colors from '@/styles/colors.scss'
 
 interface Props {
   paperUrl: string | undefined
   children: ReactNode
-  size?: { width: number; height: number }
 }
 
 function filter(node: HTMLElement) {
   return node.tagName !== 'i'
 }
-const ShareRollItem = ({ paperUrl, children, size }: Props) => {
+const ShareRollItem = ({ paperUrl, children }: Props) => {
   const [isPopupActive, setIsPopupActive] = useState(false)
   const [popupContent, setPopupContent] = useState('')
   const { state, dispatch } = useTheme()
@@ -50,9 +49,8 @@ const ShareRollItem = ({ paperUrl, children, size }: Props) => {
   }
 
   const handleImageDownloadClick = () => {
-    const rollingpaper = document.getElementsByClassName(
-      'card-content-wrapper'
-    )[0] as HTMLDivElement
+    const rollingpaper = document.getElementById('virtual-rollingpaper') as HTMLDivElement
+    const loading = document.getElementById('vr-loading') as HTMLDivElement
     if (checkBrowser()) {
       setPopupContent('(IE, Safari X)\n다른 브라우저로 시도해주세요.')
       setIsPopupActive(true)
@@ -61,16 +59,21 @@ const ShareRollItem = ({ paperUrl, children, size }: Props) => {
         setIsPopupActive(false)
       }, 1000)
     } else {
-      if (rollingpaper && size) {
-        toSvg(rollingpaper, {
-          height: size.height,
-          width: size.width,
-          backgroundColor: state.theme === 'dark' ? '#352e20' : '#fff8eb'
+      if (rollingpaper) {
+        const scale = 2
+        toPng(rollingpaper, {
+          width: rollingpaper.offsetWidth * scale,
+          height: rollingpaper.offsetHeight * scale,
+          style: {
+            transform: `scale(${scale}) translate(${rollingpaper.offsetWidth / 2 / scale}px, ${
+              rollingpaper.offsetHeight / 2 / scale
+            }px)`
+          }
         }).then((image) => {
           const link = window.document.createElement('a')
           link.setAttribute('style', 'display:none; width: 100%;')
           link.setAttribute('crossorigin', 'anonymous')
-          link.download = `rollingpaper_${paperUrl}` + '.svg'
+          link.download = `rollingpaper_${paperUrl}` + '.png'
           link.href = image
           link.click()
         })
