@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from 'react'
 import styles from './myPage.module.scss'
-import cx from 'classnames'
 import Header from '@/components/layout/Header'
 import MyPageItem from './MyPageItem'
 import CreateRoll from '../CreateRoll'
@@ -76,10 +75,11 @@ const MyPage = () => {
             />
           ))}
         </div>
+        <button className={styles.paperAddButton} onClick={handleClickAddRoll}>
+          <PaperAirplaneIcon />
+        </button>
       </section>
-      <button className={styles.paperAddButton} onClick={handleClickAddRoll}>
-        <PaperAirplaneIcon />
-      </button>
+
       {isAddRollModalOpen && <CreateRoll setIsModalOpen={setIsAddRollModalOpen} />}
     </div>
   )

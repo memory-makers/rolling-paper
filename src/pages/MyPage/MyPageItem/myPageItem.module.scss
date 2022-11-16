@@ -3,47 +3,47 @@
 
 // Main Area
 .myPageMainContent {
-  &:hover {
-    background: colors.$cardRed;
-  }
+  padding: 0 16px;
+  border-bottom: 1px solid colors.$grayMid;
+
   .roll {
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex: 311px;
     padding: 16px 0;
-    border-bottom: 1px solid colors.$grayMid;
 
     .paperInfoWrap {
-      display: flex;
-      flex: 1 1 200px;
-      justify-content: center;
-      align-items: center;
+      width: 127px;
 
       p {
-        width: 95%;
         display: -webkit-box;
-        padding-left: 8px;
         -webkit-box-orient: vertical;
         overflow: hidden;
         -webkit-line-clamp: 2;
         word-break: break-all;
         text-overflow: ellipsis;
         text-align: start;
+        font-size: 14px;
         color: colors.$textBlack;
       }
     }
 
     .openStatusWrap {
       display: flex;
-      flex: 1 1 15%;
+      flex: 48px;
       align-items: center;
+      justify-content: center;
+      padding: 0 12px;
     }
 
     .openDateWrap {
       display: flex;
-      flex: 1 1 35%;
+      flex: 100px;
       justify-content: center;
       align-items: center;
-      padding-left: 12px;
+      padding-left: 10px;
+      font-size: 14px;
 
       & button {
         display: flex;
@@ -56,11 +56,15 @@
       }
     }
   }
+  .dropdownContainer {
+    position: relative;
+    height: auto;
+  }
 }
 
 @include responsive.mobileOnly {
   .paperInfoWrap {
-    min-width: 120px;
+    min-width: 110px;
   }
   .openDateWrap {
     min-width: 150px;

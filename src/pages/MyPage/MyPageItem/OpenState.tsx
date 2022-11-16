@@ -1,7 +1,11 @@
 import styles from './openState.module.scss'
 import cx from 'classnames'
 
-const OpenState = ({ isOpened }: any) => {
+interface Props {
+  isOpened: boolean
+}
+
+const OpenState = ({ isOpened }: Props) => {
   const openState = {
     false: '오픈전',
     true: '오픈'
