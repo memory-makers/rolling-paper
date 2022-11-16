@@ -4,6 +4,9 @@ import cx from 'classnames'
 import { updateCard_API } from '@/api/rollingpaper'
 import { ArrowDownIconWhite } from '@/assets'
 
+import Modal from '@/components/Modal'
+import { ModalButton, ModalText } from '@/components/Modal/ModalItem'
+
 import { useEditor, useOutsideClick } from './hooks'
 import { colorObject, fontObject } from './constants'
 import { CompleteButton, Paper, RadioGroup, Select } from './components'
@@ -32,6 +35,7 @@ const Editor = () => {
   } = useEditor()
 
   const [editorSelectOptionVisible, setEditorSelectOptionVisible] = useState(true)
+  const [isCheckFillCardTextModalOpen, setIsCheckFillCardTextModalOpen] = useState(false)
   const [isCheckSendingModalOpen, setIsCheckSendingModalOpen] = useState(false)
   const editorSelectOptionRef = useRef(null)
 
@@ -45,6 +49,11 @@ const Editor = () => {
   useOutsideClick(editorSelectOptionRef, handleCloseEditorSelectOption)
 
   const handleClickCompleteButton = () => {
+    if (!cardText) {
+      setIsCheckFillCardTextModalOpen(true)
+      return
+    }
+
     setIsCheckSendingModalOpen(true)
   }
 
@@ -130,6 +139,15 @@ const Editor = () => {
           </div>
         </div>
       </div>
+
+      {isCheckFillCardTextModalOpen && (
+        <Modal setIsModalOpen={setIsCheckFillCardTextModalOpen}>
+          <ModalText type="title">카드를 작성해주세요 😀</ModalText>
+          <ModalButton type="button" onClick={() => setIsCheckFillCardTextModalOpen(false)}>
+            확인
+          </ModalButton>
+        </Modal>
+      )}
 
       {isCheckSendingModalOpen && (
         <CheckSendingCard setIsModalOpen={setIsCheckSendingModalOpen} callback={handleSendCard} />

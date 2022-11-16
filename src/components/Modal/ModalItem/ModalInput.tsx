@@ -1,8 +1,8 @@
-import { ChangeEventHandler } from 'react'
+import { ChangeEventHandler, InputHTMLAttributes } from 'react'
 import cx from 'classnames'
 import styles from './modalInput.module.scss'
 
-interface Props {
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
   type: 'text' | 'date'
   name: string
   onChange?: ChangeEventHandler<HTMLInputElement>
@@ -23,7 +23,8 @@ const ModalInput = ({
   maxLength,
   placeholder,
   readOnly,
-  isAddIcon
+  isAddIcon,
+  ...props
 }: Props) => {
   return (
     <input
@@ -36,6 +37,7 @@ const ModalInput = ({
       maxLength={maxLength}
       placeholder={placeholder}
       readOnly={readOnly}
+      {...props}
     />
   )
 }

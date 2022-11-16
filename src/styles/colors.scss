@@ -26,6 +26,7 @@ $pointLow: rgba(240, 90, 57, 0.8);
 $grayMid: #787878;
 $grayLow: #c0c0c0;
 $darkBg: #352e20;
+$lightGrayBg: #e8e8e8;
 
 // modal color
 $modalBlack: #000000;
@@ -64,5 +65,6 @@ $colorMap: (
   'grayMid': $grayMid,
   'grayLow': $grayLow,
   'darkBg': $darkBg,
-  'myPageBlack': $myPageBlack
+  'myPageBlack': $myPageBlack,
+  'lightGrayBg': $lightGrayBg
 );

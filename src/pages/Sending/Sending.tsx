@@ -5,11 +5,13 @@ import styles from './sending.module.scss'
 import ShareRoll from '../ShareRoll'
 import { ModalButton } from '@/components/Modal/ModalItem'
 import { useUrlName } from '@/store/urlNickname'
+import { useGA } from '@/hooks'
 
 import { ArrowLeftIcon, LogoArtIcon, LogoTextIcon } from '@/assets'
 
 const Sending = () => {
   const navigate = useNavigate()
+  const { gaEvent } = useGA()
   const { state: urlNameState } = useUrlName()
   const [isModalOpen, setIsModalOpen] = useState(false)
 
@@ -27,6 +29,7 @@ const Sending = () => {
   }
 
   const handleHomeClick = () => {
+    gaEvent({ action: 'click-sending-cv', data: { event: 'click' } })
     sessionStorage.removeItem('rolling_host')
     navigate('/')
   }

@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { BrowserRouter } from 'react-router-dom'
 import './styles/app.scss'
 import { Routes } from './pages/Routes'
 import { ThemeProvider } from './store/theme'
@@ -15,7 +14,9 @@ function App() {
         <UrlNameProvider>
           <PaperProvider>
             <Layout>
-              <Routes />
+              <BrowserRouter>
+                <Routes />
+              </BrowserRouter>
             </Layout>
           </PaperProvider>
         </UrlNameProvider>
