@@ -81,7 +81,7 @@ const Sending = () => {
       </div>
 
       {isModalOpen && (
-        <ShareRoll paperUrl={urlNameState.paperUrl} setIsModalOpen={setIsModalOpen}>
+        <ShareRoll setIsModalOpen={setIsModalOpen}>
           다른 친구들도 카드를 <br /> 써보라고 공유해줄까요?
         </ShareRoll>
       )}

@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import React, { ReactElement, ReactNode, useEffect, useRef, useState } from 'react'
 import styles from './shareRollItem.module.scss'
 import { ModalButton, ModalInput, ModalText } from '@/components/Modal/ModalItem'
 
@@ -6,24 +6,29 @@ import { CLIENT_PAPER_URL } from '@/config/commonLink'
 import { ClipboardIcon, DownloadIcon, ShareIcon2 } from '@/assets'
 import { checkBrowser } from '@/utils/common/checkBrowser'
 import Popup from '@/components/Modal/Popup'
-import { toPng, toSvg } from 'html-to-image'
+import { toPng } from 'html-to-image'
 import _ from 'lodash'
-import { useTheme } from '@/store/theme'
-import colors from '@/styles/colors.scss'
+import { useUrlName } from '@/store/urlNickname'
+import VirtualRollingPaper from '../VirtualRollingPaper/VirtualRollingPaper'
+import gsap from 'gsap'
+import { duration } from 'moment'
 
 interface Props {
-  paperUrl: string | undefined
   children: ReactNode
 }
 
 function filter(node: HTMLElement) {
   return node.tagName !== 'i'
 }
-const ShareRollItem = ({ paperUrl, children }: Props) => {
+const ShareRollItem = ({ children }: Props) => {
   const [isPopupActive, setIsPopupActive] = useState(false)
   const [popupContent, setPopupContent] = useState('')
-  const { state, dispatch } = useTheme()
-  const fullPaperUrl = paperUrl ? `${CLIENT_PAPER_URL}${paperUrl}` : '유효하지 않은 URL입니다.'
+  const [isLoading, setIsLoading] = useState(false)
+  const { state: urlNameState } = useUrlName()
+
+  const fullPaperUrl = urlNameState.paperUrl
+    ? `${CLIENT_PAPER_URL}${urlNameState.paperUrl}`
+    : '유효하지 않은 URL입니다.'
   let popupDelay: NodeJS.Timer
 
   const shareData = {
@@ -34,7 +39,6 @@ const ShareRollItem = ({ paperUrl, children }: Props) => {
 
   const handleClipboardCopyClick = () => {
     navigator.clipboard.writeText(fullPaperUrl)
-
     setIsPopupActive(true)
     setPopupContent('링크 복사 완료!')
     if (popupDelay) clearTimeout(popupDelay)
@@ -48,9 +52,58 @@ const ShareRollItem = ({ paperUrl, children }: Props) => {
     navigator.share(shareData)
   }
 
+  const handleCreateImage = (loading: HTMLDivElement, rollingPaper: HTMLDivElement) => {
+    gsap
+      .timeline()
+      .to(loading, {
+        opacity: 1,
+        duration: 1
+      })
+      .to(rollingPaper, {
+        opacity: 1,
+        onComplete: () => {
+          const scale = 2
+          toPng(rollingPaper, {
+            width: rollingPaper.offsetWidth * scale,
+            height: rollingPaper.offsetHeight * scale,
+            style: {
+              transform: `scale(${scale}) translate(${rollingPaper.offsetWidth / 2 / scale}px, ${
+                rollingPaper.offsetHeight / 2 / scale
+              }px)`
+            }
+          })
+            .then((image) => {
+              const link = window.document.createElement('a')
+              link.setAttribute('style', 'display:none; width: 100%;')
+              link.setAttribute('crossorigin', 'anonymous')
+              link.download = `rollingpaper_${urlNameState.paperUrl}` + '.png'
+              link.href = image
+              link.click()
+            })
+            .then(() => {
+              gsap
+                .timeline()
+                .to(rollingPaper, { opacity: 0 })
+                .to(loading, {
+                  opacity: 0,
+                  duration: 1,
+                  delay: 1,
+                  onComplete: () => {
+                    setIsLoading(false)
+                    setPopupContent('이미지 다운로드 완료!')
+                    setIsPopupActive(true)
+                    if (popupDelay) clearTimeout(popupDelay)
+                    popupDelay = setTimeout(() => {
+                      setIsPopupActive(false)
+                    }, 1000)
+                  }
+                })
+            })
+        }
+      })
+  }
+
   const handleImageDownloadClick = () => {
-    const rollingpaper = document.getElementById('virtual-rollingpaper') as HTMLDivElement
-    const loading = document.getElementById('vr-loading') as HTMLDivElement
     if (checkBrowser()) {
       setPopupContent('(IE, Safari X)\n다른 브라우저로 시도해주세요.')
       setIsPopupActive(true)
@@ -59,25 +112,7 @@ const ShareRollItem = ({ paperUrl, children }: Props) => {
         setIsPopupActive(false)
       }, 1000)
     } else {
-      if (rollingpaper) {
-        const scale = 2
-        toPng(rollingpaper, {
-          width: rollingpaper.offsetWidth * scale,
-          height: rollingpaper.offsetHeight * scale,
-          style: {
-            transform: `scale(${scale}) translate(${rollingpaper.offsetWidth / 2 / scale}px, ${
-              rollingpaper.offsetHeight / 2 / scale
-            }px)`
-          }
-        }).then((image) => {
-          const link = window.document.createElement('a')
-          link.setAttribute('style', 'display:none; width: 100%;')
-          link.setAttribute('crossorigin', 'anonymous')
-          link.download = `rollingpaper_${paperUrl}` + '.png'
-          link.href = image
-          link.click()
-        })
-      }
+      setIsLoading(true)
     }
   }
 
@@ -92,13 +127,13 @@ const ShareRollItem = ({ paperUrl, children }: Props) => {
           type="button"
           className={styles.shareIconButton}
           onClick={handleClipboardCopyClick}
-          disabled={!paperUrl}
+          disabled={!urlNameState.paperUrl}
         >
           <ClipboardIcon />
         </button>
       </div>
       <div className={styles.buttons}>
-        {!!paperUrl && (
+        {urlNameState.paperUrl && (
           <ModalButton type="button" onClick={handleShareClick}>
             <span>공유하기</span>
             <ShareIcon2 />
@@ -112,6 +147,7 @@ const ShareRollItem = ({ paperUrl, children }: Props) => {
         }
       </div>
       <Popup isActive={isPopupActive} content={popupContent} />
+      {isLoading && <VirtualRollingPaper onCreateImage={handleCreateImage} />}
     </>
   )
 }

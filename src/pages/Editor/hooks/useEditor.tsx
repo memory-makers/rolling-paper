@@ -2,9 +2,10 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 import { debounce } from 'lodash'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { fetchPaperId_API } from '@/api/rollingpaper'
+
 
 import { CARD_COLOR_LIST, FONT_COLOR_LIST, FONT_STYLE_LIST } from '../constants'
+import { fetchPaperId_API } from '@/api/rollingPaper'
 
 export type onChangeType = (value: ChangeEvent<HTMLInputElement>) => void
 

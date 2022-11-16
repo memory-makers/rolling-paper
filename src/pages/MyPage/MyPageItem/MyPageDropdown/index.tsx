@@ -6,6 +6,9 @@ import ShareRoll from '@/pages/ShareRoll'
 import EditRoll from '@/pages/ChangeRoll/EditRoll'
 import DeleteRoll from '@/pages/ChangeRoll/DeleteRoll'
 import PaperType from '@/utils/rollingPaper/Paper.type'
+import { useUrlName } from '@/store/urlNickname'
+import { hostname } from 'os'
+import { useName } from '@/store/nickname'
 
 interface Props {
   paper: PaperType
@@ -16,8 +19,17 @@ const MyPageDropDown = ({ paper, isDropdown }: Props) => {
   const [isShareRollModalOpen, setIsShareRollModalOpen] = useState(false)
   const [isEditRollModalOpen, setIsEditRollModalOpen] = useState(false)
   const [isDeleteRollModalOpen, setIsDeleteRollModalOpen] = useState(false)
-
+  const { state: urlNameState, dispatch: urlNameDispatch } = useUrlName()
+  const { state: nickname } = useName()
   const handleClickShare = () => {
+    urlNameDispatch({
+      type: 'LOAD_URL_NAME',
+      payload: {
+        paperId: paper.paperId,
+        paperUrl: paper.paperUrl,
+        hostName: nickname
+      }
+    })
     setIsShareRollModalOpen((prev) => !prev)
   }
   const handleClickEdit = () => {
@@ -54,7 +66,7 @@ const MyPageDropDown = ({ paper, isDropdown }: Props) => {
       )}
 
       {isShareRollModalOpen && (
-        <ShareRoll paperUrl={paper.paperUrl} setIsModalOpen={setIsShareRollModalOpen}>
+        <ShareRoll setIsModalOpen={setIsShareRollModalOpen}>
           롤링페이퍼를 친구들에게 <br /> 작성해달라고 공유해볼까요?
         </ShareRoll>
       )}

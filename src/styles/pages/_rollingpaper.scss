@@ -67,27 +67,39 @@
 }
 
 #vr-loading {
-  transition: all 0.3s;
+  opacity: 0;
   display: none;
   width: 100vw;
   height: 100%;
-  position: absolute;
+  position: fixed;
   top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(4px);
-}
+  &.light {
+    background-color: $mainBg;
+    color: #000;
+  }
+  &.dark {
+    background-color: $darkBg;
+    color: #fff;
+  }
+  .logo-container{
+    width: 240px;
+  }
+} 
+
 .loading-text {
-  font-size: 40px;
+  font-size: 36px;
   color: $point;
   text-align: center;
+  margin:  16px 0;
 }
 
-#virtual-rollingpaper {
+#virtual-rollingPaper {
+  opacity: 0;
   position: absolute;
   left: 0;
   z-index: -100;
@@ -100,5 +112,9 @@
   &.dark {
     background-color: $darkBg;
     color: #fff;
+  }
+  .sticker-content{
+    position: absolute;
+    top:0;
   }
 }

@@ -6,18 +6,20 @@ import ShareRollItem from '../ShareRoll/ShareRollItem'
 import { PaperAPIResponse, setPaperAPI } from '@/api/user'
 import { ADD_PAPER, usePaper } from '@/store/paper'
 import { convertDaysFromToday } from '@/utils/rollingPaper/paper'
+import { useUrlName } from '@/store/urlNickname'
 
 interface Props {
   setIsModalOpen: (state: boolean) => void
 }
 
 const CreateRoll = ({ setIsModalOpen }: Props) => {
-  const { dispatch } = usePaper()
+  const { dispatch: paperDispatch } = usePaper()
+  const { state: urlName, dispatch: urlNameDispatch } = useUrlName()
+
   const [paperTitle, setPaperTitle] = useState('')
   const [dueDate, setDueDate] = useState(convertDaysFromToday(7))
   const [theme, setTheme] = useState('light')
 
-  const [paperUrl, setPaperUrl] = useState('')
   const [isNextStep, setIsNextStep] = useState(false)
   const [message, setMessage] = useState('')
 
@@ -31,7 +33,7 @@ const CreateRoll = ({ setIsModalOpen }: Props) => {
       result: { paperId, paperUrl }
     } = (await setPaperAPI({ paperTitle: newPaperTitle, dueDate, theme })) as PaperAPIResponse
 
-    dispatch({
+    paperDispatch({
       type: ADD_PAPER,
       payload: {
         paperTitle: newPaperTitle,
@@ -41,7 +43,14 @@ const CreateRoll = ({ setIsModalOpen }: Props) => {
         paperUrl
       }
     })
-    setPaperUrl(paperUrl)
+    urlNameDispatch({
+      type: 'LOAD_URL_NAME',
+      payload: {
+        ...urlName,
+        paperId: paperId,
+        paperUrl: paperUrl
+      }
+    })
     setIsNextStep(true)
   }
 
@@ -59,7 +68,7 @@ const CreateRoll = ({ setIsModalOpen }: Props) => {
       )}
 
       {isNextStep && (
-        <ShareRollItem paperUrl={paperUrl}>
+        <ShareRollItem>
           롤링 페이퍼를 만들었어요! <br /> 이제 친구들에게 써달라고 <br /> 말해볼까요?
         </ShareRollItem>
       )}

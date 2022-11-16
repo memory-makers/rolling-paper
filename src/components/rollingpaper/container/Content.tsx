@@ -1,19 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { useParams } from 'react-router-dom'
-import { LOAD_URL_NAME, useUrlName } from '@/store/urlNickname'
 import { TransformWrapper, TransformComponent, ReactZoomPanPinchRef } from 'react-zoom-pan-pinch'
 import CardType from '@/utils/rollingPaper/Card.type'
 import Card from '../card/Card'
 import Title from './Title'
 interface ContentProps {
-  title: string
   handleClickCard: (index: number) => void
   cards: CardType[]
   isModifyMode: boolean
   children: JSX.Element[]
 }
 
-const Content = ({ isModifyMode, title, cards, handleClickCard, children }: ContentProps) => {
+const Content = ({ isModifyMode, cards, handleClickCard, children }: ContentProps) => {
   const [scale, setScale] = useState<number | null>(null)
   const ref = useRef<ReactZoomPanPinchRef | null>(null)
 
@@ -60,13 +57,14 @@ const Content = ({ isModifyMode, title, cards, handleClickCard, children }: Cont
         {...modifyModeDisable}
         centerOnInit={true}
         minScale={0}
+        wheel={{ step: 0.05 }}
       >
         {({ setTransform, ...rest }) => (
           <TransformComponent
             wrapperClass="card-content-wrapper"
             contentClass="card-content-component"
           >
-            <Title title={title} />
+            <Title />
             <div
               className="card-content"
               style={{ gridTemplateColumns: `repeat(${half}, minmax(200px, 300px))` }}
