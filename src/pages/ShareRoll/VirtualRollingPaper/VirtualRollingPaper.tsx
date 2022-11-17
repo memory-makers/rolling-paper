@@ -8,7 +8,7 @@ import classNames from 'classnames'
 import { Spinner } from '@/assets'
 import { useTheme } from '@/store/theme'
 import { LOAD_CARDS, LOAD_STICKERS, LOAD_TITLE, useRollingPaper } from '@/store/rollingpaper'
-import { fetchCards_API, fetchRollingPaper_API, fetchStickers_API } from '@/api/rollingPaper'
+import { fetchCards_API, fetchRollingPaper_API, fetchStickers_API } from '@/api/rollingpaper'
 import { useUrlName } from '@/store/urlNickname'
 import HomeLogo from '@/components/home/HomeLogo'
 

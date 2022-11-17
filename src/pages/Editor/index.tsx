@@ -1,7 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 import cx from 'classnames'
 
-
 import { ArrowDownIconWhite } from '@/assets'
 
 import Modal from '@/components/Modal'
@@ -13,7 +12,7 @@ import { CompleteButton, Paper, RadioGroup, Select } from './components'
 import CheckSendingCard from '../WriterRoll/CheckSendingCard'
 
 import styles from './editor.module.scss'
-import { updateCard_API } from '@/api/rollingPaper'
+import { updateCard_API } from '@/api/rollingpaper'
 
 const Editor = () => {
   const {
