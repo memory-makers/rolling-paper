@@ -40,8 +40,7 @@ const Editor = () => {
   const [isCheckSendingModalOpen, setIsCheckSendingModalOpen] = useState(false)
   const editorSelectOptionRef = useRef(null)
 
-  const { state, dispatch } = useTheme()
-  console.log(state)
+  const { state } = useTheme()
 
   const handleToggleEditorSelectOption = useCallback(() => {
     setEditorSelectOptionVisible((prev) => !prev)
