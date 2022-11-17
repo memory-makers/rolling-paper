@@ -93,7 +93,7 @@ export const updateCard_API = async (card: Card) => {
 export const fetchStickers_API = async (
   paperId: number | undefined,
   setStickers: (data: StickerType[]) => void,
-  setNewStickers: (data: StickerType[]) => void
+  setNewStickers?: (data: StickerType[]) => void
 ) => {
   try {
     if (!paperId) return
@@ -114,7 +114,7 @@ export const fetchStickers_API = async (
       } as StickerType
     })
     setStickers(stickers)
-    setNewStickers(stickers)
+    if (setNewStickers) setNewStickers(stickers)
   } catch (error) {
     console.log(error)
   }
@@ -240,7 +240,7 @@ export interface RollingPaperType {
 export const fetchRollingPaper_API = async (
   paperId: number | undefined,
   setRollingPaper: (data: RollingPaperType) => void,
-  navigate: NavigateFunction
+  navigate?: NavigateFunction
 ) => {
   try {
     if (!paperId) return
@@ -250,6 +250,6 @@ export const fetchRollingPaper_API = async (
     setRollingPaper(data.result)
   } catch (error) {
     console.log(error)
-    navigate('/not-found')
+    if (navigate) navigate('/not-found')
   }
 }

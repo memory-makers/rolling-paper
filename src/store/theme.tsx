@@ -13,13 +13,15 @@ const ThemeStateContext = React.createContext<
   { state: State; dispatch: Dispatch } | undefined
 >(undefined);
 
+type Toggle = typeof TOGGLE
+
 function themeReducer(state: State, action: Action) {
   switch (action.type) {
-    case "toggle": {
-      return { theme: state.theme === "dark" ? "light" : "dark" };
+    case 'toggle': {
+      return { theme: state.theme === 'dark' ? 'light' : 'dark' }
     }
     default: {
-      throw new Error(`Unhandled action type: ${action.type}`);
+      throw new Error(`Unhandled action type: ${action.type}`)
     }
   }
 }

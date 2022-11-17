@@ -32,3 +32,4 @@ export { ReactComponent as StickerIcon } from './sticker-icn.svg'
 export { ReactComponent as ClipboardIcon } from './Text-files.svg'
 
 export { ReactComponent as CheckIcon } from './check.svg'
+export { ReactComponent as Spinner } from './spinner.svg'

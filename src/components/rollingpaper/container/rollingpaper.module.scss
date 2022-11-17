@@ -36,6 +36,7 @@
 
 .sticker-content {
   position: absolute;
+  top: 0;
   height: 100%;
   pointer-events: none;
   opacity: 1;
@@ -53,4 +54,18 @@
   color: colors.$point;
   font-size: 16px;
   backdrop-filter: blur(1px);
+}
+
+.paper-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 32px;
+  margin: 50px;
+  .name {
+    color: colors.$subPoint;
+  }
+  .title {
+    color: colors.$point;
+  }
 }

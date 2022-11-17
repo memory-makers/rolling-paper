@@ -19,11 +19,9 @@ function nameReducer(state: State, action: Action) {
     case 'LOAD_NAME': {
       return action.payload
     }
-
     case 'EDIT_NAME': {
       return action.payload
     }
-
     default: {
       throw new Error(`Unhandled action type: ${action.type}`)
     }

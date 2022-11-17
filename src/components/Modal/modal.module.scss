@@ -21,5 +21,9 @@
     background-color: colors.$modalWhite;
     border-radius: 20px;
     border: 1px solid colors.$modalPoint;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
+
 }

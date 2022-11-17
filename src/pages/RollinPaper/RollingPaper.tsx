@@ -22,9 +22,8 @@ import { dateDiffFormat } from '@/utils/rollingPaper/dateDiffFormat'
 import StickerType from '@/utils/rollingPaper/Sticker.type'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import classNames from 'classnames'
-import { convertUrlToHostData } from '@/utils/rollingPaper/paper'
-import { LOAD_URL_NAME, useUrlName } from '@/store/urlNickname'
 import HomeButton from '@/components/rollingpaper/button/HomeButton'
+import { LOAD_TITLE, useRollingPaper } from '@/store/rollingpaper'
 
 const RollingPaper = () => {
   const urlId = useParams().rollingPaperId
@@ -42,14 +41,24 @@ const RollingPaper = () => {
   const [rollingPaper, setRollingPaper] = useState<RollingPaperType | null>(null)
   const [beforeOpen, setBeforeOpen] = useState(true)
   const [untilOpen, setUntilOpen] = useState('')
-  const { state, dispatch } = useTheme()
-  const { dispatch: urlNameDispatch } = useUrlName()
+  const {
+    state: { theme },
+    dispatch: themeDispatch
+  } = useTheme()
+  const { dispatch: rollingPaperDispatch } = useRollingPaper()
 
   useEffect(() => {
     fetchPaperId_API(urlId, setRollingPaperId, navigate)
     fetchCards_API(rollingPaperId, setCards)
     fetchStickers_API(rollingPaperId, setStickers, setNewStickers)
-    fetchRollingPaper_API(rollingPaperId, setRollingPaper, navigate)
+    fetchRollingPaper_API(
+      rollingPaperId,
+      (rollingPaper) => {
+        setRollingPaper(rollingPaper)
+        rollingPaperDispatch({ type: LOAD_TITLE, payload: rollingPaper.paperTitle })
+      },
+      navigate
+    )
   }, [rollingPaperId])
 
   useEffect(() => {
@@ -58,22 +67,8 @@ const RollingPaper = () => {
       setBeforeOpen(dateDiff.beforeOpen)
       setUntilOpen(dateDiff.untilOpen)
     }
-    if (state.theme !== rollingPaper?.theme) dispatch({ type: 'toggle' })
+    if (theme !== rollingPaper?.theme) themeDispatch({ type: 'toggle' })
   }, [rollingPaper])
-
-  const getPaperIdNickname = async () => {
-    if (!urlId) return
-    const hostData = await convertUrlToHostData(urlId)
-    if (!hostData) return
-    return urlNameDispatch({
-      type: LOAD_URL_NAME,
-      payload: hostData
-    })
-  }
-
-  useEffect(() => {
-    getPaperIdNickname()
-  }, [])
 
   const handleClickCard = useCallback(
     (id: number) => {
@@ -110,7 +105,7 @@ const RollingPaper = () => {
     setIsModifyMode(!isModifyMode)
   }
   return rollingPaper ? (
-    <div id="rollingpaper-container" className={classNames('rollingpaper-container', state.theme)}>
+    <div id="rollingpaper-container" className={classNames('rollingpaper-container', theme)}>
       <HomeButton />
       {isModifyMode ? (
         <ModifyModeButtons
@@ -120,12 +115,7 @@ const RollingPaper = () => {
       ) : (
         <Buttons beforeOpen={beforeOpen} handleModifyMode={handleModifyMode} />
       )}
-      <Content
-        isModifyMode={isModifyMode}
-        title={rollingPaper.paperTitle}
-        cards={cards}
-        handleClickCard={handleClickCard}
-      >
+      <Content isModifyMode={isModifyMode} cards={cards} handleClickCard={handleClickCard}>
         <StickerModifyContent
           isModifyMode={isModifyMode}
           newStickers={newStickers}

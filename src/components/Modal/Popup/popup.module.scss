@@ -2,10 +2,8 @@
 
 .openFloatMessage {
   position: absolute;
-  top: -60px;
-  left: calc(50% - 70px);
-  width: 140px;
-  height: 40px;
+  bottom: 360px;
+  width: flex;
   padding: 8px;
   border-radius: 4px;
   margin: 0 auto;
@@ -21,5 +19,6 @@
     font-size: 16px;
     color: colors.$white;
     text-align: center;
+    white-space: pre-wrap;
   }
 }

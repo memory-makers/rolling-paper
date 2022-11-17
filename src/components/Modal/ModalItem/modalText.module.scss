@@ -9,6 +9,8 @@
 }
 
 .modalLabel {
+  width: 100%;
+  padding: 0 4px;
   display: inline-block;
   margin: 20px auto auto;
   font-weight: 400;
@@ -18,7 +20,8 @@
 }
 
 .modalWarning {
+  width: 100%;
   color: colors.$point;
-  margin-left: 15px;
+  margin: 4px 0 0 8px;
   height: 24px;
 }

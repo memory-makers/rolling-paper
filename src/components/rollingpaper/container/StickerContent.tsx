@@ -7,7 +7,7 @@ import Card from '../card/Card'
 import styles from './rollingpaper.module.scss'
 import Sticker from '../sticker/Sticker'
 interface ContentProps {
-  isModifyMode: boolean
+  isModifyMode?: boolean
   stickers: StickerType[]
 }
 
