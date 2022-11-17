@@ -13,6 +13,7 @@ import { CompleteButton, Paper, RadioGroup, Select } from './components'
 import CheckSendingCard from '../WriterRoll/CheckSendingCard'
 
 import styles from './editor.module.scss'
+import { useTheme } from '@/store/theme'
 
 const Editor = () => {
   const {
@@ -38,6 +39,8 @@ const Editor = () => {
   const [isCheckFillCardTextModalOpen, setIsCheckFillCardTextModalOpen] = useState(false)
   const [isCheckSendingModalOpen, setIsCheckSendingModalOpen] = useState(false)
   const editorSelectOptionRef = useRef(null)
+
+  const { state } = useTheme()
 
   const handleToggleEditorSelectOption = useCallback(() => {
     setEditorSelectOptionVisible((prev) => !prev)
@@ -74,7 +77,7 @@ const Editor = () => {
   }
 
   return (
-    <div className={styles.editor}>
+    <div className={cx(styles.editor, { [styles['dark']]: state.theme === 'dark' })}>
       <div className={styles['editor-header']}>
         <CompleteButton onClick={handleClickCompleteButton} />
       </div>

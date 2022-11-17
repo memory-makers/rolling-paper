@@ -98,4 +98,12 @@
       }
     }
   }
+
+  &.dark {
+    background-color: colors.$darkBg;
+
+    .editor-nickname {
+      color: colors.$white !important;
+    }
+  }
 }

@@ -1,18 +1,32 @@
-import React from 'react'
+import { useEffect } from 'react'
+import classNames from 'classnames'
+import { useNavigate } from 'react-router-dom'
+
+import tokenStore from '@/api/tokenStore'
+
 import KakaoButton from '@/components/buttons/KakaoButton'
 import Card from '@/components/home/Card'
-import colors from '@/styles/colors.module.scss'
-
-import styles from './index.module.scss'
-import useAnimate from '@/utils/home/useAnimate'
 import HomeLogo from '@/components/home/HomeLogo'
-import classNames from 'classnames'
-import { cards } from '@/utils/home/cards'
-import { stickers } from '@/utils/home/stickers'
 import Sticker from '@/components/home/Sticker'
 
+import useAnimate from '@/utils/home/useAnimate'
+import { cards } from '@/utils/home/cards'
+import { stickers } from '@/utils/home/stickers'
+
+import styles from './index.module.scss'
+
 const Home = () => {
+  const navigate = useNavigate()
   const [cardRef, logoRef] = useAnimate()
+
+  useEffect(() => {
+    const token = tokenStore.getAccessToken()
+
+    if (token) {
+      navigate('/mypage')
+    }
+  }, [])
+
   return (
     <div className={styles.home}>
       <HomeLogo ref={logoRef} />
