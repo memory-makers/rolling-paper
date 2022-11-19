@@ -7,20 +7,20 @@
   align-items: center;
   width: 100%;
   height: 100%;
-  padding: 42px 24px;
-
+  padding: 36px 24px;
+  box-sizing: border-box;
   .home-content {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
-    width: 100%;
-    padding: 8px 35px;
+    width: 90%;
+    box-sizing: border-box;
   }
   .card-container {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(3, minmax(85px, 1fr));
-    grid-template-rows: repeat(3, minmax(85px, 1fr));
+    grid-template-columns: repeat(3, minmax(50px, 1fr));
+    grid-template-rows: repeat(3, minmax(50px, 1fr));
     width: 100%;
     box-sizing: border-box;
     aspect-ratio: 1 / 1;
@@ -44,7 +44,6 @@
   .home-description {
     margin: 24px 0;
     text-align: center;
-    line-height: 32px;
     @include txt.typograpy('basic', 24px, 400);
   }
 }

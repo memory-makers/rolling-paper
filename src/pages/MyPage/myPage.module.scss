@@ -21,6 +21,7 @@
     flex-direction: column;
     box-sizing: border-box;
     height: 100%;
+    overflow: hidden;
     background: colors.$white;
     padding: 20px 16px;
     border: 1.2px solid colors.$point;
