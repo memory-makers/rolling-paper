@@ -37,6 +37,7 @@ const MakeNickname = ({ setIsModalOpen }: Props) => {
           </ModalText>
           <ModalText type="label">닉네임</ModalText>
           <ModalInput
+          autoFocus={true}
             type="text"
             name="nickname"
             maxLength={8}

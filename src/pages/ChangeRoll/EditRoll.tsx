@@ -58,6 +58,7 @@ const EditRoll = ({ paperId, ePaperTitle, eDueDate, eTheme, paperUrl, setIsModal
       <ModalText type="title">롤링 페이퍼를 수정해볼까요?</ModalText>
       <ModalText type="label">롤링페이퍼 이름을 적어주세요</ModalText>
       <ModalInput
+        autoFocus={true}
         type="text"
         name="paperTitle"
         value={paperTitle}
