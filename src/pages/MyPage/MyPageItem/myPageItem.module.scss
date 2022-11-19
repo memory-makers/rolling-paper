@@ -10,12 +10,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: 311px;
-    padding: 16px 0;
+    width: 100%;
+    height: 52px;
 
     .paperInfoWrap {
-      width: 127px;
-
+      flex:1 1 auto;
       p {
         display: -webkit-box;
         -webkit-box-orient: vertical;
@@ -26,33 +25,31 @@
         text-align: start;
         font-size: 14px;
         color: colors.$textBlack;
+        box-sizing: border-box;
+        padding-right: 4px;
       }
     }
 
     .openStatusWrap {
       display: flex;
-      flex: 48px;
-      align-items: center;
-      justify-content: center;
-      padding: 0 12px;
+      flex:0 0 52px;
+      box-sizing: border-box;
     }
 
     .openDateWrap {
       display: flex;
-      flex: 100px;
-      justify-content: center;
-      align-items: center;
-      padding-left: 10px;
+      flex: 0 0 100px;
       font-size: 14px;
 
-      & button {
-        display: flex;
-      }
+      
 
       .dueDate {
-        padding-right: 12px;
-        white-space: nowrap;
+        width: 80px;
         color: colors.$myPageBlack;
+      }
+      svg{
+        width: 20px;
+        height: 20px;
       }
     }
   }

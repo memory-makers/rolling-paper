@@ -7,7 +7,6 @@ import {
   RollingPaperType,
   updateStickers_API
 } from '@/api/rollingpaper'
-import Header from '@/components/layout/Header'
 import Buttons from '@/components/rollingpaper/container/Buttons'
 import CardModal from '@/components/rollingpaper/modal/CardModal'
 import Content from '@/components/rollingpaper/container/Content'

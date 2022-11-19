@@ -62,8 +62,8 @@ const VirtualRollingPaper = ({ onCreateImage }: VirtualRollingPaperProps) => {
         <Title />
         <div
           className="card-content"
-          style={{ gridTemplateColumns: `repeat(${half}, minmax(200px, 300px))` }}
-        >
+           style={{ gridTemplateColumns: `repeat(${half}, minmax(200px, 300px))` }}
+           >
           {rollingPaper.cards.map((card, index) => {
             const rotateDeg = index % 2 ? 'rotate(-10deg)' : 'rotate(10deg)'
             return <Card key={index} rotateDeg={rotateDeg} card={card} handleClick={() => {}} />
