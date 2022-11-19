@@ -12,6 +12,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   placeholder?: string
   readOnly?: boolean
   isAddIcon?: boolean
+  autoFocus?: boolean
 }
 
 const ModalInput = ({
@@ -24,10 +25,12 @@ const ModalInput = ({
   placeholder,
   readOnly,
   isAddIcon,
+  autoFocus,
   ...props
 }: Props) => {
   return (
     <input
+      autoFocus={autoFocus}
       type={type}
       className={cx(styles.modalInput, { [styles.isAddIcon]: isAddIcon })}
       name={name}

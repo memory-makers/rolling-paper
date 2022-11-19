@@ -3,7 +3,7 @@ import { KAKAO_LOGIN_URL } from '@/api/user'
 
 const KakaoButton = () => (
   <a href={KAKAO_LOGIN_URL}>
-    <img className="kakao" src={`./imgs/kakao-login.png`} />
+    <img className="kakao" src={`./imgs/kakao_login_medium_wide.png`} />
   </a>
 )
 
