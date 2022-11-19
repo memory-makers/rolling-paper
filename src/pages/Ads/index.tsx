@@ -11,7 +11,7 @@ const Ads = () => {
     if (!import.meta.env.VITE_KAKAO_ADFIT) {
       const noAds = document.createElement('noAds')
       noAds.style.display = 'inline-block'
-      noAds.style.width = '320px'
+      noAds.style.width = '100%'
       noAds.style.height = '50px'
       noAds.style.backgroundColor = '#DBDBDB'
       document.querySelector('.aside__kakaoAdFit')?.appendChild(noAds)
