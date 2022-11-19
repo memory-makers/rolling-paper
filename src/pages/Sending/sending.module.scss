@@ -5,7 +5,7 @@
   height: 100%;
 
   header {
-    padding: 16px;
+    padding: 16px 0 0 16px;
 
     .backArrowButton {
       display: flex;
@@ -25,34 +25,46 @@
     }
   }
 
-  .contents {
-    margin-top: 25px;
+  .contentsWrapper {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 80%;
 
-    .logoTextSvg {
-      margin-top: 24px;
-    }
-
-    .sendingText {
-      margin-top: 35px;
-      font-size: 32px;
-      line-height: 32px;
-      text-align: center;
-
-      .nameColor {
-        color: colors.$subPoint;
-      }
-    }
-
-    .buttonContainer {
-      margin-top: 32px;
+    .contents {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
+
+      .logoTextSvg {
+        margin-top: 24px;
+      }
+
+      .sendingText {
+        margin-top: 35px;
+        font-size: 32px;
+        line-height: 32px;
+        text-align: center;
+
+        .nameColor {
+          color: colors.$subPoint;
+        }
+      }
+
+      .buttonContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .adsContainer {
+        width: 100%;
+        position: fixed;
+        left: 0;
+        bottom: 0;
+      }
     }
   }
 }
