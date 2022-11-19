@@ -6,6 +6,7 @@ import ShareRoll from '../ShareRoll'
 import { ModalButton } from '@/components/Modal/ModalItem'
 import { useUrlName } from '@/store/urlNickname'
 import { useGA } from '@/hooks'
+import Ads from '../Ads'
 
 import { ArrowLeftIcon, LogoArtIcon, LogoTextIcon } from '@/assets'
 
@@ -53,30 +54,36 @@ const Sending = () => {
         </button>
       </header>
 
-      <div className={styles.contents}>
-        <LogoArtIcon />
-        <LogoTextIcon className={styles.logoTextSvg} />
+      <div className={styles.contentsWrapper}>
+        <div className={styles.contents}>
+          <LogoArtIcon />
+          <LogoTextIcon className={styles.logoTextSvg} />
 
-        <p className={styles.sendingText}>
-          <span className={styles.nameColor}>{urlNameState.hostName}</span>
-          {hostnameText}
-          <br /> 카드내용 저장 완료!
-        </p>
+          <p className={styles.sendingText}>
+            <span className={styles.nameColor}>{urlNameState.hostName}</span>
+            {hostnameText}
+            <br /> 카드내용 저장 완료!
+          </p>
 
-        <div className={styles.buttonContainer}>
-          {urlNameState.hostName && (
-            <>
-              <ModalButton type="button" onClick={handleStickerClick} color="secondary">
-                스티커로 꾸며볼까? ★
-              </ModalButton>
-              <ModalButton type="button" onClick={handleShareClick} color="secondary">
-                친구들한테 공유해볼까?
-              </ModalButton>
-            </>
-          )}
-          <ModalButton type="button" onClick={handleHomeClick}>
-            나도 만들어볼래!
-          </ModalButton>
+          <div className={styles.buttonContainer}>
+            {urlNameState.hostName && (
+              <>
+                <ModalButton type="button" onClick={handleStickerClick} color="secondary">
+                  스티커로 꾸며볼까? ★
+                </ModalButton>
+                <ModalButton type="button" onClick={handleShareClick} color="secondary">
+                  친구들한테 공유해볼까?
+                </ModalButton>
+              </>
+            )}
+            <ModalButton type="button" onClick={handleHomeClick}>
+              나도 만들어볼래!
+            </ModalButton>
+          </div>
+
+          <div className={styles.adsContainer}>
+            <Ads />
+          </div>
         </div>
       </div>
 
