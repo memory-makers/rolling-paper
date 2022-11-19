@@ -3,11 +3,12 @@
 .openState {
   width: 42px;
   height: 20px;
-  background: colors.$lightGrayBg;
-  color: colors.$textBlack;
+  line-height: 20px;
   border-radius: 10px;
-  font-size: 14px;
+  background: colors.$lightGrayBg;
   text-align: center;
+  font-size: 10px;
+  color: colors.$textBlack;
   &.isOpened {
     background: colors.$cardRed;
     color: colors.$point;

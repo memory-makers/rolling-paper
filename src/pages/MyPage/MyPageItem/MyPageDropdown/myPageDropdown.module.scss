@@ -3,8 +3,9 @@
 
 .dropdown {
   position: absolute;
-  right: 20px;
-  width: 160px;
+  right: -10px;
+  top: -15px;
+  width: 124px;
   height: 120px;
   background: colors.$white;
   border: 1px solid colors.$point;
@@ -13,7 +14,6 @@
   transform: translateY(-20px);
   visibility: hidden;
   transition: transform 300ms ease, visibility 150ms;
-  z-index: 2;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 
   &.isActive {
@@ -28,8 +28,9 @@
   button {
     display: block;
     width: 100%;
-    height: 40px;
+    height: 39px;
     background: transparent;
+    font-size: 14px;
     color: colors.$myPageBlack;
 
     &:hover {
@@ -40,6 +41,7 @@
 }
 @include responsive.mobileOnly {
   .dropdown {
+    right: 10px;
     width: 135px;
     margin: 0 -10px 0 auto;
   }
