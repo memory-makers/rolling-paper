@@ -12,9 +12,7 @@ const Layout = ({ children }: LayoutProps) => {
   }, [])
 
   const setVh = () => {
-    console.log(window.innerHeight)
     document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`)
-    console.log(document.documentElement.style)
   }
   window.addEventListener('resize', setVh)
 
