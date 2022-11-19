@@ -13,6 +13,7 @@ interface PaperProps {
 export const Paper = ({ value, onChange, backgroundColor, color, fontFamily }: PaperProps) => {
   return (
     <textarea
+      autoFocus
       className={styles['editor-paper']}
       style={{
         backgroundColor,

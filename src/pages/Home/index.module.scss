@@ -22,8 +22,23 @@
     grid-template-columns: repeat(3, minmax(85px, 1fr));
     grid-template-rows: repeat(3, minmax(85px, 1fr));
     width: 100%;
+    box-sizing: border-box;
     aspect-ratio: 1 / 1;
     @include txt.typograpy('basic', 1rem, 400);
+    // Fallback (current, using padding hack)
+    @supports not (aspect-ratio: 1 / 1) { 
+      div::before {
+        float: left;
+        padding-top: 100%;
+        content: '';
+      }
+      
+      div::after {
+        display: block;
+        content: '';
+        clear: both;
+      }
+    }
   }
 
   .home-description {

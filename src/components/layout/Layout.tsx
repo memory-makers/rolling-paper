@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import { useTheme } from '../../store/theme'
 
 interface LayoutProps {
@@ -6,6 +6,16 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
+  
+  useEffect(() => {
+    setVh()
+  }, [])
+
+  const setVh = () => {
+    document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`)
+  }
+  window.addEventListener('resize', setVh)
+
   return <div className={'layout'}>{children}</div>
 }
 

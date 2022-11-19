@@ -6,8 +6,8 @@
   width: 100%;
   padding: 0 8px;
   justify-content: space-between;
-  @include typograpy('basic', 32px);
-  min-height: 140px;
+  align-items: flex-start;
+  @include typograpy('basic', 32px); 
 }
 .header_name {
   color: $subPoint;
@@ -25,9 +25,9 @@
   height: 100%;
 }
 .logout_button {
-  width: 30px;
-  height: 30px;
-  padding-top: 5px;
+  font-size: 14px;
+  text-decoration-line: underline;
+  color: #000000;
 }
 .isCursor {
   cursor: text;

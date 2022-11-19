@@ -72,14 +72,12 @@ const MyPageItem = ({ paper, changeOpenPaperState }: Props) => {
         <div className={styles.openStatusWrap}>
           <OpenState isOpened={isOpened} />
         </div>
-        <div className={styles.openDateWrap}>
-          <button type="button" onClick={handleClickDropdownList}>
-            <p className={styles.dueDate} ref={openDateRef}>
-              {paper.dueDate}
-            </p>
-            {isDropdown ? <ArrowUpIcon /> : <ArrowDownIcon />}
-          </button>
-        </div>
+        <button className={styles.openDateWrap} type="button" onClick={handleClickDropdownList}>
+          <p className={styles.dueDate} ref={openDateRef}>
+            {paper.dueDate}
+          </p>
+          {isDropdown ? <ArrowUpIcon /> : <ArrowDownIcon />}
+        </button>
       </div>
       <div className={styles.dropdownContainer}>
         <MyPageDropDown paper={paper} isDropdown={isDropdown} />
