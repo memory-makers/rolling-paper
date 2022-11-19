@@ -3,6 +3,12 @@ import { memo, useEffect, useRef } from 'react'
 const Ads = () => {
   const adRef = useRef<boolean>(false)
 
+  const adFunction = (ins: HTMLScriptElement, script: HTMLScriptElement) => {
+    document.querySelector('.aside__kakaoAdFit')?.appendChild(ins)
+    document.querySelector('.aside__kakaoAdFit')?.appendChild(script)
+    return null
+  }
+
   useEffect(() => {
     if (adRef.current) {
       return
@@ -31,9 +37,7 @@ const Ads = () => {
     script.async = true
     script.type = 'text/javascript'
     script.src = '//t1.daumcdn.net/kas/static/ba.min.js'
-
-    document.querySelector('.aside__kakaoAdFit')?.appendChild(ins)
-    document.querySelector('.aside__kakaoAdFit')?.appendChild(script)
+    script.onload = adFunction(ins, script)
 
     adRef.current = true
   }, [])
