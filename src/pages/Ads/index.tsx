@@ -3,7 +3,7 @@ import { memo, useEffect, useRef } from 'react'
 const Ads = () => {
   const adRef = useRef<boolean>(false)
 
-  const adFunction = (ins: HTMLScriptElement, script: HTMLScriptElement) => {
+  const adFunction = (ins: HTMLModElement, script: HTMLScriptElement) => {
     document.querySelector('.aside__kakaoAdFit')?.appendChild(ins)
     document.querySelector('.aside__kakaoAdFit')?.appendChild(script)
     return null
