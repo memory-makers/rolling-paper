@@ -5,8 +5,7 @@ import styles from './sending.module.scss'
 import ShareRoll from '../ShareRoll'
 import { ModalButton } from '@/components/Modal/ModalItem'
 import { useUrlName } from '@/store/urlNickname'
-import { useGA } from '@/hooks'
-import Ads from '../Ads'
+import { useAdBlockDetect, useGA } from '@/hooks'
 
 import { ArrowLeftIcon, LogoArtIcon, LogoTextIcon } from '@/assets'
 
@@ -15,6 +14,7 @@ const Sending = () => {
   const { gaEvent } = useGA()
   const { state: urlNameState } = useUrlName()
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const adComponent = useAdBlockDetect()
 
   const handleBackClick = () => {
     if (!urlNameState.paperUrl) navigate(-1)
@@ -81,9 +81,7 @@ const Sending = () => {
             </ModalButton>
           </div>
 
-          <div className={styles.adsContainer}>
-            <Ads />
-          </div>
+          <div className={styles.adsContainer}>{adComponent}</div>
         </div>
       </div>
 
