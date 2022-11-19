@@ -18,7 +18,7 @@ interface HeaderProps {
   text?: string
   type: HeaderType
 }
-// 공통으로 사용하는 헤더입니다.
+
 const Header = ({ children, text, type }: HeaderProps) => {
   const { state, dispatch } = useTheme()
   const titleVisible = type === 'only-title' || type === 'title-button'
@@ -67,7 +67,7 @@ const Header = ({ children, text, type }: HeaderProps) => {
         </div>
       )}
       <button type="button" className="logout_button" onClick={handleClickLogout}>
-        <img src={LogoutImg} className="" alt="logout" />
+        로그아웃
       </button>
       {buttonVisible && children}
 

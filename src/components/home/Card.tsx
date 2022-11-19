@@ -10,7 +10,7 @@ interface CardProps {
 const Card = ({ content, cardStyle }: CardProps) => {
   return (
     <div className={classNames(styles.card, 'card')} style={cardStyle}>
-      <div className={styles['card-content']}>{content}</div>
+      {content}
     </div>
   )
 }
