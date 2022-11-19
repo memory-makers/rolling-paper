@@ -3,6 +3,12 @@ import { memo, useEffect, useRef } from 'react'
 const Ads = () => {
   const adRef = useRef<boolean>(false)
 
+  const adFunction = (ins: HTMLModElement, script: HTMLScriptElement) => {
+    document.querySelector('.aside__kakaoAdFit')?.appendChild(ins)
+    document.querySelector('.aside__kakaoAdFit')?.appendChild(script)
+    return null
+  }
+
   useEffect(() => {
     if (adRef.current) {
       return
@@ -11,7 +17,7 @@ const Ads = () => {
     if (!import.meta.env.VITE_KAKAO_ADFIT) {
       const noAds = document.createElement('noAds')
       noAds.style.display = 'inline-block'
-      noAds.style.width = '320px'
+      noAds.style.width = '100%'
       noAds.style.height = '50px'
       noAds.style.backgroundColor = '#DBDBDB'
       document.querySelector('.aside__kakaoAdFit')?.appendChild(noAds)
@@ -31,9 +37,7 @@ const Ads = () => {
     script.async = true
     script.type = 'text/javascript'
     script.src = '//t1.daumcdn.net/kas/static/ba.min.js'
-
-    document.querySelector('.aside__kakaoAdFit')?.appendChild(ins)
-    document.querySelector('.aside__kakaoAdFit')?.appendChild(script)
+    script.onload = adFunction(ins, script)
 
     adRef.current = true
   }, [])
