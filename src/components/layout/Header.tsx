@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import classNames from 'classnames'
 
 import { getNicknameAPI } from '@/api/user'
@@ -7,9 +8,7 @@ import { LOAD_NAME, useName } from '@/store/nickname'
 import MakeNickname from '@/pages/Nickname/MakeNickname'
 import EditNickname from '@/pages/Nickname/EditNickname'
 import tokenStore from '@/api/tokenStore'
-import CheckLogout from '@/pages/CheckLogout'
-
-import LogoutImg from '/imgs/logout.png'
+import { SettingIcon } from '@/assets'
 
 type HeaderType = 'only-button' | 'title-button' | 'only-title'
 
@@ -21,6 +20,7 @@ interface HeaderProps {
 
 const Header = ({ children, text, type }: HeaderProps) => {
   const { state, dispatch } = useTheme()
+  const navigate = useNavigate()
   const titleVisible = type === 'only-title' || type === 'title-button'
   const buttonVisible = type === 'only-button' || type === 'title-button'
 
@@ -29,7 +29,6 @@ const Header = ({ children, text, type }: HeaderProps) => {
   const { state: nameState, dispatch: nameDispatch } = useName()
   const [isInitModalOpen, setIsInitModalOpen] = useState(false)
   const [isEditModalOpen, setIsEditModalOpen] = useState(false)
-  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false)
 
   const handleClickEditModal = () => {
     if (!token) return
@@ -37,7 +36,7 @@ const Header = ({ children, text, type }: HeaderProps) => {
   }
 
   const handleClickLogout = () => {
-    setIsLogoutModalOpen((prev) => !prev)
+    navigate('/setting')
   }
 
   const getNickname = async () => {
@@ -67,13 +66,12 @@ const Header = ({ children, text, type }: HeaderProps) => {
         </div>
       )}
       <button type="button" className="logout_button" onClick={handleClickLogout}>
-        로그아웃
+        <SettingIcon />
       </button>
       {buttonVisible && children}
 
       {isInitModalOpen && <MakeNickname setIsModalOpen={setIsInitModalOpen} />}
       {isEditModalOpen && <EditNickname setIsModalOpen={setIsEditModalOpen} />}
-      {isLogoutModalOpen && <CheckLogout setIsModalOpen={setIsLogoutModalOpen} />}
     </header>
   )
 }
