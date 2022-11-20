@@ -1,5 +1,4 @@
 @use '/src/styles/colors.scss';
-@use '/src/styles/abstracts/responsive';
 
 .myPageContainer {
   width: 100%;
@@ -92,17 +91,5 @@
       display: flex;
       justify-content: space-around;
     }
-  }
-}
-
-@include responsive.mobileOnly {
-  .myPageMain {
-    width: 343px;
-    height: 643px;
-    margin: 0 auto;
-  }
-
-  .paperAddButton {
-    bottom: 10px;
   }
 }
