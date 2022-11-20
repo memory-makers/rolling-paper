@@ -1,5 +1,4 @@
 @use '/src/styles/colors.scss';
-@use '/src/styles//abstracts/responsive';
 
 // Main Area
 .myPageMainContent {
@@ -14,7 +13,7 @@
     height: 52px;
 
     .paperInfoWrap {
-      flex:1 1 auto;
+      flex: 1 1 auto;
       p {
         display: -webkit-box;
         -webkit-box-orient: vertical;
@@ -32,7 +31,7 @@
 
     .openStatusWrap {
       display: flex;
-      flex:0 0 52px;
+      flex: 0 0 52px;
       box-sizing: border-box;
     }
 
@@ -41,13 +40,11 @@
       flex: 0 0 100px;
       font-size: 14px;
 
-      
-
       .dueDate {
         width: 80px;
         color: colors.$myPageBlack;
       }
-      svg{
+      svg {
         width: 20px;
         height: 20px;
       }
@@ -56,14 +53,5 @@
   .dropdownContainer {
     position: relative;
     height: auto;
-  }
-}
-
-@include responsive.mobileOnly {
-  .paperInfoWrap {
-    min-width: 110px;
-  }
-  .openDateWrap {
-    min-width: 150px;
   }
 }

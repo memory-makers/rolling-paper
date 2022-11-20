@@ -1,5 +1,4 @@
 @use '/src/styles/colors.scss';
-@use '/src/styles//abstracts/responsive';
 
 .dropdown {
   position: absolute;
@@ -38,12 +37,5 @@
       font-weight: 900;
       background: rgba(colors.$pointLow, 0.2);
     }
-  }
-}
-@include responsive.mobileOnly {
-  .dropdown {
-    right: 10px;
-    width: 135px;
-    margin: 0 -10px 0 auto;
   }
 }
