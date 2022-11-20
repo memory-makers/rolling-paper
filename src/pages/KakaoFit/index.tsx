@@ -1,13 +1,7 @@
 import { memo, useEffect, useRef } from 'react'
 
-const Ads = () => {
+const KakaoFit = () => {
   const adRef = useRef<boolean>(false)
-
-  const adFunction = (ins: HTMLModElement, script: HTMLScriptElement) => {
-    document.querySelector('.aside__kakaoAdFit')?.appendChild(ins)
-    document.querySelector('.aside__kakaoAdFit')?.appendChild(script)
-    return null
-  }
 
   useEffect(() => {
     if (adRef.current) {
@@ -20,7 +14,7 @@ const Ads = () => {
       noAds.style.width = '100%'
       noAds.style.height = '50px'
       noAds.style.backgroundColor = '#DBDBDB'
-      document.querySelector('.aside__kakaoAdFit')?.appendChild(noAds)
+      document.querySelector('.aside__kakaoFit')?.appendChild(noAds)
       return
     }
 
@@ -37,16 +31,18 @@ const Ads = () => {
     script.async = true
     script.type = 'text/javascript'
     script.src = '//t1.daumcdn.net/kas/static/ba.min.js'
-    script.onload = adFunction(ins, script)
+
+    document.querySelector('.aside__kakaoFit')?.appendChild(ins)
+    document.querySelector('.aside__kakaoFit')?.appendChild(script)
 
     adRef.current = true
   }, [])
 
   return (
     <>
-      <aside className="aside__kakaoAdFit"></aside>
+      <aside className="aside__kakaoFit"></aside>
     </>
   )
 }
 
-export default memo(Ads)
+export default memo(KakaoFit)
