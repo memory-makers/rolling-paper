@@ -26,13 +26,13 @@
     aspect-ratio: 1 / 1;
     @include txt.typograpy('basic', 1rem, 400);
     // Fallback (current, using padding hack)
-    @supports not (aspect-ratio: 1 / 1) { 
+    @supports not (aspect-ratio: 1 / 1) {
       div::before {
         float: left;
         padding-top: 100%;
         content: '';
       }
-      
+
       div::after {
         display: block;
         content: '';
@@ -42,7 +42,7 @@
   }
 
   .home-description {
-    margin: 24px 0;
+    margin-top: 24px;
     text-align: center;
     @include txt.typograpy('basic', 24px, 400);
   }
