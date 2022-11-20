@@ -33,3 +33,5 @@ export { ReactComponent as ClipboardIcon } from './Text-files.svg'
 
 export { ReactComponent as CheckIcon } from './check.svg'
 export { ReactComponent as Spinner } from './spinner.svg'
+
+export { ReactComponent as SettingIcon } from './setting.svg'
