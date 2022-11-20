@@ -11,6 +11,6 @@ export function dateDiffFormat(dueDate: Date) {
   const hour = Math.floor(diff / 60)
   diff = diff - hour * 60
   const min = Math.ceil(diff)
-  let untilOpen = `${day}일 ${hour}시간 ${min} 분`
+  let untilOpen = `${day}일 ${hour}시간 ${min}분`
   return { untilOpen, beforeOpen }
 }
