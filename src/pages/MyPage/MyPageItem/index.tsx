@@ -3,7 +3,6 @@ import { ReactComponent as ArrowUpIcon } from '@/assets/arrow-up.svg'
 import { useState, useRef, useEffect, BaseSyntheticEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import cx from 'classnames'
 import styles from './myPageItem.module.scss'
 import { convertTimeAndOffsetToDate } from '@/utils/rollingPaper/paper'
 
