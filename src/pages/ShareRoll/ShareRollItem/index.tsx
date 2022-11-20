@@ -1,10 +1,9 @@
-import React, { ReactElement, ReactNode, useEffect, useRef, useState } from 'react'
+import React, { ReactNode, useState } from 'react'
 import styles from './shareRollItem.module.scss'
 import { ModalButton, ModalInput, ModalText } from '@/components/Modal/ModalItem'
 
 import { CLIENT_PAPER_URL } from '@/config/commonLink'
 import { ClipboardIcon, DownloadIcon, ShareIcon2 } from '@/assets'
-import { checkBrowser } from '@/utils/common/checkBrowser'
 import Popup from '@/components/Modal/Popup'
 import { toPng } from 'html-to-image'
 import _ from 'lodash'
@@ -80,6 +79,25 @@ const ShareRollItem = ({ children }: Props) => {
               link.href = image
               link.click()
             })
+            .catch(function (error) {
+              gsap
+                .timeline()
+                .to(rollingPaper, { opacity: 0 })
+                .to(loading, {
+                  opacity: 0,
+                  duration: 1,
+                  delay: 1,
+                  onComplete: () => {
+                    setIsLoading(false)
+                    setPopupContent('(IE, Safari X)\n다른 브라우저로 시도해주세요.')
+                    setIsPopupActive(true)
+                    if (popupDelay) clearTimeout(popupDelay)
+                    popupDelay = setTimeout(() => {
+                      setIsPopupActive(false)
+                    }, 1000)
+                  }
+                })
+            })
             .then(() => {
               gsap
                 .timeline()
@@ -104,22 +122,12 @@ const ShareRollItem = ({ children }: Props) => {
   }
 
   const handleImageDownloadClick = () => {
-    if (checkBrowser()) {
-      setPopupContent('(IE, Safari X)\n다른 브라우저로 시도해주세요.')
-      setIsPopupActive(true)
-      if (popupDelay) clearTimeout(popupDelay)
-      popupDelay = setTimeout(() => {
-        setIsPopupActive(false)
-      }, 1000)
-    } else {
-      setIsLoading(true)
-    }
+    setIsLoading(true)
   }
 
   return (
     <>
       <ModalText type="title">{children}</ModalText>
-
       <ModalText type="label">롤링페이퍼 링크</ModalText>
       <div className={styles.shareInputWrapper}>
         <ModalInput type="text" name="title" value={fullPaperUrl} readOnly isAddIcon />
