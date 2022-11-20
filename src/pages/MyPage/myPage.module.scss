@@ -9,7 +9,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  
+
   // Header Area
   .myPageHeader {
     line-height: 32px;
@@ -40,15 +40,15 @@
       z-index: 3;
 
       .paperName {
-        flex:1 1 auto;
+        flex: 1 1 auto;
       }
 
       .openStatus {
-        flex:0 0 52px;
+        flex: 0 0 52px;
         padding-left: 4px;
         box-sizing: border-box;
       }
-      
+
       .openDate {
         padding-left: 4px;
         flex: 0 0 100px;
@@ -71,7 +71,7 @@
   .paperAddButton {
     z-index: 100;
     position: absolute;
-    bottom: 34px;
+    bottom: 38px;
     right: 32px;
     display: flex;
     align-items: center;

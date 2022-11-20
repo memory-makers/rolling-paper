@@ -3,8 +3,8 @@
 
 .dropdown {
   position: absolute;
-  right: -10px;
-  top: -15px;
+  right: -24px;
+  top: -5px;
   width: 124px;
   height: 120px;
   background: colors.$white;
@@ -15,6 +15,7 @@
   visibility: hidden;
   transition: transform 300ms ease, visibility 150ms;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  z-index: 700;
 
   &.isActive {
     visibility: visible;
