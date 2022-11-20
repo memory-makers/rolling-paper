@@ -19,14 +19,6 @@ const Home = () => {
   const navigate = useNavigate()
   const [cardRef, logoRef] = useAnimate()
 
-  useEffect(() => {
-    const token = tokenStore.getAccessToken()
-
-    if (token) {
-      navigate('/mypage')
-    }
-  }, [])
-
   return (
     <div className={styles.home}>
       <HomeLogo ref={logoRef} />
