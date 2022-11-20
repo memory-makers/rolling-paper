@@ -147,12 +147,12 @@ const ShareRollItem = ({ children }: Props) => {
             <ShareIcon2 />
           </ModalButton>
         )}
-        {
+        {/* {
           <ModalButton type="button" onClick={handleImageDownloadClick}>
             <span>이미지로 저장하기</span>
             <DownloadIcon />
           </ModalButton>
-        }
+        } */}
       </div>
       <Popup isActive={isPopupActive} content={popupContent} />
       {isLoading && <VirtualRollingPaper onCreateImage={handleCreateImage} />}
