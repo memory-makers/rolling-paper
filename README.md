@@ -4,6 +4,8 @@
 
 📜 [추억의 롤링페이퍼](https://rolling-paper-makers.vercel.app/) 🖋
 
+[👉백엔드 Readme 보러가기👀](https://github.com/memory-makers/rolling-paper-api)
+
 <br/>
 
 ## 📑 프로젝트 소개
