@@ -31,7 +31,6 @@ const MakeRoll = ({
   }
 
   const handleDueDateChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    console.log(e.currentTarget.value)
     setDueDate(e.currentTarget.value)
   }
 
