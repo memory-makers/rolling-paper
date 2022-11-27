@@ -7,8 +7,8 @@ interface Props {
 
 const OpenState = ({ isOpened }: Props) => {
   const openState = {
-    false: '오픈전',
-    true: '오픈'
+    false: '마감전',
+    true: '마감'
   }
   return (
     <div className={cx(styles.openState, { [styles.isOpened]: isOpened })}>
