@@ -78,9 +78,7 @@ const MyPageItem = ({ paper, changeOpenPaperState }: Props) => {
           {isDropdown ? <ArrowUpIcon /> : <ArrowDownIcon />}
         </button>
       </div>
-      <div className={styles.dropdownContainer}>
-        <MyPageDropDown paper={paper} isDropdown={isDropdown} />
-      </div>
+      <MyPageDropDown paper={paper} isDropdown={isDropdown} />
       {isBlockRollModalOpen && (
         <BlockRoll date={paper.dueDate} setIsModalOpen={setIsBlockRollModalOpen} />
       )}
