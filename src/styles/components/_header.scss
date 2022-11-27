@@ -25,11 +25,10 @@
   height: 100%;
 }
 .logout_button {
-  padding: 5px 0;
   svg {
     width: 24px;
     height: 24px;
-    fill: $pointLight;
+    fill: $subPoint;
   }
 }
 .isCursor {
