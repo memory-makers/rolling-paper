@@ -1,12 +1,10 @@
 import React, { ReactNode, useEffect } from 'react'
-import { useTheme } from '../../store/theme'
 
 interface LayoutProps {
   children: ReactNode
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  
   useEffect(() => {
     setVh()
   }, [])

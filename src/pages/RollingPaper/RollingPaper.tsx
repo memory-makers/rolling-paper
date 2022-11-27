@@ -23,6 +23,7 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import classNames from 'classnames'
 import HomeButton from '@/components/rollingpaper/button/HomeButton'
 import { LOAD_TITLE, useRollingPaper } from '@/store/rollingpaper'
+import { useAdBlockDetect } from '@/hooks'
 
 const RollingPaper = () => {
   const urlId = useParams().rollingPaperId
@@ -45,6 +46,7 @@ const RollingPaper = () => {
     dispatch: themeDispatch
   } = useTheme()
   const { dispatch: rollingPaperDispatch } = useRollingPaper()
+  const adComponent = useAdBlockDetect()
 
   useEffect(() => {
     fetchPaperId_API(urlId, setRollingPaperId, navigate)
