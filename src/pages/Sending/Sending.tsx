@@ -14,7 +14,6 @@ const Sending = () => {
   const { gaEvent } = useGA()
   const { state: urlNameState } = useUrlName()
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const adComponent = useAdBlockDetect()
 
   const handleBackClick = () => {
     if (!urlNameState.paperUrl) navigate(-1)
@@ -80,8 +79,6 @@ const Sending = () => {
               나도 만들어볼래!
             </ModalButton>
           </div>
-
-          <div className={styles.adsContainer}>{adComponent}</div>
         </div>
       </div>
 

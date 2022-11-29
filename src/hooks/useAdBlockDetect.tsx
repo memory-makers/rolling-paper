@@ -3,6 +3,7 @@ import { useDetectAdBlock } from 'adblock-detect-react'
 import axios from 'axios'
 
 import KakaoFit from '@/pages/KakaoFit'
+import { Outlet } from 'react-router-dom'
 
 export const useAdBlockDetect = () => {
   const [isBlocked, setIsBlocked] = useState(false)
@@ -29,5 +30,16 @@ export const useAdBlockDetect = () => {
     return <KakaoFit />
   }, [])
 
-  return <div>{adComponent}</div>
+  return (
+    <>
+      <div
+        style={{
+          width: '100%'
+        }}
+      >
+        {adComponent}
+      </div>
+      <Outlet />
+    </>
+  )
 }
