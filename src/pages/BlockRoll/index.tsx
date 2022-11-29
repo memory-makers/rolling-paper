@@ -24,11 +24,11 @@ const BlockRoll = ({ date, setIsModalOpen }: Props) => {
       <ModalText type="title">
         {newDate && (
           <p>
-            이 롤링페이퍼의 오픈 날짜는 <br />'{newDate}' 입니다. <br />
+            이 롤링페이퍼의 마감 날짜는 <br />'{newDate}' 입니다. <br />
             <br />
           </p>
         )}
-        <span className={styles.point}>오픈 날짜 이후</span>부터 <br />
+        <span className={styles.point}>마감 날짜 이후</span>부터 <br />
         확인할 수 있어요!
       </ModalText>
       <ModalButton type="button" onClick={handleClickApply}>
